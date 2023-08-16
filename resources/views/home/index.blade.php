@@ -1,0 +1,300 @@
+@extends('home.layouts.main')
+
+@section('content')
+<!-- Main Banner Area Start -->
+<section class="section main-banner" id="top" data-section="section1">
+    <video autoplay muted loop id="bg-video">
+        <source src="assets/images/Kominfo.mp4" type="video/mp4" />
+    </video>
+
+    <div class="video-overlay header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="caption">
+                        <h6>Hallo Peserta Magang</h6>
+                        <h2>Selamat Datang di Mari Magang</h2>
+                        <p>Tempat mahasiswa melakukan pendaftaran magang atau PKL di Dinas Komunikasi dan Informatika Kabupaten Malang</p>
+                        <div class="main-button-red">
+                            <div class="scroll-to-section"><a href="#contact">Gabung Sekarang !</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Main Banner Area End -->
+
+<section class="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="owl-service-item owl-carousel">
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="assets/images/Pendaftaran.png" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Pendaftaran Mudah</h4>
+                            <p>Pendaftaran magang atau pkl di Dinas Komunikasi dan Informatika Kabupaten Malang dengan mudah dan cepat</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="assets/images/Bidang.png" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Banyak Bidang Kerja</h4>
+                            <p>Tersedia Bidang Komunikasi, Bidang Aplikasi Informatika, Bidang Statistik, Bidang Infrastruktur, dan Sekretariat</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="assets/images/Pendaftaran-Online.png" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Pendaftaran Online</h4>
+                            <p>Mahasiswa dapat dengan mudah melakukan pendaftaran dari mana saja tanpa harus datang ke kantor</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="assets/images/Verifikasi.png" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Proses Verifikasi Cepat</h4>
+                            <p>Dokumen yang diupload akan cepat diverifikasi oleh admin dan lanjut pada tahap berikutnya</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="icon">
+                            <img src="assets/images/Keamanan.png" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>Keamanan Terjamin</h4>
+                            <p>Seluruh berkas dokumen magang atau PKL yang diupload oleh mahasiswa akan dijaga kerahasiaannya.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="upcoming-meetings" id="meetings">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Bidang Kerja Diskominfo Kabupaten Malang</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="meeting-item">
+                            <div class="thumb">
+                                <a href="/detail"><img src="assets/images/bidang-sekretariat.jpg" alt="New Lecturer Meeting"></a>
+                            </div>
+                            <div class="down-content">
+                                <a href="/detail">
+                                    <h4 style="margin: 0; padding: 0;">Bidang Sekretariat</h4>
+                                </a>
+                                <p style="margin: 0; padding: 0;">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="meeting-item">
+                            <div class="thumb">
+                                <a href="/detail"><img src="assets/images/bidang-aptika.jpg" alt="New Lecturer Meeting"></a>
+                            </div>
+                            <div class="down-content">
+                                <a href="/detail">
+                                    <h4 style="margin: 0; padding: 0;">Bidang Aplikasi Informatika</h4>
+                                </a>
+                                <p style="margin: 0; padding: 0;">Bidang Aplikasi Informatika Untuk Mahasiswa Magang / PKL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="meeting-item">
+                            <div class="thumb">
+                                <a href="/detail"><img src="assets/images/bidang-statistik.jpg" alt="New Lecturer Meeting"></a>
+                            </div>
+                            <div class="down-content">
+                                <a href="/detail">
+                                    <h4 style="margin: 0; padding: 0;">Bidang Statistik</h4>
+                                </a>
+                                <p style="margin: 0; padding: 0;">Bidang Statistik Untuk Mahasiswa Magang / PKL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="meeting-item">
+                            <div class="thumb">
+                                <a href="/detail"><img src="assets/images/bidang-infrastruktur.jpg" alt="New Lecturer Meeting"></a>
+                            </div>
+                            <div class="down-content">
+                                <a href="/detail">
+                                    <h4 style="margin: 0; padding: 0;">Bidang Infrastruktur</h4>
+                                </a>
+                                <p style="margin: 0; padding: 0;">Bidang Infrastruktur Untuk Mahasiswa Magang / PKL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="meeting-item">
+                            <div class="thumb">
+                                <a href="/detail"><img src="assets/images/bidang-komunikasi.jpg" alt="New Lecturer Meeting"></a>
+                            </div>
+                            <div class="down-content">
+                                <a href="/detail">
+                                    <h4 style="margin: 0; padding: 0;">Bidang Komunikasi</h4>
+                                </a>
+                                <p style="margin: 0; padding: 0;">Bidang Komunikasi Untuk Mahasiswa Magang / PKL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="apply-now" id="apply">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 align-self-center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="item">
+                            <h3>Tanya Jawab Seputar Magang</h3>
+                            <p>Pertanyaan umum yang sering ditanyakan oleh para mahasiswa yang ingin mendaftar di Dinas Komunikasi dan Informatika Kabupaten Malang</p>
+                            <div class="main-button-red">
+                                <div class="scroll-to-section"><a href="">Gabung Sekarang!</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="accordions is-first-expanded">
+                    <article class="accordion">
+                        <div class="accordion-head">
+                            <span>Apa saja persyaratan yang diperlukan untuk magang ?</span>
+                            <span class="icon">
+                                <i class="icon fa fa-chevron-right"></i>
+                            </span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="content">
+                                <p>Syarat yang diperlukan untuk magang adalah menyiapkan surat pengantar magang dari kampus dan proposal magang yang ditujukan ke Dinas Komunikasi dan Informatika Kabupaten Malang</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="accordion">
+                        <div class="accordion-head">
+                            <span>Apakah magang ini berbayar atau tidak ?</span>
+                            <span class="icon">
+                                <i class="icon fa fa-chevron-right"></i>
+                            </span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="content">
+                                <p>Seluruh proses pendaftaran dan selama magang tidak akan dikenakan biaya.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="accordion">
+                        <div class="accordion-head">
+                            <span>Apakah akan ada mentor yang membimbing saat magang berlangsung ?</span>
+                            <span class="icon">
+                                <i class="icon fa fa-chevron-right"></i>
+                            </span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="content">
+                                <p>Ya, akan ada mentor yang mengarahkan dan membimbing mahasiswa selama magang berlangsung.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="accordion last-accordion">
+                        <div class="accordion-head">
+                            <span>Apa proyek yang nanti dikerjakan mahasiswa ketika magang ?</span>
+                            <span class="icon">
+                                <i class="icon fa fa-chevron-right"></i>
+                            </span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="content">
+                                <p>Untuk proyek yang akan dikerjakan bergantung pada bidang yang diambil oleh mahasiswa</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="our-facts" id="data">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Data Statistik Mari Magang</h2>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="count-area-content percentage">
+                                    <div class="count-digit">94</div>
+                                    <div class="count-title">Jumlah Seluruh Kelompok Magang</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="count-area-content">
+                                    <div class="count-digit">126</div>
+                                    <div class="count-title">Jumlah Kelompok Bidang Aplikasi Informatika</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="count-area-content new-students">
+                                    <div class="count-digit">2345</div>
+                                    <div class="count-title">Jumlah Kelompok Bidang Sekretariat</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="count-area-content">
+                                    <div class="count-digit">32</div>
+                                    <div class="count-title">Jumlah Kelompok Bidang Statistik</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 align-self-center">
+                <div class="video">
+                    <a href="#"><img></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
