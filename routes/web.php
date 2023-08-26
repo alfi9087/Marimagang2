@@ -10,7 +10,8 @@ use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\DetailController;
-
+use App\Http\Controllers\AdminController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,13 @@ Route::post('/login/submit', [LoginController::class, 'authenticate'])->name('lo
 Route::get('/mahasiswa/{id}', [DashboardMahasiswaController::class, 'index'])->name('mahasiswa')->middleware('auth:web');
 
 //Route Admin
-Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin')->middleware('auth:admin');
+Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin');
+
+// Dashboard -> Admin
+Route::get('/admin', [DashboardController::class, 'admin']);
+Route::post('/adminpost', [AdminController::class, 'store'])->name('adminpost');
+Route::put('/adminupdate/{id}', [AdminController::class, 'update']);
+Route::get('/admindelete/{id}', [AdminController::class, 'delete']);
 
 //Notifikasi
 Route::get('/notif', [NotifikasiController::class, 'notif']);
@@ -55,6 +62,3 @@ Route::post('/profil/submit/{id}', [MahasiswaController::class, 'store'])->name(
 
 //Route Edit Profil
 Route::put('/mahasiswaupdate/{id}', [MahasiswaController::class, 'update'])->middleware('auth:web');
-
-
-
