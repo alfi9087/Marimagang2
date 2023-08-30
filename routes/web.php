@@ -39,14 +39,14 @@ Route::post('/login/submit', [LoginController::class, 'authenticate'])->name('lo
 //Route Mahasiswa
 Route::get('/mahasiswa/{id}', [DashboardMahasiswaController::class, 'index'])->name('mahasiswa')->middleware('auth:web');
 
-//Route Admin
-Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin');
+//Route Dashboard Admin
+Route::get('/dashboard', [DashboardAdminController::class, 'index'])->middleware('auth:admin');
 
 // Dashboard -> Admin
-Route::get('/admin', [DashboardController::class, 'admin']);
-Route::post('/adminpost', [AdminController::class, 'store'])->name('adminpost');
-Route::put('/adminupdate/{id}', [AdminController::class, 'update']);
-Route::get('/admindelete/{id}', [AdminController::class, 'delete']);
+Route::get('/admin', [DashboardAdminController::class, 'admin'])->middleware('auth:admin');
+Route::post('/adminpost', [AdminController::class, 'store'])->name('adminpost')->middleware('auth:admin');
+Route::put('/adminupdate/{id}', [AdminController::class, 'update'])->middleware('auth:admin');
+Route::get('/admindelete/{id}', [AdminController::class, 'delete'])->middleware('auth:admin');
 
 //Notifikasi
 Route::get('/notif', [NotifikasiController::class, 'notif']);

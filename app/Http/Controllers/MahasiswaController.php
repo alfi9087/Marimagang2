@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 
 class MahasiswaController extends Controller
 {
+    // Function Menambah Akun Mahasiswa
     public function store(Request $request, $id)
     {
 
@@ -44,6 +45,7 @@ class MahasiswaController extends Controller
         return redirect()->back();
     }
 
+    // Function Update Data Mahasiswa
     public function update(Request $request, $id)
     {
         $user = User::find($id);
