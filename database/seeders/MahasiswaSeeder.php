@@ -39,7 +39,7 @@ class MahasiswaSeeder extends Seeder
                 'nim' => '1111111111',
                 'email' => 'user3@example.com',
                 'password' => Hash::make('password3'),
-                'verify' => 1,
+                'verify' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -48,6 +48,11 @@ Route::post('/adminpost', [AdminController::class, 'store'])->name('adminpost')-
 Route::put('/adminupdate/{id}', [AdminController::class, 'update'])->middleware('auth:admin');
 Route::get('/admindelete/{id}', [AdminController::class, 'delete'])->middleware('auth:admin');
 
+// Dashboard -> User (Mahasiswa)
+Route::get('/user', [DashboardAdminController::class, 'user']);
+Route::get('/verify/{id}', [MahasiswaController::class, 'verify'])->middleware('auth:admin');
+Route::get('/block/{id}', [MahasiswaController::class, 'block'])->middleware('auth:admin')->name('mahasiswa.block');
+
 //Notifikasi
 Route::get('/notif', [NotifikasiController::class, 'notif']);
 

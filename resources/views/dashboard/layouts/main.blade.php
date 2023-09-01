@@ -211,7 +211,7 @@
         var SweetAlert2Demo = function() {
 
             //== Demos
-            var initDemos = function() {             
+            var initDemos = function() {
 
                 $('.delete-button-admin').click(function(e) {
                     e.preventDefault(); // Prevent the default link behavior
@@ -230,6 +230,33 @@
                             },
                             confirm: {
                                 text: 'Ya, hapus data!',
+                                className: 'btn btn-success'
+                            }
+                        }
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            window.location.href = deleteUrl; // Redirect to the delete URL
+                        }
+                    });
+                });
+
+                $('.block-button-mahasiswa').click(function(e) {
+                    e.preventDefault(); // Prevent the default link behavior
+
+                    var deleteUrl = $(this).attr('href');
+
+                    swal({
+                        title: 'Apakah kamu yakin?',
+                        text: "Mahasiswa yang diblokir tidak akan dapat mengakses lagi",
+                        type: 'warning',
+                        buttons: {
+                            cancel: {
+                                visible: true,
+                                text: 'Tidak, batalkan!',
+                                className: 'btn btn-danger'
+                            },
+                            confirm: {
+                                text: 'Ya, blokir akun!',
                                 className: 'btn btn-success'
                             }
                         }

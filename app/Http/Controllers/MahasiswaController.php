@@ -70,4 +70,29 @@ class MahasiswaController extends Controller
 
         return redirect()->back();
     }
+
+    public function verify(Request $request, $id)
+    {
+
+        $user = User::find($id);
+        if ($user) {
+            $user->verify = '1';
+            $user->save();
+            toast('Akun Mahasiswa Berhasil Diverifikasi', 'success');
+        }
+
+        return redirect()->back();
+    }
+
+    public function block(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->verify = '0';
+            $user->save();
+            toast('Akun Mahasiswa Tidak Terverifikasi', 'error');
+        }
+
+        return redirect()->back();
+    }
 }

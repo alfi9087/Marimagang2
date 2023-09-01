@@ -107,7 +107,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="basic-datatables" class="display table table-striped table-hover">
-                                    <thead>
+                                    <thead style="text-align: center;">
                                         <tr>
                                             <th>ID</th>
                                             <th>Nama</th>
@@ -115,7 +115,7 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <tfoot style="text-align: center;">
                                         <tr>
                                             <th>ID</th>
                                             <th>Nama</th>
@@ -123,14 +123,14 @@
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
+                                    <tbody style="text-align: center;">
                                         @foreach ($admin as $a)
                                         <tr>
                                             <td>{{ $a->id }}</td>
                                             <td>{{ $a->nama }}</td>
                                             <td>{{ $a->email }}</td>
                                             <td>
-                                                <div class="d-flex">
+                                                <div class="d-flex justify-content-center">
                                                     <a href="/adminupdate/{{ $a->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $a->id }}">
                                                         <button type="button" class="btn btn-icon btn-round btn-info">
                                                             <i class="fas fa-pencil-alt"></i>

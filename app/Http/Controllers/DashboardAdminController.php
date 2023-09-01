@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
+use App\Models\User;
 
 class DashboardAdminController extends Controller
 {
@@ -22,6 +23,15 @@ class DashboardAdminController extends Controller
         return view('dashboard.admin.index', [
             'title' => 'Home',
             'admin' => DB::table('admins')->get()
+        ]);
+    }
+
+    //Menampilkan Tabel Mahasiswa
+    public function user()
+    {
+        return view('dashboard.mahasiswa.index', [
+            'title' => 'User',
+            'user' => DB::table('users')->get()
         ]);
     }
 }

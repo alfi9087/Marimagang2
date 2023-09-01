@@ -34,21 +34,12 @@
                             <li><a href="/mahasiswa/{{ $user->id }}">Beranda</a></li>
                             @if(!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon)
                             @else
-                            <li class="has-sub">
-                                <a href="javascript:void(0)">Upload</a>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Surat Pengantar</a></li>
-                                    <li><a href="#">Proposal</a></li>
-                                    <li><a href="#">Surat Kesbangpol</a></li>
-                                </ul>
+                            <li>
+                                <a href="#">Pengajuan PKL</a>
                             </li>
                             @endif
-                            <li class="has-sub">
-                                <a href="javascript:void(0)">Profil</a>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Edit Akun</a></li>
-                                    <li><a href="/logout">Logout</a></li>
-                                </ul>
+                            <li>
+                                <a href="/logout">Logout</a>
                             </li>
                         </ul>
                         <a class='menu-trigger'>
