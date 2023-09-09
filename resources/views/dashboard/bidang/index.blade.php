@@ -27,7 +27,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -132,6 +132,7 @@
             <div class="container">
                 <div class="row">
 
+                    @if(count($bidang) > 0)
                     @foreach ($bidang as $b)
                     <div class="col-md-4">
                         <div class="card card-post card-round" style="border-radius: 10px;">
@@ -149,6 +150,12 @@
                         </div>
                     </div>
                     @endforeach
+
+                    @else
+                    <div class="col-md-12" style="display: flex; justify-content: center; align-items: center;">
+                        <p>Data Bidang Belum Ditambahkan</p>
+                    </div>
+                    @endif
 
                 </div>
             </div>

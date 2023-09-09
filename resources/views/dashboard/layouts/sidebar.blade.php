@@ -56,14 +56,14 @@
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#sidebarLayouts">
                         <i class="fas fa-laptop"></i>
-                        <p>Kelola Konten</p>
+                        <p>Data Bidang</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="/dashboard/home">
-                                    <span class="sub-item">Landing Page</span>
+                                    <span class="sub-item">Kelola Bidang</span>
                                 </a>
                             </li>
                         </ul>

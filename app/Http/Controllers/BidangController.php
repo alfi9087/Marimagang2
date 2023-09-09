@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bidang;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BidangController extends Controller
 {
@@ -24,12 +25,12 @@ class BidangController extends Controller
 
         // Periksa apakah file thumbnail diunggah
         if ($request->file('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('thumbnails'); // Sesuaikan dengan direktori penyimpanan yang sesuai
+            $thumbnailPath = $request->file('thumbnail')->store('bidang/thumbnails'); // Sesuaikan dengan direktori penyimpanan yang sesuai
         }
 
         // Periksa apakah file photo diunggah
         if ($request->file('photo')) {
-            $photoPath = $request->file('photo')->store('photos'); // Sesuaikan dengan direktori penyimpanan yang sesuai
+            $photoPath = $request->file('photo')->store('bidang/photos'); // Sesuaikan dengan direktori penyimpanan yang sesuai
         }
 
         // Simpan data ke dalam database menggunakan model Bidang
@@ -39,6 +40,9 @@ class BidangController extends Controller
         $bidang->photo = $photoPath;
         $bidang->deskripsi = $validatedData['deskripsi'];
         $bidang->save();
+
+        // Tambahkan SweetAlert success message
+        Alert::success('Sukses', 'Data Bidang Berhasil Ditambahkan')->showConfirmButton();
 
         // Redirect atau berikan respons yang sesuai, misalnya:
         return redirect()->back();

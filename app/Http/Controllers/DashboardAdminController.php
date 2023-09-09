@@ -39,7 +39,7 @@ class DashboardAdminController extends Controller
     //Menampilkan Kelola Landing Page
     public function home()
     {
-        return view('dashboard.home.index', [
+        return view('dashboard.bidang.index', [
             'title' => 'Landing Page',
             'bidang' => DB::table('bidang')->get()
         ]);
@@ -48,7 +48,7 @@ class DashboardAdminController extends Controller
     public function detail($id)
     {
         $bidang = Bidang::findorfail($id);
-        return view('dashboard.home.detail', [
+        return view('dashboard.bidang.detail', [
             'title' => 'Landing Page',
             'bidang' => $bidang,
         ]);
