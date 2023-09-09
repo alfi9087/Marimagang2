@@ -28,6 +28,10 @@
     <link rel="stylesheet" href="../assets/css/admin/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/admin/atlantis.min.css">
 
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -80,6 +84,11 @@
 
     <!-- Atlantis JS -->
     <script src="../assets/js/admin/atlantis.min.js"></script>
+
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('my-editor');
+    </script>
 
     <script>
         Circles.create({
@@ -280,6 +289,50 @@
         //== Class Initialization
         jQuery(document).ready(function() {
             SweetAlert2Demo.init();
+        });
+    </script>
+
+    <script>
+        // Fungsi untuk menampilkan preview gambar saat file thumbnail dipilih
+        function previewThumbnail() {
+            var thumbnailInput = document.getElementById('thumbnail');
+            var thumbnailPreview = document.getElementById('thumbnail-preview');
+
+            thumbnailInput.addEventListener('change', function() {
+                var file = thumbnailInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    thumbnailPreview.src = e.target.result;
+                    thumbnailPreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Fungsi untuk menampilkan preview gambar saat file photo dipilih
+        function previewPhoto() {
+            var photoInput = document.getElementById('photo');
+            var photoPreview = document.getElementById('photo-preview');
+
+            photoInput.addEventListener('change', function() {
+                var file = photoInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    photoPreview.src = e.target.result;
+                    photoPreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Panggil kedua fungsi saat halaman dimuat
+        window.addEventListener('load', function() {
+            previewThumbnail();
+            previewPhoto();
         });
     </script>
 </body>

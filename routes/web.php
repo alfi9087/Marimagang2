@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\BidangController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AdminController;
@@ -59,11 +60,18 @@ Route::get('/notif', [NotifikasiController::class, 'notif']);
 //Route Logout
 Route::get('/logout', [LoginController::class, 'logout']);
 
-//Route Detail
-Route::get('/detail', [DetailController::class, 'index']);
+//Route Detail (Home)
+Route::get('/homedetail/{id}', [HomeController::class, 'detail']);
 
 //Route Profil
 Route::post('/profil/submit/{id}', [MahasiswaController::class, 'store'])->name('mahasiswa.submit')->middleware('auth:web');
 
 //Route Edit Profil
 Route::put('/mahasiswaupdate/{id}', [MahasiswaController::class, 'update'])->middleware('auth:web');
+
+//Route Dashboard Admin
+Route::get('/dashboard/home', [DashboardAdminController::class, 'home'])->name('dashboard.home')->middleware('auth:admin');
+Route::post('/home/submit', [BidangController::class, 'store'])->name('home.submit')->middleware('auth:admin');
+
+//Route Dashboard Admin (Detail Bidang)
+Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail')->middleware('auth:admin');

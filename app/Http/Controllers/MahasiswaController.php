@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -27,8 +28,7 @@ class MahasiswaController extends Controller
         $photoPath = null;
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
-            $photoPath = $foto->move(public_path('mahasiswa'), $foto->getClientOriginalName())->getPathname();
-            $photoPath = 'mahasiswa/' . $foto->getClientOriginalName();
+            $photoPath = $foto->store('mahasiswa'); // 'local' sesuai dengan nama penyimpanan yang telah Anda konfigurasi
         }
 
         $user->nama = $request->input('nama');
@@ -56,6 +56,7 @@ class MahasiswaController extends Controller
             'jurusan' => 'required',
             'prodi' => 'required',
             'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar baru (opsional)
         ]);
 
         $user->nama = $request->input('nama');
@@ -63,6 +64,18 @@ class MahasiswaController extends Controller
         $user->jurusan = $request->input('jurusan');
         $user->prodi = $request->input('prodi');
         $user->telepon = $request->input('telepon');
+
+        // Update gambar jika ada unggahan gambar baru
+        if ($request->hasFile('foto')) {
+            // Hapus gambar lama jika ada
+            if ($user->foto) {
+                Storage::delete($user->foto);
+            }
+
+            $foto = $request->file('foto');
+            $photoPath = $foto->store('mahasiswa');
+            $user->foto = $photoPath;
+        }
 
         $user->save();
 

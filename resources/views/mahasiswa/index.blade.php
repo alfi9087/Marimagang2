@@ -30,7 +30,7 @@
                                             @if(!$user->foto)
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                                             @else
-                                            <img src="{{ asset($user->foto) }}" alt="foto profil" class="rounded-circle img-fluid" style="width: 150px;">
+                                            <img src="{{ asset('storage/' . $user->foto) }}" alt="foto profil" class="rounded-circle img-fluid" style="width: 175px; height: 175px;">
                                             @endif
                                             <h5 class="my-3">
                                                 @if(!$user->nama)
@@ -170,22 +170,23 @@
                                                         @csrf
 
                                                         <div>
+                                                            <!-- Preview Photo -->
                                                             <div class="d-flex justify-content-center mb-4">
-                                                                <img id="previewImage" src="{{ asset($user->foto) }}" class="rounded-circle" alt="Foto Profil" style="width: 200px;" />
+                                                                <img src="#" class="rounded-circle" alt="Photo Preview" style="display: none; width: 200px; height: 200px;" id="photo-preview" />
                                                             </div>
                                                             <div class="d-flex justify-content-center">
-                                                                <div class="btn btn-rounded" style="background-color: #DC143C; color: white;">
-                                                                    <label class="form-label text-white m-1" for="customFile2">Pilih Foto Profil</label>
+                                                                <input type="file" class="form-control-file @error('foto') is-invalid @enderror" name="foto" id="foto" style="display: none;">
 
-                                                                    <input type="file" class="form-control d-none form-control-user @error('foto') is-invalid @enderror" 
-                                                                    id="customFile2" name="foto">
-
-                                                                    @error('foto')
-                                                                    <div class="invalid-feedback">
-                                                                        {{ $message }}
-                                                                    </div>
-                                                                    @enderror
+                                                                @error('foto')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
                                                                 </div>
+                                                                @enderror
+
+                                                                <!-- Tambahkan CSS inline untuk menghilangkan teks "Choose File" dan nama file -->
+                                                                <label class="form-label text-white m-1" for="foto" style="background-color: #DC143C; color: white; padding: 6px 12px; cursor: pointer; border: none;">
+                                                                    Ubah Foto Profil
+                                                                </label>
                                                             </div>
                                                         </div>
 

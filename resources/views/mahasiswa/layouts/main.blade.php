@@ -114,19 +114,23 @@
     </script>
 
     <script>
-        const fileInput = document.getElementById('customFile2');
-        const previewImage = document.getElementById('previewImage');
+        // Fungsi untuk menampilkan preview foto saat dipilih
+        function previewFoto(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-        fileInput.addEventListener('change', () => {
-            if (fileInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    previewImage.src = e.target.result;
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                previewImage.src = ""; // Mengosongkan pratinjau gambar
+                reader.onload = function(e) {
+                    $('#photo-preview').attr('src', e.target.result).show();
+                }
+
+                reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        // Ketika input file berubah (saat foto baru diunggah)
+        $('#foto').change(function() {
+            // Tampilkan preview foto baru
+            previewFoto(this);
         });
     </script>
 

@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dashboards', function (Blueprint $table) {
+        Schema::create('bidang', function (Blueprint $table) {
             $table->id();
-            $table->string('bidang');
-            $table->string('deskripsi');
+            $table->string('nama');
             $table->string('thumbnail')->nullable();
             $table->string('photo')->nullable();
+            $table->string('deskripsi')->nullable();            
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

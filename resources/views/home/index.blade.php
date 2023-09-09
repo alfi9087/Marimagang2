@@ -96,78 +96,28 @@
                     <h2>Bidang Kerja Diskominfo Kabupaten Malang</h2>
                 </div>
             </div>
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="meeting-item">
-                            <div class="thumb">
-                                <a href="/detail"><img src="assets/images/bidang-sekretariat.jpg" alt="New Lecturer Meeting"></a>
-                            </div>
-                            <div class="down-content">
-                                <a href="/detail">
-                                    <h4 style="margin: 0; padding: 0;">Bidang Sekretariat</h4>
-                                </a>
-                                <p style="margin: 0; padding: 0;">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
-                            </div>
-                        </div>
+        </div>
+        <div class="row">
+            @foreach ($bidang as $b)
+            <div class="col-lg-4">
+                <div class="meeting-item">
+                    <div class="thumb">
+                        <a href="/homedetail/{{ $b->id }}"><img src="{{ asset('storage/' . $b->thumbnail) }}" alt="New Lecturer Meeting" style="width: 355px; height: 240px;"></a>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="meeting-item">
-                            <div class="thumb">
-                                <a href="/detail"><img src="assets/images/bidang-aptika.jpg" alt="New Lecturer Meeting"></a>
-                            </div>
-                            <div class="down-content">
-                                <a href="/detail">
-                                    <h4 style="margin: 0; padding: 0;">Bidang Aplikasi Informatika</h4>
-                                </a>
-                                <p style="margin: 0; padding: 0;">Bidang Aplikasi Informatika Untuk Mahasiswa Magang / PKL</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="meeting-item">
-                            <div class="thumb">
-                                <a href="/detail"><img src="assets/images/bidang-statistik.jpg" alt="New Lecturer Meeting"></a>
-                            </div>
-                            <div class="down-content">
-                                <a href="/detail">
-                                    <h4 style="margin: 0; padding: 0;">Bidang Statistik</h4>
-                                </a>
-                                <p style="margin: 0; padding: 0;">Bidang Statistik Untuk Mahasiswa Magang / PKL</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        <div class="meeting-item">
-                            <div class="thumb">
-                                <a href="/detail"><img src="assets/images/bidang-infrastruktur.jpg" alt="New Lecturer Meeting"></a>
-                            </div>
-                            <div class="down-content">
-                                <a href="/detail">
-                                    <h4 style="margin: 0; padding: 0;">Bidang Infrastruktur</h4>
-                                </a>
-                                <p style="margin: 0; padding: 0;">Bidang Infrastruktur Untuk Mahasiswa Magang / PKL</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="meeting-item">
-                            <div class="thumb">
-                                <a href="/detail"><img src="assets/images/bidang-komunikasi.jpg" alt="New Lecturer Meeting"></a>
-                            </div>
-                            <div class="down-content">
-                                <a href="/detail">
-                                    <h4 style="margin: 0; padding: 0;">Bidang Komunikasi</h4>
-                                </a>
-                                <p style="margin: 0; padding: 0;">Bidang Komunikasi Untuk Mahasiswa Magang / PKL</p>
-                            </div>
-                        </div>
+                    <div class="down-content">
+                        <a href="/homedetail/{{ $b->id }}">
+                            <h4 style="margin: 0; padding: 0;">{{ $b->nama }}</h4>
+                        </a>
+                        <p style="margin: 0; padding: 0;">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
                     </div>
                 </div>
             </div>
+            @if ($loop->iteration % 3 == 0)
         </div>
+        <div class="row justify-content-center">
+            @endif
+            @endforeach
+        </div> <!-- Tutup div.row terakhir jika tidak habis dibagi 3 -->
     </div>
 </section>
 
