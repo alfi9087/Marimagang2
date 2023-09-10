@@ -53,4 +53,11 @@ class DashboardAdminController extends Controller
             'bidang' => $bidang,
         ]);
     }
+
+    public function userdetail()
+    {
+        return view('dashboard.mahasiswa.detail', [
+            'title' => 'Landing Page',
+        ]);
+    }
 }
