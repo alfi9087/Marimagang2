@@ -3,9 +3,7 @@
 @section('content')
 <!-- Main Banner Area Start -->
 <section class="section main-banner" id="top" data-section="section1">
-    <video autoplay muted loop id="bg-video">
-        <source src="assets/images/Kominfo.mp4" type="video/mp4" />
-    </video>
+    <img src="assets/images/diskominfo.png" alt="">
 
     <div class="video-overlay header-text">
         <div class="container">
