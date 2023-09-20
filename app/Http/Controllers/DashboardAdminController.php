@@ -47,17 +47,23 @@ class DashboardAdminController extends Controller
 
     public function detail($id)
     {
-        $bidang = Bidang::findorfail($id);
+        $bidang = Bidang::findOrFail($id);
+
+        // Mengambil keterampilan terkait dengan bidang tertentu
+        $skill = $bidang->skill;
         return view('dashboard.bidang.detail', [
             'title' => 'Landing Page',
             'bidang' => $bidang,
+            'skill' => $skill
         ]);
     }
 
-    public function userdetail()
+    public function userdetail($id)
     {
+        $user = User::findorfail($id);
         return view('dashboard.mahasiswa.detail', [
             'title' => 'Landing Page',
+            'user' => $user,
         ]);
     }
 }

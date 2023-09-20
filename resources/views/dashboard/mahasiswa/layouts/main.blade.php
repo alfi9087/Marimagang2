@@ -230,7 +230,7 @@
                     var deleteUrl = $(this).attr('href');
 
                     swal({
-                        title: 'Apakah kamu yakin?',
+                        title: 'Apakah Kamu Yakin?',
                         text: "Data yang dihapus tidak dapat dikembalikan",
                         type: 'warning',
                         buttons: {
@@ -336,6 +336,27 @@
             previewThumbnail();
             previewPhoto();
         });
+    </script>
+
+    <!-- Javascript Menu Aktif Dashboard Detail Mahasiswa -->
+    <script>
+        function activateTab(tabID) {
+            // Menghapus kelas "active" dari semua elemen tab
+            var tabLinks = document.querySelectorAll('.nav-tabs .nav-item');
+            for (var i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove('active');
+            }
+
+            // Menambahkan kelas "active" ke elemen tab yang sesuai
+            document.querySelector('a[href="#' + tabID + '"]').parentNode.classList.add('active');
+
+            // Menampilkan konten tab yang sesuai
+            var tabContent = document.querySelectorAll('.tab-pane');
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove('active');
+            }
+            document.getElementById(tabID).classList.add('active');
+        }
     </script>
 </body>
 

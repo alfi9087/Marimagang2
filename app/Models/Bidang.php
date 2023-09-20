@@ -18,4 +18,9 @@ class Bidang extends Model
         'deskripsi',
         'status'
     ];
+
+    public function skill()
+    {
+        return $this->hasMany(Skill::class, 'bidang_id');
+    }
 }

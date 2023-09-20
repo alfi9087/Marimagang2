@@ -4,47 +4,95 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bidang;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class BidangController extends Controller
 {
     public function store(Request $request)
     {
-        // Validasi input dari formulir
-        $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Sesuaikan dengan aturan validasi yang sesuai
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Sesuaikan dengan aturan validasi yang sesuai
-            'deskripsi' => 'required',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'nama' => 'required|string|max:255',
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'deskripsi' => 'required',
+                'skill.*' => 'required', // Validasi untuk setiap keterampilan
+            ]);
 
-        // Inisialisasi variabel untuk path thumbnail dan photo
-        $thumbnailPath = null;
-        $photoPath = null;
+            $thumbnailPath = $request->file('thumbnail')->store('bidang/thumbnails');
+            $photoPath = $request->file('photo')->store('bidang/photos');
 
-        // Periksa apakah file thumbnail diunggah
-        if ($request->file('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('bidang/thumbnails'); // Sesuaikan dengan direktori penyimpanan yang sesuai
+            $bidang = new Bidang;
+            $bidang->nama = $validatedData['nama'];
+            $bidang->thumbnail = $thumbnailPath;
+            $bidang->photo = $photoPath;
+            $bidang->deskripsi = $validatedData['deskripsi'];
+
+            $bidang->save();
+
+            // Simpan setiap keterampilan sebagai baris terpisah di tabel "skills"
+            foreach ($validatedData['skill'] as $skillName) {
+                $skill = new Skill;
+                $skill->nama = $skillName;
+                $skill->bidang_id = $bidang->id;
+                $skill->save();
+            }
+
+            // Tambahkan SweetAlert success message
+            Alert::success('Sukses', 'Data Bidang Berhasil Ditambahkan')->showConfirmButton();
+
+            // Redirect atau berikan respons yang sesuai, misalnya:
+            return redirect()->back();
+        } catch (\Exception $e) {
+            // Tangani kesalahan dengan menampilkan pesan error
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+
+            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
+            return redirect()->back();
         }
+    }
 
-        // Periksa apakah file photo diunggah
-        if ($request->file('photo')) {
-            $photoPath = $request->file('photo')->store('bidang/photos'); // Sesuaikan dengan direktori penyimpanan yang sesuai
+    public function destroy($id)
+    {
+        try {
+            // Temukan bidang berdasarkan ID
+            $bidang = Bidang::find($id);
+
+            if (!$bidang) {
+                // Jika bidang tidak ditemukan, tampilkan pesan kesalahan
+                Alert::error('Error', 'Data Bidang tidak ditemukan')->showConfirmButton();
+                return redirect()->back();
+            }
+
+            // Hapus gambar thumbnail dan photo terkait bidang
+            if ($bidang->thumbnail) {
+                Storage::delete($bidang->thumbnail);
+            }
+
+            if ($bidang->photo) {
+                Storage::delete($bidang->photo);
+            }
+
+            // Hapus bidang
+            $bidang->delete();
+
+            // Hapus juga semua skill terkait dengan bidang ini (jika diperlukan)
+            // $bidang->skills()->delete();
+
+            // Tampilkan pesan sukses
+            toast('Data Bidang Berhasil Dihapus', 'success');
+
+            // Redirect atau berikan respons yang sesuai
+            return redirect()->back();
+        } catch (\Exception $e) {
+            // Tangani kesalahan dengan menampilkan pesan error
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+
+            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
+            return redirect()->back();
         }
-
-        // Simpan data ke dalam database menggunakan model Bidang
-        $bidang = new Bidang();
-        $bidang->nama = $validatedData['nama'];
-        $bidang->thumbnail = $thumbnailPath;
-        $bidang->photo = $photoPath;
-        $bidang->deskripsi = $validatedData['deskripsi'];
-        $bidang->save();
-
-        // Tambahkan SweetAlert success message
-        Alert::success('Sukses', 'Data Bidang Berhasil Ditambahkan')->showConfirmButton();
-
-        // Redirect atau berikan respons yang sesuai, misalnya:
-        return redirect()->back();
     }
 }

@@ -42,6 +42,9 @@
                                 <img src="{{ asset('storage/' . $bidang->photo) }}" alt="Card image cap" style="width: 100%; height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
                             </div>
                             <div class="card-body">
+                                @foreach($skill as $s)
+                                <span class="badge badge-dark">{{ $s->nama }}</span>
+                                @endforeach
                                 <div class="separator-solid"></div>
                                 <h3 class="card-title">
                                     <a href="#">
@@ -60,6 +63,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

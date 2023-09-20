@@ -335,6 +335,76 @@
             previewPhoto();
         });
     </script>
+
+    <script type="text/javascript">
+        $('.addmulti').on('click', function() {
+            addmulti();
+        });
+
+        function addmulti() {
+            var multi = '<div class="form-group row"><label class="col-sm-3 col-form-label">Skill</label><div class="col-sm-9"><input type="text" class="form-control @error('
+            skill ') is-invalid @enderror" name="skill[]" id="skill" placeholder="Skill Yang Dibutuhkan" value="{{ is_array(old('
+            skill ')) ? old('
+            skill ')[0] : old('
+            skill ') }}" />@error('
+            skill ')<div class="invalid-feedback">{{ $message }}</div>@enderror<a href="#" class="remove btn btn-danger plus float-right">-</a></div></div>';
+            $('.multi').append(multi);
+        };
+
+        $(document).on('click', '.remove', function() {
+            $(this).parent().parent().remove();
+        });
+    </script>
+
+    <script>
+        //== Class definition
+        var SweetAlert2Demo = function() {
+
+            //== Demos
+            var initDemos = function() {
+
+                $('.bidang-delete').submit(function(e) {
+                    e.preventDefault(); // Prevent the default form submission
+
+                    var deleteUrl = $(this).attr('action');
+
+                    swal({
+                        title: 'Apakah Kamu Yakin?',
+                        text: "Data yang dihapus tidak dapat dikembalikan",
+                        type: 'warning',
+                        buttons: {
+                            cancel: {
+                                visible: true,
+                                text: 'Tidak, batalkan!',
+                                className: 'btn btn-danger'
+                            },
+                            confirm: {
+                                text: 'Ya, hapus data!',
+                                className: 'btn btn-success'
+                            }
+                        }
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            window.location.href = deleteUrl; // Redirect to the delete URL
+                        }
+                    });
+                });
+            };
+
+            return {
+                //== Init
+                init: function() {
+                    initDemos();
+                },
+            };
+        }();
+
+        //== Class Initialization
+        jQuery(document).ready(function() {
+            SweetAlert2Demo.init();
+        });
+    </script>
+
 </body>
 
 </html>

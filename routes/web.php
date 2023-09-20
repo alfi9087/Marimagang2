@@ -51,7 +51,7 @@ Route::get('/admindelete/{id}', [AdminController::class, 'delete'])->middleware(
 
 // Dashboard -> User (Mahasiswa)
 Route::get('/user', [DashboardAdminController::class, 'user'])->middleware('auth:admin');
-Route::get('/userdetail', [DashboardAdminController::class, 'userdetail'])->middleware('auth:admin');
+Route::get('/userdetail/{id}', [DashboardAdminController::class, 'userdetail'])->middleware('auth:admin');
 Route::get('/verify/{id}', [MahasiswaController::class, 'verify'])->middleware('auth:admin');
 Route::get('/block/{id}', [MahasiswaController::class, 'block'])->middleware('auth:admin')->name('mahasiswa.block');
 
@@ -73,6 +73,10 @@ Route::put('/mahasiswaupdate/{id}', [MahasiswaController::class, 'update'])->mid
 //Route Dashboard Admin
 Route::get('/dashboard/home', [DashboardAdminController::class, 'home'])->name('dashboard.home')->middleware('auth:admin');
 Route::post('/home/submit', [BidangController::class, 'store'])->name('home.submit')->middleware('auth:admin');
+Route::get('/bidangdelete/{id}', [BidangController::class, 'destroy'])->name('bidang.delete')->middleware('auth:admin');
 
 //Route Dashboard Admin (Detail Bidang)
 Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail')->middleware('auth:admin');
+
+//Route Edit Profil
+Route::get('/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan'])->middleware('auth:web');

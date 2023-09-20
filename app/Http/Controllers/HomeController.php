@@ -20,10 +20,14 @@ class HomeController extends Controller
     //Menampilkan Detail Tiap Bidang
     public function detail($id)
     {
-        $bidang = Bidang::findorfail($id);
+        $bidang = Bidang::findOrFail($id);
+
+        // Mengambil keterampilan terkait dengan bidang tertentu
+        $skill = $bidang->skill;
         return view('home.detail', [
             'title' => 'Home',
             'bidang' => $bidang,
+            'skill' => $skill
         ]);
     }
 }

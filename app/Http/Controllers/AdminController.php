@@ -12,47 +12,70 @@ class AdminController extends Controller
     // Function Menambah Akun Admin
     public function store(Request $request)
     {
-        $ValidatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'email' => 'required|unique:admins',
-            'password' => 'required|min:8'
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'nama' => 'required|max:70',
+                'email' => 'required|email|unique:admins',
+                'password' => 'required|min:8'
+            ]);
 
-        $ValidatedData['password'] = bcrypt($ValidatedData['password']);
+            $validatedData['password'] = bcrypt($validatedData['password']);
 
-        Admin::create($ValidatedData);
+            Admin::create($validatedData);
 
-        // Alert
-        Alert::success('Sukses', 'Data admin Berhasil Ditambahkan')->showConfirmButton();
+            // Alert
+            Alert::success('Sukses', 'Data admin Berhasil Ditambahkan')->showConfirmButton();
 
-        return redirect()->back();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            // Tangani kesalahan dengan menampilkan pesan error
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+
+            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
+            return redirect()->back();
+        }
     }
 
     // Function Update Akun Admin
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'max:255',
-            'email' => 'email:dns|unique:admins,email,' . $id,
-        ]);
+        try {
+            $request->validate([
+                'nama' => 'required|max:70',
+                'email' => 'email:dns|unique:admins,email,' . $id,
+            ]);
 
-        $admin = Admin::find($id);
+            $admin = Admin::find($id);
 
-        // Bandingkan data lama dan data baru
-        $oldNama = $admin->nama;
-        $oldEmail = $admin->email;
+            if (!$admin) {
+                // Jika admin dengan ID yang diberikan tidak ditemukan
+                // Tampilkan pesan kesalahan dan berikan respons yang sesuai
+                Alert::error('Error', 'Admin tidak ditemukan')->showConfirmButton();
+                return redirect()->back();
+            }
 
-        $admin->nama = $request->nama;
-        $admin->email = $request->email;
-        $admin->save();
+            // Bandingkan data lama dan data baru
+            $oldNama = $admin->nama;
+            $oldEmail = $admin->email;
 
-        // Cek Kondisi
-        if ($admin->nama !== $oldNama || $admin->email !== $oldEmail) {
-            // Alert
-            Alert::success('Sukses', 'Data admin Berhasil Diperbarui')->showConfirmButton();
+            $admin->nama = $request->nama;
+            $admin->email = $request->email;
+            $admin->save();
+
+            // Cek Kondisi
+            if ($admin->nama !== $oldNama || $admin->email !== $oldEmail) {
+                // Alert
+                Alert::success('Sukses', 'Data admin Berhasil Diperbarui')->showConfirmButton();
+            }
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            // Tangani kesalahan dengan menampilkan pesan error
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+
+            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
+            return redirect()->back();
         }
-
-        return redirect()->back();
     }
 
     // Function Delete Akun Admin

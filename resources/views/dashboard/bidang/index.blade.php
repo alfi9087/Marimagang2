@@ -118,6 +118,24 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Skill</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control @error('skill') is-invalid @enderror" name="skill[]" id="skill" placeholder="Skill Yang Dibutuhkan" value="{{ is_array(old('skill')) ? old('skill')[0] : old('skill') }}" />
+
+                                        @error('skill')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                        <a href="#" class="addmulti btn btn-primary plus float-right">+</a>
+                                    </div>
+                                </div>
+
+                                <div class="multi">
+
+                                </div>
+
+                                <div class="form-group row">
                                     <div class="col-sm-9 offset-sm-3">
                                         <button type="submit" class="btn btn-primary float-right">Submit</button>
                                     </div>
@@ -136,7 +154,7 @@
                     @foreach ($bidang as $b)
                     <div class="col-md-4">
                         <div class="card card-post card-round" style="border-radius: 10px;">
-                            <img class="card-img-top" src="{{ asset('storage/' . $b->thumbnail) }}" alt="Card image cap" style="width: 315px; height: 250px;">
+                            <img class="card-img-top" src="{{ asset('storage/' . $b->thumbnail) }}" alt="Card image cap" style="width: 350px; height: 250px;">
                             <div class="card-body">
                                 <div class="separator-solid"></div>
                                 <h3 class="card-title">
@@ -146,6 +164,11 @@
                                 </h3>
                                 <p class="card-text">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
                                 <a href="/detail/{{ $b->id }}" class="btn btn-primary btn-rounded btn-sm" style="float: right;">Detail</a>
+                                <form action="{{ route('bidang.delete', $b->id) }}" method="POST" class="bidang-delete">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-rounded btn-sm" style="float: right; margin-right: 10px;">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>
