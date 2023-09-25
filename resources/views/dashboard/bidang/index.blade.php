@@ -119,14 +119,14 @@
 
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Skill</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control @error('skill') is-invalid @enderror" name="skill[]" id="skill" placeholder="Skill Yang Dibutuhkan" value="{{ is_array(old('skill')) ? old('skill')[0] : old('skill') }}" />
-
-                                        @error('skill')
+                                    <div class="col-sm-8"><input type="text" class="form-control @error('skill ') is-invalid @enderror" name="skill[]" id="skill" placeholder="Skill Yang Dibutuhkan" value="{{ is_array(old('skill ')) ? old('skill ')[0] : old('skill ') }}" />
+                                        @error('skill ')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
+                                    </div>
+                                    <div class="col-sm-1">
                                         <a href="#" class="addmulti btn btn-primary plus float-right">+</a>
                                     </div>
                                 </div>

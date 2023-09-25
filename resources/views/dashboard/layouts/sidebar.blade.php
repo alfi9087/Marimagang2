@@ -4,7 +4,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../assets/images/admin/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img src="../assets/images/admin/profile.png" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -30,7 +30,7 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
-                    <h4 class="text-section">Components</h4>
+                    <h4 class="text-section">Menu</h4>
                 </li>
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#base">
@@ -69,7 +69,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a data-toggle="collapse" href="#forms">
                         <i class="fas fa-pen-square"></i>
                         <p>Forms</p>
@@ -200,7 +200,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li class="mx-4 mt-2">
                     <a href="/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
                 </li>
