@@ -136,7 +136,7 @@
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="/admindelete/{{ $a->id }}" class="delete-button-admin">
+                                                    <a href="/admindelete/{{ $a->id }}" class="delete-button-admin" data-confirm-delete="true">
                                                         <button type="button" class="btn btn-icon btn-round btn-danger">
                                                             <i class="far fa-trash-alt"></i>
                                                         </button>

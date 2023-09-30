@@ -216,79 +216,58 @@
     </script>
 
     <script>
-        //== Class definition
-        var SweetAlert2Demo = function() {
-
-            //== Demos
-            var initDemos = function() {
-
-                $('.delete-button-admin').click(function(e) {
-                    e.preventDefault(); // Prevent the default link behavior
-
-                    var deleteUrl = $(this).attr('href');
-
-                    swal({
-                        title: 'Apakah kamu yakin?',
-                        text: "Data yang dihapus tidak dapat dikembalikan",
-                        type: 'warning',
-                        buttons: {
-                            cancel: {
-                                visible: true,
-                                text: 'Tidak, batalkan!',
-                                className: 'btn btn-danger'
-                            },
-                            confirm: {
-                                text: 'Ya, hapus data!',
-                                className: 'btn btn-success'
-                            }
+        $(document).ready(function() {
+            // Inisialisasi SweetAlert untuk tombol delete admin
+            $('.delete-button-admin').click(function(e) {
+                e.preventDefault();
+                var deleteUrl = $(this).attr('href');
+                swal({
+                    title: 'Apakah kamu yakin?',
+                    text: "Data yang dihapus tidak dapat dikembalikan",
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: 'Tidak, batalkan!',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: 'Ya, hapus data!',
+                            className: 'btn btn-success'
                         }
-                    }).then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = deleteUrl; // Redirect to the delete URL
-                        }
-                    });
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = deleteUrl;
+                    }
                 });
+            });
 
-                $('.block-button-mahasiswa').click(function(e) {
-                    e.preventDefault(); // Prevent the default link behavior
-
-                    var deleteUrl = $(this).attr('href');
-
-                    swal({
-                        title: 'Apakah kamu yakin?',
-                        text: "Mahasiswa yang diblokir tidak akan dapat mengakses lagi",
-                        type: 'warning',
-                        buttons: {
-                            cancel: {
-                                visible: true,
-                                text: 'Tidak, batalkan!',
-                                className: 'btn btn-danger'
-                            },
-                            confirm: {
-                                text: 'Ya, blokir akun!',
-                                className: 'btn btn-success'
-                            }
+            // Inisialisasi SweetAlert untuk tombol block mahasiswa
+            $('.block-button-mahasiswa').click(function(e) {
+                e.preventDefault();
+                var blockUrl = $(this).attr('href');
+                swal({
+                    title: 'Apakah kamu yakin?',
+                    text: "Mahasiswa yang diblokir tidak akan dapat mengakses lagi",
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: 'Tidak, batalkan!',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: 'Ya, blokir akun!',
+                            className: 'btn btn-success'
                         }
-                    }).then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = deleteUrl; // Redirect to the delete URL
-                        }
-                    });
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = blockUrl;
+                    }
                 });
-
-            };
-
-            return {
-                //== Init
-                init: function() {
-                    initDemos();
-                },
-            };
-        }();
-
-        //== Class Initialization
-        jQuery(document).ready(function() {
-            SweetAlert2Demo.init();
+            });
         });
     </script>
 

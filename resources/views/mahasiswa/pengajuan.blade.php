@@ -1,90 +1,165 @@
 @extends('mahasiswa.layouts.mainupload')
 
 @section('content')
-<main class="d-flex align-items-center">
-    <div class="container">
-        <h1>Form Pengajuan PKL</h1>
-        <form method="POST" action="#" enctype="multipart/form-data">
-            <div id="wizard">
-
-                <h3>Step 1 Title</h3>
-                <section>
-                    <h5 class="bd-wizard-step-title">Langkah 1</h5>
-                    <h2 class="section-heading">Data Umum Pengajuan PKL</h2>
-                    <div class="form-group">
-                        <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name">
+<div class="container-fluid px-0" id="bg-div">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-12">
+            <div class="card card0">
+                <div class="d-flex" id="wrapper">
+                    <!-- Sidebar -->
+                    <div class="bg-light border-right" id="sidebar-wrapper">
+                        <div class="sidebar-heading pt-5 pb-4">
+                            <strong>MENU</strong>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a data-toggle="tab" href="#menu1" id="tab1" class="tabs list-group-item active1">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-home"></div> &nbsp;&nbsp; Pengajuan PKL
+                                </div>
+                            </a>
+                            <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item bg-light">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-credit-card"></div> &nbsp;&nbsp; Lihat Data Anggota
+                                </div>
+                            </a>
+                            <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Riwayat Pengajuan
+                                </div>
+                            </a>
+                        </div>
+                    </div> <!-- Page Content -->
+                    <div id="page-content-wrapper">
+                        <div class="row pt-3" id="border-btm">
+                            <div class="col-4">
+                                <button class="btn btn-danger mt-4 ml-3 mb-3" id="menu-toggle">
+                                    <div class="bar4"></div>
+                                    <div class="bar4"></div>
+                                    <div class="bar4"></div>
+                                </button>
+                            </div>
+                            <div class="col-8">
+                                <div class="row justify-content-right">
+                                    <div class="col-12">
+                                        <p class="mb-0 mr-4 mt-4 text-right">customer@email.com</p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-right">
+                                    <div class="col-12">
+                                        <p class="mb-0 mr-4 text-right">Pay
+                                            <span class="top-highlight">$ 100</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="text-center" id="test">Pay</div>
+                        </div>
+                        <div class="tab-content">
+                            <div id="menu1" class="tab-pane in active">
+                                <div class="row justify-content-center">
+                                    <div class="col-11">
+                                        <div class="form-card">
+                                            <h3 class="mt-0 mb-4 text-center">FORM PENGAJUAN PKL</h3>
+                                            <form onsubmit="event.preventDefault()">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group">
+                                                            <input type="text" id="bk_nm" placeholder="BBB Bank">
+                                                            <label>BANK NAME</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group">
+                                                            <input type="text" name="ben_nm" id="ben-nm" placeholder="John Smith">
+                                                            <label>BENEFICIARY NAME</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group">
+                                                            <input type="text" name="scode" placeholder="ABCDAB1S" class="placeicon" minlength="8" maxlength="11">
+                                                            <label>SWIFT CODE</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="submit" value="Pay $ 100" class="btn btn-danger placeicon">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-center mb-5" id="below-btn">
+                                                            <a href="#">Use a test card</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu2" class="tab-pane">
+                                <div class="row justify-content-center">
+                                    <div class="col-11">
+                                        <div class="form-card">
+                                            <h3 class="mt-0 mb-4 text-center">DATA ANGGOTA PKL</h3>
+                                            <form onsubmit="event.preventDefault()">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group">
+                                                            <input type="text" id="cr_no" placeholder="0000 0000 0000 0000" minlength="19" maxlength="19">
+                                                            <label>CARD NUMBER</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="input-group">
+                                                            <input type="text" name="exp" id="exp" placeholder="MM/YY" minlength="5" maxlength="5">
+                                                            <label>CARD EXPIRY</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="input-group">
+                                                            <input type="password" name="cvcpwd" placeholder="&#9679;&#9679;&#9679;" class="placeicon" minlength="3" maxlength="3">
+                                                            <label>CVV</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="submit" value="Pay $ 100" class="btn btn-danger placeicon">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-center mb-5" id="below-btn"><a href="#">Use a test card</a></p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="menu3" class="tab-pane">
+                                <div class="row justify-content-center">
+                                    <div class="col-11">
+                                        <h3 class="mt-0 mb-4 text-center">Scan the QR code to pay</h3>
+                                        <div class="row justify-content-center">
+                                            <div id="qr"> <img src="https://i.imgur.com/DD4Npfw.jpg" width="200px" height="200px"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <select id="bidang" name="bidang" class="custom-select" style="height: 60px;">
-                            <option selected disabled hidden>Pilih Bidang</option>
-                            <option value="bidang 1">Bidang Infrastruktur</option>
-                            <option value="bidang 2">Bidang Datar</option>
-                            <option value="bidang 3">Bidang</option>
-                            <option value="bidang 4">Bidang</option>
-                            <option value="bidang 5">Bidang</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <select class="js-example-placeholder-multiple js-states form-control" name="states[]" multiple="multiple" style="width: 100%;">
-                            <option value="AL">HTML</option>
-                            <option value="WY">CSS</option>
-                            <option value="WY">Javascript</option>
-                            <option value="WY">React JS</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="date" class="form-control" id="tgl_mulai" name="tgl_mulai" placeholder="Tanggal Mulai PKL">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="date" class="form-control" id="tgl_selesai" name="tgl_selesai" placeholder="Tanggal Selesai PKL">
-                    </div>
-                </section>
-
-                <h3>Step 2 Title</h3>
-                <section>
-                    <h5 class="bd-wizard-step-title">Langkah 2</h5>
-                    <h2 class="section-heading">Project Yang Pernah Dikerjakan</h2>
-                    <div class="form-group">
-                        <label for="judul" class="sr-only">Judul</label>
-                        <input type="text" name="judul" id="judul" class="form-control" placeholder="Judul">
-                    </div>
-                    <div class="form-group">
-                        <label for="tempat" class="sr-only">Tempat</label>
-                        <input type="text" name="tempat" id="tempat" class="form-control" placeholder="Tempat">
-                    </div>
-                    <div class="form-group">
-                        <input type="month" name="bulan" id="bulan" class="form-control" placeholder="Tanggal Mulai">
-                    </div>
-                    <div class="form-group">
-                        <input type="month" name="bulan" id="bulan" class="form-control" placeholder="Tanggal Berakhir">
-                    </div>
-                </section>
-
-                <h3>Step 3 Title</h3>
-                <section>
-                    <h5 class="bd-wizard-step-title">Langkah 3</h5>
-                    <h2 class="section-heading mb-5">Upload Dokumen Yang Diperlukan</h2>
-                    <h6 class="font-weight-bold">Select business type</h6>
-                    <p class="mb-4" id="business-type">Branding</p>
-                    <h6 class="font-weight-bold">Enter your Account Details</h6>
-                    <p class="mb-4"><span id="enteredFirstName">Cha</span> <span id="enteredLastName">Ji-Hun C</span> <br>
-                        Phone: <span id="enteredPhoneNumber">+230-582-6609</span> <br>
-                        Email: <span id="enteredEmailAddress">willms_abby@gmail.com</span></p>
-                </section>
-
-                <h3>Step 4 Title</h3>
-                <section>
-                    <h5 class="bd-wizard-step-title">Langkah 4</h5>
-                    <h2 class="section-heading">Isi Formulir Kepuasan</h2>
-                    <a href="https://sukma.jatimprov.go.id/fe/survey?idUser=1992" class="btn btn-primary" style="background-color: #DC143C;">Isi Formulir Kepuasan</a>
-                </section>
-
+                </div>
             </div>
-        </form>
+        </div>
     </div>
-</main>
+</div>
 @endsection
