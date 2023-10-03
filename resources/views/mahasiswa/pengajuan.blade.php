@@ -41,63 +41,80 @@
                             <div class="col-8">
                                 <div class="row justify-content-right">
                                     <div class="col-12">
-                                        <p class="mb-0 mr-4 mt-4 text-right">customer@email.com</p>
+                                        <p class="mb-0 mr-4 mt-4 text-right" style="font-weight: bold;">{{ $user->nama }}</p>
                                     </div>
                                 </div>
                                 <div class="row justify-content-right">
                                     <div class="col-12">
-                                        <p class="mb-0 mr-4 text-right">Pay
-                                            <span class="top-highlight">$ 100</span>
-                                        </p>
+                                        <p class="mb-0 mr-4 text-right">{{ $user->email }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="text-center" id="test">Pay</div>
                         </div>
                         <div class="tab-content">
                             <div id="menu1" class="tab-pane in active">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
                                         <div class="form-card">
-                                            <h3 class="mt-0 mb-4 text-center">FORM PENGAJUAN PKL</h3>
-                                            <form onsubmit="event.preventDefault()">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <input type="text" id="bk_nm" placeholder="BBB Bank">
-                                                            <label>BANK NAME</label>
-                                                        </div>
-                                                    </div>
+                                            <h4 class="mt-0 mb-4 text-center">FORM PENGAJUAN PKL</h4>
+                                            <div class="main">
+
+                                                <div class="container">
+                                                    <form method="POST" id="signup-form" class="signup-form" enctype="multipart/form-data" action="/wikwik">
+                                                        <h3>
+                                                            Data Umum
+                                                        </h3>
+                                                        <fieldset>
+                                                            <div class="form-row">
+                                                                <div class="form-group">
+                                                                    <label for="date">Nama Lengkap:</label>
+                                                                    <input type="text" name="name" id="name" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="date">Tanggal Mulai PKL:</label>
+                                                                    <input type="date" name="name" id="name" />
+                                                                </div>
+                                                                <div class="form-select">
+                                                                    <label for="date">Pilih Bidang Kerja</label>
+                                                                    <div class="select-group">
+                                                                        <select name="daily_budget" id="daily_budget">
+                                                                            <option value="" disabled selected hidden></option>
+                                                                            <option value="40$">40$</option>
+                                                                            <option value="60$">60$</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="date">Tanggal Selesai PKL:</label>
+                                                                    <input type="date" name="bidang" id="bidang" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-group">
+
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+
+                                                        <h3>
+                                                            Project Sebelumnya
+                                                        </h3>
+                                                        <fieldset>
+
+                                                        </fieldset>
+
+                                                        <h3>
+                                                            Upload Berkas
+                                                        </h3>
+                                                        <fieldset>
+
+                                                        </fieldset>
+                                                    </form>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <input type="text" name="ben_nm" id="ben-nm" placeholder="John Smith">
-                                                            <label>BENEFICIARY NAME</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <input type="text" name="scode" placeholder="ABCDAB1S" class="placeicon" minlength="8" maxlength="11">
-                                                            <label>SWIFT CODE</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <input type="submit" value="Pay $ 100" class="btn btn-danger placeicon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <p class="text-center mb-5" id="below-btn">
-                                                            <a href="#">Use a test card</a>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </form>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -106,51 +123,40 @@
                                 <div class="row justify-content-center">
                                     <div class="col-11">
                                         <div class="form-card">
-                                            <h3 class="mt-0 mb-4 text-center">DATA ANGGOTA PKL</h3>
-                                            <form onsubmit="event.preventDefault()">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <input type="text" id="cr_no" placeholder="0000 0000 0000 0000" minlength="19" maxlength="19">
-                                                            <label>CARD NUMBER</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="input-group">
-                                                            <input type="text" name="exp" id="exp" placeholder="MM/YY" minlength="5" maxlength="5">
-                                                            <label>CARD EXPIRY</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="input-group">
-                                                            <input type="password" name="cvcpwd" placeholder="&#9679;&#9679;&#9679;" class="placeicon" minlength="3" maxlength="3">
-                                                            <label>CVV</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <input type="submit" value="Pay $ 100" class="btn btn-danger placeicon">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <p class="text-center mb-5" id="below-btn"><a href="#">Use a test card</a></p>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            <h4 class="mt-0 mb-4 text-center">DATA ANGGOTA PKL</h4>
+                                            <button id="addDataButton" class="btn btn-primary float-right mb-3">Tambah Data</button>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">Nama</th>
+                                                        <th class="text-center">NIM</th>
+                                                        <th class="text-center">Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Isi tabel di sini -->
+                                                    <tr>
+                                                        <td class="text-center">John Doe</td>
+                                                        <td class="text-center">123456</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-sm btn-primary">Edit</button>
+                                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Tambahkan baris lain sesuai dengan data yang ada -->
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div id="menu3" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
-                                        <h3 class="mt-0 mb-4 text-center">Scan the QR code to pay</h3>
+                                        <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN PKL</h4>
                                         <div class="row justify-content-center">
-                                            <div id="qr"> <img src="https://i.imgur.com/DD4Npfw.jpg" width="200px" height="200px"> </div>
+
                                         </div>
                                     </div>
                                 </div>
