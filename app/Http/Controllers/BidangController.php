@@ -30,6 +30,7 @@ class BidangController extends Controller
             $bidang->thumbnail = $thumbnailPath;
             $bidang->photo = $photoPath;
             $bidang->deskripsi = $validatedData['deskripsi'];
+            $bidang->status = 'Buka';
 
             $bidang->save();
 
@@ -53,6 +54,31 @@ class BidangController extends Controller
             // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
             return redirect()->back();
         }
+    }
+
+    public function open(Request $request, $id)
+    {
+
+        $bidang = Bidang::find($id);
+        if ($bidang) {
+            $bidang->status = 'Buka';
+            $bidang->save();
+            toast('Bidang Berhasil Dibuka', 'success');
+        }
+
+        return redirect()->back();
+    }
+
+    public function close(Request $request, $id)
+    {
+        $bidang = Bidang::find($id);
+        if ($bidang) {
+            $bidang->status = 'Tutup';
+            $bidang->save();
+            toast('Bidang Berhasil Ditutup', 'error');
+        }
+
+        return redirect()->back();
     }
 
     public function destroy($id)

@@ -268,6 +268,32 @@
                     }
                 });
             });
+
+            $('.close-button-bidang').click(function(e) {
+                e.preventDefault();
+                var blockUrl = $(this).attr('href');
+                swal({
+                    title: 'Apakah kamu yakin?',
+                    text: "Bidang Yang Ditutup Tidak Dapat Diambil Oleh Mahasiswa",
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: 'Tidak, Batalkan!',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: 'Ya, Tutup Bidang!',
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = blockUrl;
+                    }
+                });
+            });
+
         });
     </script>
 

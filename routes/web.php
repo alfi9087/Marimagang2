@@ -12,6 +12,7 @@ use App\Http\Controllers\BidangController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AdminController;
+use App\Models\Bidang;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -74,6 +75,8 @@ Route::put('/mahasiswaupdate/{id}', [MahasiswaController::class, 'update'])->mid
 Route::get('/dashboard/home', [DashboardAdminController::class, 'home'])->name('dashboard.home')->middleware('auth:admin');
 Route::post('/home/submit', [BidangController::class, 'store'])->name('home.submit')->middleware('auth:admin');
 Route::get('/bidangdelete/{id}', [BidangController::class, 'destroy'])->name('bidang.delete')->middleware('auth:admin');
+Route::get('/open/{id}', [BidangController::class, 'open'])->middleware('auth:admin');
+Route::get('/close/{id}', [BidangController::class, 'close'])->middleware('auth:admin')->name('bidang.close');
 
 //Route Dashboard Admin (Detail Bidang)
 Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail')->middleware('auth:admin');

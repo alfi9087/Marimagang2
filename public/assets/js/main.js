@@ -6,9 +6,9 @@
         bodyTag: "fieldset",
         transitionEffect: "fade",
         labels: {
-            previous: 'Prev',
-            next: 'Next',
-            finish: 'Finish',
+            previous: 'Kembali',
+            next: 'Lanjut',
+            finish: 'Submit',
             current: ''
         },
         titleTemplate: '<h3 class="title">#title#</h3>',

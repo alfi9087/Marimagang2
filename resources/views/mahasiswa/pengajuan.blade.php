@@ -109,7 +109,24 @@
                                                             Upload Berkas
                                                         </h3>
                                                         <fieldset>
-
+                                                            <div class="container mt-5">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="upload-box" id="left-box">
+                                                                            <p>Drag & Drop PDF Proposal</p>
+                                                                            <input type="file" id="proposal" accept=".pdf" style="display: none;">
+                                                                        </div>
+                                                                        <div id="proposal-info"></div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="upload-box" id="right-box">
+                                                                            <p>Drag & Drop PDF Pengantar</p>
+                                                                            <input type="file" id="pengantar" accept=".pdf" style="display: none;">
+                                                                        </div>
+                                                                        <div id="pengantar-info"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </fieldset>
                                                     </form>
                                                 </div>
@@ -156,11 +173,125 @@
                                     <div class="col-11">
                                         <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN PKL</h4>
                                         <div class="row justify-content-center">
-
+                                            <div class="scrolling-container">
+                                                <!-- Contoh beberapa kartu (cards) -->
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <blockquote class="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                                <!-- Tambahkan lebih banyak kartu sesuai kebutuhan -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

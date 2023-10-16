@@ -31,6 +31,11 @@ class User extends Authenticatable
         'verify',
     ];
 
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -149,7 +149,6 @@
 
             <div class="container">
                 <div class="row">
-
                     @if(count($bidang) > 0)
                     @foreach ($bidang as $b)
                     <div class="col-md-4">
@@ -169,17 +168,30 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-rounded btn-sm" style="float: right; margin-right: 10px;">Delete</button>
                                 </form>
+
+                                @if( $b->status == 'Buka')
+                                <a href="/close/{{ $b->id }}" class="close-button-bidang">
+                                    <button type="button" class="btn btn-success btn-rounded btn-sm">
+                                        Status : Buka
+                                    </button>
+                                </a>
+                                @else
+                                <a href="/open/{{ $b->id }}">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm">
+                                        Status : Tutup
+                                    </button>
+                                </a>
+                                @endif
+
                             </div>
                         </div>
                     </div>
                     @endforeach
-
                     @else
                     <div class="col-md-12" style="display: flex; justify-content: center; align-items: center;">
                         <p>Data Bidang Belum Ditambahkan</p>
                     </div>
                     @endif
-
                 </div>
             </div>
 
