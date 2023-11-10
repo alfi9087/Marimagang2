@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SkillUser extends Model
+class Pengajuan extends Model
 {
     use HasFactory;
 
-    protected $table = 'skilluser';
-    protected $fillable = ['user_id', 'skill_id'];
+    protected $table = 'pengajuan';
+    protected $fillable = [
+        'pengantar',
+        'proposal',
+        'kesbangpol',
+        'tanggalmulai',
+        'tanggalselesai',
+        'status'
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function skill()
-    {
-        return $this->belongsTo(Skill::class, 'skill_id');
     }
 }

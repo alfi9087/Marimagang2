@@ -96,15 +96,15 @@
             </div>
         </div>
         <div class="row">
-            @foreach ($bidang as $b)
+            @foreach ($databidang as $d)
             <div class="col-lg-4">
                 <div class="meeting-item">
                     <div class="thumb">
-                        <a href="/homedetail/{{ $b->id }}"><img src="{{ asset('storage/' . $b->thumbnail) }}" alt="New Lecturer Meeting" style="width: 415px; height: 300px;"></a>
+                        <a href="/homedetail/{{ $d->id }}"><img src="{{ asset('storage/' . $d->thumbnail) }}" alt="New Lecturer Meeting" style="width: 100%; height: 300px;"></a>
                     </div>
                     <div class="down-content">
-                        <a href="/homedetail/{{ $b->id }}">
-                            <h4 style="margin: 0; padding: 0;">{{ $b->nama }}</h4>
+                        <a href="/homedetail/{{ $d->id }}">
+                            <h4 style="margin: 0; padding: 0;">{{ $d->nama }}</h4>
                         </a>
                         <p style="margin: 0; padding: 0;">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
                     </div>

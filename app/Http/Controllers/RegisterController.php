@@ -13,7 +13,7 @@ class RegisterController extends Controller
         $ValidatedData = $request->validate([
             'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8|max:50',
         ]);
 
         $ValidatedData['password'] = bcrypt($ValidatedData['password']);

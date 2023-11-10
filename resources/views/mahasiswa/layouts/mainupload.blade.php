@@ -14,9 +14,29 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
+        .upload-box {
+            width: 100%;
+            /* Ganti nilai sesuai kebutuhan lebar */
+            height: 250px;
+            /* Ganti nilai sesuai kebutuhan tinggi */
+            border: 2px dashed #ccc;
+            /* Contoh garis putus-putus untuk area drag & drop */
+            padding: 20px;
+            /* Menambahkan padding agar konten tidak berdekatan dengan border */
+            text-align: center;
+            /* Posisi teks di tengah */
+        }
+
+        .upload-box button {
+            margin-top: 10px;
+            /* Ganti nilai sesuai kebutuhan jarak antara tombol dan teks */
+        }
+
         .scrolling-container {
-            max-height: 400px;
+            max-height: 670px;
             /* Atur tinggi maksimum sesuai kebutuhan Anda */
             overflow-y: scroll;
             /* Aktifkan penggulungan vertikal */
@@ -69,6 +89,8 @@
     <script src="{{ asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-steps/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
         const leftBox = document.getElementById('left-box');
@@ -145,6 +167,19 @@
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
+    <!-- JS Agar Tidak Memilih Tanggal Kemarin -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const startDateInput = document.getElementById("start_date");
+            const endDateInput = document.getElementById("end_date");
+
+            startDateInput.addEventListener("change", function() {
+                endDateInput.min = startDateInput.value;
+            });
+        });
+    </script>
+
+    @stack('script')
 </body>
 
 </html>

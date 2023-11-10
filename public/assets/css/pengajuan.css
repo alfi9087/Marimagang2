@@ -62,7 +62,7 @@ body {
 }
 
 #sidebar-wrapper {
-    min-height: 100vh;
+    min-height: 144vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
@@ -113,6 +113,7 @@ body {
 }
 
 .card0 {
+    height: 900px;
     border: 3px solid #DC143C;
     /* Ketebalan border 3px dan warna hitam (#000) */
     border-radius: 5px;

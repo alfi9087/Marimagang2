@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.main')
+@extends('dashboardbidang.layouts.main')
 
 @section('content')
 
@@ -39,7 +39,7 @@
                     <div class="col-md-8"> <!-- Lebar kolom diperbesar -->
                         <div class="card card-post card-round" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-img-top">
-                                <img src="{{ asset('storage/' . $bidang->photo) }}" alt="Card image cap" style="width: 100%; height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                                <img src="{{ asset('storage/' . $databidang->photo) }}" alt="Card image cap" style="width: 100%; height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">
                             </div>
                             <div class="card-body">
                                 @foreach($skill as $s)
@@ -48,17 +48,17 @@
                                 <div class="separator-solid"></div>
                                 <h3 class="card-title">
                                     <a href="#">
-                                        {{ $bidang->nama }}
+                                        {{ $databidang->nama }}
                                     </a>
                                 </h3>
                                 <br><br>
                                 <p class="description">
-                                    {!! $bidang->deskripsi !!}
+                                    {!! $databidang->deskripsi !!}
                                 </p>
                             </div>
                         </div>
                         <div class="text-center">
-                            <a href="/dashboard/home" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
+                            <a href="/databidang" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
                         </div>
                     </div>
                 </div>

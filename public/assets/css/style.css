@@ -370,6 +370,7 @@ fieldset.current {
 }
 
 .actions {
+  margin-bottom: -200px;
   position: absolute;
   bottom: 31px;
   right: 0;

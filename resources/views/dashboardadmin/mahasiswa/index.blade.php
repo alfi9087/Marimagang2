@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.main')
+@extends('dashboardadmin.layouts.main')
 
 @section('content')
 <div class="main-panel">

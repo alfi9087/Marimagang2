@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Bidang;
+use App\Models\DataBidang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +35,14 @@ class DashboardMahasiswaController extends Controller
         return view('mahasiswa.pengajuan', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
-            'bidang' => DB::table('bidang')->get()
+            'databidang' => DB::table('databidang')->where('status', 'Buka')->get()
         ]);
+    }
+
+    public function select_skill($databidang_id)
+    {
+        $skill = DB::table('skill')->select('id', 'nama as text')->where('databidang_id', $databidang_id)->get();
+        $data = ['results' => $skill];
+        return $data;
     }
 }

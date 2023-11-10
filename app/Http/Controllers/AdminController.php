@@ -14,9 +14,9 @@ class AdminController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'nama' => 'required|max:70',
+                'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
                 'email' => 'required|email|unique:admins',
-                'password' => 'required|min:8'
+                'password' => 'required|min:8|max:50',
             ]);
 
             $validatedData['password'] = bcrypt($validatedData['password']);
@@ -24,7 +24,7 @@ class AdminController extends Controller
             Admin::create($validatedData);
 
             // Alert
-            Alert::success('Sukses', 'Data admin Berhasil Ditambahkan')->showConfirmButton();
+            Alert::success('Sukses', 'Data Admin Berhasil Ditambahkan')->showConfirmButton();
 
             return redirect()->back();
         } catch (\Exception $e) {
@@ -41,7 +41,7 @@ class AdminController extends Controller
     {
         try {
             $request->validate([
-                'nama' => 'required|max:70',
+                'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
                 'email' => 'email:dns|unique:admins,email,' . $id,
             ]);
 
@@ -65,7 +65,7 @@ class AdminController extends Controller
             // Cek Kondisi
             if ($admin->nama !== $oldNama || $admin->email !== $oldEmail) {
                 // Alert
-                Alert::success('Sukses', 'Data admin Berhasil Diperbarui')->showConfirmButton();
+                Alert::success('Sukses', 'Data Admin Berhasil Diperbarui')->showConfirmButton();
             }
 
             return redirect()->back();
@@ -84,7 +84,7 @@ class AdminController extends Controller
         Admin::destroy($request->id);
 
         // Alert
-        Alert::success('Sukses', 'Data admin Berhasil Dihapus')->showConfirmButton();
+        Alert::success('Sukses', 'Data Admin Berhasil Dihapus')->showConfirmButton();
 
         return redirect()->back();
     }

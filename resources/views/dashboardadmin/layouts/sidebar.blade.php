@@ -54,16 +54,16 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a data-toggle="collapse" href="#sidebarLayouts">
-                        <i class="fas fa-laptop"></i>
-                        <p>Data Bidang</p>
+                    <a data-toggle="collapse" href="#forms">
+                        <i class="fas fa-book"></i>
+                        <p>Data Magang</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="sidebarLayouts">
+                    <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/dashboard/home">
-                                    <span class="sub-item">Kelola Bidang</span>
+                                <a href="forms/forms.html">
+                                    <span class="sub-item">Permohonan Magang</span>
                                 </a>
                             </li>
                         </ul>
@@ -202,7 +202,7 @@
                     </div>
                 </li> -->
                 <li class="mx-4 mt-2">
-                    <a href="/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
+                    <a href="/logout" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
                 </li>
             </ul>
         </div>

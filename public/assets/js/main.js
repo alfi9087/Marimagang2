@@ -1,6 +1,6 @@
 (function ($) {
 
-    var form = $("#signup-form");
+    var form = $("#pengajuan-form");
     form.steps({
         headerTag: "h3",
         bodyTag: "fieldset",
@@ -13,8 +13,7 @@
         },
         titleTemplate: '<h3 class="title">#title#</h3>',
         onFinished: function (event, currentIndex) {
-            // Mengarahkan form ke halaman lain (ganti URL sesuai kebutuhan)
-            window.location.href = "/halaman-tujuan";
+            form.submit(); // Mengirim formulir setelah langkah terakhir diselesaikan
         }
     });
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Bidang;
+use App\Models\DataBidang;
 
 class HomeController extends Controller
 {
@@ -13,20 +13,20 @@ class HomeController extends Controller
     {
         return view('home.index', [
             'title' => 'Home',
-            'bidang' => DB::table('bidang')->get()
+            'databidang' => DB::table('databidang')->get()
         ]);
     }
 
     //Menampilkan Detail Tiap Bidang
     public function detail($id)
     {
-        $bidang = Bidang::findOrFail($id);
+        $databidang = DataBidang::findOrFail($id);
 
         // Mengambil keterampilan terkait dengan bidang tertentu
-        $skill = $bidang->skill;
+        $skill = $databidang->skill;
         return view('home.detail', [
             'title' => 'Home',
-            'bidang' => $bidang,
+            'databidang' => $databidang,
             'skill' => $skill
         ]);
     }

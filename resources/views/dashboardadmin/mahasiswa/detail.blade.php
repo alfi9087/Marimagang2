@@ -1,4 +1,4 @@
-@extends('dashboard.mahasiswa.layouts.main')
+@extends('dashboardadmin.mahasiswa.layouts.main')
 
 @section('content')
 

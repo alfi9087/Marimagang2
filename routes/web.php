@@ -8,11 +8,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardBidangController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AdminController;
-use App\Models\Bidang;
+use App\Http\Controllers\DataBidangController;
+use App\Http\Controllers\PengajuanController;
+use App\Models\DataBidang;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -71,15 +74,32 @@ Route::post('/profil/submit/{id}', [MahasiswaController::class, 'store'])->name(
 //Route Edit Profil
 Route::put('/mahasiswaupdate/{id}', [MahasiswaController::class, 'update'])->middleware('auth:web');
 
-//Route Dashboard Admin
-Route::get('/dashboard/home', [DashboardAdminController::class, 'home'])->name('dashboard.home')->middleware('auth:admin');
-Route::post('/home/submit', [BidangController::class, 'store'])->name('home.submit')->middleware('auth:admin');
-Route::get('/bidangdelete/{id}', [BidangController::class, 'destroy'])->name('bidang.delete')->middleware('auth:admin');
-Route::get('/open/{id}', [BidangController::class, 'open'])->middleware('auth:admin');
-Route::get('/close/{id}', [BidangController::class, 'close'])->middleware('auth:admin')->name('bidang.close');
-
 //Route Dashboard Admin (Detail Bidang)
 Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail')->middleware('auth:admin');
 
 //Route Edit Profil
 Route::get('/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan'])->middleware('auth:web');
+
+//Route Dashboard Bidang
+Route::middleware(['auth:bidang'])->group(function () {
+    Route::get('/dashboardbidang', [DashboardBidangController::class, 'index'])->name('dashboard.bidang');
+
+    // Route Akun Bidang (CRUD Akun Bidang)
+    Route::get('/bidang', [DashboardBidangController::class, 'bidang']);
+    Route::post('/bidangpost', [BidangController::class, 'store'])->name('bidangpost');
+    Route::put('/bidangupdate/{id}', [BidangController::class, 'update']);
+    Route::get('/bidangdelete/{id}', [BidangController::class, 'delete']);
+
+    // Route Data Bidang
+    Route::get('/databidang', [DashboardBidangController::class, 'databidang']);
+    Route::post('/databidang/submit', [DataBidangController::class, 'store'])->name('databidang.submit');
+    Route::get('/databidangdelete/{id}', [DataBidangController::class, 'delete'])->name('databidangdelete');
+    Route::get('/open/{id}', [DataBidangController::class, 'open']);
+    Route::get('/close/{id}', [DataBidangController::class, 'close'])->name('bidang.close');
+    Route::get('/detail/{id}', [DashboardBidangController::class, 'detail'])->name('dashboard.detail');
+});
+
+
+
+Route::post('/pengajuan-submite/submite', [PengajuanController::class, 'store'])->name('pengajuan.submit');
+Route::get('/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaController::class, 'select_skill']);

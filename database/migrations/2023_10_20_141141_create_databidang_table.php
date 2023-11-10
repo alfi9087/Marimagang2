@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengalaman', function (Blueprint $table) {
+        Schema::create('databidang', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->string('nama');
+            $table->string('thumbnail')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->enum('status', ['Buka', 'Tutup']);
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengalaman');
+        Schema::dropIfExists('databidang');
     }
 };

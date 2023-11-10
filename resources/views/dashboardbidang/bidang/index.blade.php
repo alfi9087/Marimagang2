@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.main')
+@extends('dashboardbidang.layouts.main')
 
 @section('content')
 <div class="main-panel">
@@ -22,7 +22,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Admin</a>
+                        <a href="#">Bidang</a>
                     </li>
                 </ul>
             </div>
@@ -31,13 +31,13 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h4 class="card-title">Akun Admin</h4>
+                                <h4 class="card-title">Akun Bidang</h4>
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#addOrderModal">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-danger">
                                         <span class="btn-label">
                                             <i class="fas fa-user-plus"></i>
                                         </span>
-                                        Tambah Admin
+                                        Tambah Bidang
                                     </button>
                                 </a>
                             </div>
@@ -47,11 +47,11 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Tambah Data Admin</h5>
+                                        <h5 class="modal-title">Tambah Data Bidang</h5>
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('adminpost') }}" enctype="multipart/form-data">
+                                        <form method="POST" action="{{ route('bidangpost') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nama</label>
@@ -124,19 +124,19 @@
                                         </tr>
                                     </tfoot>
                                     <tbody style="text-align: center;">
-                                        @foreach ($admin as $a)
+                                        @foreach ($bidang as $b)
                                         <tr>
-                                            <td>{{ $a->id }}</td>
-                                            <td>{{ $a->nama }}</td>
-                                            <td>{{ $a->email }}</td>
+                                            <td>{{ $b->id }}</td>
+                                            <td>{{ $b->nama }}</td>
+                                            <td>{{ $b->email }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="/adminupdate/{{ $a->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $a->id }}">
+                                                    <a href="/bidangupdate/{{ $b->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $b->id }}">
                                                         <button type="button" class="btn btn-icon btn-round btn-info">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="/admindelete/{{ $a->id }}" class="delete-button-admin" data-confirm-delete="true">
+                                                    <a href="/bidangdelete/{{ $b->id }}" class="bidang" data-confirm-delete="true">
                                                         <button type="button" class="btn btn-icon btn-round btn-danger">
                                                             <i class="far fa-trash-alt"></i>
                                                         </button>
@@ -145,11 +145,11 @@
                                             </td>
                                         </tr>
 
-                                        <div class="modal fade" id="edit-{{ $a->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal fade" id="edit-{{ $b->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Admin</h5>
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Data Bidang</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -158,13 +158,13 @@
 
                                                         <div class="container-fluid">
 
-                                                            <form method="POST" action="/adminupdate/{{ $a->id }}" enctype="multipart/form-data">
+                                                            <form method="POST" action="/bidangupdate/{{ $b->id }}" enctype="multipart/form-data">
                                                                 @method("put")
                                                                 @csrf
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-3 col-form-label">Nama</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama', $a->nama) }}" />
+                                                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" value="{{ old('nama', $b->nama) }}" />
 
                                                                         @error('nama')
                                                                         <div class="invalid-feedback">
@@ -177,7 +177,7 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-3 col-form-label">Email</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email', $a->email) }}" />
+                                                                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email', $b->email) }}" />
 
                                                                         @error('email')
                                                                         <div class="invalid-feedback">

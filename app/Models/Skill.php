@@ -14,8 +14,13 @@ class Skill extends Model
         'nama',
     ];
 
-    public function bidang()
+    public function databidang()
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->belongsTo(DataBidang::class, 'databidang_id');
+    }
+
+    public function skilluser()
+    {
+        return $this->hasMany(SkillUser::class, 'skill_id');
     }
 }

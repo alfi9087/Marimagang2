@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('skill', function (Blueprint $table) {
+        Schema::create('bidangs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bidang_id');
-            $table->string('nama')->nullable();  
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('bidang_id')->references('id')->on('bidang')->onDelete('cascade');
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('bidangs');
     }
 };

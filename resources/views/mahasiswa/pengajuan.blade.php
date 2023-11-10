@@ -41,7 +41,9 @@
                             <div class="col-8">
                                 <div class="row justify-content-right">
                                     <div class="col-12">
-                                        <p class="mb-0 mr-4 mt-4 text-right" style="font-weight: bold;">{{ $user->nama }}</p>
+                                        <p class="mb-0 mr-4 mt-4 text-right" style="font-weight: bold;">
+                                            {{ $user->nama }}
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="row justify-content-right">
@@ -62,38 +64,47 @@
                                             <div class="main">
 
                                                 <div class="container">
-                                                    <form method="POST" id="signup-form" class="signup-form" enctype="multipart/form-data" action="/wikwik">
+                                                    <form method="POST" id="pengajuan-form" class="pengajuan-form" enctype="multipart/form-data" action="{{ route('pengajuan.submit') }}">
+                                                        @csrf
                                                         <h3>
                                                             Data Umum
                                                         </h3>
                                                         <fieldset>
-                                                            <div class="form-row">
-                                                                <div class="form-group">
-                                                                    <label for="date">Nama Lengkap:</label>
-                                                                    <input type="text" name="name" id="name" />
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="date">Tanggal Mulai PKL:</label>
-                                                                    <input type="date" name="name" id="name" />
-                                                                </div>
-                                                                <div class="form-select">
-                                                                    <label for="date">Pilih Bidang Kerja</label>
-                                                                    <div class="select-group">
-                                                                        <select name="daily_budget" id="daily_budget">
-                                                                            <option value="" disabled selected hidden></option>
-                                                                            <option value="40$">40$</option>
-                                                                            <option value="60$">60$</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="date">Tanggal Selesai PKL:</label>
-                                                                    <input type="date" name="bidang" id="bidang" />
-                                                                </div>
+                                                            <div class="form-group" style="width: 100%;">
+                                                                <label for="name">Nama Lengkap:</label>
+                                                                <input type="text" name="display_name" id="display_name" value="{{ $user->nama }}" disabled />
+                                                                <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}" />
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-group">
-
+                                                                    <label for="start_date">Tanggal Mulai Magang:</label>
+                                                                    <input type="date" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="end_date">Tanggal Selesai Magang:</label>
+                                                                    <input type="date" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-select">
+                                                                    <label for="databidang">Pilih Bidang Kerja</label>
+                                                                    <div class="select-group">
+                                                                        <select name="databidang" id="databidang">
+                                                                            <option value="" disabled selected hidden></option>
+                                                                            @foreach ($databidang as $bidang)
+                                                                            <option value="{{ $bidang->id }}">
+                                                                                {{ $bidang->nama }}
+                                                                            </option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-select">
+                                                                    <label for="skill">Pilih Skill</label>
+                                                                    <div class="select-group">
+                                                                        <select name="skill[]" id="skill" multiple="multiple">
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </fieldset>
@@ -102,7 +113,20 @@
                                                             Project Sebelumnya
                                                         </h3>
                                                         <fieldset>
-
+                                                            <div class="form-row">
+                                                                <div class="form-group">
+                                                                    <label for="namaproyek">Nama Project:</label>
+                                                                    <input type="text" name="namaproyek" id="namaproyek" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="bukti">Gambar Project:</label>
+                                                                    <input type="file" name="bukti" id="bukti"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form">
+                                                                <label for="my-editor">Deskripsi Project:</label>
+                                                                <textarea class="form-control" id="deskripsi" name="deskripsi" style="resize: none; width: 100%; height:250px;"></textarea>
+                                                            </div>
                                                         </fieldset>
 
                                                         <h3>
@@ -112,16 +136,26 @@
                                                             <div class="container mt-5">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
+                                                                        <label for="proposal">Proposal
+                                                                            Magang:</label>
                                                                         <div class="upload-box" id="left-box">
-                                                                            <p>Drag & Drop PDF Proposal</p>
-                                                                            <input type="file" id="proposal" accept=".pdf" style="display: none;">
+                                                                            <p>Drag & Drop PDF</p>
+                                                                            <br>
+                                                                            <button type="button" class="btn btn-danger">Pilih
+                                                                                File</button>
+                                                                            <input type="file" id="proposal" name="proposal" accept=".pdf" style="display: none;">
                                                                         </div>
                                                                         <div id="proposal-info"></div>
                                                                     </div>
                                                                     <div class="col-md-6">
+                                                                        <label for="pengantar">Surat Pengantar
+                                                                            Pendidikan:</label>
                                                                         <div class="upload-box" id="right-box">
-                                                                            <p>Drag & Drop PDF Pengantar</p>
-                                                                            <input type="file" id="pengantar" accept=".pdf" style="display: none;">
+                                                                            <p>Drag & Drop PDF</p>
+                                                                            <br>
+                                                                            <button type="button" class="btn btn-danger">Pilih
+                                                                                File</button>
+                                                                            <input type="file" id="pengantar" name="pengantar" accept=".pdf" style="display: none;">
                                                                         </div>
                                                                         <div id="pengantar-info"></div>
                                                                     </div>
@@ -141,7 +175,40 @@
                                     <div class="col-11">
                                         <div class="form-card">
                                             <h4 class="mt-0 mb-4 text-center">DATA ANGGOTA PKL</h4>
-                                            <button id="addDataButton" class="btn btn-primary float-right mb-3">Tambah Data</button>
+                                            <button type="button" class="btn btn-danger float-right mb-3" data-toggle="modal" data-target="#add">
+                                                + Tambah Data
+                                            </button>
+                                            <!-- Modal Tambah Anggota -->
+                                            <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Tambah
+                                                                Anggota</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-row">
+                                                                <div class="form-group">
+                                                                    <label for="previous_name">Nama:</label>
+                                                                    <input type="text" name="previous_name" id="name" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="previous_image">NIM:</label>
+                                                                    <input type="text" name="previous_name" id="name" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-danger">Simpan</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -156,11 +223,42 @@
                                                         <td class="text-center">John Doe</td>
                                                         <td class="text-center">123456</td>
                                                         <td class="text-center">
-                                                            <button class="btn btn-sm btn-primary">Edit</button>
+                                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit">
+                                                                Edit
+                                                            </button>
                                                             <button class="btn btn-sm btn-danger">Delete</button>
                                                         </td>
                                                     </tr>
-                                                    <!-- Tambahkan baris lain sesuai dengan data yang ada -->
+                                                    <!-- Modal Edit Anggota -->
+                                                    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Edit Anggota</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-row">
+                                                                        <div class="form-group">
+                                                                            <label for="nama">Nama:</label>
+                                                                            <input type="text" name="nama" id="nama" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="nim">NIM:</label>
+                                                                            <input type="text" name="nim" id="nim" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                    <button type="submit" class="btn btn-danger">Simpan</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -175,112 +273,14 @@
                                         <div class="row justify-content-center">
                                             <div class="scrolling-container">
                                                 <!-- Contoh beberapa kartu (cards) -->
-                                                <div class="card">
+                                                <div class="card mb-3">
                                                     <div class="card-header">
                                                         Quote
                                                     </div>
                                                     <div class="card-body">
                                                         <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Integer posuere erat a ante.</p>
                                                             <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
                                                         </blockquote>
                                                     </div>
@@ -300,3 +300,31 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+    $(document).ready(function() {
+        // Select2 for#databidang
+        $('#databidang').select2({
+            width: '100%',
+        });
+        $('#skill').select2({
+            width: '100%',
+        });
+
+        // Event listener for changing the#databidang
+        $('#databidang').on('change', function() {
+            $('#skill').empty(); // Kosongkan pilihan keterampilan saat bidang berubah
+            var databidang_id = $(this)
+                .val(); // Ambil nilai databidang_id dari select bidang yang berubah
+            $.get("{{ url('pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
+
+
+                $("#skill").select2({
+                    data: data.results,
+                    width: '100%',
+                })
+            });
+        });
+    });
+</script>
+@endpush

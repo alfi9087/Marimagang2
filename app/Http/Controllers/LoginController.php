@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    //Autentikasi Untuk Login
+    // Autentikasi Untuk Login
     protected function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -17,20 +17,32 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/dashboard');
+        try {
+            if (Auth::guard('web')->attempt($credentials)) {
+                $request->session()->regenerate();
+                $mahasiswaId = Auth::user()->id; // Ambil ID mahasiswa yang berhasil login
+                return redirect('/mahasiswa/' . $mahasiswaId);
+            }
+        } catch (\Illuminate\Auth\AuthenticationException $e) {
+            // Handle authentication exception for the 'admin' guard
         }
 
-        if (Auth::guard('web')->attempt($credentials)) {
-            $user = Auth::guard('web')->user();
-            if ($user->verify === 1) {
+        try {
+            if (Auth::guard('admin')->attempt($credentials)) {
                 $request->session()->regenerate();
-                return redirect()->route('mahasiswa', ['id' => $user->id]);
-            } else {
-                Auth::guard('web')->logout();
-                return redirect('notif');
+                return redirect('/dashboard');
             }
+        } catch (\Illuminate\Auth\AuthenticationException $e) {
+            // Handle authentication exception for the 'admin' guard
+        }
+
+        try {
+            if (Auth::guard('bidang')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect('/dashboardbidang');
+            }
+        } catch (\Illuminate\Auth\AuthenticationException $e) {
+            // Handle authentication exception for the 'bidang' guard
         }
 
         return back()->with('loginError', 'Login Gagal! Anda Belum Registrasi');
@@ -42,6 +54,9 @@ class LoginController extends Controller
         if (Auth::guard('admin')->check()) {
             // Logout admin
             Auth::guard('admin')->logout();
+        } elseif (Auth::guard('bidang')->check()) {
+            // Logout bidang
+            Auth::guard('bidang')->logout();
         } else {
             // Logout user
             Auth::logout();

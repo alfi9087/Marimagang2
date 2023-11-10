@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'bidang' => [
+            'driver' => 'session',
+            'provider' => 'bidangs',
+        ],
     ],
 
     /*
@@ -73,6 +77,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+
+        'bidangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Bidang::class,
+        ],
     ],
 
     /*
@@ -99,6 +108,12 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'bidangs' => [
+            'provider' => 'bidangs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

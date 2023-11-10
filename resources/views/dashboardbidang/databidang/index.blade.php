@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.main')
+@extends('dashboardbidang.layouts.main')
 
 @section('content')
 
@@ -35,7 +35,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">Kelola Bidang</h4>
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#add">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-danger">
                                         <span class="btn-label">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="modal-body">
 
-                            <form method="POST" action="{{ route('home.submit') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('databidang.submit') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Bidang</label>
@@ -149,34 +149,34 @@
 
             <div class="container">
                 <div class="row">
-                    @if(count($bidang) > 0)
-                    @foreach ($bidang as $b)
+                    @if(count($databidang) > 0)
+                    @foreach ($databidang as $d)
                     <div class="col-md-4">
                         <div class="card card-post card-round" style="border-radius: 10px;">
-                            <img class="card-img-top" src="{{ asset('storage/' . $b->thumbnail) }}" alt="Card image cap" style="width: 350px; height: 250px;">
+                            <img class="card-img-top" src="{{ asset('storage/' . $d->thumbnail) }}" alt="Card image cap" style="width: 350px; height: 250px;">
                             <div class="card-body">
                                 <div class="separator-solid"></div>
                                 <h3 class="card-title">
                                     <a href="#">
-                                        {{ $b->nama }}
+                                        {{ $d->nama }}
                                     </a>
                                 </h3>
                                 <p class="card-text">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
-                                <a href="/detail/{{ $b->id }}" class="btn btn-primary btn-rounded btn-sm" style="float: right;">Detail</a>
-                                <form action="{{ route('bidang.delete', $b->id) }}" method="POST" class="bidang-delete">
+                                <a href="/detail/{{ $d->id }}" class="btn btn-primary btn-rounded btn-sm" style="float: right;">Detail</a>
+                                <form action="{{ route('databidangdelete', ['id' => $d->id]) }}" method="POST" class="bidang-delete">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-rounded btn-sm" style="float: right; margin-right: 10px;">Delete</button>
                                 </form>
 
-                                @if( $b->status == 'Buka')
-                                <a href="/close/{{ $b->id }}" class="close-button-bidang">
+                                @if( $d->status == 'Buka')
+                                <a href="/close/{{ $d->id }}" class="close-button-bidang">
                                     <button type="button" class="btn btn-success btn-rounded btn-sm">
                                         Status : Buka
                                     </button>
                                 </a>
                                 @else
-                                <a href="/open/{{ $b->id }}">
+                                <a href="/open/{{ $d->id }}">
                                     <button type="button" class="btn btn-danger btn-rounded btn-sm">
                                         Status : Tutup
                                     </button>

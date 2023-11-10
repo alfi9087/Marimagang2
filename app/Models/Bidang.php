@@ -4,23 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
-class Bidang extends Model
+class Bidang extends Model implements Authenticatable
 {
-    use HasFactory;
+    use HasFactory,AuthenticableTrait;
 
-    protected $table = 'bidang';
+    protected $table = 'bidangs';
     protected $guarded = ['id'];
     protected $fillable = [
         'nama',
-        'thumbnail',
-        'photo',
-        'deskripsi',
-        'status'
+        'email',
+        'password',
     ];
-
-    public function skill()
-    {
-        return $this->hasMany(Skill::class, 'bidang_id');
-    }
 }

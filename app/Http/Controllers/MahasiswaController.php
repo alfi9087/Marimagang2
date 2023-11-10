@@ -24,7 +24,7 @@ class MahasiswaController extends Controller
             }
 
             $request->validate([
-                'nama' => 'required|string|max:70',
+                'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
                 'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
                 'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
                 'prodi' => 'required|max:100',
@@ -73,7 +73,7 @@ class MahasiswaController extends Controller
             }
 
             $request->validate([
-                'nama' => 'required|string|max:70',
+                'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
                 'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
                 'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
                 'prodi' => 'required|max:100',

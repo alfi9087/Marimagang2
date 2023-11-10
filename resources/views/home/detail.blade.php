@@ -20,7 +20,7 @@
                     <div class="col-lg-12">
                         <div class="meeting-single-item">
                             <div class="thumb">
-                                <a href="#"><img src="{{ asset('storage/' . $bidang->photo) }}" alt="" style="width: 1296px; height: auto;"></a>
+                                <a href="#"><img src="{{ asset('storage/' . $databidang->photo) }}" alt="" style="width: 100%; height: auto;"></a>
                             </div>
                             <div class="down-content">
                                 @foreach($skill as $s)
@@ -28,9 +28,9 @@
                                 @endforeach
                                 <a href="#" style="display: block; margin-top: 10px; margin-bottom: 10px;">
                                     <hr style="border-top: 3px solid #000;">
-                                    <h4>{{ $bidang->nama }}</h4>
+                                    <h4>{{ $databidang->nama }}</h4>
                                 </a>
-                                <p>{!! $bidang->deskripsi !!}</p>
+                                <p>{!! $databidang->deskripsi !!}</p>
                             </div>
                         </div>
                     </div>
