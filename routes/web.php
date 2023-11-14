@@ -55,7 +55,6 @@ Route::get('/admindelete/{id}', [AdminController::class, 'delete'])->middleware(
 
 // Dashboard -> User (Mahasiswa)
 Route::get('/user', [DashboardAdminController::class, 'user'])->middleware('auth:admin');
-Route::get('/userdetail/{id}', [DashboardAdminController::class, 'userdetail'])->middleware('auth:admin');
 Route::get('/verify/{id}', [MahasiswaController::class, 'verify'])->middleware('auth:admin');
 Route::get('/block/{id}', [MahasiswaController::class, 'block'])->middleware('auth:admin')->name('mahasiswa.block');
 
@@ -99,7 +98,22 @@ Route::middleware(['auth:bidang'])->group(function () {
     Route::get('/detail/{id}', [DashboardBidangController::class, 'detail'])->name('dashboard.detail');
 });
 
+// Route Pengajuan
+Route::post('/pengajuan-submite/submite', [PengajuanController::class, 'store'])->name('pengajuan.submit')->middleware('auth:web');
+Route::get('/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaController::class, 'select_skill'])->middleware('auth:web');
 
+// Route Dashboard Admin
+Route::get('/pengajuanadmin', [DashboardAdminController::class, 'pengajuan'])->middleware('auth:admin');
+Route::get('/userdetailadmin/{id}', [DashboardAdminController::class, 'userdetail'])->middleware('auth:admin');
 
-Route::post('/pengajuan-submite/submite', [PengajuanController::class, 'store'])->name('pengajuan.submit');
-Route::get('/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaController::class, 'select_skill']);
+// Route Dashboard Bidang
+Route::get('/pengajuanbidang', [DashboardBidangController::class, 'pengajuan'])->middleware('auth:bidang');
+Route::get('/userdetailbidang/{id}', [DashboardBidangController::class, 'userdetail'])->middleware('auth:bidang');
+
+// Route Dashboard Mahasiswa Anggota
+Route::post('/tambahanggota', [PengajuanController::class, 'tambahanggota'])->name('tambah.anggota')->middleware('auth:web');
+Route::put('/editanggota/{id}', [PengajuanController::class, 'editanggota'])->name('edit.anggota')->middleware('auth:web');
+Route::delete('/hapusanggota/{id}', [PengajuanController::class, 'deleteanggota'])->name('delete.anggota')->middleware('auth:web');
+
+Route::put('/diteruskanbidang/{id}', [PengajuanController::class, 'diteruskanbidang'])->name('diteruskan.bidang')->middleware('auth:admin');
+Route::put('/ditolakadmin/{id}', [PengajuanController::class, 'ditolakadmin'])->name('ditolak.admin')->middleware('auth:admin');

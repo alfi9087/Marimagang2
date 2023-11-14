@@ -44,7 +44,6 @@
                                             <th>NIM</th>
                                             <th>Email</th>
                                             <th>Status Akun</th>
-                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tfoot style="text-align: center;">
@@ -53,7 +52,6 @@
                                             <th>NIM</th>
                                             <th>Email</th>
                                             <th>Status Akun</th>
-                                            <th>Detail</th>
                                         </tr>
                                     </tfoot>
                                     <tbody style="text-align: center;">
@@ -80,13 +78,6 @@
                                                     </button>
                                                 </a>
                                                 @endif
-                                            </td>
-                                            <td>
-                                                <a href="/userdetail/{{ $u->id }}">
-                                                    <button type="button" class="btn btn-info">
-                                                        <i class="fas fa-user-alt"></i> Profil
-                                                    </button>
-                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach

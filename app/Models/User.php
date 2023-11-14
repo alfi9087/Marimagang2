@@ -36,6 +36,11 @@ class User extends Authenticatable
         return $this->hasMany(Anggota::class, 'user_id');
     }
 
+    public function skilluser()
+    {
+        return $this->hasMany(SkillUser::class, 'user_id');
+    }
+
     public function pengajuan()
     {
         return $this->hasMany(Pengajuan::class, 'user_id');

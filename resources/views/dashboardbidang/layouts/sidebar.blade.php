@@ -73,7 +73,7 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="forms/forms.html">
+                                <a href="/pengajuanbidang">
                                     <span class="sub-item">Permohonan Magang</span>
                                 </a>
                             </li>

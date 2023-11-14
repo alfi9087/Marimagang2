@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DataBidang;
 use App\Models\Bidang;
+use App\Models\Pengajuan;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardBidangController extends Controller
 {
@@ -46,6 +48,26 @@ class DashboardBidangController extends Controller
             'title' => 'Landing Page',
             'databidang' => $databidang,
             'skill' => $skill
+        ]);
+    }
+
+    public function userdetail($id)
+    {
+        $pengajuan = Pengajuan::with('user.anggota', 'user.skilluser')->findOrFail($id);
+        return view('dashboardbidang.pengajuan.detail', [
+            'title' => 'Landing Page',
+            'pengajuan' => $pengajuan,
+        ]);
+    }
+
+    //Menampilkan Dashboard Pengajuan
+    public function pengajuan()
+    {
+        $pengajuan = Pengajuan::with('user')->get();
+
+        return view('dashboardbidang.pengajuan.index', [
+            'title' => 'Pengajuan',
+            'pengajuan' => $pengajuan,
         ]);
     }
 }

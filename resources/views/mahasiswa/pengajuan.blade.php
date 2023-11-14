@@ -119,8 +119,8 @@
                                                                     <input type="text" name="namaproyek" id="namaproyek" />
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="bukti">Gambar Project:</label>
-                                                                    <input type="file" name="bukti" id="bukti"/>
+                                                                    <label for="bukti">Bukti Project (pdf):</label>
+                                                                    <input type="file" name="bukti" id="bukti" />
                                                                 </div>
                                                             </div>
                                                             <div class="form">
@@ -189,22 +189,25 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <div class="form-row">
-                                                                <div class="form-group">
-                                                                    <label for="previous_name">Nama:</label>
-                                                                    <input type="text" name="previous_name" id="name" />
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="previous_image">NIM:</label>
-                                                                    <input type="text" name="previous_name" id="name" />
+                                                        <form method="POST" action="{{ route('tambah.anggota') }}" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-row">
+                                                                    <div class="form-group">
+                                                                        <label for="previous_name">Nama:</label>
+                                                                        <input type="text" name="nama" id="nama" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="previous_image">NIM:</label>
+                                                                        <input type="text" name="nim" id="nim" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-danger">Simpan</button>
-                                                        </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-danger">Simpan</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,46 +222,78 @@
                                                 </thead>
                                                 <tbody>
                                                     <!-- Isi tabel di sini -->
+                                                    @foreach ($user->anggota as $anggota)
                                                     <tr>
-                                                        <td class="text-center">John Doe</td>
-                                                        <td class="text-center">123456</td>
+                                                        <td class="text-center">{{ $anggota->nama }}</td>
+                                                        <td class="text-center">{{ $anggota->nim }}</td>
                                                         <td class="text-center">
-                                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit">
+                                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit-{{ $anggota->id }}">
                                                                 Edit
                                                             </button>
-                                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-{{ $anggota->id }}">
+                                                                Delete
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                     <!-- Modal Edit Anggota -->
-                                                    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="edit-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                                        Edit Anggota</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Anggota</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <div class="form-row">
-                                                                        <div class="form-group">
-                                                                            <label for="nama">Nama:</label>
-                                                                            <input type="text" name="nama" id="nama" />
+                                                                    <form action="{{ route('edit.anggota', ['id' => $anggota->id]) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <div class="form-row">
+                                                                            <div class="form-group">
+                                                                                <label for="nama">Nama:</label>
+                                                                                <input type="text" name="nama" id="nama" value="{{ $anggota->nama }}" />
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="nim">NIM:</label>
+                                                                                <input type="text" name="nim" id="nim" value="{{ $anggota->nim }}" />
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <label for="nim">NIM:</label>
-                                                                            <input type="text" name="nim" id="nim" />
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                            <button type="submit" class="btn btn-danger">Simpan</button>
                                                                         </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                    <button type="submit" class="btn btn-danger">Simpan</button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <!-- Modal Delete -->
+                                                    <div class="modal fade" id="delete-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Apakah Anda Yakin Ingin Menghapus Data Ini?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                    <form action="{{ route('delete.anggota', ['id' => $anggota->id]) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -272,20 +307,24 @@
                                         <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN PKL</h4>
                                         <div class="row justify-content-center">
                                             <div class="scrolling-container">
+                                                @foreach ($pengajuan as $p)
                                                 <!-- Contoh beberapa kartu (cards) -->
-                                                <div class="card mb-3">
-                                                    <div class="card-header">
-                                                        Quote
+                                                <div class="card mb-3" style="width: 600px;"> <!-- Ganti 200px sesuai kebutuhan Anda -->
+                                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                                        Permohonan Magang
+                                                        <!-- Tambahkan tulisan status di sini -->
+                                                        <span class="badge badge-success">{{ $p->status }}</span>
                                                     </div>
                                                     <div class="card-body">
                                                         <blockquote class="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Integer posuere erat a ante.</p>
+                                                            <p>Tanggal Mulai : {{ $p->tanggalmulai }}</p>
+                                                            <p>Tanggal Selesai : {{ $p->tanggalselesai }}</p>
                                                             <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
                                                         </blockquote>
                                                     </div>
                                                 </div>
                                                 <!-- Tambahkan lebih banyak kartu sesuai kebutuhan -->
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>

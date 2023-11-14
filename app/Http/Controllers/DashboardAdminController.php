@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\Pengajuan;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
 {
@@ -37,10 +39,21 @@ class DashboardAdminController extends Controller
 
     public function userdetail($id)
     {
-        $user = User::findorfail($id);
-        return view('dashboardadmin.mahasiswa.detail', [
+        $pengajuan = Pengajuan::with('user.anggota', 'user.skilluser')->findOrFail($id);
+        return view('dashboardadmin.pengajuan.detail', [
             'title' => 'Landing Page',
-            'user' => $user,
+            'pengajuan' => $pengajuan,
+        ]);
+    }
+
+    //Menampilkan Dashboard Pengajuan
+    public function pengajuan()
+    {
+        $pengajuan = Pengajuan::with('user')->get();
+
+        return view('dashboardadmin.pengajuan.index', [
+            'title' => 'Pengajuan',
+            'pengajuan' => $pengajuan,
         ]);
     }
 }

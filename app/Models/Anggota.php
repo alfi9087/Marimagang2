@@ -11,10 +11,7 @@ class Anggota extends Model
 
     protected $table = 'anggota';
     protected $guarded = ['id'];
-    protected $fillable = [
-        'nama',
-        'nim',
-    ];
+    protected $fillable = ['user_id', 'nama', 'nim'];
 
     public function user()
     {

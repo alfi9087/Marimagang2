@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('anggota', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('nama')->nullable();
-            $table->string('nim')->nullable()->unique();
+            $table->string('nama');
+            $table->string('nim')->unique();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

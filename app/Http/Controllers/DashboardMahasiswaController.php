@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Anggota;
+use App\Models\Pengajuan;
 use App\Models\DataBidang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -30,11 +32,13 @@ class DashboardMahasiswaController extends Controller
 
     public function pengajuan($id)
     {
-        $user = User::findorfail($id);
+        $user = User::with('anggota')->findOrFail($id);
+        $pengajuan = Pengajuan::where('user_id', $user->id)->get();
 
         return view('mahasiswa.pengajuan', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
+            'pengajuan' => $pengajuan,
             'databidang' => DB::table('databidang')->where('status', 'Buka')->get()
         ]);
     }
