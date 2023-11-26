@@ -1,7 +1,6 @@
 @extends('home.layouts.main')
 
 @section('content')
-<!-- Main Banner Area Start -->
 <section class="section main-banner" id="top" data-section="section1">
     <img src="assets/images/diskominfo.png" alt="">
 
@@ -14,7 +13,7 @@
                         <h2>Selamat Datang di Mari Magang</h2>
                         <p>Tempat mahasiswa melakukan pendaftaran magang atau PKL di Dinas Komunikasi dan Informatika Kabupaten Malang</p>
                         <div class="main-button-red">
-                            <div class="scroll-to-section"><a href="#contact">Gabung Sekarang !</a></div>
+                            <div class="scroll-to-section"><a href="/forms">Gabung Sekarang !</a></div>
                         </div>
                     </div>
                 </div>
@@ -22,7 +21,6 @@
         </div>
     </div>
 </section>
-<!-- Main Banner Area End -->
 
 <section class="services">
     <div class="container">
@@ -115,7 +113,7 @@
         <div class="row justify-content-center">
             @endif
             @endforeach
-        </div> <!-- Tutup div.row terakhir jika tidak habis dibagi 3 -->
+        </div>
     </div>
 </section>
 
@@ -129,7 +127,7 @@
                             <h3>Tanya Jawab Seputar Magang</h3>
                             <p>Pertanyaan umum yang sering ditanyakan oleh para mahasiswa yang ingin mendaftar di Dinas Komunikasi dan Informatika Kabupaten Malang</p>
                             <div class="main-button-red">
-                                <div class="scroll-to-section"><a href="">Gabung Sekarang!</a></div>
+                                <div><a href="/forms">Gabung Sekarang!</a></div>
                             </div>
                         </div>
                     </div>
@@ -206,15 +204,15 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-12">
-                                <div class="count-area-content percentage">
-                                    <div class="count-digit">94</div>
-                                    <div class="count-title">Jumlah Seluruh Kelompok Magang</div>
+                                <div class="count-area-content">
+                                    <div class="count-digit">{{ $jumlahpengajuan }}</div>
+                                    <div class="count-title">Jumlah Seluruh Pengajuan</div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="count-area-content">
-                                    <div class="count-digit">126</div>
-                                    <div class="count-title">Jumlah Kelompok Bidang Aplikasi Informatika</div>
+                                    <div class="count-digit">{{ $jumlahuser }}</div>
+                                    <div class="count-title">Jumlah Seluruh Akun Terdaftar</div>
                                 </div>
                             </div>
                         </div>
@@ -223,14 +221,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="count-area-content new-students">
-                                    <div class="count-digit">2345</div>
-                                    <div class="count-title">Jumlah Kelompok Bidang Sekretariat</div>
+                                    <div class="count-digit">{{ $jumlahdatabidang }}</div>
+                                    <div class="count-title">Jumlah Bidang Kerja</div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="count-area-content">
-                                    <div class="count-digit">32</div>
-                                    <div class="count-title">Jumlah Kelompok Bidang Statistik</div>
+                                    <div class="count-digit">{{ $jumlahadmin }}</div>
+                                    <div class="count-title">Jumlah Admin Mari Magang</div>
                                 </div>
                             </div>
                         </div>

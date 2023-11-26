@@ -17,31 +17,39 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <style>
+        .alignMe li {
+            margin-bottom: 10px;
+        }
+
+        .alignMe b {
+            display: inline-block;
+            width: 50%;
+            position: relative;
+            padding-right: 10px;
+        }
+
+        .alignMe b::after {
+            content: ":";
+            position: absolute;
+            right: 10px;
+        }
+
         .upload-box {
             width: 100%;
-            /* Ganti nilai sesuai kebutuhan lebar */
             height: 250px;
-            /* Ganti nilai sesuai kebutuhan tinggi */
             border: 2px dashed #ccc;
-            /* Contoh garis putus-putus untuk area drag & drop */
             padding: 20px;
-            /* Menambahkan padding agar konten tidak berdekatan dengan border */
             text-align: center;
-            /* Posisi teks di tengah */
         }
 
         .upload-box button {
             margin-top: 10px;
-            /* Ganti nilai sesuai kebutuhan jarak antara tombol dan teks */
         }
 
         .scrolling-container {
-            max-height: 670px;
-            /* Atur tinggi maksimum sesuai kebutuhan Anda */
-            overflow-y: scroll;
-            /* Aktifkan penggulungan vertikal */
+            max-height: 690px;
+            overflow-y: auto;
             padding-right: 15px;
-            /* Tambahkan padding kanan untuk ruang penggulungan */
         }
 
         .upload-box {
@@ -57,7 +65,6 @@
 
         .pdf-icon {
             color: #e74c3c;
-            /* Warna PDF */
             font-size: 36px;
         }
 
@@ -66,7 +73,47 @@
             cursor: pointer;
         }
 
-        /* Gaya lainnya sesuai kebutuhan Anda */
+        #kesbangpol-box {
+            width: 100%;
+            height: 70vh;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #kesbangpol-box button {
+            margin-top: 10px;
+        }
+
+        #kesbangpol-box:hover {
+            background-color: #f5f5f5;
+        }
+
+        #laporan-box {
+            width: 100%;
+            height: 70vh;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #laporan-box button {
+            margin-top: 10px;
+        }
+
+        #laporan-box:hover {
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 
@@ -130,7 +177,6 @@
             handleUploadedFile(file, pengantarInfo, 'pengantar');
         });
 
-        // Trigger file input when the box is clicked
         leftBox.addEventListener('click', () => {
             document.getElementById('proposal').click();
         });
@@ -151,10 +197,9 @@
             const infoContainer = document.getElementById(type + '-info');
             infoContainer.innerHTML = '';
             const fileInput = document.getElementById(type);
-            fileInput.value = ''; // Reset the input element
+            fileInput.value = ''; 
         }
 
-        // Handle file selection through file input
         document.getElementById('proposal').addEventListener('change', function(e) {
             const file = e.target.files[0];
             handleUploadedFile(file, proposalInfo, 'proposal');

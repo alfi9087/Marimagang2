@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    // Autentikasi Untuk Login
     protected function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -20,11 +19,10 @@ class LoginController extends Controller
         try {
             if (Auth::guard('web')->attempt($credentials)) {
                 $request->session()->regenerate();
-                $mahasiswaId = Auth::user()->id; // Ambil ID mahasiswa yang berhasil login
+                $mahasiswaId = Auth::user()->id;
                 return redirect('/mahasiswa/' . $mahasiswaId);
             }
         } catch (\Illuminate\Auth\AuthenticationException $e) {
-            // Handle authentication exception for the 'admin' guard
         }
 
         try {
@@ -33,7 +31,6 @@ class LoginController extends Controller
                 return redirect('/dashboard');
             }
         } catch (\Illuminate\Auth\AuthenticationException $e) {
-            // Handle authentication exception for the 'admin' guard
         }
 
         try {
@@ -42,23 +39,18 @@ class LoginController extends Controller
                 return redirect('/dashboardbidang');
             }
         } catch (\Illuminate\Auth\AuthenticationException $e) {
-            // Handle authentication exception for the 'bidang' guard
         }
 
         return back()->with('loginError', 'Login Gagal! Anda Belum Registrasi');
     }
 
-    //Logout
     public function logout(Request $request)
     {
         if (Auth::guard('admin')->check()) {
-            // Logout admin
             Auth::guard('admin')->logout();
         } elseif (Auth::guard('bidang')->check()) {
-            // Logout bidang
             Auth::guard('bidang')->logout();
         } else {
-            // Logout user
             Auth::logout();
         }
 

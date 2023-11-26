@@ -70,7 +70,6 @@
                                                 <div class="modal-body">
                                                     <form method="POST" action="{{ route('mahasiswa.submit', ['id' => $user->id]) }}" enctype="multipart/form-data">
                                                         @csrf
-                                                        <!--Avatar-->
                                                         <div>
                                                             <div class="d-flex justify-content-center mb-4">
                                                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="rounded-circle" alt="example placeholder" style="width: 200px;" id="add" />
@@ -166,11 +165,10 @@
 
                                                 <div class="modal-body">
                                                     <form method="POST" action="/mahasiswaupdate/{{ $user->id }}" enctype="multipart/form-data">
-                                                        @method('put')
                                                         @csrf
+                                                        @method('put')
 
                                                         <div>
-                                                            <!-- Preview Photo -->
                                                             <div class="d-flex justify-content-center mb-4">
                                                                 <img src="#" class="rounded-circle" alt="Photo Preview" style="display: none; width: 200px; height: 200px;" id="photo-preview" />
                                                             </div>
@@ -183,7 +181,6 @@
                                                                 </div>
                                                                 @enderror
 
-                                                                <!-- Tambahkan CSS inline untuk menghilangkan teks "Choose File" dan nama file -->
                                                                 <label class="form-label text-white m-1" for="foto" style="background-color: #DC143C; color: white; padding: 6px 12px; cursor: pointer; border: none;">
                                                                     Ubah Foto Profil
                                                                 </label>

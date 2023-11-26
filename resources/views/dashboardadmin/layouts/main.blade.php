@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard Admin</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="../assets/images/admin/icon.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="../assets/js/admin/plugin/webfont/webfont.min.js"></script>
@@ -30,6 +29,7 @@
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
@@ -89,6 +89,7 @@
     <script>
         CKEDITOR.replace('my-editor');
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
         Circles.create({
@@ -158,7 +159,7 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            display: false //this will remove only the label
+                            display: false
                         },
                         gridLines: {
                             drawBorder: false,
@@ -217,7 +218,6 @@
 
     <script>
         $(document).ready(function() {
-            // Inisialisasi SweetAlert untuk tombol delete admin
             $('.delete-button-admin').click(function(e) {
                 e.preventDefault();
                 var deleteUrl = $(this).attr('href');
@@ -243,7 +243,6 @@
                 });
             });
 
-            // Inisialisasi SweetAlert untuk tombol block mahasiswa
             $('.block-button-mahasiswa').click(function(e) {
                 e.preventDefault();
                 var blockUrl = $(this).attr('href');
@@ -271,7 +270,7 @@
 
         });
     </script>
-
+    @stack('script')
 </body>
 
 </html>

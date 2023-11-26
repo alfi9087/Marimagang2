@@ -36,7 +36,7 @@
 
             <div class="container">
                 <div class="row align-items-center justify-content-center" style="min-height: 100vh;">
-                    <div class="col-md-8"> <!-- Lebar kolom diperbesar -->
+                    <div class="col-md-8">
                         <div class="card card-post card-round" style="border-radius: 20px; overflow: hidden;">
                             <div class="card-img-top">
                                 <img src="{{ asset('storage/' . $databidang->photo) }}" alt="Card image cap" style="width: 100%; height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;">

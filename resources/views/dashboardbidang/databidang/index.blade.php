@@ -83,7 +83,6 @@
                                         </div>
                                         @enderror
 
-                                        <!-- Preview Thumbnail -->
                                         <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 200px; max-height: 200px;" />
                                     </div>
                                 </div>
@@ -99,7 +98,6 @@
                                         </div>
                                         @enderror
 
-                                        <!-- Preview Photo -->
                                         <img id="photo-preview" src="#" alt="Photo Preview" style="display: none; max-width: 200px; max-height: 200px;" />
                                     </div>
                                 </div>

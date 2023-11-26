@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Pengajuan;
+use App\Models\SkillUser;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
 {
-    //Menampilkan Dashboard Admin
     public function index()
     {
         return view('dashboardadmin.index', [
@@ -19,7 +19,6 @@ class DashboardAdminController extends Controller
         ]);
     }
 
-    //Menampilkan Tabel Admin
     public function admin()
     {
         return view('dashboardadmin.admin.index', [
@@ -28,7 +27,6 @@ class DashboardAdminController extends Controller
         ]);
     }
 
-    //Menampilkan Tabel Mahasiswa
     public function user()
     {
         return view('dashboardadmin.mahasiswa.index', [
@@ -39,19 +37,58 @@ class DashboardAdminController extends Controller
 
     public function userdetail($id)
     {
-        $pengajuan = Pengajuan::with('user.anggota', 'user.skilluser')->findOrFail($id);
+        $pengajuan = Pengajuan::with('user.anggota', 'user.skilluser', 'user.skilluser.skill.databidang')->findOrFail($id);
         return view('dashboardadmin.pengajuan.detail', [
             'title' => 'Landing Page',
             'pengajuan' => $pengajuan,
         ]);
     }
 
-    //Menampilkan Dashboard Pengajuan
     public function pengajuan()
     {
-        $pengajuan = Pengajuan::with('user')->get();
+
+        $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
+            ->where('pengajuan.status', 'Diproses')
+            ->get();
 
         return view('dashboardadmin.pengajuan.index', [
+            'title' => 'Pengajuan',
+            'pengajuan' => $pengajuan,
+            'databidang' => DB::table('databidang')->where('status', 'Buka')->get()
+        ]);
+    }
+
+    public function diteruskan()
+    {
+        $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
+            ->where('pengajuan.status', 'Diteruskan')
+            ->get();
+
+        return view('dashboardadmin.pengajuan.diteruskan', [
+            'title' => 'Pengajuan',
+            'pengajuan' => $pengajuan,
+        ]);
+    }
+
+    public function konfirmasi()
+    {
+        $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
+            ->whereIn('pengajuan.status', ['Diterima', 'Ditolak'])
+            ->get();
+
+        return view('dashboardadmin.pengajuan.konfirmasi', [
+            'title' => 'Pengajuan',
+            'pengajuan' => $pengajuan,
+        ]);
+    }
+
+    public function magang()
+    {
+        $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
+            ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+            ->get();
+
+        return view('dashboardadmin.pengajuan.magang', [
             'title' => 'Pengajuan',
             'pengajuan' => $pengajuan,
         ]);

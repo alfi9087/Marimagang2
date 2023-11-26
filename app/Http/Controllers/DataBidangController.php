@@ -19,7 +19,7 @@ class DataBidangController extends Controller
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'deskripsi' => 'required',
-                'skill.*' => 'required', // Validasi untuk setiap keterampilan
+                'skill.*' => 'required',
             ]);
 
             $thumbnailPath = $request->file('thumbnail')->store('bidang/thumbnails');
@@ -34,7 +34,6 @@ class DataBidangController extends Controller
 
             $databidang->save();
 
-            // Simpan setiap keterampilan sebagai baris terpisah di tabel "skills"
             foreach ($validatedData['skill'] as $skillName) {
                 $skill = new Skill;
                 $skill->nama = $skillName;
@@ -42,23 +41,17 @@ class DataBidangController extends Controller
                 $skill->save();
             }
 
-            // Tambahkan SweetAlert success message
             Alert::success('Sukses', 'Data Bidang Berhasil Ditambahkan')->showConfirmButton();
 
-            // Redirect atau berikan respons yang sesuai, misalnya:
             return redirect()->back();
         } catch (\Exception $e) {
-            // Tangani kesalahan dengan menampilkan pesan error
             Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-
-            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
             return redirect()->back();
         }
     }
 
     public function open(Request $request, $id)
     {
-
         $databidang = DataBidang::find($id);
         if ($databidang) {
             $databidang->status = 'Buka';
@@ -84,16 +77,13 @@ class DataBidangController extends Controller
     public function delete($id)
     {
         try {
-            // Temukan bidang berdasarkan ID
             $databidang = DataBidang::find($id);
 
             if (!$databidang) {
-                // Jika bidang tidak ditemukan, tampilkan pesan kesalahan
                 Alert::error('Error', 'Data Bidang tidak ditemukan')->showConfirmButton();
                 return redirect()->back();
             }
 
-            // Hapus gambar thumbnail dan photo terkait bidang
             if ($databidang->thumbnail) {
                 Storage::delete($databidang->thumbnail);
             }
@@ -102,22 +92,13 @@ class DataBidangController extends Controller
                 Storage::delete($databidang->photo);
             }
 
-            // Hapus bidang
             $databidang->delete();
 
-            // Hapus juga semua skill terkait dengan bidang ini (jika diperlukan)
-            // $bidang->skills()->delete();
-
-            // Tampilkan pesan sukses
             toast('Data Bidang Berhasil Dihapus', 'success');
 
-            // Redirect atau berikan respons yang sesuai
             return redirect()->back();
         } catch (\Exception $e) {
-            // Tangani kesalahan dengan menampilkan pesan error
             Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-
-            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
             return redirect()->back();
         }
     }

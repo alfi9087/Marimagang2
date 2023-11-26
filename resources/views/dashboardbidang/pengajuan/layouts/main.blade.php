@@ -160,7 +160,7 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            display: false //this will remove only the label
+                            display: false 
                         },
                         gridLines: {
                             drawBorder: false,
@@ -218,14 +218,12 @@
     </script>
 
     <script>
-        //== Class definition
         var SweetAlert2Demo = function() {
 
-            //== Demos
             var initDemos = function() {
 
                 $('.delete-button-admin').click(function(e) {
-                    e.preventDefault(); // Prevent the default link behavior
+                    e.preventDefault();
 
                     var deleteUrl = $(this).attr('href');
 
@@ -246,13 +244,13 @@
                         }
                     }).then((willDelete) => {
                         if (willDelete) {
-                            window.location.href = deleteUrl; // Redirect to the delete URL
+                            window.location.href = deleteUrl;
                         }
                     });
                 });
 
                 $('.block-button-mahasiswa').click(function(e) {
-                    e.preventDefault(); // Prevent the default link behavior
+                    e.preventDefault();
 
                     var deleteUrl = $(this).attr('href');
 
@@ -273,7 +271,7 @@
                         }
                     }).then((willDelete) => {
                         if (willDelete) {
-                            window.location.href = deleteUrl; // Redirect to the delete URL
+                            window.location.href = deleteUrl;
                         }
                     });
                 });
@@ -281,21 +279,18 @@
             };
 
             return {
-                //== Init
                 init: function() {
                     initDemos();
                 },
             };
         }();
 
-        //== Class Initialization
         jQuery(document).ready(function() {
             SweetAlert2Demo.init();
         });
     </script>
 
     <script>
-        // Fungsi untuk menampilkan preview gambar saat file thumbnail dipilih
         function previewThumbnail() {
             var thumbnailInput = document.getElementById('thumbnail');
             var thumbnailPreview = document.getElementById('thumbnail-preview');
@@ -313,7 +308,6 @@
             });
         }
 
-        // Fungsi untuk menampilkan preview gambar saat file photo dipilih
         function previewPhoto() {
             var photoInput = document.getElementById('photo');
             var photoPreview = document.getElementById('photo-preview');
@@ -331,26 +325,21 @@
             });
         }
 
-        // Panggil kedua fungsi saat halaman dimuat
         window.addEventListener('load', function() {
             previewThumbnail();
             previewPhoto();
         });
     </script>
 
-    <!-- Javascript Menu Aktif Dashboard Detail Mahasiswa -->
     <script>
         function activateTab(tabID) {
-            // Menghapus kelas "active" dari semua elemen tab
             var tabLinks = document.querySelectorAll('.nav-tabs .nav-item');
             for (var i = 0; i < tabLinks.length; i++) {
                 tabLinks[i].classList.remove('active');
             }
 
-            // Menambahkan kelas "active" ke elemen tab yang sesuai
             document.querySelector('a[href="#' + tabID + '"]').parentNode.classList.add('active');
 
-            // Menampilkan konten tab yang sesuai
             var tabContent = document.querySelectorAll('.tab-pane');
             for (var i = 0; i < tabContent.length; i++) {
                 tabContent[i].classList.remove('active');

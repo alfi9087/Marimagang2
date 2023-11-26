@@ -44,6 +44,7 @@
                                             <th>Nama</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
+                                            <th>Bidang</th>
                                             <th>Status Pengajuan</th>
                                             <th>Detail</th>
                                             <th>Action</th>
@@ -55,6 +56,7 @@
                                             <th>Nama</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
+                                            <th>Bidang</th>
                                             <th>Status Pengajuan</th>
                                             <th>Detail</th>
                                             <th>Action</th>
@@ -63,34 +65,28 @@
                                     <tbody style="text-align: center;">
                                         @foreach ($pengajuan as $p)
                                         <tr>
-                                            <td>{{ $p->id }}</td>
-                                            <td>{{ $p->user->nama }}</td>
-                                            <td>{{ $p->tanggalmulai }}</td>
-                                            <td>{{ $p->tanggalselesai }}</td>
-                                            <td><span class="badge badge-light">{{ $p->status }}</span></td>
-                                            <td>
+                                            <td class="col-1">{{ $p->id }}</td>
+                                            <td class="col-1">{{ $p->user->nama }}</td>
+                                            <td class="col-3">{{ $p->tanggalmulai }}</td>
+                                            <td class="col-3">{{ $p->tanggalselesai }}</td>
+                                            <td class="col-1">{{ $p->databidang->nama }}</td>
+                                            <td class="col-3"><span class="badge badge-warning">{{ $p->status }}</span></td>
+                                            <td class="col-1">
                                                 <a href="/userdetailbidang/{{ $p->id }}">
                                                     <button type="button" class="btn btn-sm btn-info">
                                                         <i class="fas fa-user-alt"></i> Profil
                                                     </button>
                                                 </a>
                                             </td>
-                                            <td>
-                                                @if($p->status == 'Diteruskan')
+                                            <td class="col-1">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Actions
+                                                    <button type="button" class="btn btn-sm btn-danger mr-1" data-toggle="modal" data-target="#ditolak{{ $p->id }}">
+                                                        Ditolak
                                                     </button>
-                                                    <div class="dropdown-menu">
-                                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#diterima{{ $p->id }}">
-                                                            Diterima
-                                                        </button>
-                                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#ditolak{{ $p->id }}">
-                                                            Ditolak
-                                                        </button>
-                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#diterima{{ $p->id }}">
+                                                        Diterima
+                                                    </button>
                                                 </div>
-                                                @endif
                                             </td>
                                         </tr>
 
@@ -99,36 +95,29 @@
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Pilih Bidang Yang Direkomendasikan</h5>
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Penerimaan Mahasiswa Magang</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <label for="bidangRekomendasi">Bidang Rekomendasi:</label>
-                                                                <select class="form-control" id="bidangRekomendasi" name="bidangRekomendasi" required>
-                                                                    <option value="bidang1">Bidang 1</option>
-                                                                    <option value="bidang2">Bidang 2</option>
-                                                                    <option value="bidang3">Bidang 3</option>
-                                                                    <!-- Add more options as needed -->
-                                                                </select>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-success">Save changes</button>
-                                                    </div>
+                                                    <form method="POST" action="/diterimabidang/{{ $p->id }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method("put")
+                                                        <div class="modal-body">
+                                                            <p style="font-size: 18px;">Apakah Anda yakin untuk menerima <strong>{{ $p->user->nama }}</strong> ini untuk magang di <strong>{{ $p->databidang->nama }}</strong>?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-success">Ya, Terima</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
 
-
                                         <!-- Ditolak Modal -->
                                         <div class="modal fade" id="ditolak{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalCenterTitle">Pengajuan Magang Ditolak</h5>
@@ -136,18 +125,28 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group">
-                                                                <label for="komentar">Komentar:</label>
-                                                                <textarea class="form-control" id="komentar" name="komentar" rows="3" required></textarea>
+                                                    <form method="POST" action="/ditolakbidang/{{ $p->id }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method("put")
+                                                        <div class="modal-body">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Komentar</label>
+                                                                <div class="col-sm-9">
+                                                                    <textarea id="my-editor" class="my-editor form-control @error('komentar') is-invalid @enderror" name="komentar" id="komentar" placeholder="Komentar">{{ old('komentar') }}</textarea>
+
+                                                                    @error('komentar')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-success">Save changes</button>
-                                                    </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-success">Kirim Data</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

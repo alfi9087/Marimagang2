@@ -73,10 +73,10 @@
             </div>
             @enderror
             <br>
-            <button>Masuk</button>
+            <button type="submit">Masuk</button>
         </form>
     </div>
-    
+
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-left">

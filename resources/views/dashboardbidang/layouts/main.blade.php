@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard Bidang</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="../assets/images/admin/icon.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="../assets/js/admin/plugin/webfont/webfont.min.js"></script>
@@ -158,7 +157,7 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            display: false //this will remove only the label
+                            display: false 
                         },
                         gridLines: {
                             drawBorder: false,
@@ -217,7 +216,6 @@
 
     <script>
         $(document).ready(function() {
-            // Inisialisasi SweetAlert untuk tombol delete 
             $('.bidang').click(function(e) {
                 e.preventDefault();
                 var deleteUrl = $(this).attr('href');
@@ -272,7 +270,6 @@
     </script>
 
     <script>
-        // Fungsi untuk menampilkan preview gambar saat file thumbnail dipilih
         function previewThumbnail() {
             var thumbnailInput = document.getElementById('thumbnail');
             var thumbnailPreview = document.getElementById('thumbnail-preview');
@@ -290,7 +287,6 @@
             });
         }
 
-        // Fungsi untuk menampilkan preview gambar saat file photo dipilih
         function previewPhoto() {
             var photoInput = document.getElementById('photo');
             var photoPreview = document.getElementById('photo-preview');
@@ -308,7 +304,6 @@
             });
         }
 
-        // Panggil kedua fungsi saat halaman dimuat
         window.addEventListener('load', function() {
             previewThumbnail();
             previewPhoto();
@@ -336,14 +331,12 @@
     </script>
 
     <script>
-        //== Class definition
         var SweetAlert2Demo = function() {
 
-            //== Demos
             var initDemos = function() {
 
                 $('.bidang-delete').submit(function(e) {
-                    e.preventDefault(); // Prevent the default form submission
+                    e.preventDefault();
 
                     var deleteUrl = $(this).attr('action');
 
@@ -364,21 +357,19 @@
                         }
                     }).then((willDelete) => {
                         if (willDelete) {
-                            window.location.href = deleteUrl; // Redirect to the delete URL
+                            window.location.href = deleteUrl;
                         }
                     });
                 });
             };
 
             return {
-                //== Init
                 init: function() {
                     initDemos();
                 },
             };
         }();
 
-        //== Class Initialization
         jQuery(document).ready(function() {
             SweetAlert2Demo.init();
         });

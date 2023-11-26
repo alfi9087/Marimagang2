@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class FormsController extends Controller
 {
-    //Menampilkan Halaman Form Registrasi / Login
     public function form()
     {
         return view('forms.index', [

@@ -78,6 +78,8 @@ Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('d
 
 //Route Edit Profil
 Route::get('/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan'])->middleware('auth:web');
+Route::put('/kesbangpol', [PengajuanController::class, 'kesbangpol'])->name('kesbangpol.submit')->middleware('auth:web');
+Route::put('/laporan', [PengajuanController::class, 'laporan'])->name('laporan.submit')->middleware('auth:web');
 
 //Route Dashboard Bidang
 Route::middleware(['auth:bidang'])->group(function () {
@@ -104,16 +106,22 @@ Route::get('/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaContro
 
 // Route Dashboard Admin
 Route::get('/pengajuanadmin', [DashboardAdminController::class, 'pengajuan'])->middleware('auth:admin');
+Route::get('/pengajuanditeruskan', [DashboardAdminController::class, 'diteruskan'])->middleware('auth:admin');
+Route::get('/pengajuanaccadmin', [DashboardAdminController::class, 'konfirmasi'])->middleware('auth:admin');
+Route::get('/magang', [DashboardAdminController::class, 'magang'])->middleware('auth:admin');
+Route::put('/diteruskan/{id}', [PengajuanController::class, 'updatebidang'])->middleware('auth:admin');
+Route::put('/ditolakadmin/{id}', [PengajuanController::class, 'ditolakadmin'])->middleware('auth:admin');
 Route::get('/userdetailadmin/{id}', [DashboardAdminController::class, 'userdetail'])->middleware('auth:admin');
+Route::put('/diterimaadmin/{id}', [PengajuanController::class, 'diterimaadmin'])->middleware('auth:admin');
+Route::put('/selesai', [PengajuanController::class, 'selesai'])->middleware('auth:admin');
 
 // Route Dashboard Bidang
 Route::get('/pengajuanbidang', [DashboardBidangController::class, 'pengajuan'])->middleware('auth:bidang');
 Route::get('/userdetailbidang/{id}', [DashboardBidangController::class, 'userdetail'])->middleware('auth:bidang');
+Route::put('/ditolakbidang/{id}', [PengajuanController::class, 'ditolakbidang'])->middleware('auth:bidang');
+Route::put('/diterimabidang/{id}', [PengajuanController::class, 'diterimabidang'])->middleware('auth:bidang');
 
 // Route Dashboard Mahasiswa Anggota
 Route::post('/tambahanggota', [PengajuanController::class, 'tambahanggota'])->name('tambah.anggota')->middleware('auth:web');
 Route::put('/editanggota/{id}', [PengajuanController::class, 'editanggota'])->name('edit.anggota')->middleware('auth:web');
 Route::delete('/hapusanggota/{id}', [PengajuanController::class, 'deleteanggota'])->name('delete.anggota')->middleware('auth:web');
-
-Route::put('/diteruskanbidang/{id}', [PengajuanController::class, 'diteruskanbidang'])->name('diteruskan.bidang')->middleware('auth:admin');
-Route::put('/ditolakadmin/{id}', [PengajuanController::class, 'ditolakadmin'])->name('ditolak.admin')->middleware('auth:admin');

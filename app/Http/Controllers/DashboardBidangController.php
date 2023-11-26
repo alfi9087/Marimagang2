@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardBidangController extends Controller
 {
-    //Menampilkan Dashboard Admin
     public function index()
     {
         return view('dashboardbidang.index', [
@@ -19,7 +18,6 @@ class DashboardBidangController extends Controller
         ]);
     }
 
-    //Menampilkan Tabel Bidang
     public function bidang()
     {
         return view('dashboardbidang.bidang.index', [
@@ -28,7 +26,6 @@ class DashboardBidangController extends Controller
         ]);
     }
 
-    //Menampilkan Data Bidang
     public function databidang()
     {
         return view('dashboardbidang.databidang.index', [
@@ -37,12 +34,10 @@ class DashboardBidangController extends Controller
         ]);
     }
 
-    // Detail Bidang
     public function detail($id)
     {
         $databidang = DataBidang::findOrFail($id);
 
-        // Mengambil keterampilan terkait dengan bidang tertentu
         $skill = $databidang->skill;
         return view('dashboardbidang.databidang.detail', [
             'title' => 'Landing Page',
@@ -60,10 +55,11 @@ class DashboardBidangController extends Controller
         ]);
     }
 
-    //Menampilkan Dashboard Pengajuan
     public function pengajuan()
     {
-        $pengajuan = Pengajuan::with('user')->get();
+        $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
+            ->where('pengajuan.status', 'Diteruskan')
+            ->get();
 
         return view('dashboardbidang.pengajuan.index', [
             'title' => 'Pengajuan',

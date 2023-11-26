@@ -10,7 +10,7 @@ class SkillUser extends Model
     use HasFactory;
 
     protected $table = 'skilluser';
-    protected $fillable = ['user_id', 'skill_id'];
+    protected $fillable = ['user_id', 'skill_id', 'pengajuan_id'];
 
     public function user()
     {
@@ -20,5 +20,10 @@ class SkillUser extends Model
     public function skill()
     {
         return $this->belongsTo(Skill::class, 'skill_id');
+    }
+
+    public function pengajuan()
+    {
+        return $this->hasMany(Pengajuan::class, 'skilluser_id');
     }
 }

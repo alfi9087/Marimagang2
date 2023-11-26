@@ -159,8 +159,8 @@
                                                         <div class="container-fluid">
 
                                                             <form method="POST" action="/bidangupdate/{{ $b->id }}" enctype="multipart/form-data">
-                                                                @method("put")
                                                                 @csrf
+                                                                @method("put")
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-3 col-form-label">Nama</label>
                                                                     <div class="col-sm-9">

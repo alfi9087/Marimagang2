@@ -38,7 +38,6 @@
 
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
             <section id="content" class="container">
-                <!-- Begin .page-heading -->
                 <div class="page-heading">
                     <div class="media clearfix">
                         <div class="media-left pr30">
@@ -53,7 +52,7 @@
                         <div class="media-body va-m" style="margin-left: 25px;">
                             <h2 class="media-heading">{{ $pengajuan->user->nama }}</h2>
                             <p class="lead">Durasi Magang : ( {{ $pengajuan->tanggalmulai }} - {{ $pengajuan->tanggalselesai }} )</p>
-                            <a href="" class="btn btn-danger">Gmail</a> <!-- Tombol Gmail -->
+                            <a href="" class="btn btn-danger">Gmail</a> 
                         </div>
                     </div>
                 </div>
@@ -68,8 +67,8 @@
                                 <span class="panel-title">Skill</span>
                             </div>
                             <div class="panel-body pb5">
-                                @foreach ($pengajuan->user->skilluser as $skilluser)
-                                <span class="label label-success mr5 mb10 ib lh15">{{ $skilluser->skill->nama }}</span>
+                                @foreach ($pengajuan->skilluser as $skill)
+                                <span class="label label-success mr5 mb10 ib lh15">{{ $skill->skill->nama }}</span>
                                 @endforeach
                             </div>
                         </div>
@@ -82,7 +81,6 @@
                             </div>
                             <div class="panel-body pb5">
                                 <h6>Experience</h6>
-                                <h4>{{ $pengajuan->namaproyek }}</h4>
                                 <p class="text-muted">{{ $pengajuan->deskripsi }}</p>
                                 <hr class="short br-lighter">
                                 <div class="row">
@@ -217,7 +215,6 @@
                                     @endforeach
                                 </div>
                                 <div id="tab3" class="tab-pane">
-                                    <!-- Konten untuk tab 3 -->
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <div class="row">

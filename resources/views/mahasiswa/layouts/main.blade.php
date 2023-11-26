@@ -14,9 +14,6 @@
     <!-- File Boostrap -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/bootstrap/css/bootstrap.min.css') }}">
 
-    <!-- CSS Bootstrap -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC6FYl+stj8g2QW8kc0FbN8fToXtHVaU4vD" crossorigin="anonymous"> -->
-
     <!-- File CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mahasiswa.css') }}">
@@ -37,7 +34,6 @@
     <!-- Footer -->
     @include('mahasiswa.layouts.footer')
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
@@ -53,7 +49,6 @@
     <script src="{{ asset('assets/js/custompage.js') }}"></script>
 
     <script>
-        //according to loftblog tut
         $('.nav li:first').addClass('active');
 
         var showSection = function showSection(section, isAnimate) {
@@ -114,7 +109,6 @@
     </script>
 
     <script>
-        // Fungsi untuk menampilkan preview foto saat dipilih
         function previewFoto(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -127,9 +121,7 @@
             }
         }
 
-        // Ketika input file berubah (saat foto baru diunggah)
         $('#foto').change(function() {
-            // Tampilkan preview foto baru
             previewFoto(this);
         });
     </script>

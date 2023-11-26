@@ -22,4 +22,9 @@ class DataBidang extends Model
     {
         return $this->hasMany(Skill::class, 'databidang_id');
     }
+
+    public function pengajuan()
+    {
+        return $this->hasOne(Pengajuan::class, 'databidang_id');
+    }
 }

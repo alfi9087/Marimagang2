@@ -15,7 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DashboardMahasiswaController extends Controller
 {
-    //Menampilkan Dashboard Mahasiswa
     public function index($id)
     {
         $user = User::findorfail($id);
@@ -35,11 +34,19 @@ class DashboardMahasiswaController extends Controller
         $user = User::with('anggota')->findOrFail($id);
         $pengajuan = Pengajuan::where('user_id', $user->id)->get();
 
+        if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Diterima' && $pengajuan[0]->kesbangpol === null) {
+            Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
+        }
+
+        if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->laporan === null) {
+            Alert::info('Anda Dinyatakan Magang', 'Silahkan Upload Laporan Akhir Selama Magang')->showConfirmButton();
+        }
+
         return view('mahasiswa.pengajuan', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
             'pengajuan' => $pengajuan,
-            'databidang' => DB::table('databidang')->where('status', 'Buka')->get()
+            'databidang' => DB::table('databidang')->where('status', 'Buka')->get(),
         ]);
     }
 

@@ -1,9 +1,7 @@
 <div class="main-header">
-    <!-- Logo Header -->
     <div class="logo-header" data-background-color="red">
 
         <a href="index.html" class="logo" style="color: white;">
-            <!-- <img src="../assets/images/admin/logo.svg" alt="navbar brand" class="navbar-brand"> -->
             Mari Magang
         </a>
 
@@ -12,7 +10,7 @@
                 <i class="icon-menu"></i>
             </span>
         </button>
-        
+
         <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
         <div class="nav-toggle">
             <button class="btn btn-toggle toggle-sidebar">
@@ -20,9 +18,7 @@
             </button>
         </div>
     </div>
-    <!-- End Logo Header -->
 
-    <!-- Navbar Header -->
     <nav class="navbar navbar-header navbar-expand-lg" data-background-color="red">
 
         <div class="container-fluid">
@@ -258,5 +254,4 @@
             </ul>
         </div>
     </nav>
-    <!-- End Navbar -->
 </div>

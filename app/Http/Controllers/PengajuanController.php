@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SkillUser;
 use App\Models\Pengajuan;
 use App\Models\Anggota;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,55 +16,229 @@ class PengajuanController extends Controller
     public function store(Request $request)
     {
         try {
-            // Validate the form data
             $request->validate([
-                'namaproyek' => 'required|string|max:50',
-                'deskripsi' => 'required|string',
                 'start_date' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
                 'end_date' => 'required|date|after:start_date',
-                'proposal' => 'required|mimes:pdf|max:2048',
-                'pengantar' => 'required|mimes:pdf|max:2048',
+                'databidang_id' => 'required|exists:databidang,id',
+                'skill' => 'required|array',
                 'bukti' => 'required|mimes:pdf|max:2048',
+                'pengantar' => 'required|mimes:pdf|max:2048',
+                'proposal' => 'required|mimes:pdf|max:2048',
             ]);
 
-            // Handle file uploads
-            $proposalPath = $request->file('proposal')->store('proposal', 'public');
-            $pengantarPath = $request->file('pengantar')->store('pengantar', 'public');
-            $buktiPath = $request->file('bukti')->store('bukti', 'public');
+            $user_id = $request->input('user_id');
 
-            // Create a new Pengajuan instance
-            $pengajuan = new Pengajuan();
-            $pengajuan->user_id = $request->input('user_id');
-            $pengajuan->namaproyek = $request->input('namaproyek');
-            $pengajuan->deskripsi = $request->input('deskripsi');
-            $pengajuan->bukti = $buktiPath;
-            $pengajuan->pengantar = $pengantarPath;
-            $pengajuan->proposal = $proposalPath;
-            $pengajuan->tanggalmulai = $request->input('start_date');
-            $pengajuan->tanggalselesai = $request->input('end_date');
-            $pengajuan->status = 'Diproses';
-
-            // Save the Pengajuan data
-            $pengajuan->save();
-
-            // Attach skills to the user
             $skills = $request->input('skill');
+
             if (!empty($skills)) {
+                $pengajuan = Pengajuan::create([
+                    'user_id' => auth()->id(),
+                    'databidang_id' => $request->databidang_id,
+                    'tanggalmulai' => $request->input('start_date'),
+                    'tanggalselesai' => $request->input('end_date'),
+                    'deskripsi' => $request->input('deskripsi'),
+                    'status' => 'Diproses',
+                    'bukti' => $request->file('bukti')->store('bukti', 'public'),
+                    'pengantar' => $request->file('pengantar')->store('pengantar', 'public'),
+                    'proposal' => $request->file('proposal')->store('proposal', 'public'),
+                ]);
                 foreach ($skills as $skill) {
                     SkillUser::create([
-                        'user_id' => $pengajuan->user_id,
+                        'user_id' => $user_id,
                         'skill_id' => $skill,
+                        'pengajuan_id' => $pengajuan->id
                     ]);
                 }
             }
-            // Alert
+
             Alert::success('Sukses', 'Data Pengajuan Berhasil Dikirim')->showConfirmButton();
-            // Display a success message using Sweet Alert
+
             return redirect()->back();
         } catch (\Exception $e) {
             Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
             return redirect()->back();
         }
+    }
+
+    public function updatebidang(Request $request, $id)
+    {
+        try {
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            if ($request->has('skill')) {
+                $request->validate([
+                    'skill' => 'array',
+                ]);
+
+                $pengajuan->skilluser()->delete();
+
+                $skills = $request->input('skill', []);
+                foreach ($skills as $skill) {
+                    SkillUser::create([
+                        'user_id' => $pengajuan->user_id,
+                        'skill_id' => $skill,
+                        'pengajuan_id' => $pengajuan->id
+                    ]);
+                }
+            }
+
+            $pengajuan->status = 'Diteruskan';
+            $pengajuan->save();
+
+            Alert::success('Sukses', 'Data Skill Pengajuan Berhasil Dikirim')->showConfirmButton();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back();
+        }
+    }
+
+    public function ditolakadmin(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'komentar' => 'required|string',
+            ]);
+
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            Storage::delete([$pengajuan->pengantar, $pengajuan->bukti]);
+
+            Anggota::truncate();
+
+            $pengajuan->update([
+                'pengantar' => null,
+                'bukti' => null,
+                'status' => 'Ditolak',
+                'komentar' => $request->input('komentar'),
+            ]);
+
+            Alert::success('Sukses', 'Pengajuan Magang Ditolak')->showConfirmButton();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back();
+        }
+    }
+
+    public function ditolakbidang(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'komentar' => 'required|string',
+            ]);
+
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            Storage::delete([$pengajuan->pengantar, $pengajuan->bukti]);
+
+            Anggota::truncate();
+
+            $pengajuan->update([
+                'pengantar' => null,
+                'bukti' => null,
+                'status' => 'Ditolak',
+                'komentar' => $request->input('komentar'),
+            ]);
+
+            Alert::success('Sukses', 'Pengajuan Magang Ditolak')->showConfirmButton();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back();
+        }
+    }
+
+    public function diterimabidang(Request $request, $id)
+    {
+        try {
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            $pengajuan->update([
+                'status' => 'Diterima',
+            ]);
+
+            Alert::success('Sukses', 'Pengajuan Magang Diterima')->showConfirmButton();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back();
+        }
+    }
+
+    public function diterimaadmin(Request $request, $id)
+    {
+        try {
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            $pengajuan->update([
+                'status' => 'Magang'
+            ]);
+
+            Alert::success('Sukses', 'Data Pengajuan Berhasil Diterima')->showConfirmButton();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+        }
+
+        return redirect()->back();
+    }
+
+    public function kesbangpol(Request $request)
+    {
+        try {
+            $request->validate([
+                'kesbangpol' => 'required|mimes:pdf|max:2048',
+                'id' => 'required|exists:pengajuan,id',
+            ]);
+
+            $id = $request->input('id');
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            if ($pengajuan->kesbangpol) {
+                Storage::disk('public')->delete($pengajuan->kesbangpol);
+            }
+
+            $kesbangpolFile = $request->file('kesbangpol')->store('kesbangpol', 'public');
+
+            $pengajuan->update(['kesbangpol' => $kesbangpolFile]);
+
+            Alert::success('Sukses', 'Data Kesbangpol Berhasil Dikirim')->showConfirmButton();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+        }
+
+        return redirect()->back();
+    }
+
+    public function laporan(Request $request)
+    {
+        try {
+            $request->validate([
+                'laporan' => 'required|mimes:pdf|max:2048',
+                'id' => 'required|exists:pengajuan,id',
+            ]);
+
+            $id = $request->input('id');
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            if ($pengajuan->laporan) {
+                Storage::disk('public')->delete($pengajuan->laporan);
+            }
+
+            $laporan = $request->file('laporan')->store('laporan', 'public');
+
+            $pengajuan->update(['laporan' => $laporan]);
+
+            Alert::success('Sukses', 'Data Laporan Akhir Berhasil Dikirim')->showConfirmButton();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+        }
+
+        return redirect()->back();
     }
 
     public function tambahanggota(Request $request)
@@ -74,10 +249,8 @@ class PengajuanController extends Controller
                 'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/|unique:anggota,nim',
             ]);
 
-            // Ambil user_id dari user saat ini
             $user_id = auth()->user()->id;
 
-            // Simpan anggota
             Anggota::create([
                 'user_id' => $user_id,
                 'nama' => $request->input('nama'),
@@ -101,10 +274,8 @@ class PengajuanController extends Controller
                 'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/|unique:anggota,nim,' . $id,
             ]);
 
-            // Ambil anggota berdasarkan ID
             $anggota = Anggota::findOrFail($id);
 
-            // Update data anggota
             $anggota->update([
                 'nama' => $request->input('nama'),
                 'nim' => $request->input('nim'),
@@ -122,11 +293,42 @@ class PengajuanController extends Controller
     public function deleteanggota($id)
     {
         try {
-            // Hapus anggota berdasarkan ID
             $anggota = Anggota::findOrFail($id);
             $anggota->delete();
 
             Alert::success('Berhasil', 'Anggota berhasil dihapus');
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back();
+        }
+    }
+
+    public function selesai(Request $request)
+    {
+        try {
+            $request->validate([
+                'suratmagang' => 'required|mimes:pdf|max:2048',
+                'id' => 'required|exists:pengajuan,id',
+            ]);
+
+            $id = $request->input('id');
+            $pengajuan = Pengajuan::findOrFail($id);
+
+            if ($pengajuan->suratmagang) {
+                Storage::disk('public')->delete($pengajuan->suratmagang);
+            }
+
+            $suratmagang = $request->file('suratmagang')->store('suratmagang', 'public');
+
+            $pengajuan->update([
+                'suratmagang' => $suratmagang,
+                'status' => 'Selesai'
+            ]);
+            Anggota::truncate();
+
+            Alert::success('Sukses', 'Magang Telah Diselesaikan')->showConfirmButton();
 
             return redirect()->back();
         } catch (\Exception $e) {

@@ -10,15 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
-    // Function Menambah Akun Mahasiswa
     public function store(Request $request, $id)
     {
         try {
             $user = User::find($id);
 
             if (!$user) {
-                // Jika pengguna dengan ID yang diberikan tidak ditemukan
-                // Tampilkan pesan kesalahan dan berikan respons yang sesuai
                 Alert::error('Error', 'Pengguna tidak ditemukan')->showConfirmButton();
                 return redirect()->back();
             }
@@ -35,7 +32,7 @@ class MahasiswaController extends Controller
             $photoPath = null;
             if ($request->hasFile('foto')) {
                 $foto = $request->file('foto');
-                $photoPath = $foto->store('mahasiswa'); // 'local' sesuai dengan nama penyimpanan yang telah Anda konfigurasi
+                $photoPath = $foto->store('mahasiswa');
             }
 
             $user->nama = $request->input('nama');
@@ -46,28 +43,21 @@ class MahasiswaController extends Controller
             $user->foto = $photoPath;
             $user->save();
 
-            // Tambahkan SweetAlert success message
             Alert::success('Sukses', 'Data Profil Berhasil Ditambahkan')->showConfirmButton();
 
             return redirect()->back();
         } catch (\Exception $e) {
-            // Tangani kesalahan dengan menampilkan pesan error
             Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-
-            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
             return redirect()->back();
         }
     }
 
-    // Function Update Data Mahasiswa
     public function update(Request $request, $id)
     {
         try {
             $user = User::find($id);
 
             if (!$user) {
-                // Jika pengguna dengan ID yang diberikan tidak ditemukan
-                // Tampilkan pesan kesalahan dan berikan respons yang sesuai
                 Alert::error('Error', 'Pengguna tidak ditemukan')->showConfirmButton();
                 return redirect()->back();
             }
@@ -87,9 +77,7 @@ class MahasiswaController extends Controller
             $user->prodi = $request->input('prodi');
             $user->telepon = $request->input('telepon');
 
-            // Update gambar jika ada unggahan gambar baru
             if ($request->hasFile('foto')) {
-                // Hapus gambar lama jika ada
                 if ($user->foto) {
                     Storage::delete($user->foto);
                 }
@@ -105,17 +93,13 @@ class MahasiswaController extends Controller
 
             return redirect()->back();
         } catch (\Exception $e) {
-            // Tangani kesalahan dengan menampilkan pesan error
             Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-
-            // Redirect atau berikan respons yang sesuai untuk menangani kesalahan
             return redirect()->back();
         }
     }
 
     public function verify(Request $request, $id)
     {
-
         $user = User::find($id);
         if ($user) {
             $user->verify = '1';

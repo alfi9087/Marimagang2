@@ -15,20 +15,23 @@ return new class extends Migration
     {
         Schema::create('pengajuan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('namaproyek');
-            $table->string('deskripsi');
-            $table->string('bukti');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('databidang_id')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('bukti')->nullable();
             $table->string('pengantar')->nullable();
             $table->string('proposal')->nullable();
             $table->string('kesbangpol')->nullable();
-            $table->date('tanggalmulai');
-            $table->date('tanggalselesai');
-            $table->enum('status', ['Diproses', 'Diteruskan', 'Ditolak', 'Diterima']);
+            $table->string('laporan')->nullable();
+            $table->string('suratmagang')->nullable();
+            $table->date('tanggalmulai')->nullable();
+            $table->date('tanggalselesai')->nullable();
+            $table->enum('status', ['Diproses', 'Diteruskan', 'Diterima', 'Ditolak', 'Magang', 'Selesai']);
             $table->string('komentar')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('databidang_id')->references('id')->on('databidang')->onDelete('cascade');
         });
     }
 

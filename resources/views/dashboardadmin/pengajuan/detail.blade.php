@@ -38,7 +38,6 @@
 
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
             <section id="content" class="container">
-                <!-- Begin .page-heading -->
                 <div class="page-heading">
                     <div class="media clearfix">
                         <div class="media-left pr30">
@@ -53,7 +52,7 @@
                         <div class="media-body va-m" style="margin-left: 25px;">
                             <h2 class="media-heading">{{ $pengajuan->user->nama }}</h2>
                             <p class="lead">Durasi Magang : ( {{ $pengajuan->tanggalmulai }} - {{ $pengajuan->tanggalselesai }} )</p>
-                            <a href="" class="btn btn-danger">Gmail</a> <!-- Tombol Gmail -->
+                            <a href="" class="btn btn-danger">Gmail</a>
                         </div>
                     </div>
                 </div>
@@ -68,8 +67,8 @@
                                 <span class="panel-title">Skill</span>
                             </div>
                             <div class="panel-body pb5">
-                                @foreach ($pengajuan->user->skilluser as $skilluser)
-                                <span class="label label-success mr5 mb10 ib lh15">{{ $skilluser->skill->nama }}</span>
+                                @foreach ($pengajuan->skilluser as $skill)
+                                <span class="label label-success mr5 mb10 ib lh15">{{ $skill->skill->nama }}</span>
                                 @endforeach
                             </div>
                         </div>
@@ -82,13 +81,12 @@
                             </div>
                             <div class="panel-body pb5">
                                 <h6>Experience</h6>
-                                <h4>{{ $pengajuan->namaproyek }}</h4>
                                 <p class="text-muted">{{ $pengajuan->deskripsi }}</p>
                                 <hr class="short br-lighter">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <a href="{{ asset('storage/' . $pengajuan->bukti) }}" target="_blank" class="btn btn-info btn-sm btn-block">
-                                            Lihat 
+                                            Lihat
                                         </a>
                                     </div>
                                     <div class="col-md-6">
@@ -108,9 +106,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#tab1" data-toggle="tab" onclick="activateTab('tab1')">Profil</a>
                                 </li>
+                                @if ($pengajuan->status !== 'Selesai')
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab2" data-toggle="tab" onclick="activateTab('tab2')">Team</a>
                                 </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab3" data-toggle="tab" onclick="activateTab('tab3')">Pengajuan</a>
                                 </li>
@@ -192,6 +192,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if ($pengajuan->status !== 'Selesai')
                                 <div id="tab2" class="tab-pane">
                                     @foreach ($pengajuan->user->anggota as $anggota)
                                     <div class="card mb-4">
@@ -217,8 +218,8 @@
                                     </div>
                                     @endforeach
                                 </div>
+                                @endif
                                 <div id="tab3" class="tab-pane">
-                                    <!-- Konten untuk tab 3 -->
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <div class="row">
@@ -274,6 +275,43 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> Surat Magang</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->suratmagang)
+                                                    <a href="{{ asset('storage/' . $pengajuan->suratmagang) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->suratmagang) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">Belum Ada File Surat Magang</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> Laporan Akhir</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->laporan)
+                                                    <a href="{{ asset('storage/' . $pengajuan->laporan) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->laporan) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">Belum Ada File Laporan Akhir</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

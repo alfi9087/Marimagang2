@@ -7,7 +7,6 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
-    //Memvalidasi dan Menyimpan Data Register
     public function store(Request $request)
     {
         $ValidatedData = $request->validate([

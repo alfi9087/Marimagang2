@@ -26,5 +26,12 @@ $(document).ready(function () {
         $("#tab3").addClass("active1");
         $("#tab3").removeClass("bg-light");
     });
+
+    $("#tab4").click(function () {
+        $(".tabs").removeClass("active1");
+        $(".tabs").addClass("bg-light");
+        $("#tab4").addClass("active1");
+        $("#tab4").removeClass("bg-light");
+    });
 })
 

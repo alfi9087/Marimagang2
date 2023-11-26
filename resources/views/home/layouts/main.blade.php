@@ -46,7 +46,6 @@
     <script src="{{ asset('assets/js/custompage.js') }}"></script>
 
     <script>
-        //according to loftblog tut
         $('.nav li:first').addClass('active');
 
         var showSection = function showSection(section, isAnimate) {

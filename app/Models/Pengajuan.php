@@ -11,13 +11,30 @@ class Pengajuan extends Model
 
     protected $table = 'pengajuan';
     protected $fillable = [
+        'user_id',
+        'databidang_id',
+        'deskripsi',
+        'bukti',
         'pengantar',
         'proposal',
+        'laporan',
+        'suratmagang',
         'kesbangpol',
         'tanggalmulai',
         'tanggalselesai',
-        'status'
+        'status',
+        'komentar'
     ];
+
+    public function skilluser()
+    {
+        return $this->hasMany(SkillUser::class, 'pengajuan_id');
+    }
+
+    public function databidang()
+    {
+        return $this->belongsTo(DataBidang::class, 'databidang_id');
+    }
 
     public function user()
     {

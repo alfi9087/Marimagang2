@@ -22,13 +22,30 @@
                                     <div class="fa fa-credit-card"></div> &nbsp;&nbsp; Lihat Data Anggota
                                 </div>
                             </a>
+                            @foreach ($pengajuan as $p)
+                            @if ($p->status == 'Diterima')
                             <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Surat Kesbangpol
+                                </div>
+                            </a>
+                            @elseif ($p->status == 'Magang')
+                            <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Laporan Akhir
+                                </div>
+                            </a>
+                            @else
+                            @endif
+                            @endforeach
+                            <a data-toggle="tab" href="#menu4" id="tab4" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
                                     <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Riwayat Pengajuan
                                 </div>
                             </a>
                         </div>
-                    </div> <!-- Page Content -->
+                    </div>
+
                     <div id="page-content-wrapper">
                         <div class="row pt-3" id="border-btm">
                             <div class="col-4">
@@ -55,6 +72,7 @@
                         </div>
                         <div class="row justify-content-center">
                         </div>
+
                         <div class="tab-content">
                             <div id="menu1" class="tab-pane in active">
                                 <div class="row justify-content-center">
@@ -89,7 +107,7 @@
                                                                 <div class="form-select">
                                                                     <label for="databidang">Pilih Bidang Kerja</label>
                                                                     <div class="select-group">
-                                                                        <select name="databidang" id="databidang">
+                                                                        <select name="databidang_id" id="databidang">
                                                                             <option value="" disabled selected hidden></option>
                                                                             @foreach ($databidang as $bidang)
                                                                             <option value="{{ $bidang->id }}">
@@ -114,11 +132,7 @@
                                                         </h3>
                                                         <fieldset>
                                                             <div class="form-row">
-                                                                <div class="form-group">
-                                                                    <label for="namaproyek">Nama Project:</label>
-                                                                    <input type="text" name="namaproyek" id="namaproyek" />
-                                                                </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group" style="width: 100%;">
                                                                     <label for="bukti">Bukti Project (pdf):</label>
                                                                     <input type="file" name="bukti" id="bukti" />
                                                                 </div>
@@ -221,7 +235,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <!-- Isi tabel di sini -->
                                                     @foreach ($user->anggota as $anggota)
                                                     <tr>
                                                         <td class="text-center">{{ $anggota->nama }}</td>
@@ -235,6 +248,7 @@
                                                             </button>
                                                         </td>
                                                     </tr>
+
                                                     <!-- Modal Edit Anggota -->
                                                     <div class="modal fade" id="edit-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -301,48 +315,227 @@
                                 </div>
                             </div>
 
+                            @foreach ($pengajuan as $p)
+                            @if ($p->status == 'Diterima')
                             <div id="menu3" class="tab-pane">
+                                <div class="row justify-content-center">
+                                    <div class="col-11">
+                                        <h4 class="mt-0 mb-2 text-center">UPLOAD SURAT KESBANGPOL</h4>
+                                        <div class="row justify-content-center">
+                                            <div class="container mt-0">
+                                                <form method="POST" action="{{ route('kesbangpol.submit') }}" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method("put")
+                                                    <input type="hidden" name="id" value="{{ $p->id }}">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="upload-box" id="kesbangpol-box">
+                                                                <p>Drag & Drop PDF</p>
+                                                                <br>
+                                                                <button type="button" class="btn btn-danger">Pilih File</button>
+                                                                <input type="file" id="kesbangpol" name="kesbangpol" accept=".pdf" style="display: none;">
+                                                            </div>
+                                                            <div id="kesbangpol-info"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-end mt-3">
+                                                        <div class="col-md-2">
+                                                            <button type="submit" id="submit-btn" class="btn btn-danger btn-block" style="display: none;">Kirim</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @elseif ($p->status == 'Magang')
+                            <div id="menu3" class="tab-pane">
+                                <div class="row justify-content-center">
+                                    <div class="col-11">
+                                        <h4 class="mt-0 mb-2 text-center">UPLOAD LAPORAN AKHIR</h4>
+                                        <div class="row justify-content-center">
+                                            <div class="container mt-0">
+                                                <form method="POST" action="{{ route('laporan.submit') }}" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method("put")
+                                                    <input type="hidden" name="id" value="{{ $p->id }}">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="upload-box" id="laporan-box">
+                                                                <p>Drag & Drop PDF</p>
+                                                                <br>
+                                                                <button type="button" class="btn btn-danger">Pilih File</button>
+                                                                <input type="file" id="laporan" name="laporan" accept=".pdf" style="display: none;">
+                                                            </div>
+                                                            <div id="laporan-info"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row justify-content-end mt-3">
+                                                        <div class="col-md-2">
+                                                            <button type="submit" id="submit-btn" class="btn btn-danger btn-block" style="display: none;">Kirim</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                            @endif
+                            @endforeach
+
+                            <div id="menu4" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
                                         <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN PKL</h4>
                                         <div class="row justify-content-center">
                                             <div class="scrolling-container">
                                                 @foreach ($pengajuan as $p)
-                                                <!-- Contoh beberapa kartu (cards) -->
-                                                <div class="card mb-3" style="width: 600px;"> <!-- Ganti 200px sesuai kebutuhan Anda -->
-                                                    <div class="card-header d-flex justify-content-between align-items-center">
-                                                        Permohonan Magang
-                                                        <!-- Tambahkan tulisan status di sini -->
-                                                        <span class="badge badge-success">{{ $p->status }}</span>
+
+                                                <div class="card mb-3" style="width: 600px;">
+                                                    <div class="card-header d-flex justify-content-between align-items-center toggle-card">
+                                                        <div>
+                                                            <b style="margin-right: 5px;">Permohonan Magang :</b>
+                                                            <span class="badge
+                                                                @if($p->status == 'Diproses') badge-warning
+                                                                @elseif($p->status == 'Diteruskan') badge-info
+                                                                @elseif($p->status == 'Diterima') badge-success
+                                                                @elseif($p->status == 'Ditolak') badge-danger
+                                                                @elseif($p->status == 'Magang') badge-primary
+                                                                @elseif($p->status == 'Selesai') badge-dark
+                                                                @endif">
+                                                                {{ $p->status }}
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#detail-{{ $p->id }}">
+                                                                <i class="fas fa-caret-down"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <blockquote class="blockquote mb-0">
-                                                            <p>Tanggal Mulai : {{ $p->tanggalmulai }}</p>
-                                                            <p>Tanggal Selesai : {{ $p->tanggalselesai }}</p>
-                                                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                                        </blockquote>
+
+                                                    <div id="detail-{{ $p->id }}" class="collapse card-body">
+                                                        <ul class="alignMe" style="list-style: none;">
+                                                            <li><b>Tanggal Mulai</b> {{ $p->tanggalmulai }}</li>
+                                                            <li><b>Tanggal Selesai</b> {{ $p->tanggalselesai }}</li>
+                                                            <li><b>Bidang</b> {{ $p->databidang->nama }}</li>
+                                                            <li>
+                                                                <b>Proposal</b>
+                                                                <a href="{{ asset('storage/'.$p->proposal) }}" target="_blank" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                                |
+                                                                <a href="{{ asset('storage/'.$p->proposal) }}" download class="text-danger">
+                                                                    <span style="margin-left: 5px;">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </span>
+                                                                    Download
+                                                                </a>
+                                                            </li>
+                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
+                                                            <li>
+                                                                <b>Kesbangpol</b>
+                                                                @if ($p->kesbangpol)
+                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" target="_blank" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                                |
+                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" download class="text-danger">
+                                                                    <span style="margin-left: 5px;">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </span>
+                                                                    Download
+                                                                </a>
+                                                                @else
+                                                                Belum Diupload
+                                                                @endif
+                                                            </li>
+                                                            <li>
+                                                                <b>Surat Magang</b>
+                                                                @if ($p->suratmagang)
+                                                                <a href="{{ asset('storage/'.$p->suratmagang) }}" target="_blank" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                                |
+                                                                <a href="{{ asset('storage/'.$p->suratmagang) }}" download class="text-danger">
+                                                                    <span style="margin-left: 5px;">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </span>
+                                                                    Download
+                                                                </a>
+                                                                @else
+                                                                Belum Diupload
+                                                                @endif
+                                                            </li>
+                                                            @endif
+                                                            @if ($p->status == 'Ditolak')
+                                                            <li>
+                                                                <b>Komentar</b>
+                                                                <a href="#" data-toggle="modal" data-target="#komentarModal{{ $p->id }}" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                            </li>
+                                                            @endif
+                                                        </ul>
                                                     </div>
+
+                                                    <!-- Komentar Modal -->
+                                                    <div class="modal fade" id="komentarModal{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Alasan Ditolak</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>{!! $p->komentar !!}</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
-                                                <!-- Tambahkan lebih banyak kartu sesuai kebutuhan -->
                                                 @endforeach
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 @endsection
 @push('script')
 <script>
     $(document).ready(function() {
-        // Select2 for#databidang
+
         $('#databidang').select2({
             width: '100%',
         });
@@ -350,13 +543,11 @@
             width: '100%',
         });
 
-        // Event listener for changing the#databidang
         $('#databidang').on('change', function() {
-            $('#skill').empty(); // Kosongkan pilihan keterampilan saat bidang berubah
+            $('#skill').empty();
             var databidang_id = $(this)
-                .val(); // Ambil nilai databidang_id dari select bidang yang berubah
+                .val();
             $.get("{{ url('pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
-
 
                 $("#skill").select2({
                     data: data.results,
@@ -366,4 +557,98 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('.toggle-card').click(function() {
+            var cardBody = $(this).siblings('.card-body');
+            cardBody.slideToggle();
+        });
+    });
+</script>
+
+<script>
+    const kesbangpolBox = document.getElementById('kesbangpol-box');
+    const kesbangpolInfo = document.getElementById('kesbangpol-info');
+
+    kesbangpolBox.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        kesbangpolBox.style.border = '2px dashed #007bff';
+    });
+
+    kesbangpolBox.addEventListener('dragleave', () => {
+        kesbangpolBox.style.border = '2px dashed #ccc';
+    });
+
+    kesbangpolBox.addEventListener('drop', (e) => {
+        e.preventDefault();
+        kesbangpolBox.style.border = '2px dashed #ccc';
+        const file = e.dataTransfer.files[0];
+        handleUploadedFile(file, kesbangpolInfo, 'kesbangpol');
+    });
+
+    kesbangpolBox.addEventListener('click', () => {
+        document.getElementById('kesbangpol').click();
+    });
+
+    document.getElementById('kesbangpol').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        handleUploadedFile(file, kesbangpolInfo, 'kesbangpol');
+    });
+
+    function handleUploadedFile(file, infoContainer, type) {
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (file.type === 'application/pdf') {
+            infoContainer.innerHTML = `<p><i class="fas fa-file-pdf pdf-icon"></i> ${file.name} <span class="remove-file" onclick="removeFile('${type}')">×</span></p>`;
+            submitBtn.style.display = 'block';
+        } else {
+            infoContainer.innerHTML = '<p>File Harus Berformat PDF.</p>';
+            submitBtn.style.display = 'none';
+        }
+    }
+</script>
+
+<script>
+    const laporanBox = document.getElementById('laporan-box');
+    const laporanInfo = document.getElementById('laporan-info');
+
+    laporanBox.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        laporanBox.style.border = '2px dashed #007bff';
+    });
+
+    laporanBox.addEventListener('dragleave', () => {
+        laporanBox.style.border = '2px dashed #ccc';
+    });
+
+    laporanBox.addEventListener('drop', (e) => {
+        e.preventDefault();
+        laporanBox.style.border = '2px dashed #ccc';
+        const file = e.dataTransfer.files[0];
+        handleUploadedFile(file, laporanInfo, 'laporan');
+    });
+
+    laporanBox.addEventListener('click', () => {
+        document.getElementById('laporan').click();
+    });
+
+    document.getElementById('laporan').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        handleUploadedFile(file, laporanInfo, 'laporan');
+    });
+
+    function handleUploadedFile(file, infoContainer, type) {
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (file.type === 'application/pdf') {
+            infoContainer.innerHTML = `<p><i class="fas fa-file-pdf pdf-icon"></i> ${file.name} <span class="remove-file" onclick="removeFile('${type}')">×</span></p>`;
+            submitBtn.style.display = 'block';
+        } else {
+            infoContainer.innerHTML = '<p>File Harus Berformat PDF.</p>';
+            submitBtn.style.display = 'none';
+        }
+    }
+</script>
+
 @endpush
