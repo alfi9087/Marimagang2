@@ -479,7 +479,7 @@
                                                                 @endif
                                                             </li>
                                                             @endif
-                                                            @if ($p->status == 'Ditolak')
+                                                            @if ($p->status == 'Diterima' || $p->status == 'Ditolak')
                                                             <li>
                                                                 <b>Komentar</b>
                                                                 <a href="#" data-toggle="modal" data-target="#komentarModal{{ $p->id }}" class="text-danger">
