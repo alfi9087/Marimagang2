@@ -78,7 +78,7 @@
                                             @endif
                                             <td>
                                                 <a href="/userdetailadmin/{{ $p->id }}">
-                                                    <button type="button" class="btn btn-sm btn-info">
+                                                    <button type="button" class="btn btn-xs btn-info">
                                                         <i class="fas fa-user-alt"></i> Profil
                                                     </button>
                                                 </a>
@@ -86,7 +86,7 @@
                                             <td><span class="badge badge-light">{{ $p->status }}</span></td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <button type="button" class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Actions
                                                     </button>
                                                     <div class="dropdown-menu">

@@ -73,17 +73,17 @@
                                             <td class="col-3"><span class="badge badge-warning">{{ $p->status }}</span></td>
                                             <td class="col-1">
                                                 <a href="/userdetailbidang/{{ $p->id }}">
-                                                    <button type="button" class="btn btn-sm btn-info">
+                                                    <button type="button" class="btn btn-xs btn-info">
                                                         <i class="fas fa-user-alt"></i> Profil
                                                     </button>
                                                 </a>
                                             </td>
                                             <td class="col-1">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-danger mr-1" data-toggle="modal" data-target="#ditolak{{ $p->id }}">
+                                                    <button type="button" class="btn btn-xs btn-danger mr-1" data-toggle="modal" data-target="#ditolak{{ $p->id }}">
                                                         Ditolak
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#diterima{{ $p->id }}">
+                                                    <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#diterima{{ $p->id }}">
                                                         Diterima
                                                     </button>
                                                 </div>

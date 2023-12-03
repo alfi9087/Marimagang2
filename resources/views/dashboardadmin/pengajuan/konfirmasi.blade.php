@@ -103,7 +103,7 @@
 
                                             <!-- Modal Diterima -->
                                             <div class="modal fade" id="diterimaadmin{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalCenterTitle">Konfirmasi Penerimaan Mahasiswa Magang</h5>
@@ -116,7 +116,18 @@
                                                             @method("put")
                                                             <div class="modal-body">
                                                                 <p style="font-size: 18px;">Apakah Anda yakin untuk menerima <strong>{{ $p->user->nama }}</strong> ini untuk magang di <strong>{{ $p->databidang->nama }}</strong>?</p>
-                                                                <br>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-3 col-form-label">Komentar</label>
+                                                                    <div class="col-sm-9">
+                                                                        <textarea id="my-editor" class="my-editor form-control @error('komentar') is-invalid @enderror" name="komentar" id="komentar" placeholder="Komentar">{{ old('komentar') }}</textarea>
+
+                                                                        @error('komentar')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
                                                                 <p style="font-size: 18px;"><strong>Note :</strong> Pastikan File Kesbangpol Sudah Diupload</p>
                                                             </div>
                                                             <div class="modal-footer">

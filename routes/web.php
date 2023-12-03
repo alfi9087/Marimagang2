@@ -33,7 +33,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [HomeController::class, 'home']);
 
 //Route Forms
-Route::get('/forms', [FormsController::class, 'form']);
+Route::get('/forms', [FormsController::class, 'form'])->name('forms');
 
 //Route Post Register
 Route::post('/register/submit', [RegisterController::class, 'store'])->name('register.submit');

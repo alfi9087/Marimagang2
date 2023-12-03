@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
-    protected function authenticate(Request $request)
+    public function authenticate(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -18,31 +20,34 @@ class LoginController extends Controller
 
         try {
             if (Auth::guard('web')->attempt($credentials)) {
+                $user = Auth::user();
+
+                if ($user->verify == 0) {
+                    // User is not verified, redirect to notification page
+                    return redirect('/notif');
+                }
+
                 $request->session()->regenerate();
-                $mahasiswaId = Auth::user()->id;
+                $mahasiswaId = $user->id;
                 return redirect('/mahasiswa/' . $mahasiswaId);
             }
-        } catch (\Illuminate\Auth\AuthenticationException $e) {
-        }
 
-        try {
             if (Auth::guard('admin')->attempt($credentials)) {
                 $request->session()->regenerate();
                 return redirect('/dashboard');
             }
-        } catch (\Illuminate\Auth\AuthenticationException $e) {
-        }
 
-        try {
             if (Auth::guard('bidang')->attempt($credentials)) {
                 $request->session()->regenerate();
                 return redirect('/dashboardbidang');
             }
-        } catch (\Illuminate\Auth\AuthenticationException $e) {
+        } catch (Exception $e) {
+            Log::info($e->getMessage());
         }
 
         return back()->with('loginError', 'Login Gagal! Anda Belum Registrasi');
     }
+
 
     public function logout(Request $request)
     {

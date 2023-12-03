@@ -71,7 +71,7 @@
                                             <td><span class="badge badge-warning">{{ $p->status }}</span></td>
                                             <td>
                                                 <a href="/userdetailadmin/{{ $p->id }}">
-                                                    <button type="button" class="btn btn-sm btn-info">
+                                                    <button type="button" class="btn btn-xs btn-info">
                                                         <i class="fas fa-user-alt"></i> Profil
                                                     </button>
                                                 </a>

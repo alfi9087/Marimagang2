@@ -173,10 +173,15 @@ class PengajuanController extends Controller
     public function diterimaadmin(Request $request, $id)
     {
         try {
+            $request->validate([
+                'komentar' => 'required|string',
+            ]);
+            
             $pengajuan = Pengajuan::findOrFail($id);
 
             $pengajuan->update([
-                'status' => 'Magang'
+                'status' => 'Magang',
+                'komentar' => $request->input('komentar'),
             ]);
 
             Alert::success('Sukses', 'Data Pengajuan Berhasil Diterima')->showConfirmButton();
