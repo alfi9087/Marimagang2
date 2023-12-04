@@ -16,6 +16,42 @@ class DashboardAdminController extends Controller
     {
         return view('dashboardadmin.index', [
             'title' => 'Home',
+            'sekretariat' => DB::table('pengajuan')
+                ->join('databidang', 'pengajuan.databidang_id', '=', 'databidang.id')
+                ->where('databidang.nama', 'LIKE', '%sekretariat%')
+                ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+                ->count(),
+
+            'aptika' => DB::table('pengajuan')
+                ->join('databidang', 'pengajuan.databidang_id', '=', 'databidang.id')
+                ->where('databidang.nama', 'LIKE', '%aptika%')
+                ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+                ->count(),
+
+            'statistik' => DB::table('pengajuan')
+                ->join('databidang', 'pengajuan.databidang_id', '=', 'databidang.id')
+                ->where('databidang.nama', 'LIKE', '%statistik%')
+                ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+                ->count(),
+
+            'infrastruktur' => DB::table('pengajuan')
+                ->join('databidang', 'pengajuan.databidang_id', '=', 'databidang.id')
+                ->where('databidang.nama', 'LIKE', '%infrastruktur%')
+                ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+                ->count(),
+
+            'komunikasi' => DB::table('pengajuan')
+                ->join('databidang', 'pengajuan.databidang_id', '=', 'databidang.id')
+                ->where('databidang.nama', 'LIKE', '%komunikasi%')
+                ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+                ->count(),
+
+            'diproses' => DB::table('pengajuan')->where('status', 'Diproses')->count(),
+            'diteruskan' => DB::table('pengajuan')->where('status', 'Diteruskan')->count(),
+            'diterima' => DB::table('pengajuan')->where('status', 'Diterima')->count(),
+            'ditolak' => DB::table('pengajuan')->where('status', 'Ditolak')->count(),
+            'magang' => DB::table('pengajuan')->where('status', 'Magang')->count(),
+            'selesai' => DB::table('pengajuan')->where('status', 'Selesai')->count(),
         ]);
     }
 
