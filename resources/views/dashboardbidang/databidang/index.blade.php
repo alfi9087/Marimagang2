@@ -151,7 +151,7 @@
                     @foreach ($databidang as $d)
                     <div class="col-md-4">
                         <div class="card card-post card-round" style="border-radius: 10px;">
-                            <img class="card-img-top" src="{{ asset('storage/' . $d->thumbnail) }}" alt="Card image cap" style="width: 100%; height: 250px;">
+                            <img class="card-img-top" src="{{ asset('storage/' . $d->thumbnail) }}" alt="Card image cap" style="width: 100%; height: 210px;">
                             <div class="card-body">
                                 <div class="separator-solid"></div>
                                 <h3 class="card-title">

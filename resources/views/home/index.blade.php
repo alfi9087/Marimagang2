@@ -98,7 +98,7 @@
             <div class="col-lg-4">
                 <div class="meeting-item">
                     <div class="thumb">
-                        <a href="/homedetail/{{ $d->id }}"><img src="{{ asset('storage/' . $d->thumbnail) }}" alt="New Lecturer Meeting" style="width: 100%; height: 300px;"></a>
+                        <a href="/homedetail/{{ $d->id }}"><img src="{{ asset('storage/' . $d->thumbnail) }}" alt="New Lecturer Meeting" style="width: 100%; height: 250px;"></a>
                     </div>
                     <div class="down-content">
                         <a href="/homedetail/{{ $d->id }}">
