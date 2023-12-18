@@ -28,6 +28,7 @@ return new class extends Migration
             $table->date('tanggalselesai')->nullable();
             $table->enum('status', ['Diproses', 'Diteruskan', 'Diterima', 'Ditolak', 'Magang', 'Selesai']);
             $table->string('komentar')->nullable();
+            $table->string('dokumentasi');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

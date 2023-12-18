@@ -17,7 +17,8 @@ class HomeController extends Controller
             'jumlahuser' => DB::table('users')->where('verify', 1)->count(),
             'jumlahdatabidang' => DB::table('databidang')->count(),
             'jumlahpengajuan' => DB::table('pengajuan')->count(),
-            'jumlahadmin' => DB::table('admins')->count()
+            'jumlahmagang' => DB::table('pengajuan')->where('status', 'Magang')->count(),
+            'pengajuan' => DB::table('pengajuan')->get()
         ]);
     }
 

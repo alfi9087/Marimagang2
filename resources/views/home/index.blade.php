@@ -227,8 +227,8 @@
                             </div>
                             <div class="col-12">
                                 <div class="count-area-content">
-                                    <div class="count-digit">{{ $jumlahadmin }}</div>
-                                    <div class="count-title">Jumlah Admin Mari Magang</div>
+                                    <div class="count-digit">{{ $jumlahmagang }}</div>
+                                    <div class="count-title">Jumlah Peserta Sedang Magang</div>
                                 </div>
                             </div>
                         </div>

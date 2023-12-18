@@ -8,6 +8,7 @@ use App\Models\DataBidang;
 use App\Models\Bidang;
 use App\Models\Pengajuan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class DashboardBidangController extends Controller
 {
@@ -55,11 +56,12 @@ class DashboardBidangController extends Controller
         ]);
     }
 
-    public function databidang()
+    public function databidang(Request $request)
     {
+        $bidang = Session::get('id_bidang');
         return view('dashboardbidang.databidang.index', [
             'title' => 'Home',
-            'databidang' => DB::table('databidang')->get()
+            'databidang' => DB::table('databidang')->where('id', $bidang)->get()
         ]);
     }
 
@@ -86,8 +88,10 @@ class DashboardBidangController extends Controller
 
     public function pengajuan()
     {
+        $bidang = Session::get('id_bidang');
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
             ->where('pengajuan.status', 'Diteruskan')
+            ->where('pengajuan.databidang_id', $bidang)
             ->get();
 
         return view('dashboardbidang.pengajuan.index', [

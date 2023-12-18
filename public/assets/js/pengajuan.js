@@ -33,5 +33,12 @@ $(document).ready(function () {
         $("#tab4").addClass("active1");
         $("#tab4").removeClass("bg-light");
     });
+
+    $("#tab5").click(function () {
+        $(".tabs").removeClass("active1");
+        $(".tabs").addClass("bg-light");
+        $("#tab5").addClass("active1");
+        $("#tab5").removeClass("bg-light");
+    });
 })
 

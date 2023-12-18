@@ -19,20 +19,20 @@
                             </a>
                             <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-credit-card"></div> &nbsp;&nbsp; Lihat Data Anggota
+                                    <div class="fa fa-users"></div> &nbsp;&nbsp; Lihat Data Anggota
                                 </div>
                             </a>
                             @foreach ($pengajuan as $p)
                             @if ($p->status == 'Diterima')
                             <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Surat Kesbangpol
+                                    <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Surat Kesbangpol
                                 </div>
                             </a>
                             @elseif ($p->status == 'Magang')
                             <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Laporan Akhir
+                                    <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Laporan Akhir
                                 </div>
                             </a>
                             @else
@@ -40,7 +40,12 @@
                             @endforeach
                             <a data-toggle="tab" href="#menu4" id="tab4" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-qrcode"></div> &nbsp;&nbsp;&nbsp; Riwayat Pengajuan
+                                    <div class="fa fa-history"></div> &nbsp;&nbsp;&nbsp; Riwayat Pengajuan
+                                </div>
+                            </a>
+                            <a data-toggle="tab" href="#menu5" id="tab5" class="tabs list-group-item bg-light">
+                                <div class="list-div my-2">
+                                    <div class="fa fa-clipboard"></div> &nbsp;&nbsp;&nbsp; Survei Kepuasan
                                 </div>
                             </a>
                         </div>
@@ -128,7 +133,7 @@
                                                         </fieldset>
 
                                                         <h3>
-                                                            Project Sebelumnya
+                                                            Portofolio
                                                         </h3>
                                                         <fieldset>
                                                             <div class="form-row">
@@ -360,8 +365,15 @@
                                                     @csrf
                                                     @method("put")
                                                     <input type="hidden" name="id" value="{{ $p->id }}">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <label for="dokumentasi" class="form-label">Upload Dokumentasi (image):</label>
+                                                            <input type="file" id="dokumentasi" name="dokumentasi" accept="image/*" class="form-control">
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
+                                                            <label for="laporan" class="form-label">Upload Laporan Akhir (.pdf):</label>
                                                             <div class="upload-box" id="laporan-box">
                                                                 <p>Drag & Drop PDF</p>
                                                                 <br>
@@ -521,6 +533,20 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="menu5" class="tab-pane" style="padding: 20px;">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-11">
+                                            <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); padding: 30px; text-align: center; animation: fadeInUp 0.8s ease-in-out;">
+                                                <h4 style="color: black; font-size: 24px; margin-bottom: 20px;">SURVEI KEPUASAN MASYARAKAT</h4>
+                                                <a href="https://sukma.jatimprov.go.id/fe/survey?idUser=1992" style="display: inline-block; padding: 15px 30px; font-size: 18px; text-decoration: none; color: #ffffff; background-color: #DC143C; border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#DC143C'" onmouseout="this.style.backgroundColor='#DC143C'">Isi Survei</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

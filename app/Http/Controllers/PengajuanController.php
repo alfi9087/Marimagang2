@@ -176,7 +176,7 @@ class PengajuanController extends Controller
             $request->validate([
                 'komentar' => 'required|string',
             ]);
-            
+
             $pengajuan = Pengajuan::findOrFail($id);
 
             $pengajuan->update([
@@ -225,6 +225,7 @@ class PengajuanController extends Controller
             $request->validate([
                 'laporan' => 'required|mimes:pdf|max:2048',
                 'id' => 'required|exists:pengajuan,id',
+                'dokumentasi' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
             $id = $request->input('id');
@@ -234,9 +235,17 @@ class PengajuanController extends Controller
                 Storage::disk('public')->delete($pengajuan->laporan);
             }
 
-            $laporan = $request->file('laporan')->store('laporan', 'public');
+            if ($pengajuan->dokumentasi) {
+                Storage::disk('public')->delete($pengajuan->dokumentasi);
+            }
 
-            $pengajuan->update(['laporan' => $laporan]);
+            $laporan = $request->file('laporan')->store('laporan', 'public');
+            $dokumentasi = $request->file('dokumentasi')->store('dokumentasi', 'public');
+
+            $pengajuan->update([
+                'laporan' => $laporan,
+                'dokumentasi' => $dokumentasi
+            ]);
 
             Alert::success('Sukses', 'Data Laporan Akhir Berhasil Dikirim')->showConfirmButton();
         } catch (\Exception $e) {

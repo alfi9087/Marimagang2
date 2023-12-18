@@ -8,6 +8,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -34,11 +35,18 @@ class LoginController extends Controller
 
             if (Auth::guard('admin')->attempt($credentials)) {
                 $request->session()->regenerate();
+                Session::put('level', 'admin');
                 return redirect('/dashboard');
             }
 
             if (Auth::guard('bidang')->attempt($credentials)) {
                 $request->session()->regenerate();
+                $dtbidag = DB::table('bidangs')->where('email', $credentials['email'])->get();
+                foreach ($dtbidag as $d){
+                    $id_b = $d->id_bidang;
+                }
+                Session::put('id_bidang', $id_b);
+                Session::put('level', 'bidang');
                 return redirect('/dashboardbidang');
             }
         } catch (Exception $e) {

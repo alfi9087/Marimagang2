@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('bidangs', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_bidang');
             $table->string('nama');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
