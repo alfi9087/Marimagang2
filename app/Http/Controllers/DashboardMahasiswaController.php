@@ -34,12 +34,12 @@ class DashboardMahasiswaController extends Controller
         $user = User::with('anggota')->findOrFail($id);
         $pengajuan = Pengajuan::where('user_id', $user->id)->get();
 
-        if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Diterima' && $pengajuan[0]->kesbangpol === null) {
-            Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
-        }
-
-        if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->laporan === null) {
+        if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol !== null && $pengajuan[0]->laporan === null) {
             Alert::info('Anda Dinyatakan Magang', 'Silahkan Upload Laporan Akhir Selama Magang')->showConfirmButton();
+        } elseif ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol === null) {
+            Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
+        } else{
+            Alert::info('Berhasil Upload Semua Berkas', 'Tunggu Verifikasi Admin')->showConfirmButton();
         }
 
         return view('mahasiswa.pengajuan', [

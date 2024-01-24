@@ -24,7 +24,8 @@ class Pengajuan extends Model
         'tanggalselesai',
         'status',
         'komentar',
-        'dokumentasi'
+        'dokumentasi',
+        'kesediaan'
     ];
 
     public function skilluser()

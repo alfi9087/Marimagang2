@@ -132,14 +132,10 @@ class PengajuanController extends Controller
 
             $pengajuan = Pengajuan::findOrFail($id);
 
-            Storage::delete([$pengajuan->pengantar, $pengajuan->bukti]);
-
             Anggota::truncate();
 
             $pengajuan->update([
-                'pengantar' => null,
-                'bukti' => null,
-                'status' => 'Ditolak',
+                'status' => 'Diproses',
                 'komentar' => $request->input('komentar'),
             ]);
 
@@ -179,9 +175,16 @@ class PengajuanController extends Controller
 
             $pengajuan = Pengajuan::findOrFail($id);
 
+            if ($pengajuan->suratmagang) {
+                Storage::disk('public')->delete($pengajuan->suratmagang);
+            }
+
+            $kesediaan = $request->file('kesediaan')->store('kesediaan', 'public');
+
             $pengajuan->update([
                 'status' => 'Magang',
                 'komentar' => $request->input('komentar'),
+                'kesediaan' => $kesediaan
             ]);
 
             Alert::success('Sukses', 'Data Pengajuan Berhasil Diterima')->showConfirmButton();

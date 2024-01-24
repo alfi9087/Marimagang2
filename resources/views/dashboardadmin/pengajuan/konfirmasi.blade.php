@@ -127,8 +127,12 @@
                                                                         </div>
                                                                         @enderror
                                                                     </div>
+                                                                    <div class="form-group">
+                                                                        <label for="suratmagang">Upload Surat Rekomendasi Kesediaan PKL (PDF)</label>
+                                                                        <input type="file" class="form-control" id="kesediaan" name="kesediaan" accept=".pdf">
+                                                                    </div>
                                                                 </div>
-                                                                <p style="font-size: 18px;"><strong>Note :</strong> Pastikan File Kesbangpol Sudah Diupload</p>
+                                                            
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
