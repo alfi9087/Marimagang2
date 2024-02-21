@@ -10,6 +10,8 @@ use App\Models\Pengajuan;
 use App\Models\Anggota;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class DashboardBidangController extends Controller
 {
@@ -119,5 +121,53 @@ class DashboardBidangController extends Controller
             'bidang' => $bidang,
             'pengajuan' => $pengajuan,
         ]);
+    }
+
+    public function magangbidang($id)
+    {
+
+        $databidangId = DataBidang::where('bidang_id', $id)->value('id');
+
+        if (!$databidangId) {
+            abort(404, 'DataBidang tidak ditemukan');
+        }
+
+        $bidang = Bidang::findOrFail($id);
+
+        $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
+            ->where('pengajuan.databidang_id', $databidangId)
+            ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
+            ->orderBy('pengajuan.status', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('dashboardbidang.pengajuan.magang', [
+            'title' => 'Pengajuan',
+            'bidang' => $bidang,
+            'pengajuan' => $pengajuan,
+        ]);
+    }
+
+    public function pdfbidang($id)
+    {
+        $databidangId = DataBidang::where('bidang_id', $id)->value('id');
+
+        if (!$databidangId) {
+            abort(404, 'DataBidang tidak ditemukan');
+        }
+
+        $bidang = Bidang::findOrFail($id);
+        $pengajuan = Pengajuan::whereIn('status', ['Magang', 'Selesai'])
+            ->orderBy('status', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('dashboardbidang.pengajuan.pdf', compact('pengajuan')));
+        $pdf->setPaper('A4', 'landscape');
+
+        $pdf->render();
+
+        return $pdf->stream('pengajuan.pdf');
     }
 }

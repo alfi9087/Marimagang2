@@ -74,7 +74,7 @@
                                             <td class="col-1">
                                                 <a href="/userdetailbidang/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
-                                                        <i class="fas fa-user-alt"></i> Profil
+                                                        Profil
                                                     </button>
                                                 </a>
                                             </td>

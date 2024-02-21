@@ -72,7 +72,7 @@
                                             <td>
                                                 <a href="/userdetailadmin/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
-                                                        <i class="fas fa-user-alt"></i> Profil
+                                                        Profil
                                                     </button>
                                                 </a>
                                             </td>

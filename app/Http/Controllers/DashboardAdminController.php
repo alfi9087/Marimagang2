@@ -10,6 +10,8 @@ use App\Models\Pengajuan;
 use App\Models\SkillUser;
 use App\Models\Anggota;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class DashboardAdminController extends Controller
 {
@@ -85,7 +87,6 @@ class DashboardAdminController extends Controller
 
     public function pengajuan()
     {
-
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
             ->where('pengajuan.status', 'Diproses')->orderBy('created_at', 'desc')->get();
 
@@ -124,7 +125,9 @@ class DashboardAdminController extends Controller
     {
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
             ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
-            ->orderBy('created_at', 'desc')->get();
+            ->orderBy('pengajuan.status', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('dashboardadmin.pengajuan.magang', [
             'title' => 'Pengajuan',
@@ -137,5 +140,21 @@ class DashboardAdminController extends Controller
         $skill = DB::table('skill')->select('id', 'nama as text')->where('databidang_id', $databidang_id)->get();
         $data = ['results' => $skill];
         return $data;
+    }
+
+    public function pdfadmin()
+    {
+        $pengajuan = Pengajuan::whereIn('status', ['Magang', 'Selesai'])
+            ->orderBy('status', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('dashboardadmin.pengajuan.pdf', compact('pengajuan')));
+        $pdf->setPaper('A4', 'landscape');
+
+        $pdf->render();
+
+        return $pdf->stream('pengajuan.pdf');
     }
 }

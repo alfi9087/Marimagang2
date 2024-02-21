@@ -1,4 +1,4 @@
-@extends('dashboardadmin.layouts.main')
+@extends('dashboardbidang.layouts.main')
 
 @section('content')
 <div class="main-panel">
@@ -32,7 +32,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">Data Magang</h4>
-                                <a href="/pdfadmin" class="btn btn-sm btn-danger" style="color: white; text-decoration: none;"><i class="fa fa-download"></i> Cetak ke PDF</a>
+                                <a href="/pdfbidang/{{ $bidang->id }}" class="btn btn-sm btn-danger" style="color: white; text-decoration: none;"><i class="fa fa-download"></i> Cetak ke PDF</a>
                             </div>
                         </div>
 

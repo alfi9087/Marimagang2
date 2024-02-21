@@ -126,3 +126,10 @@ Route::put('/diterimabidang/{id}', [PengajuanController::class, 'diterimabidang'
 Route::post('/tambahanggota', [PengajuanController::class, 'tambahanggota'])->name('tambah.anggota')->middleware('auth:web');
 Route::put('/editanggota/{id}', [PengajuanController::class, 'editanggota'])->name('edit.anggota')->middleware('auth:web');
 Route::delete('/hapusanggota/{id}', [PengajuanController::class, 'deleteanggota'])->name('delete.anggota')->middleware('auth:web');
+
+Route::get('/pdfadmin', [DashboardAdminController::class, 'pdfadmin'])->name('pdfadmin')->middleware('auth:admin');
+Route::get('/pdfbidang/{id}', [DashboardBidangController::class, 'pdfbidang'])->name('pdfbidang')->middleware('auth:bidang');
+
+Route::get('/magangbidang/{id}', [DashboardBidangController::class, 'magangbidang'])->middleware('auth:bidang');
+
+

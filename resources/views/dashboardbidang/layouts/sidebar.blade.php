@@ -79,6 +79,22 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#charts">
+                        <i class="far fa-chart-bar"></i>
+                        <p>Data Magang</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="charts">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="/magangbidang/{{ $bidang->id }}">
+                                    <span class="sub-item">Data Magang</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="mx-4 mt-2">
                     <a href="/logout" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
                 </li>
