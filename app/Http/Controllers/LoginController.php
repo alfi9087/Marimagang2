@@ -24,7 +24,6 @@ class LoginController extends Controller
                 $user = Auth::user();
 
                 if ($user->verify == 0) {
-                    // User is not verified, redirect to notification page
                     return redirect('/notif');
                 }
 
@@ -40,17 +39,16 @@ class LoginController extends Controller
             }
 
             if (Auth::guard('bidang')->attempt($credentials)) {
+
+                $bidang = Auth::guard('bidang')->user();
+
                 $request->session()->regenerate();
-                $dtbidag = DB::table('bidangs')->where('email', $credentials['email'])->get();
-                foreach ($dtbidag as $d){
-                    $id_b = $d->id_bidang;
-                }
-                Session::put('id_bidang', $id_b);
                 Session::put('level', 'bidang');
-                return redirect('/dashboardbidang');
+                $bidang = $bidang->id;
+                return redirect('/dashboardbidang/' . $bidang);
             }
         } catch (Exception $e) {
-            Log::info($e->getMessage());
+            Log::error('Exception during login:', ['message' => $e->getMessage()]);
         }
 
         return back()->with('loginError', 'Login Gagal! Anda Belum Registrasi');

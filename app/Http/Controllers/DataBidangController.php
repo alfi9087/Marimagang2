@@ -15,6 +15,7 @@ class DataBidangController extends Controller
     {
         try {
             $validatedData = $request->validate([
+                'bidang_id' => 'required|exists:bidangs,id',
                 'nama' => 'required|string|max:255',
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -26,6 +27,7 @@ class DataBidangController extends Controller
             $photoPath = $request->file('photo')->store('bidang/photos');
 
             $databidang = new DataBidang;
+            $databidang->bidang_id = $validatedData['bidang_id'];
             $databidang->nama = $validatedData['nama'];
             $databidang->thumbnail = $thumbnailPath;
             $databidang->photo = $photoPath;
@@ -93,6 +95,7 @@ class DataBidangController extends Controller
             }
 
             $databidang->delete();
+            $databidang = null;
 
             toast('Data Bidang Berhasil Dihapus', 'success');
 

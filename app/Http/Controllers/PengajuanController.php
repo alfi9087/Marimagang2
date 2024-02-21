@@ -42,6 +42,9 @@ class PengajuanController extends Controller
                     'pengantar' => $request->file('pengantar')->store('pengantar', 'public'),
                     'proposal' => $request->file('proposal')->store('proposal', 'public'),
                 ]);
+
+                session(['pengajuan_id' => $pengajuan->id]);
+
                 foreach ($skills as $skill) {
                     SkillUser::create([
                         'user_id' => $user_id,
@@ -64,6 +67,8 @@ class PengajuanController extends Controller
     {
         try {
             $pengajuan = Pengajuan::findOrFail($id);
+
+            $pengajuan->databidang_id = $request->input('databidang');
 
             if ($request->has('skill')) {
                 $request->validate([
@@ -103,13 +108,7 @@ class PengajuanController extends Controller
 
             $pengajuan = Pengajuan::findOrFail($id);
 
-            Storage::delete([$pengajuan->pengantar, $pengajuan->bukti]);
-
-            Anggota::truncate();
-
             $pengajuan->update([
-                'pengantar' => null,
-                'bukti' => null,
                 'status' => 'Ditolak',
                 'komentar' => $request->input('komentar'),
             ]);
@@ -131,8 +130,6 @@ class PengajuanController extends Controller
             ]);
 
             $pengajuan = Pengajuan::findOrFail($id);
-
-            Anggota::truncate();
 
             $pengajuan->update([
                 'status' => 'Diproses',
@@ -263,13 +260,16 @@ class PengajuanController extends Controller
         try {
             $validatedData = $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
-                'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/|unique:anggota,nim',
+                'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/',
             ]);
 
             $user_id = auth()->user()->id;
 
+            $pengajuan_id = session('pengajuan_id');
+
             Anggota::create([
                 'user_id' => $user_id,
+                'pengajuan_id' => $pengajuan_id,
                 'nama' => $request->input('nama'),
                 'nim' => $request->input('nim'),
             ]);
@@ -333,17 +333,12 @@ class PengajuanController extends Controller
             $id = $request->input('id');
             $pengajuan = Pengajuan::findOrFail($id);
 
-            if ($pengajuan->suratmagang) {
-                Storage::disk('public')->delete($pengajuan->suratmagang);
-            }
-
             $suratmagang = $request->file('suratmagang')->store('suratmagang', 'public');
 
             $pengajuan->update([
                 'suratmagang' => $suratmagang,
                 'status' => 'Selesai'
             ]);
-            Anggota::truncate();
 
             Alert::success('Sukses', 'Magang Telah Diselesaikan')->showConfirmButton();
 

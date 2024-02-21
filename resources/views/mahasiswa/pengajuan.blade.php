@@ -244,7 +244,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($user->anggota as $anggota)
+                                                    @foreach ($anggota as $anggota)
                                                     <tr>
                                                         <td class="text-center">{{ $anggota->nama }}</td>
                                                         <td class="text-center">{{ $anggota->nim }}</td>
@@ -482,7 +482,23 @@
                                                             <li><b>Tanggal Selesai</b> {{ $p->tanggalselesai }}</li>
                                                             <li><b>Bidang</b> {{ $p->databidang->nama }}</li>
                                                             <li>
-                                                                <b>Proposal</b>
+                                                                <b>Surat Pengantar Pendidikan</b>
+                                                                <a href="{{ asset('storage/'.$p->pengantar) }}" target="_blank" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                                |
+                                                                <a href="{{ asset('storage/'.$p->pengantar) }}" download class="text-danger">
+                                                                    <span style="margin-left: 5px;">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </span>
+                                                                    Download
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <b>Proposal Magang</b>
                                                                 <a href="{{ asset('storage/'.$p->proposal) }}" target="_blank" class="text-danger">
                                                                     <span style="margin-right: 5px;">
                                                                         <i class="fas fa-eye"></i>
@@ -497,6 +513,7 @@
                                                                     Download
                                                                 </a>
                                                             </li>
+                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
                                                             <li>
                                                                 <b>Surat Rekomendasi Magang</b>
                                                                 <a href="{{ asset('storage/'.$p->kesediaan) }}" target="_blank" class="text-danger">
@@ -513,7 +530,6 @@
                                                                     Download
                                                                 </a>
                                                             </li>
-                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
                                                             <li>
                                                                 <b>Kesbangpol</b>
                                                                 @if ($p->kesbangpol)

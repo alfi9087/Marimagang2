@@ -9,7 +9,7 @@
                 <h4 class="page-title">Kelola Konten</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboard">
+                        <a href="/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -34,6 +34,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">Kelola Bidang</h4>
+                                @if($databidang->isEmpty())
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#add">
                                     <button class="btn btn-danger">
                                         <span class="btn-label">
@@ -42,6 +43,7 @@
                                         Tambah Bidang
                                     </button>
                                 </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -59,6 +61,7 @@
 
                             <form method="POST" action="{{ route('databidang.submit') }}" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="bidang_id" value="{{ $bidang->id }}">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Bidang</label>
                                     <div class="col-sm-9">

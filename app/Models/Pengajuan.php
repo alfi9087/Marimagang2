@@ -42,4 +42,9 @@ class Pengajuan extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class, 'pengajuan_id');
+    }
 }

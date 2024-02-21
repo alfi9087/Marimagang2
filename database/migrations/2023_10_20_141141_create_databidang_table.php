@@ -15,12 +15,15 @@ return new class extends Migration
     {
         Schema::create('databidang', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('bidang_id');
             $table->string('nama');
             $table->string('thumbnail')->nullable();
             $table->string('photo')->nullable();
             $table->string('deskripsi')->nullable();
             $table->enum('status', ['Buka', 'Tutup']);
             $table->timestamps();
+
+            $table->foreign('bidang_id')->references('id')->on('bidangs')->onDelete('cascade');
         });
     }
 

@@ -194,7 +194,7 @@
                                 </div>
                                 @if ($pengajuan->status !== 'Selesai')
                                 <div id="tab2" class="tab-pane">
-                                    @foreach ($pengajuan->user->anggota as $anggota)
+                                    @foreach ($anggota as $anggota)
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <div class="row">

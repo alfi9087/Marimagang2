@@ -1,7 +1,7 @@
 <div class="main-header">
     <div class="logo-header" data-background-color="red">
 
-        <a href="/dashboardbidang" class="logo" style="color: white;">
+        <a href="/dashboardbidang/{{ $bidang->id }}" class="logo" style="color: white;">
             Mari Magang
         </a>
 
@@ -43,23 +43,23 @@
                 <li class="nav-item dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="../assets/images/admin/profile.png" alt="..." class="avatar-img rounded-circle">
+                            <img src="../assets/images/admin/profile.jpg" alt="..." class="avatar-img rounded-circle">
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
                         <div class="dropdown-user-scroll scrollbar-outer">
                             <li>
                                 <div class="user-box">
-                                    <div class="avatar-lg"><img src="../assets/images/admin/profile.png" alt="image profile" class="avatar-img rounded"></div>
+                                    <div class="avatar-lg"><img src="../assets/images/admin/profile.jpeg" alt="image profile" class="avatar-img rounded"></div>
                                     <div class="u-text">
-                                        <h4>Bidang</h4>
+                                        <h4>Bidang {{ $bidang->nama }}</h4>
                                         <p class="text-muted">Mari Magang</p>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/bidang">Akun Bidang</a>
+                                <a class="dropdown-item" href="/bidang/{{ $bidang->id }}">Kelola Akun</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout">Logout</a>
                             </li>

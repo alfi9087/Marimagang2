@@ -48,7 +48,7 @@
                         </li>
                         <li>
                             <h6 style="font-weight:bold">Email</h6>
-                            <span style="font-size: 13px;">KOMINFO@MALANGKAB.GO.ID</span>
+                            <span style="font-size: 13px;">Kominfo@Malangkab.go.id</span>
                         </li>
                         <li>
                             <h6 style="font-weight:bold">Alamat</h6>
@@ -56,7 +56,7 @@
                         </li>
                         <li>
                             <h6 style="font-weight:bold">Website URL</h6>
-                            <span style="font-size: 12px;">https://kominfo.malangkab.go.id/</span>
+                            <span style="font-size: 12px;">kominfo.malangkab.go.id</span>
                         </li>
                     </ul>
                 </div>

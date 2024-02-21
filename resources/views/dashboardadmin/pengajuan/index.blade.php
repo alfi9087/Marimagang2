@@ -96,6 +96,11 @@
                                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#ditolak{{ $p->id }}">
                                                             Ditolak
                                                         </button>
+                                                        @if(!empty($p->komentar))
+                                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#lihatKomentarModal{{ $p->id }}">
+                                                            Lihat Komentar
+                                                        </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
@@ -118,9 +123,9 @@
                                                             <div style="margin-bottom: 15px;">
                                                                 <label for="databidang">Pilih Bidang Kerja</label>
                                                                 <select name="databidang" id="databidang">
-                                                                    <option value="" disabled selected hidden></option>
+                                                                    <option value="" disabled hidden></option>
                                                                     @foreach ($databidang as $bidang)
-                                                                    <option value="{{ $bidang->id }}">
+                                                                    <option value="{{ $bidang->id }}" {{ $bidang->id == $p->databidang_id ? 'selected' : '' }}>
                                                                         {{ $bidang->nama }}
                                                                     </option>
                                                                     @endforeach
@@ -178,6 +183,28 @@
                                             </div>
                                         </div>
 
+                                        <!-- Modal Komentar -->
+                                        @if(!empty($p->komentar))
+                                        <div class="modal fade" id="lihatKomentarModal{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Alasan Penolakan Pengajuan Oleh Bidang</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>{!! $p->komentar !!}</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -202,15 +229,19 @@
 
         $('#databidang').on('change', function() {
             $('#skill').empty();
-            var databidang_id = $(this)
-                .val();
-            $.get("{{ url('pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
-
-                $("#skill").select2({
-                    data: data.results,
-                    width: '100%',
-                })
+            var databidang_id = $(this).val();
+            $.get("{{ url('pengajuan/update-skill') }}/" + databidang_id, function(data, status) {
+                if (Array.isArray(data.results)) {
+                    $("#skill").select2({
+                        data: data.results,
+                        width: '100%',
+                    });
+                }
             });
+        });
+
+        $("#skill").select2({
+            width: '100%',
         });
     });
 </script>

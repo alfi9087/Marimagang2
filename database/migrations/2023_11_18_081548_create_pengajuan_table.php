@@ -21,15 +21,15 @@ return new class extends Migration
             $table->string('bukti')->nullable();
             $table->string('pengantar')->nullable();
             $table->string('proposal')->nullable();
+            $table->string('kesediaan')->nullable();
             $table->string('kesbangpol')->nullable();
             $table->string('laporan')->nullable();
             $table->string('suratmagang')->nullable();
+            $table->string('dokumentasi')->nullable();
+            $table->string('komentar')->nullable();
             $table->date('tanggalmulai')->nullable();
             $table->date('tanggalselesai')->nullable();
             $table->enum('status', ['Diproses', 'Diteruskan', 'Diterima', 'Ditolak', 'Magang', 'Selesai']);
-            $table->string('komentar')->nullable();
-            $table->string('dokumentasi')->nullable();
-            $table->string('kesediaan')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

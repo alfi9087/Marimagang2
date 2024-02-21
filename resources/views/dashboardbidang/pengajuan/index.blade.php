@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Pengajuan Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardbidang">
+                        <a href="/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>

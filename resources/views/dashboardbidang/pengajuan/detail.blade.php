@@ -190,7 +190,7 @@
                                     </div>
                                 </div>
                                 <div id="tab2" class="tab-pane">
-                                    @foreach ($pengajuan->user->anggota as $anggota)
+                                    @foreach ($anggota as $anggota)
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <div class="row">
@@ -230,7 +230,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Belum Ada Pengantar Pendidikan</p>
+                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -248,7 +248,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Belum Ada Proposal</p>
+                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -266,7 +266,61 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Belum Ada File Kesbangpol</p>
+                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    @endif
+                                                </div>
+                                            </div>        
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> Surat Kesediaan Magang</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->kesediaan)
+                                                    <a href="{{ asset('storage/' . $pengajuan->kesediaan) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->kesediaan) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> Laporan Magang</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->laporan)
+                                                    <a href="{{ asset('storage/' . $pengajuan->laporan) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->laporan) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> Surat Selesai Magang</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->suratmagang)
+                                                    <a href="{{ asset('storage/' . $pengajuan->suratmagang) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->suratmagang) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>

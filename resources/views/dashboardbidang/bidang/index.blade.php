@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Akun</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboard">
+                        <a href="/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -124,7 +124,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody style="text-align: center;">
-                                        @foreach ($bidang as $b)
+                                        @foreach ($bidangs as $b)
                                         <tr>
                                             <td>{{ $b->id }}</td>
                                             <td>{{ $b->nama }}</td>

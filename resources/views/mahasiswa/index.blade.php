@@ -28,7 +28,7 @@
                                     <div class="card mb-4">
                                         <div class="card-body text-center">
                                             @if(!$user->foto)
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                            <img src="https://i.pinimg.com/236x/83/52/64/835264761a076845234005154f1bacd8.jpg" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
                                             @else
                                             <img src="{{ asset('storage/' . $user->foto) }}" alt="foto profil" class="rounded-circle img-fluid" style="width: 175px; height: 175px;">
                                             @endif
@@ -72,7 +72,7 @@
                                                         @csrf
                                                         <div>
                                                             <div class="d-flex justify-content-center mb-4">
-                                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="rounded-circle" alt="example placeholder" style="width: 200px;" id="add" />
+                                                                <img src="https://i.pinimg.com/236x/83/52/64/835264761a076845234005154f1bacd8.jpg" class="rounded-circle" alt="example placeholder" style="width: 200px;" id="add" />
                                                             </div>
                                                             <div class="d-flex justify-content-center">
                                                                 <div class="btn btn-rounded" style="background-color: #DC143C; color: white;">

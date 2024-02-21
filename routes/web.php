@@ -83,16 +83,16 @@ Route::put('/laporan', [PengajuanController::class, 'laporan'])->name('laporan.s
 
 //Route Dashboard Bidang
 Route::middleware(['auth:bidang'])->group(function () {
-    Route::get('/dashboardbidang', [DashboardBidangController::class, 'index'])->name('dashboard.bidang');
+    Route::get('/dashboardbidang/{id}', [DashboardBidangController::class, 'index'])->name('dashboard.bidang');
 
     // Route Akun Bidang (CRUD Akun Bidang)
-    Route::get('/bidang', [DashboardBidangController::class, 'bidang']);
+    Route::get('/bidang/{id}', [DashboardBidangController::class, 'bidang']);
     Route::post('/bidangpost', [BidangController::class, 'store'])->name('bidangpost');
     Route::put('/bidangupdate/{id}', [BidangController::class, 'update']);
     Route::get('/bidangdelete/{id}', [BidangController::class, 'delete']);
 
     // Route Data Bidang
-    Route::get('/databidang', [DashboardBidangController::class, 'databidang']);
+    Route::get('/databidang/{id}', [DashboardBidangController::class, 'databidang']);
     Route::post('/databidang/submit', [DataBidangController::class, 'store'])->name('databidang.submit');
     Route::get('/databidangdelete/{id}', [DataBidangController::class, 'delete'])->name('databidangdelete');
     Route::get('/open/{id}', [DataBidangController::class, 'open']);
@@ -103,6 +103,7 @@ Route::middleware(['auth:bidang'])->group(function () {
 // Route Pengajuan
 Route::post('/pengajuan-submite/submite', [PengajuanController::class, 'store'])->name('pengajuan.submit')->middleware('auth:web');
 Route::get('/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaController::class, 'select_skill'])->middleware('auth:web');
+Route::get('/pengajuan/update-skill/{databidang_id}', [DashboardAdminController::class, 'select_skill'])->middleware('auth:admin');
 
 // Route Dashboard Admin
 Route::get('/pengajuanadmin', [DashboardAdminController::class, 'pengajuan'])->middleware('auth:admin');
@@ -116,7 +117,7 @@ Route::put('/diterimaadmin/{id}', [PengajuanController::class, 'diterimaadmin'])
 Route::put('/selesai', [PengajuanController::class, 'selesai'])->middleware('auth:admin');
 
 // Route Dashboard Bidang
-Route::get('/pengajuanbidang', [DashboardBidangController::class, 'pengajuan'])->middleware('auth:bidang');
+Route::get('/pengajuanbidang/{id}', [DashboardBidangController::class, 'pengajuan'])->middleware('auth:bidang');
 Route::get('/userdetailbidang/{id}', [DashboardBidangController::class, 'userdetail'])->middleware('auth:bidang');
 Route::put('/ditolakbidang/{id}', [PengajuanController::class, 'ditolakbidang'])->middleware('auth:bidang');
 Route::put('/diterimabidang/{id}', [PengajuanController::class, 'diterimabidang'])->middleware('auth:bidang');

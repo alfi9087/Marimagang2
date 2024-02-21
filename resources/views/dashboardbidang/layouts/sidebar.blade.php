@@ -3,12 +3,12 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../assets/images/admin/profile.png" alt="..." class="avatar-img rounded-circle">
+                    <img src="../assets/images/admin/profile.jpeg" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Bidang
+                            Bidang {{ $bidang->nama }}
                             <span class="user-level">Mari Magang</span>
                         </span>
                     </a>
@@ -20,7 +20,7 @@
 
             <ul class="nav nav-primary">
                 <li class="nav-item">
-                    <a href="/dashboardbidang">
+                    <a href="/dashboardbidang/{{ $bidang->id }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -40,7 +40,7 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/bidang">
+                                <a href="/bidang/{{ $bidang->id }}">
                                     <span class="sub-item">Bidang</span>
                                 </a>
                             </li>
@@ -56,7 +56,7 @@
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/databidang">
+                                <a href="/databidang/{{ $bidang->id }}">
                                     <span class="sub-item">Kelola Bidang</span>
                                 </a>
                             </li>
@@ -72,7 +72,7 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/pengajuanbidang">
+                                <a href="/pengajuanbidang/{{ $bidang->id }}">
                                     <span class="sub-item">Pengajuan Ke Bidang</span>
                                 </a>
                             </li>

@@ -116,6 +116,10 @@
                                                             @method("put")
                                                             <div class="modal-body">
                                                                 <p style="font-size: 18px;">Apakah Anda yakin untuk menerima <strong>{{ $p->user->nama }}</strong> ini untuk magang di <strong>{{ $p->databidang->nama }}</strong>?</p>
+                                                                <div class="form-group">
+                                                                    <label for="suratmagang">Upload Surat Rekomendasi Kesediaan PKL (PDF)</label>
+                                                                    <input type="file" class="form-control" id="kesediaan" name="kesediaan" accept=".pdf">
+                                                                </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-3 col-form-label">Komentar</label>
                                                                     <div class="col-sm-9">
@@ -127,12 +131,7 @@
                                                                         </div>
                                                                         @enderror
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label for="suratmagang">Upload Surat Rekomendasi Kesediaan PKL (PDF)</label>
-                                                                        <input type="file" class="form-control" id="kesediaan" name="kesediaan" accept=".pdf">
-                                                                    </div>
                                                                 </div>
-                                                            
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>

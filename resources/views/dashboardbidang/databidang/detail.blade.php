@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a href="/databidang" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
+                            <a href="/databidang/{{ $bidang->id }}" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
                         </div>
                     </div>
                 </div>

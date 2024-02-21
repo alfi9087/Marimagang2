@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\User;
 use App\Models\Pengajuan;
 use App\Models\SkillUser;
+use App\Models\Anggota;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
@@ -59,7 +60,7 @@ class DashboardAdminController extends Controller
     {
         return view('dashboardadmin.admin.index', [
             'title' => 'Home',
-            'admin' => DB::table('admins')->get()
+            'admin' => DB::table('admins')->orderBy('created_at', 'desc')->get()
         ]);
     }
 
@@ -67,16 +68,18 @@ class DashboardAdminController extends Controller
     {
         return view('dashboardadmin.mahasiswa.index', [
             'title' => 'User',
-            'user' => DB::table('users')->get()
+            'user' => DB::table('users')->orderBy('created_at', 'desc')->get()
         ]);
     }
 
     public function userdetail($id)
     {
-        $pengajuan = Pengajuan::with('user.anggota', 'user.skilluser', 'user.skilluser.skill.databidang')->findOrFail($id);
+        $pengajuan = Pengajuan::with('user.skilluser', 'user.skilluser.skill.databidang')->findOrFail($id);
+        $anggota = Anggota::where('pengajuan_id', $pengajuan->id)->get();
         return view('dashboardadmin.pengajuan.detail', [
             'title' => 'Landing Page',
             'pengajuan' => $pengajuan,
+            'anggota' => $anggota,
         ]);
     }
 
@@ -84,8 +87,7 @@ class DashboardAdminController extends Controller
     {
 
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
-            ->where('pengajuan.status', 'Diproses')
-            ->get();
+            ->where('pengajuan.status', 'Diproses')->orderBy('created_at', 'desc')->get();
 
         return view('dashboardadmin.pengajuan.index', [
             'title' => 'Pengajuan',
@@ -98,7 +100,7 @@ class DashboardAdminController extends Controller
     {
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
             ->where('pengajuan.status', 'Diteruskan')
-            ->get();
+            ->orderBy('created_at', 'desc')->get();
 
         return view('dashboardadmin.pengajuan.diteruskan', [
             'title' => 'Pengajuan',
@@ -110,7 +112,7 @@ class DashboardAdminController extends Controller
     {
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
             ->whereIn('pengajuan.status', ['Diterima', 'Ditolak'])
-            ->get();
+            ->orderBy('created_at', 'desc')->get();
 
         return view('dashboardadmin.pengajuan.konfirmasi', [
             'title' => 'Pengajuan',
@@ -122,11 +124,18 @@ class DashboardAdminController extends Controller
     {
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])
             ->whereIn('pengajuan.status', ['Magang', 'Selesai'])
-            ->get();
+            ->orderBy('created_at', 'desc')->get();
 
         return view('dashboardadmin.pengajuan.magang', [
             'title' => 'Pengajuan',
             'pengajuan' => $pengajuan,
         ]);
+    }
+
+    public function select_skill($databidang_id)
+    {
+        $skill = DB::table('skill')->select('id', 'nama as text')->where('databidang_id', $databidang_id)->get();
+        $data = ['results' => $skill];
+        return $data;
     }
 }

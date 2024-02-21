@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Session;
 
 class DashboardMahasiswaController extends Controller
 {
@@ -31,20 +32,27 @@ class DashboardMahasiswaController extends Controller
 
     public function pengajuan($id)
     {
-        $user = User::with('anggota')->findOrFail($id);
+        $pengajuanSession = Session::get('pengajuan_id');
+        $user = User::findOrFail($id);
+
         $pengajuan = Pengajuan::where('user_id', $user->id)->get();
 
         if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol !== null && $pengajuan[0]->laporan === null) {
             Alert::info('Anda Dinyatakan Magang', 'Silahkan Upload Laporan Akhir Selama Magang')->showConfirmButton();
         } elseif ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol === null) {
             Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
-        } else{
+        } elseif ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol !== null && $pengajuan[0]->laporan !== null) {
             Alert::info('Berhasil Upload Semua Berkas', 'Tunggu Verifikasi Admin')->showConfirmButton();
+        } else {
         }
+        $anggota = Anggota::where('user_id', $user->id)
+            ->where('pengajuan_id', $pengajuanSession)
+            ->get();
 
         return view('mahasiswa.pengajuan', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
+            'anggota' => $anggota ?? null,
             'pengajuan' => $pengajuan,
             'databidang' => DB::table('databidang')->where('status', 'Buka')->get(),
         ]);

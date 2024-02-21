@@ -27,4 +27,9 @@ class DataBidang extends Model
     {
         return $this->hasOne(Pengajuan::class, 'databidang_id');
     }
+
+    public function bidang()
+    {
+        return $this->belongsTo(Bidang::class, 'bidang_id');
+    }
 }

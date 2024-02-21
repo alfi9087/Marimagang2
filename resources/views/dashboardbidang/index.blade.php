@@ -7,12 +7,12 @@
             <div class="page-inner py-5" style="background-color: #F25961;">
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h2 class="text-white pb-2 fw-bold">Dashboard Bidang</h2>
+                        <h2 class="text-white pb-2 fw-bold">Dashboard {{ $bidang->nama }}</h2>
                         <h5 class="text-white op-7 mb-2">Mengelola Bidang dan Pengajuan Magang</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <a href="/databidang" class="btn btn-white btn-border btn-round mr-2">Kelola Bidang</a>
-                        <a href="/pengajuanbidang" class="btn btn-light btn-round">Kelola Permohonan</a>
+                        <a href="/databidang/{{ $bidang->id }}" class="btn btn-white btn-border btn-round mr-2">Kelola Bidang</a>
+                        <a href="/pengajuanbidang/{{ $bidang->id }}" class="btn btn-light btn-round">Kelola Permohonan</a>
                     </div>
                 </div>
             </div>

@@ -30,7 +30,7 @@
 
                     <div class="item">
                         <div class="icon">
-                            <img src="assets/images/Pendaftaran.png" alt="">
+                            <img src="assets/images/pendaftaran.jpg" alt="">
                         </div>
                         <div class="down-content">
                             <h4>Pendaftaran Mudah</h4>
@@ -40,7 +40,7 @@
 
                     <div class="item">
                         <div class="icon">
-                            <img src="assets/images/Bidang.png" alt="">
+                            <img src="assets/images/bidang.jpg" alt="">
                         </div>
                         <div class="down-content">
                             <h4>Banyak Bidang Kerja</h4>
@@ -50,7 +50,7 @@
 
                     <div class="item">
                         <div class="icon">
-                            <img src="assets/images/Pendaftaran-Online.png" alt="">
+                            <img src="assets/images/pendaftaran-online.jpg" alt="">
                         </div>
                         <div class="down-content">
                             <h4>Pendaftaran Online</h4>
@@ -60,7 +60,7 @@
 
                     <div class="item">
                         <div class="icon">
-                            <img src="assets/images/Verifikasi.png" alt="">
+                            <img src="assets/images/verifikasi.jpg" alt="">
                         </div>
                         <div class="down-content">
                             <h4>Proses Verifikasi Cepat</h4>
@@ -70,7 +70,7 @@
 
                     <div class="item">
                         <div class="icon">
-                            <img src="assets/images/Keamanan.png" alt="">
+                            <img src="assets/images/keamanan.jpg" alt="">
                         </div>
                         <div class="down-content">
                             <h4>Keamanan Terjamin</h4>
