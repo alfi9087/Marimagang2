@@ -14,27 +14,22 @@
                         <div class="list-group list-group-flush">
                             <a data-toggle="tab" href="#menu1" id="tab1" class="tabs list-group-item active1">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-home"></div> &nbsp;&nbsp; Pengajuan PKL
-                                </div>
-                            </a>
-                            <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item bg-light">
-                                <div class="list-div my-2">
-                                    <div class="fa fa-users"></div> &nbsp;&nbsp; Lihat Data Anggota
+                                    <div class="fa fa-home"></div> &nbsp;&nbsp; Pengajuan Magang
                                 </div>
                             </a>
                             @foreach ($pengajuan as $p)
-                            @if ($p->status == 'Magang' && !$p->kesbangpol)
-                            <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
+                            @if ($p->status == 'Diterima')
+                            <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
                                     <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Surat Kesbangpol
                                 </div>
                             </a>
-                            <a data-toggle="tab" href="#menu4" id="tab4" class="tabs list-group-item bg-light">
+                            @elseif ($p->status == 'Magang' && $p->kesbangpol)
+                            <a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
-                                    <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Laporan Akhir
+                                    <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Logbook Mahasiswa
                                 </div>
                             </a>
-                            @elseif ($p->status == 'Magang' && $p->kesbangpol)
                             <a data-toggle="tab" href="#menu4" id="tab4" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
                                     <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Laporan Akhir
@@ -193,140 +188,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="menu2" class="tab-pane">
-                                <div class="row justify-content-center">
-                                    <div class="col-11">
-                                        <div class="form-card">
-                                            <h4 class="mt-0 mb-4 text-center">DATA ANGGOTA PKL</h4>
-                                            <button type="button" class="btn btn-danger float-right mb-3" data-toggle="modal" data-target="#add">
-                                                + Tambah Data
-                                            </button>
-                                            <!-- Modal Tambah Anggota -->
-                                            <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Tambah
-                                                                Anggota</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form method="POST" action="{{ route('tambah.anggota') }}" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="modal-body">
-                                                                <div class="form-row">
-                                                                    <div class="form-group">
-                                                                        <label for="previous_name">Nama:</label>
-                                                                        <input type="text" name="nama" id="nama" />
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="previous_image">NIM:</label>
-                                                                        <input type="text" name="nim" id="nim" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-danger">Simpan</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">Nama</th>
-                                                        <th class="text-center">NIM</th>
-                                                        <th class="text-center">Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($anggota as $anggota)
-                                                    <tr>
-                                                        <td class="text-center">{{ $anggota->nama }}</td>
-                                                        <td class="text-center">{{ $anggota->nim }}</td>
-                                                        <td class="text-center">
-                                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit-{{ $anggota->id }}">
-                                                                Edit
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-{{ $anggota->id }}">
-                                                                Delete
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Modal Edit Anggota -->
-                                                    <div class="modal fade" id="edit-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Anggota</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form action="{{ route('edit.anggota', ['id' => $anggota->id]) }}" method="POST">
-                                                                        @csrf
-                                                                        @method('PUT')
-                                                                        <div class="form-row">
-                                                                            <div class="form-group">
-                                                                                <label for="nama">Nama:</label>
-                                                                                <input type="text" name="nama" id="nama" value="{{ $anggota->nama }}" />
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="nim">NIM:</label>
-                                                                                <input type="text" name="nim" id="nim" value="{{ $anggota->nim }}" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                            <button type="submit" class="btn btn-danger">Simpan</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Modal Delete -->
-                                                    <div class="modal fade" id="delete-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Hapus</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    Apakah Anda Yakin Ingin Menghapus Data Ini?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                    <form action="{{ route('delete.anggota', ['id' => $anggota->id]) }}" method="POST">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger">Hapus</button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             @foreach ($pengajuan as $p)
-                            @if ($p->status == 'Magang' && !$p->kesbangpol)
-                            <div id="menu3" class="tab-pane">
+                            @if ($p->status == 'Diterima')
+                            <div id="menu2" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
                                         <h4 class="mt-0 mb-2 text-center">UPLOAD SURAT KESBANGPOL</h4>
@@ -358,49 +223,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="menu4" class="tab-pane">
-                                <div class="row justify-content-center">
-                                    <div class="col-11">
-                                        <h4 class="mt-0 mb-2 text-center">UPLOAD LAPORAN AKHIR</h4>
-                                        <small>*pastikan surat kesbangpol sudah diupload</small>
-                                        <div class="row justify-content-center">
-                                            <div class="container mt-0">
-                                                <form method="POST" action="{{ route('laporan.submit') }}" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method("put")
-                                                    <input type="hidden" name="id" value="{{ $p->id }}">
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-12">
-                                                            <label for="dokumentasi" class="form-label">Upload Dokumentasi (image):</label>
-                                                            <input type="file" id="dokumentasi" name="dokumentasi" accept="image/*" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <label for="laporan" class="form-label">Upload Laporan Akhir (.pdf):</label>
-                                                            <br>
-                                                            <small><b>*pastikan surat kesbangpol sudah diupload</b></small>
-                                                            <div class="upload-box" id="laporan-box">
-                                                                <p>Drag & Drop PDF</p>
-                                                                <br>
-                                                                <button type="button" class="btn btn-danger">Pilih File</button>
-                                                                <input type="file" id="laporan" name="laporan" accept=".pdf" style="display: none;">
-                                                            </div>
-                                                            <div id="laporan-info"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-end mt-3">
-                                                        <div class="col-md-2">
-                                                            <button type="submit" id="submit-btn" class="btn btn-danger btn-block" style="display: none;">Kirim</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                            @elseif ($p->status == 'Magang' && $p->kesbangpol)
+                            <div id="menu3" class="tab-pane" style="padding: 20px;">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-11">
+                                            <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); padding: 30px; text-align: center; animation: fadeInUp 0.8s ease-in-out;">
+                                                <h4 style="color: black; font-size: 24px; margin-bottom: 20px;">LOGBOOK MAHASISWA</h4>
+                                                <a href="/logbook/{{ $user->id }}?id_pengajuan={{ $p->id }}" style="display: inline-block; padding: 15px 30px; font-size: 18px; text-decoration: none; color: #ffffff; background-color: #DC143C; border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#DC143C'" onmouseout="this.style.backgroundColor='#DC143C'">Isi Logbook</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @elseif ($p->status == 'Magang' && $p->kesbangpol)
                             <div id="menu4" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
@@ -421,7 +256,7 @@
                                                         <div class="col-md-12">
                                                             <label for="laporan" class="form-label">Upload Laporan Akhir (.pdf):</label>
                                                             <br>
-                                                            <small><b>*pastikan surat kesbangpol sudah diupload</b></small>
+                                                            <small><b>*pastikan surat kesbangpol sudah diupload dan pastikan logbook sudah terisi lengkap</b></small>
                                                             <div class="upload-box" id="laporan-box">
                                                                 <p>Drag & Drop PDF</p>
                                                                 <br>
@@ -449,7 +284,7 @@
                             <div id="menu5" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
-                                        <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN PKL</h4>
+                                        <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN MAGANG</h4>
                                         <div class="row justify-content-center">
                                             <div class="scrolling-container">
                                                 @foreach ($pengajuan as $p)
@@ -513,7 +348,25 @@
                                                                     Download
                                                                 </a>
                                                             </li>
-                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
+                                                            @if ($p->status == 'Diterima' && $p->kesbangpol)
+                                                            <li>
+                                                                <b>Kesbangpol</b>
+                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" target="_blank" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                                |
+                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" download class="text-danger">
+                                                                    <span style="margin-left: 5px;">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </span>
+                                                                    Download
+                                                                </a>
+                                                            </li>
+                                                            @endif
+                                                            @if (in_array($p->status, ['Magang', 'Selesai']))
                                                             <li>
                                                                 <b>Surat Rekomendasi Magang</b>
                                                                 <a href="{{ asset('storage/'.$p->kesediaan) }}" target="_blank" class="text-danger">
@@ -530,29 +383,27 @@
                                                                     Download
                                                                 </a>
                                                             </li>
+                                                            @if ($p->laporan)
                                                             <li>
-                                                                <b>Kesbangpol</b>
-                                                                @if ($p->kesbangpol)
-                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" target="_blank" class="text-danger">
+                                                                <b>Laporan Akhir</b>
+                                                                <a href="{{ asset('storage/'.$p->laporan) }}" target="_blank" class="text-danger">
                                                                     <span style="margin-right: 5px;">
                                                                         <i class="fas fa-eye"></i>
                                                                     </span>
                                                                     Lihat
                                                                 </a>
                                                                 |
-                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" download class="text-danger">
+                                                                <a href="{{ asset('storage/'.$p->laporan) }}" download class="text-danger">
                                                                     <span style="margin-left: 5px;">
                                                                         <i class="fas fa-download"></i>
                                                                     </span>
                                                                     Download
                                                                 </a>
-                                                                @else
-                                                                Belum Diupload
-                                                                @endif
                                                             </li>
+                                                            @endif
+                                                            @if ($p->suratmagang)
                                                             <li>
                                                                 <b>Surat Selesai Magang</b>
-                                                                @if ($p->suratmagang)
                                                                 <a href="{{ asset('storage/'.$p->suratmagang) }}" target="_blank" class="text-danger">
                                                                     <span style="margin-right: 5px;">
                                                                         <i class="fas fa-eye"></i>
@@ -566,12 +417,10 @@
                                                                     </span>
                                                                     Download
                                                                 </a>
-                                                                @else
-                                                                Belum Diupload
-                                                                @endif
                                                             </li>
                                                             @endif
-                                                            @if ($p->status == 'Diterima' || $p->status == 'Ditolak')
+                                                            @endif
+                                                            @if ($p->status == 'Magang' || $p->status == 'Ditolak')
                                                             <li>
                                                                 <b>Komentar</b>
                                                                 <a href="#" data-toggle="modal" data-target="#komentarModal{{ $p->id }}" class="text-danger">
@@ -582,6 +431,15 @@
                                                                 </a>
                                                             </li>
                                                             @endif
+                                                            <li>
+                                                                <b>Data Anggota</b>
+                                                                <a href="/anggota/{{ $user->id }}?id_pengajuan={{ $p->id }}" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-users"></i>
+                                                                    </span>
+                                                                    Kelola Data Anggota
+                                                                </a>
+                                                            </li>
                                                         </ul>
                                                     </div>
 
@@ -590,7 +448,7 @@
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Alasan Ditolak</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Komentar Terkait Pengajuan</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>

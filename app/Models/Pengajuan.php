@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Pengajuan extends Model
 {
@@ -28,6 +29,38 @@ class Pengajuan extends Model
         'kesediaan'
     ];
 
+    public function getTanggalLogbookAttribute()
+    {
+        try {
+            $startDate = Carbon::parse($this->attributes['tanggalmulai']);
+            $endDate = Carbon::parse($this->attributes['tanggalselesai']);
+
+            $logbook = [];
+
+            while ($startDate->lte($endDate)) {
+                if ($startDate->isWeekday()) {
+                    $logbook[] = $startDate->copy()->toDateString(); 
+                }
+
+                $startDate->addDay();
+            }
+
+            return $logbook;
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    public function getTanggalmulaiAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->isoFormat('D MMMM YYYY') : null;
+    }
+
+    public function getTanggalselesaiAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->isoFormat('D MMMM YYYY') : null;
+    }
+
     public function skilluser()
     {
         return $this->hasMany(SkillUser::class, 'pengajuan_id');
@@ -46,5 +79,10 @@ class Pengajuan extends Model
     public function anggota()
     {
         return $this->hasMany(Anggota::class, 'pengajuan_id');
+    }
+
+    public function logbook()
+    {
+        return $this->belongsTo(Logbook::class, 'pengajuan_id');
     }
 }

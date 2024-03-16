@@ -20,7 +20,7 @@ class DashboardMahasiswaController extends Controller
     {
         $user = User::findorfail($id);
 
-        if (!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon || !$user->foto) {
+        if (!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon) {
             Alert::info('Lengkapi Profil', 'Upload Berkas Setelah Anda Melengkapi Profil')->showConfirmButton();
         }
 
@@ -30,23 +30,23 @@ class DashboardMahasiswaController extends Controller
         ]);
     }
 
-    public function pengajuan($id)
+    public function pengajuan(Request $request, $id)
     {
-        $pengajuanSession = Session::get('pengajuan_id');
         $user = User::findOrFail($id);
 
         $pengajuan = Pengajuan::where('user_id', $user->id)->get();
 
-        if ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol !== null && $pengajuan[0]->laporan === null) {
-            Alert::info('Anda Dinyatakan Magang', 'Silahkan Upload Laporan Akhir Selama Magang')->showConfirmButton();
-        } elseif ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol === null) {
-            Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
-        } elseif ($pengajuan->isNotEmpty() && $pengajuan[0]->status === 'Magang' && $pengajuan[0]->kesbangpol !== null && $pengajuan[0]->laporan !== null) {
-            Alert::info('Berhasil Upload Semua Berkas', 'Tunggu Verifikasi Admin')->showConfirmButton();
-        } else {
+        foreach ($pengajuan as $p) {
+            if ($p->status === 'Magang' && $p->kesbangpol !== null && $p->laporan === null) {
+                Alert::info('Anda Dinyatakan Magang', 'Silahkan Upload Laporan Akhir Selama Magang')->showConfirmButton();
+            } elseif ($p->status === 'Diterima' && $p->kesbangpol === null) {
+                Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
+            } elseif ($p->status === 'Magang' && $p->kesbangpol !== null && $p->laporan !== null) {
+                Alert::info('Berhasil Upload Semua Berkas', 'Tunggu Verifikasi Admin')->showConfirmButton();
+            }
         }
+
         $anggota = Anggota::where('user_id', $user->id)
-            ->where('pengajuan_id', $pengajuanSession)
             ->get();
 
         return view('mahasiswa.pengajuan', [
@@ -55,6 +55,48 @@ class DashboardMahasiswaController extends Controller
             'anggota' => $anggota ?? null,
             'pengajuan' => $pengajuan,
             'databidang' => DB::table('databidang')->where('status', 'Buka')->get(),
+        ]);
+    }
+
+    public function anggota(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $pengajuan = $request->query('id_pengajuan');
+
+        $anggota = Anggota::where('pengajuan_id', $pengajuan)
+            ->get();
+
+
+        if ($anggota->isEmpty()) {
+            Alert::info('Selamat Datang', 'Kelola Data Anggota Magang Anda')->showConfirmButton();
+        }
+
+        return view('mahasiswa.anggota', [
+            'title' => 'Dashboard Mahasiswa',
+            'anggota' => $anggota ?? null,
+            'pengajuan' => $pengajuan,
+            'user' => $user,
+        ]);
+    }
+
+    public function logbook(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $pengajuan = $request->query('id_pengajuan');
+
+        $anggota = Anggota::where('pengajuan_id', $pengajuan)->get();
+        $pengajuanId = Pengajuan::findOrFail($pengajuan);
+
+        $tanggallogbook = $pengajuanId->tanggallogbook;
+
+        return view('mahasiswa.logbook', [
+            'title' => 'Dashboard Mahasiswa',
+            'anggota' => $anggota ?? null,
+            'pengajuan' => $pengajuan,
+            'databidang' => DB::table('databidang')->where('status', 'Buka')->get(),
+            'user' => $user,
+            'tanggallogbook' => $tanggallogbook,
+            'logbook' => DB::table('logbooks')->get(),
         ]);
     }
 

@@ -9,16 +9,20 @@ class RegisterController extends Controller
 {
     public function store(Request $request)
     {
-        $ValidatedData = $request->validate([
-            'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|max:50',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'nim' => 'required|numeric|min:10',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8|max:50',
+            ]);
 
-        $ValidatedData['password'] = bcrypt($ValidatedData['password']);
+            $validatedData['password'] = bcrypt($validatedData['password']);
 
-        User::create($ValidatedData);
+            User::create($validatedData);
 
-        return redirect('/forms')->with('success', 'Anda Berhasil Registrasi');
+            return redirect('/forms')->with('success', 'Anda Berhasil Registrasi');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect('/forms#register')->withErrors($e->validator->errors())->withInput();
+        }
     }
 }

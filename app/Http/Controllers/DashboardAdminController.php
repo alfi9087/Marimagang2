@@ -97,6 +97,16 @@ class DashboardAdminController extends Controller
         ]);
     }
 
+    public function getSkills($pengajuanId)
+    {
+        $skills = SkillUser::where('pengajuan_id', $pengajuanId)
+            ->with('skill')
+            ->get();
+
+        return response()->json($skills);
+    }
+
+
     public function diteruskan()
     {
         $pengajuan = Pengajuan::with(['user', 'skilluser.skill', 'databidang'])

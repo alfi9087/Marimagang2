@@ -197,7 +197,7 @@
             const infoContainer = document.getElementById(type + '-info');
             infoContainer.innerHTML = '';
             const fileInput = document.getElementById(type);
-            fileInput.value = ''; 
+            fileInput.value = '';
         }
 
         document.getElementById('proposal').addEventListener('change', function(e) {

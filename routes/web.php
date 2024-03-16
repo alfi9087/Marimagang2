@@ -78,6 +78,9 @@ Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('d
 
 //Route Edit Profil
 Route::get('/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan'])->middleware('auth:web');
+Route::get('/anggota/{id}', [DashboardMahasiswaController::class, 'anggota'])->middleware('auth:web');
+Route::get('/logbook/{id}', [DashboardMahasiswaController::class, 'logbook'])->middleware('auth:web');
+Route::post('/logbook/store/{id}', [PengajuanController::class, 'logbook'])->name('logbook.store')->middleware('auth:web');
 Route::put('/kesbangpol', [PengajuanController::class, 'kesbangpol'])->name('kesbangpol.submit')->middleware('auth:web');
 Route::put('/laporan', [PengajuanController::class, 'laporan'])->name('laporan.submit')->middleware('auth:web');
 

@@ -6,10 +6,12 @@ use App\Models\SkillUser;
 use App\Models\Pengajuan;
 use App\Models\Anggota;
 use App\Models\User;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 class PengajuanController extends Controller
 {
@@ -168,6 +170,7 @@ class PengajuanController extends Controller
         try {
             $request->validate([
                 'komentar' => 'required|string',
+                'kesediaan' => 'required|mimes:pdf|max:2048'
             ]);
 
             $pengajuan = Pengajuan::findOrFail($id);
@@ -265,7 +268,7 @@ class PengajuanController extends Controller
 
             $user_id = auth()->user()->id;
 
-            $pengajuan_id = session('pengajuan_id');
+            $pengajuan_id = $request->input('id_pengajuan');
 
             Anggota::create([
                 'user_id' => $user_id,
@@ -341,6 +344,36 @@ class PengajuanController extends Controller
             ]);
 
             Alert::success('Sukses', 'Magang Telah Diselesaikan')->showConfirmButton();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back();
+        }
+    }
+
+    public function logbook(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'kegiatan' => 'required',
+                'tanggal' => 'required|date',
+            ]);
+
+            $user = User::findOrFail($id);
+            $user_id = $user->id;
+            $pengajuan_id = $request->input('id_pengajuan');
+
+            $tanggal = Carbon::parse($request->tanggal);
+
+            Logbook::create([
+                'user_id' => $user_id,
+                'pengajuan_id' => $pengajuan_id,
+                'tanggal' => $tanggal,
+                'kegiatan' => $request->kegiatan,
+            ]);
+
+            Alert::success('Sukses', 'Logbook Berhasil Ditambahkan')->showConfirmButton();
 
             return redirect()->back();
         } catch (\Exception $e) {

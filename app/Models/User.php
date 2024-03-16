@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $this->hasMany(Pengajuan::class, 'user_id');
     }
 
+    public function logbook()
+    {
+        return $this->hasMany(Logbook::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

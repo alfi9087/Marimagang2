@@ -9,7 +9,7 @@ class FormsController extends Controller
     public function form()
     {
         return view('forms.index', [
-            'title' => 'Forms',
+            'title' => 'Forms'
         ]);
     }
 }

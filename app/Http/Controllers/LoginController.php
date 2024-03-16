@@ -15,12 +15,12 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'emaillogin' => ['required', 'email'],
+            'passwordlogin' => ['required'],
         ]);
 
         try {
-            if (Auth::guard('web')->attempt($credentials)) {
+            if (Auth::guard('web')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
                 $user = Auth::user();
 
                 if ($user->verify == 0) {
@@ -32,13 +32,13 @@ class LoginController extends Controller
                 return redirect('/mahasiswa/' . $mahasiswaId);
             }
 
-            if (Auth::guard('admin')->attempt($credentials)) {
+            if (Auth::guard('admin')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
                 $request->session()->regenerate();
                 Session::put('level', 'admin');
                 return redirect('/dashboard');
             }
 
-            if (Auth::guard('bidang')->attempt($credentials)) {
+            if (Auth::guard('bidang')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
 
                 $bidang = Auth::guard('bidang')->user();
 
@@ -53,7 +53,6 @@ class LoginController extends Controller
 
         return back()->with('loginError', 'Login Gagal! Anda Belum Registrasi');
     }
-
 
     public function logout(Request $request)
     {

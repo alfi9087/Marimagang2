@@ -43,7 +43,7 @@
                         <div class="media-left pr30">
                             <a href="#">
                                 @if(!$pengajuan->user->foto)
-                                <img class="media-object mw150 rounded-circle shadow" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" style="width: 150px; height: 150px; background-color:white">
+                                <img class="media-object mw150 rounded-circle shadow" src="https://i.pinimg.com/236x/83/52/64/835264761a076845234005154f1bacd8.jpg" style="width: 150px; height: 150px; background-color:white">
                                 @else
                                 <img class="media-object mw150 rounded-circle shadow" src="{{ asset('storage/' . $pengajuan->user->foto ) }}" alt="Foto Profil" style="width: 150px; height: 150px;">
                                 @endif
@@ -80,7 +80,7 @@
                                 <span class="panel-title">Project Sebelumnya</span>
                             </div>
                             <div class="panel-body pb5">
-                                <h6>Experience</h6>
+                                <h6>Pengalaman Sebelumnya</h6>
                                 <p class="text-muted">{{ $pengajuan->deskripsi }}</p>
                                 <hr class="short br-lighter">
                                 <div class="row">
@@ -230,7 +230,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -248,7 +248,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -266,7 +266,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>        
@@ -284,7 +284,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -302,7 +302,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -320,7 +320,7 @@
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
-                                                    <p class="text-muted mb-0">Data Belum Tersedia</p>
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
                                                     @endif
                                                 </div>
                                             </div>
