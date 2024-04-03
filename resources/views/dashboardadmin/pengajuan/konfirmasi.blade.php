@@ -117,8 +117,13 @@
                                                             <div class="modal-body">
                                                                 <p style="font-size: 18px;">Apakah Anda yakin untuk menerima <strong>{{ $p->user->nama }}</strong> ini untuk magang di <strong>{{ $p->databidang->nama }}</strong>?</p>
                                                                 <div class="form-group">
-                                                                    <label for="suratmagang">Upload Surat Rekomendasi Kesediaan PKL (PDF)</label>
-                                                                    <input type="file" class="form-control" id="kesediaan" name="kesediaan" accept=".pdf">
+                                                                    <label for="kesediaan">Upload Surat Rekomendasi Kesediaan PKL (PDF)</label>
+                                                                    <input type="file" class="form-control @error('kesediaan') is-invalid @enderror" id="kesediaan" name="kesediaan" accept=".pdf">
+                                                                    @error('kesediaan')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-3 col-form-label">Komentar</label>

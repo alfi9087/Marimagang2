@@ -25,9 +25,12 @@ class AdminController extends Controller
             Alert::success('Sukses', 'Data Admin Berhasil Ditambahkan')->showConfirmButton();
 
             return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-            return redirect()->back();
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
         }
     }
 
@@ -58,16 +61,27 @@ class AdminController extends Controller
             }
 
             return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-            return redirect()->back();
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
         }
     }
 
     public function delete(Request $request)
     {
-        Admin::destroy($request->id);
-        Alert::success('Sukses', 'Data Admin Berhasil Dihapus')->showConfirmButton();
-        return redirect()->back();
+        try {
+            Admin::destroy($request->id);
+            Alert::success('Sukses', 'Data Admin Berhasil Dihapus')->showConfirmButton();
+            return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
+        }
     }
 }

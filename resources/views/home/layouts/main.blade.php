@@ -45,6 +45,7 @@
     <script src="{{ asset('assets/js/slick-slider.js') }}"></script>
     <script src="{{ asset('assets/js/custompage.js') }}"></script>
 
+    <!-- JS Scroll dan Menu Aktif -->
     <script>
         $('.nav li:first').addClass('active');
 

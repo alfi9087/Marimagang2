@@ -33,13 +33,13 @@
                                 <div class="row justify-content-right">
                                     <div class="col-12">
                                         <p class="mb-0 mr-4 mt-4 text-right" style="font-weight: bold;">
-                                            Nico
+                                            {{ $user->nama }}
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row justify-content-right">
                                     <div class="col-12">
-                                        <p class="mb-0 mr-4 text-right">Nico@gmail.com</p>
+                                        <p class="mb-0 mr-4 text-right">{{ $user->email }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,8 @@
                                                     <button type="button" class="btn btn-danger float-right mb-3" data-toggle="modal" data-target="#add">
                                                         + Tambah Data
                                                     </button>
-                                                    <!-- Modal Tambah Anggota -->
+
+                                                    <!-- Modal Untuk Tambah Anggota -->
                                                     <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
@@ -117,7 +118,7 @@
                                                                 </td>
                                                             </tr>
 
-                                                            <!-- Modal Edit Anggota -->
+                                                            <!-- Modal Untuk Edit Anggota -->
                                                             <div class="modal fade" id="edit-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                                     <div class="modal-content">
@@ -151,7 +152,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <!-- Modal Delete -->
+                                                            <!-- Modal Untuk Menghapus Data Anggota -->
                                                             <div class="modal fade" id="delete-{{ $anggota->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                                     <div class="modal-content">
@@ -194,8 +195,8 @@
     </div>
 </div>
 @endsection
-@push('script')
 
+@push('script')
 <script>
     $(document).ready(function() {
         $('.toggle-card').click(function() {

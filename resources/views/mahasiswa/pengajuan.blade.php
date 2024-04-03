@@ -6,17 +6,32 @@
         <div class="col-lg-9 col-12">
             <div class="card card0">
                 <div class="d-flex" id="wrapper">
-                    <!-- Sidebar -->
+                    <!-- Menu Sidebar -->
                     <div class="bg-light border-right" id="sidebar-wrapper">
                         <div class="sidebar-heading pt-5 pb-4">
                             <strong>MENU</strong>
                         </div>
                         <div class="list-group list-group-flush">
-                            <a data-toggle="tab" href="#menu1" id="tab1" class="tabs list-group-item active1">
+                            @php
+                            $activeTab = '';
+
+                            foreach ($pengajuan as $p) {
+                            if ($p->status == 'Diproses' || $p->status == 'Diteruskan' || $p->status == 'Diterima' || $p->status == 'Magang') {
+
+                            $activeTab = 'menu5';
+                            break;
+                            }
+                            }
+                            @endphp
+
+                            @if($activeTab != 'menu5')
+                            <a data-toggle="tab" href="#menu1" id="tab1" class="tabs list-group-item">
                                 <div class="list-div my-2">
                                     <div class="fa fa-home"></div> &nbsp;&nbsp; Pengajuan Magang
                                 </div>
                             </a>
+                            @endif
+
                             @foreach ($pengajuan as $p)
                             @if ($p->status == 'Diterima')
                             <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item bg-light">
@@ -37,7 +52,7 @@
                             </a>
                             @endif
                             @endforeach
-                            <a data-toggle="tab" href="#menu5" id="tab5" class="tabs list-group-item bg-light">
+                            <a data-toggle="tab" href="#menu5" id="tab5" class="tabs list-group-item bg-light @if($activeTab == 'menu5') active1 @endif">
                                 <div class="list-div my-2">
                                     <div class="fa fa-history"></div> &nbsp;&nbsp;&nbsp; Riwayat Pengajuan
                                 </div>
@@ -78,7 +93,9 @@
                         </div>
 
                         <div class="tab-content">
-                            <div id="menu1" class="tab-pane in active">
+
+                            <!-- Menu Pengajuan Mahasiswa -->
+                            <div id="menu1" class="tab-pane @if($activeTab != 'menu5') in active @endif">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
                                         <div class="form-card">
@@ -100,18 +117,28 @@
                                                             <div class="form-row">
                                                                 <div class="form-group">
                                                                     <label for="start_date">Tanggal Mulai Magang:</label>
-                                                                    <input type="date" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" />
+                                                                    <input type="date" name="start_date" id="start_date" min="{{ date('Y-m-d') }}" class="form-control form-control-user @error('start_date') is-invalid @enderror" value="{{ old('start_date') }}" />
+                                                                    @error('start_date')
+                                                                    <div class="invalid-feedback" style="margin-top: -20px;">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="end_date">Tanggal Selesai Magang:</label>
-                                                                    <input type="date" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" />
+                                                                    <input type="date" name="end_date" id="end_date" min="{{ date('Y-m-d') }}" class="form-control form-control-user @error('end_date') is-invalid @enderror" value="{{ old('end_date') }}" />
+                                                                    @error('end_date')
+                                                                    <div class="invalid-feedback" style="margin-top: -20px;">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-select">
                                                                     <label for="databidang">Pilih Bidang Kerja</label>
                                                                     <div class="select-group">
-                                                                        <select name="databidang_id" id="databidang">
+                                                                        <select name="databidang_id" id="databidang" class="form-control form-control-user @error('databidang_id') is-invalid @enderror">
                                                                             <option value="" disabled selected hidden></option>
                                                                             @foreach ($databidang as $bidang)
                                                                             <option value="{{ $bidang->id }}">
@@ -119,13 +146,23 @@
                                                                             </option>
                                                                             @endforeach
                                                                         </select>
+                                                                        @error('databidang_id')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-select">
                                                                     <label for="skill">Pilih Skill</label>
                                                                     <div class="select-group">
-                                                                        <select name="skill[]" id="skill" multiple="multiple">
+                                                                        <select name="skill[]" id="skill" multiple="multiple" class="form-control form-control-user @error('skill') is-invalid @enderror">
                                                                         </select>
+                                                                        @error('skill')
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -138,12 +175,22 @@
                                                             <div class="form-row">
                                                                 <div class="form-group" style="width: 100%;">
                                                                     <label for="bukti">Bukti Project (pdf):</label>
-                                                                    <input type="file" name="bukti" id="bukti" />
+                                                                    <input type="file" name="bukti" id="bukti" class="form-control form-control-user @error('bukti') is-invalid @enderror" />
+                                                                    @error('bukti')
+                                                                    <div class="invalid-feedback" style="margin-top: -20px;">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="form">
-                                                                <label for="my-editor">Deskripsi Project:</label>
-                                                                <textarea class="form-control" id="deskripsi" name="deskripsi" style="resize: none; width: 100%; height:250px;"></textarea>
+                                                                <label for="deskripsi">Deskripsi Project:</label>
+                                                                <textarea id="deskripsi" name="deskripsi" style="resize: none; width: 100%; height:230px;" class="form-control form-control-user @error('deskripsi') is-invalid @enderror">{{ old('deskripsi') }}</textarea>
+                                                                @error('deskripsi')
+                                                                <div class="invalid-feedback" style="margin-top: -20px;">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
                                                             </div>
                                                         </fieldset>
 
@@ -161,7 +208,12 @@
                                                                             <br>
                                                                             <button type="button" class="btn btn-danger">Pilih
                                                                                 File</button>
-                                                                            <input type="file" id="proposal" name="proposal" accept=".pdf" style="display: none;">
+                                                                            <input type="file" id="proposal" name="proposal" accept=".pdf" style="display: none;" class="form-control form-control-user @error('proposal') is-invalid @enderror">
+                                                                            @error('proposal')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                            @enderror
                                                                         </div>
                                                                         <div id="proposal-info"></div>
                                                                     </div>
@@ -173,7 +225,12 @@
                                                                             <br>
                                                                             <button type="button" class="btn btn-danger">Pilih
                                                                                 File</button>
-                                                                            <input type="file" id="pengantar" name="pengantar" accept=".pdf" style="display: none;">
+                                                                            <input type="file" id="pengantar" name="pengantar" accept=".pdf" style="display: none;" class="form-control form-control-user @error('pengantar') is-invalid @enderror">
+                                                                            @error('pengantar')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                            @enderror
                                                                         </div>
                                                                         <div id="pengantar-info"></div>
                                                                     </div>
@@ -191,6 +248,8 @@
 
                             @foreach ($pengajuan as $p)
                             @if ($p->status == 'Diterima')
+
+                            <!-- Menu Upload Surat Kesbangpol -->
                             <div id="menu2" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
@@ -223,7 +282,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             @elseif ($p->status == 'Magang' && $p->kesbangpol)
+
+                            <!-- Menu Logbook Mahasiswa -->
                             <div id="menu3" class="tab-pane" style="padding: 20px;">
                                 <div class="container">
                                     <div class="row justify-content-center">
@@ -236,6 +298,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Menu Upload Laporan Akhir -->
                             <div id="menu4" class="tab-pane">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
@@ -248,8 +312,14 @@
                                                     <input type="hidden" name="id" value="{{ $p->id }}">
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
-                                                            <label for="dokumentasi" class="form-label">Upload Dokumentasi (image):</label>
+                                                            <label for="dokumentasi" class="form-label">Upload Dokumentasi (.img):</label>
                                                             <input type="file" id="dokumentasi" name="dokumentasi" accept="image/*" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <label for="nilai" class="form-label">Upload Form Nilai (.docx / .doc):</label>
+                                                            <input type="file" id="nilai" name="nilai" accept=".docx" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -277,11 +347,13 @@
                                     </div>
                                 </div>
                             </div>
+
                             @else
                             @endif
                             @endforeach
 
-                            <div id="menu5" class="tab-pane">
+                            <!-- Menu Riwayat Pengajuan -->
+                            <div id="menu5" class="tab-pane @if($activeTab == 'menu5') in active @endif">
                                 <div class="row justify-content-center">
                                     <div class="col-11">
                                         <h4 class="mt-0 mb-4 text-center">RIWAYAT PENGAJUAN MAGANG</h4>
@@ -348,9 +420,10 @@
                                                                     Download
                                                                 </a>
                                                             </li>
-                                                            @if ($p->status == 'Diterima' && $p->kesbangpol)
+                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
                                                             <li>
                                                                 <b>Kesbangpol</b>
+                                                                @if($p->kesbangpol)
                                                                 <a href="{{ asset('storage/'.$p->kesbangpol) }}" target="_blank" class="text-danger">
                                                                     <span style="margin-right: 5px;">
                                                                         <i class="fas fa-eye"></i>
@@ -364,9 +437,11 @@
                                                                     </span>
                                                                     Download
                                                                 </a>
+                                                                @else
+                                                                File Belum Diupload
+                                                                @endif
                                                             </li>
-                                                            @endif
-                                                            @if (in_array($p->status, ['Magang', 'Selesai']))
+                                                            @if($p->kesediaan)
                                                             <li>
                                                                 <b>Surat Rekomendasi Magang</b>
                                                                 <a href="{{ asset('storage/'.$p->kesediaan) }}" target="_blank" class="text-danger">
@@ -383,6 +458,9 @@
                                                                     Download
                                                                 </a>
                                                             </li>
+                                                            @else
+
+                                                            @endif
                                                             @if ($p->laporan)
                                                             <li>
                                                                 <b>Laporan Akhir</b>
@@ -400,6 +478,8 @@
                                                                     Download
                                                                 </a>
                                                             </li>
+                                                            @else
+
                                                             @endif
                                                             @if ($p->suratmagang)
                                                             <li>
@@ -443,7 +523,7 @@
                                                         </ul>
                                                     </div>
 
-                                                    <!-- Komentar Modal -->
+                                                    <!-- Modal Untuk Komentar -->
                                                     <div class="modal fade" id="komentarModal{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
@@ -472,6 +552,7 @@
                                 </div>
                             </div>
 
+                            <!-- Menu Survei Kepuasan -->
                             <div id="menu6" class="tab-pane" style="padding: 20px;">
                                 <div class="container">
                                     <div class="row justify-content-center">
@@ -496,7 +577,10 @@
 </div>
 </div>
 @endsection
+
 @push('script')
+
+<!-- JS Mengatur Select Skill Terkait Databidang -->
 <script>
     $(document).ready(function() {
 
@@ -522,6 +606,7 @@
     });
 </script>
 
+<!-- JS Mengatur Card -->
 <script>
     $(document).ready(function() {
         $('.toggle-card').click(function() {
@@ -531,6 +616,7 @@
     });
 </script>
 
+<!-- JS Mengatur File Upload Kesbangpol -->
 <script>
     const kesbangpolBox = document.getElementById('kesbangpol-box');
     const kesbangpolInfo = document.getElementById('kesbangpol-info');
@@ -573,6 +659,7 @@
     }
 </script>
 
+<!-- JS Mengatur File Upload Laporan -->
 <script>
     const laporanBox = document.getElementById('laporan-box');
     const laporanInfo = document.getElementById('laporan-info');
@@ -614,5 +701,4 @@
         }
     }
 </script>
-
 @endpush

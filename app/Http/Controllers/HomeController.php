@@ -18,7 +18,12 @@ class HomeController extends Controller
             'jumlahdatabidang' => DB::table('databidang')->count(),
             'jumlahpengajuan' => DB::table('pengajuan')->count(),
             'jumlahmagang' => DB::table('pengajuan')->whereIn('status', ['Magang', 'Selesai'])->count(),
-            'pengajuan' => DB::table('pengajuan')->get()
+            'pengajuan' => DB::table('pengajuan')
+                ->where('status', 'Selesai')
+                ->whereNotNull('dokumentasi')
+                ->orderBy('created_at', 'desc')
+                ->limit(15)
+                ->get()
         ]);
     }
 

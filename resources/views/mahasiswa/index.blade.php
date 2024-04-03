@@ -59,6 +59,7 @@
                                         @endif
                                     </div>
 
+                                    <!-- Modal Untuk Menambah Profil Mahasiswa -->
                                     <div class="modal fade" id="modalform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -155,6 +156,7 @@
                                         </div>
                                     </div>
 
+                                    <!-- Modal Untuk Edit Profil -->
                                     <div class="modal fade" id="modalformedit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -267,6 +269,7 @@
 
                                 </div>
 
+                                <!-- Menampilkan Data Mahasiswa -->
                                 <div class="col-lg-8">
                                     <div class="card mb-4">
                                         <div class="card-body">
@@ -364,6 +367,27 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center font-weight-bold">LOG AKTIFITAS</h5>
+                                            <hr>
+                                            @if (empty($logs))
+                                            <p class="text-center">Aktivitas Belum Tersedia</p>
+                                            @else
+                                            <ul class="log-list">
+                                                @foreach($logs as $log)
+                                                <li class="log-item">
+                                                    <div class="log-message">{{ $log['message'] }}</div>
+                                                    <div class="log-time">{{ $log['time'] }}</div>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
@@ -374,5 +398,4 @@
         </div>
     </div>
 </section>
-
 @endsection

@@ -78,10 +78,13 @@ class DashboardAdminController extends Controller
     {
         $pengajuan = Pengajuan::with('user.skilluser', 'user.skilluser.skill.databidang')->findOrFail($id);
         $anggota = Anggota::where('pengajuan_id', $pengajuan->id)->get();
+        $tanggallogbook = $pengajuan->tanggallogbook;
         return view('dashboardadmin.pengajuan.detail', [
             'title' => 'Landing Page',
             'pengajuan' => $pengajuan,
             'anggota' => $anggota,
+            'tanggallogbook' => $tanggallogbook,
+            'logbook' => DB::table('logbooks')->get(),
         ]);
     }
 

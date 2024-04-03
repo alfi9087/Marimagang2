@@ -106,13 +106,17 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#tab1" data-toggle="tab" onclick="activateTab('tab1')">Profil</a>
                                 </li>
-                                @if ($pengajuan->status !== 'Selesai')
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab2" data-toggle="tab" onclick="activateTab('tab2')">Team</a>
                                 </li>
-                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab3" data-toggle="tab" onclick="activateTab('tab3')">Pengajuan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab4" data-toggle="tab" onclick="activateTab('tab4')">Logbook</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tab5" data-toggle="tab" onclick="activateTab('tab4')">Nilai</a>
                                 </li>
                             </ul>
                             <div class="tab-content p30" style="height: 730px;">
@@ -192,7 +196,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if ($pengajuan->status !== 'Selesai')
                                 <div id="tab2" class="tab-pane">
                                     @foreach ($anggota as $anggota)
                                     <div class="card mb-4">
@@ -218,7 +221,6 @@
                                     </div>
                                     @endforeach
                                 </div>
-                                @endif
                                 <div id="tab3" class="tab-pane">
                                     <div class="card mb-4">
                                         <div class="card-body">
@@ -332,6 +334,59 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="tab4" class="tab-pane">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            @foreach($tanggallogbook as $tanggal)
+                                            @php
+                                            $logbookEntries = $logbook->where('tanggal', $tanggal);
+                                            $tglBgColor = $logbookEntries->isNotEmpty() ? 'background-color: #f25961;' : ''; // Jika ada entri logbook, beri latar belakang merah
+                                            $tglTextColor = $logbookEntries->isNotEmpty() ? 'color: white;' : ''; // Jika ada entri logbook, ubah warna teks menjadi putih
+                                            @endphp
+                                            <div class="tgl-row" style="margin-bottom: 20px;">
+                                                <div class="tgl-header" onclick="toggleLogbook(this)" style="{{ $tglBgColor }}">
+                                                    <p class="tgl-date" style="{{ $tglTextColor }}">{{ \Carbon\Carbon::parse($tanggal)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}</p>
+                                                    <i class="fas fa-chevron-down" style="{{ $tglTextColor }}"></i>
+                                                </div>
+                                                <div class="tgl-content" style="display: none;">
+                                                    @if($logbookEntries->isNotEmpty())
+                                                    @foreach($logbookEntries as $log)
+                                                    <div class="isi-logbook">
+                                                        <p>{{ $log->kegiatan }}</p>
+                                                    </div>
+                                                    @endforeach
+                                                    @else
+                                                    <p class="text-muted">Tidak ada entri logbook untuk tanggal ini.</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab5" class="tab-pane">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> Nilai Magang</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->nilai)
+                                                    <a href="{{ asset('storage/' . $pengajuan->nilai) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->nilai) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -342,3 +397,12 @@
 </div>
 
 @endsection
+
+@push('script')
+<script>
+    function toggleLogbook(element) {
+        var content = element.nextElementSibling;
+        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+@endpush

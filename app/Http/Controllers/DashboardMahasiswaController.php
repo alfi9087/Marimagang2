@@ -18,15 +18,50 @@ class DashboardMahasiswaController extends Controller
 {
     public function index($id)
     {
-        $user = User::findorfail($id);
+        // Path to the log file
+        $logPath = storage_path('logs/notification.log');
 
-        if (!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon) {
-            Alert::info('Lengkapi Profil', 'Upload Berkas Setelah Anda Melengkapi Profil')->showConfirmButton();
+        // Check if the log file exists
+        if (File::exists($logPath)) {
+            // Read the contents of the log file
+            $logsContent = File::get($logPath);
+
+            // Separate log entries by newline
+            $logs = explode("\n", $logsContent);
+
+            // Remove any empty log entries
+            $logs = array_filter($logs);
+
+            // Process each log entry
+            $formattedLogs = [];
+            foreach ($logs as $log) {
+                // Extract timestamp and message from log entry
+                preg_match('/\[(.*?)\].*?local.INFO: (.*)/', $log, $matches);
+                if (count($matches) === 3) {
+                    $timestamp = Carbon::createFromFormat('Y-m-d H:i:s', $matches[1]);
+                    $formattedTimestamp = $timestamp->isoFormat('DD MMMM YYYY HH:mm');
+
+                    $formattedLogs[] = [
+                        'time' => $formattedTimestamp,
+                        'message' => $matches[2]
+                    ];
+                }
+            }
+
+            // Reverse the array to display the latest logs first
+            $formattedLogs = array_reverse($formattedLogs);
+        } else {
+            // Log file does not exist, set logs to empty array
+            $formattedLogs = [];
         }
+
+        // Get the user by ID
+        $user = User::findOrFail($id);
 
         return view('mahasiswa.index', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
+            'logs' => $formattedLogs
         ]);
     }
 
@@ -41,8 +76,6 @@ class DashboardMahasiswaController extends Controller
                 Alert::info('Anda Dinyatakan Magang', 'Silahkan Upload Laporan Akhir Selama Magang')->showConfirmButton();
             } elseif ($p->status === 'Diterima' && $p->kesbangpol === null) {
                 Alert::info('Pengajuan Anda Diterima', 'Silahkan Upload Berkas Kesbangpol')->showConfirmButton();
-            } elseif ($p->status === 'Magang' && $p->kesbangpol !== null && $p->laporan !== null) {
-                Alert::info('Berhasil Upload Semua Berkas', 'Tunggu Verifikasi Admin')->showConfirmButton();
             }
         }
 

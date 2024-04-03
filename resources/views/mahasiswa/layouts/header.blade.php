@@ -21,6 +21,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+
                 <nav class="main-nav">
 
                     <a href="/" class="logo">
@@ -33,7 +34,7 @@
                         @if(!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon)
                         @else
                         <li>
-                            <a href="/pengajuan/{{ $user->id }}">Pengajuan PKL</a>
+                            <a href="/pengajuan/{{ $user->id }}">Pengajuan Magang</a>
                         </li>
                         @endif
                         <li>
@@ -45,6 +46,7 @@
                     </a>
 
                 </nav>
+                
             </div>
         </div>
     </div>

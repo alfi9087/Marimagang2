@@ -136,3 +136,4 @@ Route::get('/pdfbidang/{id}', [DashboardBidangController::class, 'pdfbidang'])->
 Route::get('/magangbidang/{id}', [DashboardBidangController::class, 'magangbidang'])->middleware('auth:bidang');
 
 
+

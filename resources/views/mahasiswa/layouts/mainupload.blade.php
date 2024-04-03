@@ -10,111 +10,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="{{ asset('assets/css/pengajuan.css') }}">
 
-    <!-- Form Wizard -->
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/css/select.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/upload.css') }}">
 
-    <style>
-        .alignMe li {
-            margin-bottom: 10px;
-        }
-
-        .alignMe b {
-            display: inline-block;
-            width: 50%;
-            position: relative;
-            padding-right: 10px;
-        }
-
-        .alignMe b::after {
-            content: ":";
-            position: absolute;
-            right: 10px;
-        }
-
-        .upload-box {
-            width: 100%;
-            height: 250px;
-            border: 2px dashed #ccc;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .upload-box button {
-            margin-top: 10px;
-        }
-
-        .scrolling-container {
-            max-height: 690px;
-            overflow-y: auto;
-            padding-right: 15px;
-        }
-
-        .upload-box {
-            border: 2px dashed #ccc;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .upload-box:hover {
-            background-color: #f5f5f5;
-        }
-
-        .pdf-icon {
-            color: #e74c3c;
-            font-size: 36px;
-        }
-
-        .remove-file {
-            color: red;
-            cursor: pointer;
-        }
-
-        #kesbangpol-box {
-            width: 100%;
-            height: 70vh;
-            border: 2px dashed #ccc;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #kesbangpol-box button {
-            margin-top: 10px;
-        }
-
-        #kesbangpol-box:hover {
-            background-color: #f5f5f5;
-        }
-
-        #laporan-box {
-            width: 100%;
-            height: 70vh;
-            border: 2px dashed #ccc;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #laporan-box button {
-            margin-top: 10px;
-        }
-
-        #laporan-box:hover {
-            background-color: #f5f5f5;
-        }
-    </style>
 </head>
 
 <body>

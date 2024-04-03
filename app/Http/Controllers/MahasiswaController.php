@@ -7,26 +7,43 @@ use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class MahasiswaController extends Controller
 {
     public function store(Request $request, $id)
     {
         try {
-            $user = User::find($id);
-
-            if (!$user) {
-                Alert::error('Error', 'Pengguna tidak ditemukan')->showConfirmButton();
-                return redirect()->back();
-            }
+            $user = User::findOrFail($id);
 
             $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
-                'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
-                'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
-                'prodi' => 'required|max:100',
-                'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
+                'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
+                'prodi' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
+                'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:13',
                 'foto' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+            ], [
+                'nama.required' => 'Nama field is required',
+                'nama.regex' => 'Nama field must contain only letters, numbers, and spaces',
+                'nama.max' => 'Nama field may not be greater than 60 characters',
+                'kampus.required' => 'Kampus field is required',
+                'kampus.regex' => 'Kampus field must contain only letters, numbers, spaces, hyphens, and underscores',
+                'kampus.max' => 'Kampus field may not be greater than 60 characters',
+                'jurusan.required' => 'Jurusan field is required',
+                'jurusan.regex' => 'Jurusan field must contain only letters, numbers, spaces, hyphens, and underscores',
+                'jurusan.max' => 'Jurusan field may not be greater than 60 characters',
+                'prodi.required' => 'Prodi field is required',
+                'prodi.regex' => 'Prodi field must contain only letters, numbers, and spaces',
+                'prodi.max' => 'Prodi field may not be greater than 60 characters',
+                'telepon.required' => 'Telepon field is required',
+                'telepon.regex' => 'Telepon field must contain only numbers, spaces, hyphens, and plus symbols',
+                'telepon.min' => 'Telepon field must be at least 10 characters',
+                'telepon.max' => 'Telepon field may not be greater than 13 characters',
+                'foto.image' => 'Foto must be an image',
+                'foto.mimes' => 'Foto must be a file of type: jpeg, png, jpg, svg',
+                'foto.max' => 'Foto may not be greater than 2 MB',
             ]);
 
             $photoPath = null;
@@ -45,10 +62,16 @@ class MahasiswaController extends Controller
 
             Alert::success('Sukses', 'Data Profil Berhasil Ditambahkan')->showConfirmButton();
 
+            $message = 'Anda Berhasil Melengkapi Profil';
+            Log::channel('notification')->info($message);
+
             return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-            return redirect()->back();
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
         }
     }
 
@@ -64,12 +87,44 @@ class MahasiswaController extends Controller
 
             $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
-                'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
-                'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:100',
-                'prodi' => 'required|max:100',
-                'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
+                'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
+                'prodi' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
+                'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:13',
                 'foto' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+            ], [
+                'nama.required' => 'Nama field is required',
+                'nama.regex' => 'Nama field must contain only letters, numbers, and spaces',
+                'nama.max' => 'Nama field may not be greater than 60 characters',
+                'kampus.required' => 'Kampus field is required',
+                'kampus.regex' => 'Kampus field must contain only letters, numbers, spaces, hyphens, and underscores',
+                'kampus.max' => 'Kampus field may not be greater than 60 characters',
+                'jurusan.required' => 'Jurusan field is required',
+                'jurusan.regex' => 'Jurusan field must contain only letters, numbers, spaces, hyphens, and underscores',
+                'jurusan.max' => 'Jurusan field may not be greater than 60 characters',
+                'prodi.required' => 'Prodi field is required',
+                'prodi.regex' => 'Prodi field must contain only letters, numbers, and spaces',
+                'prodi.max' => 'Prodi field may not be greater than 60 characters',
+                'telepon.required' => 'Telepon field is required',
+                'telepon.regex' => 'Telepon field must contain only numbers, spaces, hyphens, and plus symbols',
+                'telepon.min' => 'Telepon field must be at least 10 characters',
+                'telepon.max' => 'Telepon field may not be greater than 13 characters',
+                'foto.image' => 'Foto must be an image',
+                'foto.mimes' => 'Foto must be a file of type: jpeg, png, jpg, svg',
+                'foto.max' => 'Foto may not be greater than 2 MB',
             ]);
+
+            if (
+                $user->nama == $request->input('nama') &&
+                $user->kampus == $request->input('kampus') &&
+                $user->jurusan == $request->input('jurusan') &&
+                $user->prodi == $request->input('prodi') &&
+                $user->telepon == $request->input('telepon') &&
+                !$request->hasFile('foto')
+            ) {
+                Alert::info('', 'Profil Tidak Diperbarui')->showConfirmButton();
+                return redirect()->back();
+            }
 
             $user->nama = $request->input('nama');
             $user->kampus = $request->input('kampus');
@@ -91,10 +146,16 @@ class MahasiswaController extends Controller
 
             Alert::warning('Sukses', 'Data Profil Berhasil Diperbarui')->showConfirmButton();
 
+            $message = 'Anda Berhasil Memperbarui Profil';
+            Log::channel('notification')->info($message);
+
             return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-            return redirect()->back();
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
         }
     }
 
@@ -105,6 +166,8 @@ class MahasiswaController extends Controller
             $user->verify = '1';
             $user->save();
             toast('Akun Mahasiswa Berhasil Diverifikasi', 'success');
+            $message = 'Akun Anda Berhasil Diverifikasi Admin';
+            Log::channel('notification')->info($message);
         }
 
         return redirect()->back();

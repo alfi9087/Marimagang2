@@ -26,6 +26,7 @@ class Pengajuan extends Model
         'status',
         'komentar',
         'dokumentasi',
+        'nilai',
         'kesediaan'
     ];
 

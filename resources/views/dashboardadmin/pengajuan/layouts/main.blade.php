@@ -33,7 +33,34 @@
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
+    <style>
+        .tgl-row {
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
 
+        .tgl-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tgl-date {
+            margin: 10px;
+        }
+
+        .tgl-content {
+            padding: 10px 10px;
+        }
+
+        .isi-logbook {
+            margin-bottom: 10px;
+        }
+
+        .tgl-header i.fas.fa-chevron-down {
+            margin-right: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -255,6 +282,7 @@
             document.getElementById(tabID).classList.add('active');
         }
     </script>
+    @stack('script')
 </body>
 
 </html>

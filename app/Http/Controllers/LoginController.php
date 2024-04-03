@@ -17,6 +17,10 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'emaillogin' => ['required', 'email'],
             'passwordlogin' => ['required'],
+        ], [
+            'emaillogin.required' => 'Email field is required',
+            'emaillogin.email' => 'Please enter a valid email address',
+            'passwordlogin.required' => 'Password field is required',
         ]);
 
         try {
@@ -51,7 +55,7 @@ class LoginController extends Controller
             Log::error('Exception during login:', ['message' => $e->getMessage()]);
         }
 
-        return back()->with('loginError', 'Login Gagal! Anda Belum Registrasi');
+        return back()->with('loginError', 'Login Gagal!')->with('loginErrorDetails', 'Email atau Password Anda Salah');
     }
 
     public function logout(Request $request)

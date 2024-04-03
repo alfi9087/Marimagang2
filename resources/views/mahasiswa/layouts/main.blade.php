@@ -20,6 +20,36 @@
     <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 
+    <style>
+        .card-title.text-center {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .log-list {
+            list-style-type: none;
+            padding: 0;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .log-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .log-item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
 </head>
 
 <body>
@@ -94,6 +124,7 @@
         });
     </script>
 
+    <!-- JS Untuk Preview Foto (Tambah Profil) -->
     <script>
         function preview(event) {
             const input = event.target;
@@ -108,6 +139,7 @@
         }
     </script>
 
+    <!-- JS Untuk Preview Foto -->
     <script>
         function previewFoto(input) {
             if (input.files && input.files[0]) {

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('databidang_id')->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('bukti')->nullable();
             $table->string('pengantar')->nullable();
             $table->string('proposal')->nullable();
@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('laporan')->nullable();
             $table->string('suratmagang')->nullable();
             $table->string('dokumentasi')->nullable();
-            $table->string('komentar')->nullable();
+            $table->string('nilai')->nullable();
+            $table->text('komentar')->nullable();
             $table->date('tanggalmulai')->nullable();
             $table->date('tanggalselesai')->nullable();
             $table->enum('status', ['Diproses', 'Diteruskan', 'Diterima', 'Ditolak', 'Magang', 'Selesai']);

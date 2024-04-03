@@ -1,6 +1,8 @@
 @extends('notifikasi.layouts.main')
 
 @section('content')
+
+<!-- Navbar -->
 <nav class="navbar navbar-transparent navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -31,6 +33,7 @@
         </div>
     </div>
 </nav>
+<!-- Content -->
 <div class="main" style="background-image: url('assets/images/bg-malang.jpg')">
     <div class="cover black" data-color="black"></div>
     <div class="container">

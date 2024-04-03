@@ -14,7 +14,7 @@
                         @if(!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon)
                         @else
                         <li>
-                            <a href="/pengajuan/{{ $user->id }}">Pengajuan PKL</a>
+                            <a href="/pengajuan/{{ $user->id }}">Pengajuan Magang</a>
                         </li>
                         @endif
                         <li>

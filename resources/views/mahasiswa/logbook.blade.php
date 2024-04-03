@@ -88,7 +88,7 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Modal -->
+                                                <!-- Modal Untuk Isi Logbook -->
                                                 <div class="modal fade" id="exampleModal-{{ $loop->index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                         <div class="modal-content">
@@ -116,6 +116,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 @endforeach
 
                                             </div>
@@ -134,7 +135,9 @@
 </div>
 </div>
 @endsection
+
 @push('script')
+<!-- JS Mengatur Card -->
 <script>
     $(document).ready(function() {
         $('.toggle-card').click(function() {
@@ -143,5 +146,4 @@
         });
     });
 </script>
-
 @endpush

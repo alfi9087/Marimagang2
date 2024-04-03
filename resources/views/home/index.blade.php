@@ -243,4 +243,27 @@
         </div>
     </div>
 </section>
+
+<section class="our-courses" id="courses">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Dokumentasi Kegiatan Magang</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="owl-courses-item owl-carousel">
+                    @foreach($pengajuan as $item)
+                    <div class="item">
+                        <img src="{{ asset('storage/' . $item->dokumentasi) }}" alt="Dokumentasi" style="width: 275px; height: 225px;">
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 @endsection

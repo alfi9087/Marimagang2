@@ -10,6 +10,7 @@
 
     <title>Notifikasi</title>
 
+    <!-- CSS -->
     <link href="{{ asset('assets/css/notifikasi/bootstrap.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/notifikasi/coming-sssoon.css') }}" rel="stylesheet" />
 
@@ -24,6 +25,7 @@
     @yield('content')
 </body>
 
+<!-- JS -->
 <script src="{{ asset('assets/js/notifikasi/jquery-1.10.2.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/notifikasi/bootstrap.min.js') }}" type="text/javascript"></script>
 

@@ -2,26 +2,27 @@
 
 @section('content')
 <div class="container" id="container">
-    <div class="form-container sign-up-container">
+    <div class="form-container sign-up-container" id="registerForm">
+
         <form method="POST" action="{{ route('register.submit') }}" enctype="multipart/form-data" id="register-form">
             @csrf
             <h1>Daftar</h1>
 
-            <input type="text" class="form-control form-control-user @error('nim') is-invalid @enderror" id="nim" name="nim" placeholder="NIM" value="{{ old('nim') }}">
+            <input type="text" class="form-control form-control-user @error('nim') is-invalid @enderror" id="nim" name="nim" placeholder="NIM" value="{{ old('nim') }}" required>
             @error('nim')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
 
-            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
             @error('email')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
 
-            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" value="{{ old('password') }}">
+            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" value="{{ old('password') }}" required>
             @error('password')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -30,6 +31,7 @@
             <br>
             <button type="submit">Daftar</button>
         </form>
+
     </div>
 
     <div class="form-container sign-in-container">
@@ -56,6 +58,8 @@
             <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 {{ session('loginError') }}
+                <br>
+                {{ session('loginErrorDetails') }}
             </div>
             @endif
 
