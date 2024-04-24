@@ -21,7 +21,7 @@ class MahasiswaSeeder extends Seeder
         $usersData = [
             [
                 'nim' => '2041720220',
-                'email' => 'nicola@gmail.com',
+                'email' => 'nickarieska@gmail.com',
                 'password' => Hash::make('password'),
                 'verify' => 1,
                 'created_at' => now(),

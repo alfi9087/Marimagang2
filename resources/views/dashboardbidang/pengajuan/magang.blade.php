@@ -76,7 +76,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="/userdetailadmin/{{ $p->id }}">
+                                                <a href="/userdetailbidang/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>

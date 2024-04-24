@@ -52,7 +52,6 @@
                         <div class="media-body va-m" style="margin-left: 25px;">
                             <h2 class="media-heading">{{ $pengajuan->user->nama }}</h2>
                             <p class="lead">Durasi Magang : ( {{ $pengajuan->tanggalmulai }} - {{ $pengajuan->tanggalselesai }} )</p>
-                            <a href="" class="btn btn-danger">Gmail</a>
                         </div>
                     </div>
                 </div>
@@ -115,7 +114,7 @@
                                     <a class="nav-link" href="#tab4" data-toggle="tab" onclick="activateTab('tab4')">Logbook</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab5" data-toggle="tab" onclick="activateTab('tab4')">Nilai</a>
+                                    <a class="nav-link" href="#tab5" data-toggle="tab" onclick="activateTab('tab5')">Nilai</a>
                                 </li>
                             </ul>
                             <div class="tab-content p30" style="height: 730px;">

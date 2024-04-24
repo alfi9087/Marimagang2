@@ -43,6 +43,7 @@
                                             <th>ID</th>
                                             <th>NIM</th>
                                             <th>Email</th>
+                                            <th>Dibuat Pada</th>
                                             <th>Status Akun</th>
                                         </tr>
                                     </thead>
@@ -51,6 +52,7 @@
                                             <th>ID</th>
                                             <th>NIM</th>
                                             <th>Email</th>
+                                            <th>Dibuat Pada</th>
                                             <th>Status Akun</th>
                                         </tr>
                                     </tfoot>
@@ -60,6 +62,7 @@
                                             <td>{{ $u->id }}</td>
                                             <td>{{ $u->nim }}</td>
                                             <td>{{ $u->email }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($u->created_at)->locale('id')->isoFormat('D MMMM YYYY, HH:mm') }}</td>
 
                                             <td>
 

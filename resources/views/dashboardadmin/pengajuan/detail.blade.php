@@ -52,7 +52,39 @@
                         <div class="media-body va-m" style="margin-left: 25px;">
                             <h2 class="media-heading">{{ $pengajuan->user->nama }}</h2>
                             <p class="lead">Durasi Magang : ( {{ $pengajuan->tanggalmulai }} - {{ $pengajuan->tanggalselesai }} )</p>
-                            <a href="" class="btn btn-danger">Gmail</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#emailModal">
+                                Gmail
+                            </button>
+
+                            <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="emailModalLabel">Kirim Email</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="POST" action="/kirim-email">
+                                            <div class="modal-body">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="email">Email Ke:</label>
+                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $pengajuan->user->email }}" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pesan">Pesan:</label>
+                                                    <textarea class="form-control" id="my-editor" name="pesan" rows="5" placeholder="Masukkan pesan Anda di sini"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                                                <button type="submit" name="submit" class="btn btn-success">Kirim</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,7 +148,7 @@
                                     <a class="nav-link" href="#tab4" data-toggle="tab" onclick="activateTab('tab4')">Logbook</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#tab5" data-toggle="tab" onclick="activateTab('tab4')">Nilai</a>
+                                    <a class="nav-link" href="#tab5" data-toggle="tab" onclick="activateTab('tab5')">Nilai</a>
                                 </li>
                             </ul>
                             <div class="tab-content p30" style="height: 730px;">

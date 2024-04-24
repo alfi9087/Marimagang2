@@ -7,6 +7,7 @@ use App\Models\Pengajuan;
 use App\Models\Anggota;
 use App\Models\User;
 use App\Models\Logbook;
+use App\Models\Riwayat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -86,10 +87,12 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Data Pengajuan Berhasil Dikirim')->showConfirmButton();
 
-            $message = 'Anda Berhasil Melakukan Pengajuan Magang dan Jangan Lupa Tambahkan Data Anggota (Jika Ada)';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Berhasil Melakukan Pengajuan Magang dan Jangan Lupa Tambahkan Data Anggota (Jika Ada)'
+            ]);
 
-            return redirect()->back();
+            return redirect()->route('mahasiswa', ['id' => $request->user()->id]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
@@ -128,8 +131,10 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Data Skill Pengajuan Berhasil Dikirim')->showConfirmButton();
 
-            $message = 'Status Pengajuan Anda Sedang Diteruskan Ke Bidang';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Status Pengajuan Anda Sedang Diteruskan Ke Bidang, Silahkan Cek Riwayat Pengajuan'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -157,8 +162,10 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Pengajuan Magang Ditolak')->showConfirmButton();
 
-            $message = 'Pengajuan Magang Anda Ditolak, Cek Riwayat Pengajuan';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Pengajuan Magang Anda Ditolak Oleh Admin, Cek Komentar Pada Riwayat Pengajuan'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -186,6 +193,11 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Pengajuan Magang Ditolak')->showConfirmButton();
 
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Pengajuan Magang Anda Ditolak Oleh Bidang, Tunggu Verifikasi Admin'
+            ]);
+
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
@@ -207,8 +219,10 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Pengajuan Magang Diterima')->showConfirmButton();
 
-            $message = 'Pengajuan Magang Anda Berhasil Diterima, Silahkan Upload File Kesbangpol';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Pengajuan Magang Anda Berhasil Diterima, Silahkan Upload File Kesbangpol'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -242,11 +256,24 @@ class PengajuanController extends Controller
                 'kesediaan' => $kesediaan
             ]);
 
+            $pesan = 'Pengajuan Anda Berhasil dan Anda Dinyatakan Magang, Jangan Lupa Mengisi Logbook Serta Upload Laporan Magang';
+            $pesanArray = explode(', ', $pesan);
+
+            foreach ($pesanArray as $key => $message) {
+                if ($key == 0) {
+                    Riwayat::create([
+                        'user_id' => auth()->id(),
+                        'pesan' => $message
+                    ]);
+                } else {
+                    Riwayat::create([
+                        'user_id' => auth()->id(),
+                        'pesan' => $message
+                    ]);
+                }
+            }
+
             Alert::success('Sukses', 'Data Pengajuan Berhasil Diterima')->showConfirmButton();
-
-            $message = 'Pengajuan Berhasil, Anda Dinyatakan Magang dan Jangan Lupa Mengisi Logbook Anda';
-            Log::channel('notification')->info($message);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
@@ -285,9 +312,10 @@ class PengajuanController extends Controller
 
             Alert::success('Success', 'File Kesbangpol Berhasil Terkirim')->showConfirmButton();
 
-            $message = 'Anda Telah Mengupload File Kesbangpol';
-            Log::channel('notification')->info($message);
-
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Berhasil Mengupload File Kesbangpol'
+            ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
@@ -296,7 +324,7 @@ class PengajuanController extends Controller
             return redirect()->back()->withInput();
         }
 
-        return redirect()->back();
+        return redirect()->route('mahasiswa', ['id' => $request->user()->id]);
     }
 
 
@@ -348,11 +376,24 @@ class PengajuanController extends Controller
                 'nilai' => $nilai,
             ]);
 
+            $pesan = 'Anda Telah Mengupload Seluruh Berkas Akhir Magang, Tunggu Verifikasi Admin Untuk Menilai Kinerja Magang Anda';
+            $pesanArray = explode(', ', $pesan);
+
+            foreach ($pesanArray as $key => $message) {
+                if ($key == 0) {
+                    Riwayat::create([
+                        'user_id' => auth()->id(),
+                        'pesan' => $message
+                    ]);
+                } else {
+                    Riwayat::create([
+                        'user_id' => auth()->id(),
+                        'pesan' => $message
+                    ]);
+                }
+            }
+
             Alert::success('Success', 'Data Akhir Berhasil Terkirim')->showConfirmButton();
-
-            $message = 'Anda Telah Mengupload Seluruh Berkas Akhir Magang, Tunggu Verifikasi Admin';
-            Log::channel('notification')->info($message);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
             return redirect()->back()->withErrors($e->validator->errors())->withInput();
@@ -361,7 +402,7 @@ class PengajuanController extends Controller
             return redirect()->back()->withInput();
         }
 
-        return redirect()->back();
+        return redirect()->route('mahasiswa', ['id' => $request->user()->id]);
     }
 
 
@@ -385,6 +426,11 @@ class PengajuanController extends Controller
             ]);
 
             Alert::success('Berhasil', 'Anggota berhasil ditambahkan');
+
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Berhasil Menambahkan Data Anggota Kelompok Magang'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -413,6 +459,11 @@ class PengajuanController extends Controller
 
             Alert::success('Berhasil', 'Anggota berhasil diupdate');
 
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Berhasil Memperbarui Data Anggota Kelompok Magang'
+            ]);
+
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
@@ -430,6 +481,11 @@ class PengajuanController extends Controller
             $anggota->delete();
 
             Alert::success('Berhasil', 'Anggota berhasil dihapus');
+
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Telah Menghapus Data Anggota Kelompok Magang'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -468,8 +524,10 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Magang Telah Diselesaikan')->showConfirmButton();
 
-            $message = 'Magang Anda Berakhir, Cek Nilai Anda';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Terima Kasih...Magang Anda Telah Berakhir, Cek Nilai Anda'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use App\Models\Riwayat;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
+
 
 class MahasiswaController extends Controller
 {
@@ -62,8 +66,10 @@ class MahasiswaController extends Controller
 
             Alert::success('Sukses', 'Data Profil Berhasil Ditambahkan')->showConfirmButton();
 
-            $message = 'Anda Berhasil Melengkapi Profil';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Berhasil Melengkapi profil'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -146,8 +152,10 @@ class MahasiswaController extends Controller
 
             Alert::warning('Sukses', 'Data Profil Berhasil Diperbarui')->showConfirmButton();
 
-            $message = 'Anda Berhasil Memperbarui Profil';
-            Log::channel('notification')->info($message);
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Anda Berhasil Memperbarui profil'
+            ]);
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -166,8 +174,16 @@ class MahasiswaController extends Controller
             $user->verify = '1';
             $user->save();
             toast('Akun Mahasiswa Berhasil Diverifikasi', 'success');
-            $message = 'Akun Anda Berhasil Diverifikasi Admin';
-            Log::channel('notification')->info($message);
+
+            Riwayat::create([
+                'user_id' => auth()->id(),
+                'pesan' => 'Akun Anda Berhasil Diverifikasi Admin'
+            ]);
+
+            $email = $user->email;
+            $message = "Kami Menginformasikan Bahwa Status Akun Anda Adalah TERVERIFIKASI. Silahkan Login dan Segera Lakukan Pengajuan Magang Anda.";
+
+            Mail::to($email)->send(new SendEmail($message));
         }
 
         return redirect()->back();

@@ -15,8 +15,12 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DataBidangController;
 use App\Http\Controllers\PengajuanController;
+use App\Mail\SendEmail;
 use App\Models\DataBidang;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use Symfony\Component\Mailer\Messenger\SendEmailMessage;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,5 +139,17 @@ Route::get('/pdfbidang/{id}', [DashboardBidangController::class, 'pdfbidang'])->
 
 Route::get('/magangbidang/{id}', [DashboardBidangController::class, 'magangbidang'])->middleware('auth:bidang');
 
+Route::post('/kirim-email', function (Request $request) {
+    // Ambil data dari request
+    $data = $request->all();
 
+    // Proses data sesuai kebutuhan
+    // Contoh: Ambil email dan pesan
+    $email = $data['email'];
+    $message = $data['pesan'];
 
+    // Kirim email menggunakan Mail facade
+    Mail::to($email)->send(new SendEmail($message));
+
+    return redirect()->back();
+});

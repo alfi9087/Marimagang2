@@ -94,11 +94,14 @@ class DashboardBidangController extends Controller
         $pengajuan = Pengajuan::with('user.skilluser')->findOrFail($id);
         $anggota = Anggota::where('pengajuan_id', $pengajuan->id)->get();
         $bidang = Bidang::findOrFail($id);
+        $tanggallogbook = $pengajuan->tanggallogbook;
         return view('dashboardbidang.pengajuan.detail', [
             'title' => 'Landing Page',
             'pengajuan' => $pengajuan,
             'bidang' => $bidang,
             'anggota' => $anggota,
+            'tanggallogbook' => $tanggallogbook,
+            'logbook' => DB::table('logbooks')->get(),
         ]);
     }
 

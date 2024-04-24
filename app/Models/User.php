@@ -28,6 +28,7 @@ class User extends Authenticatable
         'telepon',
         'foto',
         'verify',
+        'created_at'
     ];
 
     public function anggota()
@@ -48,6 +49,11 @@ class User extends Authenticatable
     public function logbook()
     {
         return $this->hasMany(Logbook::class, 'user_id');
+    }
+
+    public function riwayat()
+    {
+        return $this->hasMany(Riwayat::class, 'user_id');
     }
 
     /**

@@ -48,6 +48,53 @@
         .log-item:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
+
+        .steps-section {
+            padding: 50px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .steps-wrapper {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .step {
+            flex: 0 0 calc(25% - 40px);
+            margin: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 5px solid #DC143C;
+            border-radius: 5px;
+        }
+
+        .step-number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #DC143C;
+            margin-bottom: 10px;
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #DC143C;
+            font-weight: bold;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: #DC143C;
+        }
     </style>
 
 </head>

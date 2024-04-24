@@ -12,6 +12,77 @@
     </div>
 </section>
 
+<section class="steps-section" id="steps">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="steps-wrapper">
+                    <h2>LANGKAH LANGKAH PENGAJUAN MAGANG</h2>
+                    <div class="step-box">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>REGISTRASI DAN LOGIN</h3>
+                                <p>Melakukan Registrasi Akun dan Login Ketika Sudah di Acc Admin</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>PROFIL MAHASISWA</h3>
+                                <p>Melengkapi Semua Data Profil Yang Dibutuhkan (Termasuk Foto Profil)</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>PENGAJUAN MAGANG</h3>
+                                <p>Mahasiswa Melakukan Pengajuan Magang Setelah Melengkapi Profil Mahasiswa</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>ACC ADMIN 1</h3>
+                                <p>Pengajuan Akan Diverifikasi Admin dan Meneruskan Ke Bidang Yang Bersangkutan</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>ACC BIDANG</h3>
+                                <p>Setiap Bidang Juga Akan Melakukan Verifikasi Pengajuan Mahasiswa</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h3>UPLOAD KESBANGPOL</h3>
+                                <p>Setelah Dinyatakan Diterima Oleh Bidang, Mahasiswa Melakukan Upload File Kesbangpol</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">7</div>
+                            <div class="step-content">
+                                <h3>ACC ADMIN 2</h3>
+                                <p>Menunggu Verifikasi Surat Kesbangpol Oleh Admin</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">8</div>
+                            <div class="step-content">
+                                <h3>KEGIATAN MAGANG</h3>
+                                <p>Anda Dinyatakan Magang dan Jangan Lupa Untuk Mengisi Logbook Serta Upload Berkas Akhir</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <section class="meetings-page" id="meetings">
     <div class="container">
         <div class="row">
@@ -372,14 +443,14 @@
                                         <div class="card-body">
                                             <h5 class="card-title text-center font-weight-bold">LOG AKTIFITAS</h5>
                                             <hr>
-                                            @if (empty($logs))
+                                            @if ($riwayat->isEmpty())
                                             <p class="text-center">Aktivitas Belum Tersedia</p>
                                             @else
                                             <ul class="log-list">
-                                                @foreach($logs as $log)
+                                                @foreach($riwayat as $r)
                                                 <li class="log-item">
-                                                    <div class="log-message">{{ $log['message'] }}</div>
-                                                    <div class="log-time">{{ $log['time'] }}</div>
+                                                    <div class="log-message">{{ $r->pesan }}</div>
+                                                    <div class="log-time">{{ $r->created_at->format('d F Y H:i') }}</div>
                                                 </li>
                                                 @endforeach
                                             </ul>
