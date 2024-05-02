@@ -503,13 +503,6 @@
                                                             @if ($p->nilai)
                                                             <li>
                                                                 <b>Nilai Magang</b>
-                                                                <a href="{{ asset('storage/'.$p->nilai) }}" target="_blank" class="text-danger">
-                                                                    <span style="margin-right: 5px;">
-                                                                        <i class="fas fa-eye"></i>
-                                                                    </span>
-                                                                    Lihat
-                                                                </a>
-                                                                |
                                                                 <a href="{{ asset('storage/'.$p->nilai) }}" download class="text-danger">
                                                                     <span style="margin-left: 5px;">
                                                                         <i class="fas fa-download"></i>

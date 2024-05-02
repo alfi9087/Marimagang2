@@ -29,6 +29,7 @@
 
     <!-- Body -->
     @yield('content')
+    @include('sweetalert::alert')
 
     <!-- Footer -->
     @include('home.layouts.footer')

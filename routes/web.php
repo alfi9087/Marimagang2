@@ -34,7 +34,7 @@ use Symfony\Component\Mailer\Messenger\SendEmailMessage;
 */
 
 //Route Landing Page
-Route::get('/', [HomeController::class, 'home']);
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 //Route Forms
 Route::get('/forms', [FormsController::class, 'form'])->name('forms');
@@ -59,8 +59,9 @@ Route::get('/admindelete/{id}', [AdminController::class, 'delete'])->middleware(
 
 // Dashboard -> User (Mahasiswa)
 Route::get('/user', [DashboardAdminController::class, 'user'])->middleware('auth:admin');
-Route::get('/verify/{id}', [MahasiswaController::class, 'verify'])->middleware('auth:admin');
+Route::get('/verification/{user}', [MahasiswaController::class, 'verify'])->name('verify');
 Route::get('/block/{id}', [MahasiswaController::class, 'block'])->middleware('auth:admin')->name('mahasiswa.block');
+Route::get('/verify/{id}', [MahasiswaController::class, 'verifyAdmin'])->middleware('auth:admin')->name('mahasiswa.verify');
 
 //Notifikasi
 Route::get('/notif', [NotifikasiController::class, 'notif']);

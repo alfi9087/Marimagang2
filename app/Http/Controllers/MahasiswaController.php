@@ -7,7 +7,6 @@ use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use App\Models\Riwayat;
 use App\Mail\SendEmail;
@@ -167,35 +166,44 @@ class MahasiswaController extends Controller
         }
     }
 
-    public function verify(Request $request, $id)
+    public function verify(User $user)
     {
-        $user = User::find($id);
-        if ($user) {
+        if ($user && !$user->email_verified_at) {
+            $user->email_verified_at = now();
             $user->verify = '1';
             $user->save();
-            toast('Akun Mahasiswa Berhasil Diverifikasi', 'success');
-
-            Riwayat::create([
-                'user_id' => auth()->id(),
-                'pesan' => 'Akun Anda Berhasil Diverifikasi Admin'
-            ]);
 
             $email = $user->email;
             $message = "Kami Menginformasikan Bahwa Status Akun Anda Adalah TERVERIFIKASI. Silahkan Login dan Segera Lakukan Pengajuan Magang Anda.";
 
             Mail::to($email)->send(new SendEmail($message));
+
+            return redirect()->route('home')->with('success', 'Akun Anda berhasil diverifikasi!');
         }
 
-        return redirect()->back();
+        return redirect()->route('home')->with('error', 'Akun Anda sudah diverifikasi sebelumnya atau tidak valid.');
     }
 
-    public function block(Request $request, $id)
+
+    public function block($id)
     {
         $user = User::find($id);
         if ($user) {
             $user->verify = '0';
             $user->save();
             toast('Akun Mahasiswa Tidak Terverifikasi', 'error');
+        }
+
+        return redirect()->back();
+    }
+
+    public function verifyAdmin($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->verify = '1';
+            $user->save();
+            toast('Akun Mahasiswa Terverifikasi', 'success');
         }
 
         return redirect()->back();

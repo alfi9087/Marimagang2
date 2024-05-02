@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\KirimVerifikasi;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,9 @@ class RegisterController extends Controller
 
             $validatedData['password'] = bcrypt($validatedData['password']);
 
-            User::create($validatedData);
+            $user = User::create($validatedData);
+
+            Mail::to($user->email)->send(new KirimVerifikasi($user));
 
             return redirect('/forms#login')->with('success', 'Anda Berhasil Registrasi');
         } catch (\Illuminate\Validation\ValidationException $e) {
