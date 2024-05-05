@@ -104,6 +104,7 @@
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                             <p style="font-size: 18px;">Apakah Anda yakin untuk menerima <strong>{{ $p->user->nama }}</strong> ini untuk magang di <strong>{{ $p->databidang->nama }}</strong>?</p>
                                                         </div>
                                                         <div class="modal-footer">
@@ -129,6 +130,7 @@
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Komentar</label>
                                                                 <div class="col-sm-9">

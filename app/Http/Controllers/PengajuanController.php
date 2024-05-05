@@ -132,7 +132,7 @@ class PengajuanController extends Controller
             Alert::success('Sukses', 'Data Skill Pengajuan Berhasil Dikirim')->showConfirmButton();
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Status Pengajuan Anda Sedang Diteruskan Ke Bidang, Silahkan Cek Riwayat Pengajuan'
             ]);
 
@@ -163,7 +163,7 @@ class PengajuanController extends Controller
             Alert::success('Sukses', 'Pengajuan Magang Ditolak')->showConfirmButton();
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Pengajuan Magang Anda Ditolak Oleh Admin, Cek Komentar Pada Riwayat Pengajuan'
             ]);
 
@@ -194,7 +194,7 @@ class PengajuanController extends Controller
             Alert::success('Sukses', 'Pengajuan Magang Ditolak')->showConfirmButton();
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Pengajuan Magang Anda Ditolak Oleh Bidang, Tunggu Verifikasi Admin'
             ]);
 
@@ -220,7 +220,7 @@ class PengajuanController extends Controller
             Alert::success('Sukses', 'Pengajuan Magang Diterima')->showConfirmButton();
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Pengajuan Magang Anda Berhasil Diterima, Silahkan Upload File Kesbangpol'
             ]);
 
@@ -262,12 +262,12 @@ class PengajuanController extends Controller
             foreach ($pesanArray as $key => $message) {
                 if ($key == 0) {
                     Riwayat::create([
-                        'user_id' => auth()->id(),
+                        'user_id' => $request->input('user_id'),
                         'pesan' => $message
                     ]);
                 } else {
                     Riwayat::create([
-                        'user_id' => auth()->id(),
+                        'user_id' => $request->input('user_id'),
                         'pesan' => $message
                     ]);
                 }
@@ -313,7 +313,7 @@ class PengajuanController extends Controller
             Alert::success('Success', 'File Kesbangpol Berhasil Terkirim')->showConfirmButton();
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Anda Berhasil Mengupload File Kesbangpol'
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -382,12 +382,12 @@ class PengajuanController extends Controller
             foreach ($pesanArray as $key => $message) {
                 if ($key == 0) {
                     Riwayat::create([
-                        'user_id' => auth()->id(),
+                        'user_id' => $request->input('user_id'),
                         'pesan' => $message
                     ]);
                 } else {
                     Riwayat::create([
-                        'user_id' => auth()->id(),
+                        'user_id' => $request->input('user_id'),
                         'pesan' => $message
                     ]);
                 }
@@ -428,7 +428,7 @@ class PengajuanController extends Controller
             Alert::success('Berhasil', 'Anggota berhasil ditambahkan');
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Anda Berhasil Menambahkan Data Anggota Kelompok Magang'
             ]);
 
@@ -460,7 +460,7 @@ class PengajuanController extends Controller
             Alert::success('Berhasil', 'Anggota berhasil diupdate');
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Anda Berhasil Memperbarui Data Anggota Kelompok Magang'
             ]);
 
@@ -474,7 +474,7 @@ class PengajuanController extends Controller
         }
     }
 
-    public function deleteanggota($id)
+    public function deleteanggota(Request $request, $id)
     {
         try {
             $anggota = Anggota::findOrFail($id);
@@ -483,7 +483,7 @@ class PengajuanController extends Controller
             Alert::success('Berhasil', 'Anggota berhasil dihapus');
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Anda Telah Menghapus Data Anggota Kelompok Magang'
             ]);
 
@@ -525,7 +525,7 @@ class PengajuanController extends Controller
             Alert::success('Sukses', 'Magang Telah Diselesaikan')->showConfirmButton();
 
             Riwayat::create([
-                'user_id' => auth()->id(),
+                'user_id' => $request->input('user_id'),
                 'pesan' => 'Terima Kasih...Magang Anda Telah Berakhir, Cek Nilai Anda'
             ]);
 

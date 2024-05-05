@@ -120,6 +120,7 @@
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                             <div style="margin-bottom: 15px;">
                                                                 <label for="databidang">Pilih Bidang Kerja</label>
                                                                 <select name="databidang" id="databidang">
@@ -161,6 +162,7 @@
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                             <div class="form-group row">
                                                                 <label class="col-sm-3 col-form-label">Komentar</label>
                                                                 <div class="col-sm-9">

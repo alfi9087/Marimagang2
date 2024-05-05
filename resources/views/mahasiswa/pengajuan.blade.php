@@ -260,6 +260,7 @@
                                                     @csrf
                                                     @method("put")
                                                     <input type="hidden" name="id" value="{{ $p->id }}">
+                                                    <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="upload-box" id="kesbangpol-box">
@@ -310,6 +311,7 @@
                                                     @csrf
                                                     @method("put")
                                                     <input type="hidden" name="id" value="{{ $p->id }}">
+                                                    <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
                                                             <label for="dokumentasi" class="form-label">Upload Dokumentasi (.img):</label>

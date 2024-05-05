@@ -141,6 +141,7 @@
                                                         <div class="modal-body">
                                                             <p style="font-size: 18px;">Apakah Anda yakin untuk menyelesaikan magang <br> <strong>{{ $p->user->nama }}</strong> di <strong>{{ $p->databidang->nama }}</strong>?</p>
                                                             <input type="hidden" name="id" value="{{ $p->id }}">
+                                                            <input type="hidden" name="user_id" value="{{ $p->user_id }}">
                                                             <div class="form-group">
                                                                 <label for="nilai">Upload Nilai Mahasiswa (.docx)</label>
                                                                 <input type="file" class="form-control @error('nilai') is-invalid @enderror" id="nilai" name="nilai" accept=".docx">
