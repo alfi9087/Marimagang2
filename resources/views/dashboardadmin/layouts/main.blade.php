@@ -7,15 +7,17 @@
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 
     <!-- Fonts and icons -->
-    <script src="../assets/js/admin/plugin/webfont/webfont.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/webfont/webfont.min.js') }}"></script>
     <script>
+        var customFontsUrl = '{{ asset("assets/css/fonts.min.css") }}';
+
         WebFont.load({
             google: {
                 "families": ["Lato:300,400,700,900"]
             },
             custom: {
                 "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-                urls: ['../assets/css/fonts.min.css']
+                urls: [customFontsUrl]
             },
             active: function() {
                 sessionStorage.fonts = true;
@@ -24,8 +26,8 @@
     </script>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="../assets/css/admin/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/admin/atlantis.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin/atlantis.min.css') }}">
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -47,43 +49,37 @@
         @yield('content')
 
     </div>
+
     <!--   Core JS Files   -->
-    <script src="../assets/js/admin/core/jquery.3.2.1.min.js"></script>
-    <script src="../assets/js/admin/core/popper.min.js"></script>
-    <script src="../assets/js/admin/core/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/admin/core/jquery.3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/core/bootstrap.min.js') }}"></script>
 
     <!-- jQuery UI -->
-    <script src="../assets/js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <script src="../assets/js/admin/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
 
     <!-- jQuery Scrollbar -->
-    <script src="../assets/js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
-
-    <!-- Chart JS -->
-    <script src="../assets/js/admin/plugin/chart.js/chart.min.js"></script>
-
-    <!-- jQuery Sparkline -->
-    <script src="../assets/js/admin/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
     <!-- Chart Circle -->
-    <script src="../assets/js/admin/plugin/chart-circle/circles.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/chart-circle/circles.min.js') }}"></script>
 
     <!-- Datatables -->
-    <script src="../assets/js/admin/plugin/datatables/datatables.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/datatables/datatables.min.js') }}"></script>
 
     <!-- Bootstrap Notify -->
-    <script src="../assets/js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
     <!-- jQuery Vector Maps -->
-    <script src="../assets/js/admin/plugin/jqvmap/jquery.vmap.min.js"></script>
-    <script src="../assets/js/admin/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/admin/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
 
     <!-- Sweet Alert -->
-    <script src="../assets/js/admin/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ asset('assets/js/admin/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Atlantis JS -->
-    <script src="../assets/js/admin/atlantis.min.js"></script>
+    <script src="{{ asset('assets/js/admin/atlantis.min.js') }}"></script>
 
     <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script>

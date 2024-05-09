@@ -3,7 +3,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="../assets/images/admin/profile.jpeg" alt="..." class="avatar-img rounded-circle">
+                    <img src="{{ asset('assets/images/admin/profile.jpeg') }}" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -20,7 +20,7 @@
 
             <ul class="nav nav-primary">
                 <li class="nav-item">
-                    <a href="/dashboard">
+                    <a href="/marimagang/dashboardadmin">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -40,12 +40,12 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/admin">
+                                <a href="/marimagang/admin">
                                     <span class="sub-item">Admin</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/user">
+                                <a href="/marimagang/user">
                                     <span class="sub-item">Mahasiswa</span>
                                 </a>
                             </li>
@@ -61,17 +61,17 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/pengajuanadmin">
+                                <a href="/marimagang/pengajuanadmin">
                                     <span class="sub-item">Pengajuan Magang</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/pengajuanditeruskan">
+                                <a href="/marimagang/pengajuanditeruskan">
                                     <span class="sub-item">Pengajuan Ke Bidang</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/pengajuanaccadmin">
+                                <a href="/marimagang/pengajuanaccadmin">
                                     <span class="sub-item">Pengajuan Dikonfirmasi</span>
                                 </a>
                             </li>
@@ -87,7 +87,7 @@
                     <div class="collapse" id="charts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/magang">
+                                <a href="/marimagang/magang">
                                     <span class="sub-item">Data Magang</span>
                                 </a>
                             </li>
@@ -95,7 +95,7 @@
                     </div>
                 </li>
                 <li class="mx-4 mt-2">
-                    <a href="/logout" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
+                    <a href="/marimagang/logout" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
                 </li>
             </ul>
         </div>

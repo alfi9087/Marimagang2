@@ -35,11 +35,11 @@ class RegisterController extends Controller
 
             Mail::to($user->email)->send(new KirimVerifikasi($user));
 
-            return redirect('/forms#login')->with('success', 'Anda Berhasil Registrasi');
+            return redirect('/marimagang/forms#login')->with('success', 'Anda Berhasil Registrasi');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return redirect('/forms#register')->withErrors($e->validator->errors())->withInput();
+            return redirect('/marimagang/forms#register')->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            return redirect('/forms#register')->withInput();
+            return redirect('/marimagang/forms#register')->withInput();
         }
     }
 }

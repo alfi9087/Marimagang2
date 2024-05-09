@@ -11,16 +11,9 @@ use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBidangController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\NotifikasiController;
-use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DataBidangController;
 use App\Http\Controllers\PengajuanController;
-use App\Mail\SendEmail;
-use App\Models\DataBidang;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use Symfony\Component\Mailer\Messenger\SendEmailMessage;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,124 +26,110 @@ use Symfony\Component\Mailer\Messenger\SendEmailMessage;
 |
 */
 
-//Route Landing Page
-Route::get('/', [HomeController::class, 'home'])->name('home');
+// Route Landing Page
+Route::get('/marimagang', [HomeController::class, 'home'])->name('home');
 
-//Route Forms
-Route::get('/forms', [FormsController::class, 'form'])->name('forms');
+// Route Forms (Login Register)
+Route::get('/marimagang/forms', [FormsController::class, 'form'])->name('forms');
 
-//Route Post Register
-Route::post('/register/submit', [RegisterController::class, 'store'])->name('register.submit');
+// Route Post Register
+Route::post('/marimagang/register', [RegisterController::class, 'store'])->name('register.submit');
 
-//Route Post Login
-Route::post('/login/submit', [LoginController::class, 'authenticate'])->name('login.submit');
+// Route Post Login
+Route::post('/marimagang/login', [LoginController::class, 'authenticate'])->name('login.submit');
 
-//Route Mahasiswa
-Route::get('/mahasiswa/{id}', [DashboardMahasiswaController::class, 'index'])->name('mahasiswa')->middleware('auth:web');
+// Notifikasi
+Route::get('/marimagang/notif', [NotifikasiController::class, 'notif']);
 
-//Route Dashboard Admin
-Route::get('/dashboard', [DashboardAdminController::class, 'index'])->middleware('auth:admin');
+// Route Logout
+Route::get('/marimagang/logout', [LoginController::class, 'logout']);
 
-// Dashboard -> Admin
-Route::get('/admin', [DashboardAdminController::class, 'admin'])->middleware('auth:admin');
-Route::post('/adminpost', [AdminController::class, 'store'])->name('adminpost')->middleware('auth:admin');
-Route::put('/adminupdate/{id}', [AdminController::class, 'update'])->middleware('auth:admin');
-Route::get('/admindelete/{id}', [AdminController::class, 'delete'])->middleware('auth:admin');
+// Route Detail (Home)
+Route::get('/marimagang/homedetail/{id}', [HomeController::class, 'detail']);
 
-// Dashboard -> User (Mahasiswa)
-Route::get('/user', [DashboardAdminController::class, 'user'])->middleware('auth:admin');
-Route::get('/verification/{user}', [MahasiswaController::class, 'verify'])->name('verify');
-Route::get('/block/{id}', [MahasiswaController::class, 'block'])->middleware('auth:admin')->name('mahasiswa.block');
-Route::get('/verify/{id}', [MahasiswaController::class, 'verifyAdmin'])->middleware('auth:admin')->name('mahasiswa.verify');
+// Email Verifikasi Mahasiswa
+Route::get('/marimagang/verification/{user}', [MahasiswaController::class, 'verify'])->name('verify');
 
-//Notifikasi
-Route::get('/notif', [NotifikasiController::class, 'notif']);
+// Route Mahasiswa
+Route::middleware(['auth:web'])->group(function () {
+    Route::get('/marimagang/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan']);
+    Route::get('/marimagang/anggota/{id}', [DashboardMahasiswaController::class, 'anggota']);
+    Route::get('/marimagang/logbook/{id}', [DashboardMahasiswaController::class, 'logbook']);
+    Route::post('/marimagang/logbook/store/{id}', [PengajuanController::class, 'logbook'])->name('logbook.store');
+    Route::put('/marimagang/kesbangpol', [PengajuanController::class, 'kesbangpol'])->name('kesbangpol.submit');
+    Route::put('/marimagang/laporan', [PengajuanController::class, 'laporan'])->name('laporan.submit');
 
-//Route Logout
-Route::get('/logout', [LoginController::class, 'logout']);
+    Route::get('/marimagang/mahasiswa/{id}', [DashboardMahasiswaController::class, 'index'])->name('mahasiswa');
+    Route::post('/marimagang/profil/submit/{id}', [MahasiswaController::class, 'store'])->name('mahasiswa.submit');
+    Route::put('/marimagang/mahasiswaupdate/{id}', [MahasiswaController::class, 'update']);
 
-//Route Detail (Home)
-Route::get('/homedetail/{id}', [HomeController::class, 'detail']);
+    Route::post('/marimagang/pengajuan-submite/submite', [PengajuanController::class, 'store'])->name('pengajuan.submit');
+    Route::get('/marimagang/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaController::class, 'select_skill']);
 
-//Route Profil
-Route::post('/profil/submit/{id}', [MahasiswaController::class, 'store'])->name('mahasiswa.submit')->middleware('auth:web');
-
-//Route Edit Profil
-Route::put('/mahasiswaupdate/{id}', [MahasiswaController::class, 'update'])->middleware('auth:web');
-
-//Route Dashboard Admin (Detail Bidang)
-Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail')->middleware('auth:admin');
-
-//Route Edit Profil
-Route::get('/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan'])->middleware('auth:web');
-Route::get('/anggota/{id}', [DashboardMahasiswaController::class, 'anggota'])->middleware('auth:web');
-Route::get('/logbook/{id}', [DashboardMahasiswaController::class, 'logbook'])->middleware('auth:web');
-Route::post('/logbook/store/{id}', [PengajuanController::class, 'logbook'])->name('logbook.store')->middleware('auth:web');
-Route::put('/kesbangpol', [PengajuanController::class, 'kesbangpol'])->name('kesbangpol.submit')->middleware('auth:web');
-Route::put('/laporan', [PengajuanController::class, 'laporan'])->name('laporan.submit')->middleware('auth:web');
-
-//Route Dashboard Bidang
-Route::middleware(['auth:bidang'])->group(function () {
-    Route::get('/dashboardbidang/{id}', [DashboardBidangController::class, 'index'])->name('dashboard.bidang');
-
-    // Route Akun Bidang (CRUD Akun Bidang)
-    Route::get('/bidang/{id}', [DashboardBidangController::class, 'bidang']);
-    Route::post('/bidangpost', [BidangController::class, 'store'])->name('bidangpost');
-    Route::put('/bidangupdate/{id}', [BidangController::class, 'update']);
-    Route::get('/bidangdelete/{id}', [BidangController::class, 'delete']);
-
-    // Route Data Bidang
-    Route::get('/databidang/{id}', [DashboardBidangController::class, 'databidang']);
-    Route::post('/databidang/submit', [DataBidangController::class, 'store'])->name('databidang.submit');
-    Route::get('/databidangdelete/{id}', [DataBidangController::class, 'delete'])->name('databidangdelete');
-    Route::get('/open/{id}', [DataBidangController::class, 'open']);
-    Route::get('/close/{id}', [DataBidangController::class, 'close'])->name('bidang.close');
-    Route::get('/detail/{id}', [DashboardBidangController::class, 'detail'])->name('dashboard.detail');
+    Route::post('/marimagang/tambahanggota', [PengajuanController::class, 'tambahanggota'])->name('tambah.anggota');
+    Route::put('/marimagang/editanggota/{id}', [PengajuanController::class, 'editanggota'])->name('edit.anggota');
+    Route::delete('/marimagang/hapusanggota/{id}', [PengajuanController::class, 'deleteanggota'])->name('delete.anggota');
 });
 
-// Route Pengajuan
-Route::post('/pengajuan-submite/submite', [PengajuanController::class, 'store'])->name('pengajuan.submit')->middleware('auth:web');
-Route::get('/pengajuan/pilihan-skill/{databidang_id}', [DashboardMahasiswaController::class, 'select_skill'])->middleware('auth:web');
-Route::get('/pengajuan/update-skill/{databidang_id}', [DashboardAdminController::class, 'select_skill'])->middleware('auth:admin');
+// Route Admin
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/marimagang/dashboardadmin', [DashboardAdminController::class, 'index']);
 
-// Route Dashboard Admin
-Route::get('/pengajuanadmin', [DashboardAdminController::class, 'pengajuan'])->middleware('auth:admin');
-Route::get('/pengajuanditeruskan', [DashboardAdminController::class, 'diteruskan'])->middleware('auth:admin');
-Route::get('/pengajuanaccadmin', [DashboardAdminController::class, 'konfirmasi'])->middleware('auth:admin');
-Route::get('/magang', [DashboardAdminController::class, 'magang'])->middleware('auth:admin');
-Route::put('/diteruskan/{id}', [PengajuanController::class, 'updatebidang'])->middleware('auth:admin');
-Route::put('/ditolakadmin/{id}', [PengajuanController::class, 'ditolakadmin'])->middleware('auth:admin');
-Route::get('/userdetailadmin/{id}', [DashboardAdminController::class, 'userdetail'])->middleware('auth:admin');
-Route::put('/diterimaadmin/{id}', [PengajuanController::class, 'diterimaadmin'])->middleware('auth:admin');
-Route::put('/selesai', [PengajuanController::class, 'selesai'])->middleware('auth:admin');
+    Route::get('/marimagang/admin', [DashboardAdminController::class, 'admin']);
+    Route::post('/marimagang/adminpost', [AdminController::class, 'store'])->name('adminpost');
+    Route::put('/marimagang/adminupdate/{id}', [AdminController::class, 'update']);
+    Route::get('/marimagang/admindelete/{id}', [AdminController::class, 'delete']);
 
-// Route Dashboard Bidang
-Route::get('/pengajuanbidang/{id}', [DashboardBidangController::class, 'pengajuan'])->middleware('auth:bidang');
-Route::get('/userdetailbidang/{id}', [DashboardBidangController::class, 'userdetail'])->middleware('auth:bidang');
-Route::put('/ditolakbidang/{id}', [PengajuanController::class, 'ditolakbidang'])->middleware('auth:bidang');
-Route::put('/diterimabidang/{id}', [PengajuanController::class, 'diterimabidang'])->middleware('auth:bidang');
+    Route::get('/marimagang/block/{id}', [MahasiswaController::class, 'block'])->name('mahasiswa.block');
+    Route::get('/marimagang/verify/{id}', [MahasiswaController::class, 'verifyAdmin'])->name('mahasiswa.verify');
 
-// Route Dashboard Mahasiswa Anggota
-Route::post('/tambahanggota', [PengajuanController::class, 'tambahanggota'])->name('tambah.anggota')->middleware('auth:web');
-Route::put('/editanggota/{id}', [PengajuanController::class, 'editanggota'])->name('edit.anggota')->middleware('auth:web');
-Route::delete('/hapusanggota/{id}', [PengajuanController::class, 'deleteanggota'])->name('delete.anggota')->middleware('auth:web');
+    Route::get('/marimagang/user', [DashboardAdminController::class, 'user']);
+    Route::get('/marimagang/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail');
 
-Route::get('/pdfadmin', [DashboardAdminController::class, 'pdfadmin'])->name('pdfadmin')->middleware('auth:admin');
-Route::get('/pdfbidang/{id}', [DashboardBidangController::class, 'pdfbidang'])->name('pdfbidang')->middleware('auth:bidang');
+    // Route Pengajuan
+    Route::get('/marimagang/pengajuan/update-skill/{databidang_id}', [DashboardAdminController::class, 'select_skill']);
 
-Route::get('/magangbidang/{id}', [DashboardBidangController::class, 'magangbidang'])->middleware('auth:bidang');
+    // Route Dashboard Admin
+    Route::get('/marimagang/pengajuanadmin', [DashboardAdminController::class, 'pengajuan']);
+    Route::get('/marimagang/pengajuanditeruskan', [DashboardAdminController::class, 'diteruskan']);
+    Route::get('/marimagang/pengajuanaccadmin', [DashboardAdminController::class, 'konfirmasi']);
+    Route::get('/marimagang/magang', [DashboardAdminController::class, 'magang']);
+    Route::put('/marimagang/diteruskan/{id}', [PengajuanController::class, 'updatebidang']);
+    Route::put('/marimagang/ditolakadmin/{id}', [PengajuanController::class, 'ditolakadmin']);
+    Route::get('/marimagang/userdetailadmin/{id}', [DashboardAdminController::class, 'userdetail']);
+    Route::put('/marimagang/diterimaadmin/{id}', [PengajuanController::class, 'diterimaadmin']);
+    Route::put('/marimagang/selesai', [PengajuanController::class, 'selesai']);
 
-Route::post('/kirim-email', function (Request $request) {
-    // Ambil data dari request
-    $data = $request->all();
+    Route::get('/marimagang/pdfadmin', [DashboardAdminController::class, 'pdfadmin'])->name('pdfadmin');
 
-    // Proses data sesuai kebutuhan
-    // Contoh: Ambil email dan pesan
-    $email = $data['email'];
-    $message = $data['pesan'];
+    // Route Kirim Email 
+    Route::post('/marimagang/kirim-email', [PengajuanController::class, 'email']);
+});
 
-    // Kirim email menggunakan Mail facade
-    Mail::to($email)->send(new SendEmail($message));
 
-    return redirect()->back();
+// Route Bidang
+Route::middleware(['auth:bidang'])->group(function () {
+    Route::get('/marimagang/pengajuanbidang/{id}', [DashboardBidangController::class, 'pengajuan']);
+    Route::get('/marimagang/userdetailbidang/{id}', [DashboardBidangController::class, 'userdetail']);
+    Route::put('/marimagang/ditolakbidang/{id}', [PengajuanController::class, 'ditolakbidang']);
+    Route::put('/marimagang/diterimabidang/{id}', [PengajuanController::class, 'diterimabidang']);
+
+    Route::get('/marimagang/pdfbidang/{id}', [DashboardBidangController::class, 'pdfbidang'])->name('pdfbidang');
+    Route::get('/marimagang/magangbidang/{id}', [DashboardBidangController::class, 'magangbidang']);
+
+    Route::get('marimagang/dashboardbidang/{id}', [DashboardBidangController::class, 'index'])->name('dashboard.bidang');
+
+    // Route Akun Bidang (CRUD Akun Bidang)
+    Route::get('/marimagang/bidang/{id}', [DashboardBidangController::class, 'bidang']);
+    Route::post('/marimagang/bidangpost', [BidangController::class, 'store'])->name('bidangpost');
+    Route::put('/marimagang/bidangupdate/{id}', [BidangController::class, 'update']);
+    Route::get('/marimagang/bidangdelete/{id}', [BidangController::class, 'delete']);
+
+    // Route Data Bidang
+    Route::get('/marimagang/databidang/{id}', [DashboardBidangController::class, 'databidang']);
+    Route::post('/marimagang/databidang/submit', [DataBidangController::class, 'store'])->name('databidang.submit');
+    Route::get('/marimagang/databidangdelete/{id}', [DataBidangController::class, 'delete'])->name('databidangdelete');
+    Route::get('/marimagang/open/{id}', [DataBidangController::class, 'open']);
+    Route::get('/marimagang/close/{id}', [DataBidangController::class, 'close'])->name('bidang.close');
+    Route::get('/marimagang/detail/{id}', [DashboardBidangController::class, 'detail'])->name('dashboard.detail');
 });

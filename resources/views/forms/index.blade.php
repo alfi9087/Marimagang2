@@ -38,7 +38,7 @@
 
         @if (session()->has('success'))
         <div class="card">
-            <a class="close-btn" href="/forms">
+            <a class="close-btn" href="/marimagang/forms">
                 &#10006;
             </a>
             <div class="hoverable-div">

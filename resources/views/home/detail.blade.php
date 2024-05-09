@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="main-button-red">
-                            <a href="/">Kembali</a>
+                            <a href="/marimagang">Kembali</a>
                         </div>
                     </div>
                 </div>

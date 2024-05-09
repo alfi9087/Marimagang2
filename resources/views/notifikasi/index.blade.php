@@ -17,13 +17,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/">
+                    <a href="/marimagang">
                         <i class="fa fa-home"></i>
                         Beranda
                     </a>
                 </li>
                 <li>
-                    <a href="/forms">
+                    <a href="/marimagang/forms">
                         <i class="fa fa-user"></i>
                         Login / Register
                     </a>
@@ -34,7 +34,7 @@
     </div>
 </nav>
 <!-- Content -->
-<div class="main" style="background-image: url('assets/images/bg-malang.jpg')">
+<div class="main" style="background-image: url('{{ asset('assets/images/bg-malang.jpg') }}')">
     <div class="cover black" data-color="black"></div>
     <div class="container">
         <h1 class="logo">

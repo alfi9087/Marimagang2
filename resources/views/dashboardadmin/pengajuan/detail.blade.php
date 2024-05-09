@@ -9,7 +9,7 @@
                 <h4 class="page-title">Detail Mahasiswa</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="#">
+                        <a href="/marimagang/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -65,7 +65,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form method="POST" action="/kirim-email">
+                                        <form method="POST" action="/marimagang/kirim-email">
                                             <div class="modal-body">
                                                 @csrf
                                                 <div class="form-group">

@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Pengajuan Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/marimagang/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -72,7 +72,7 @@
                                             <td class="col-1">{{ $p->databidang->nama }}</td>
                                             <td class="col-3"><span class="badge badge-warning">{{ $p->status }}</span></td>
                                             <td class="col-1">
-                                                <a href="/userdetailbidang/{{ $p->id }}">
+                                                <a href="/marimagang/userdetailbidang/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>
@@ -100,7 +100,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="/diterimabidang/{{ $p->id }}" enctype="multipart/form-data">
+                                                    <form method="POST" action="/marimagang/diterimabidang/{{ $p->id }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">
@@ -126,7 +126,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="/ditolakbidang/{{ $p->id }}" enctype="multipart/form-data">
+                                                    <form method="POST" action="/marimagang/ditolakbidang/{{ $p->id }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">

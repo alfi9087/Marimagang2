@@ -9,7 +9,7 @@
                 <h4 class="page-title">Detail Mahasiswa</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="#">
+                        <a href="/marimagang/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -110,12 +110,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab3" data-toggle="tab" onclick="activateTab('tab3')">Pengajuan</a>
                                 </li>
+                                @if ($pengajuan->status == 'Magang' || $pengajuan->status == 'Selesai')
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab4" data-toggle="tab" onclick="activateTab('tab4')">Logbook</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#tab5" data-toggle="tab" onclick="activateTab('tab5')">Nilai</a>
                                 </li>
+                                @endif
                             </ul>
                             <div class="tab-content p30" style="height: 730px;">
                                 <div id="tab1" class="tab-pane active">

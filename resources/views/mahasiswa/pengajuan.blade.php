@@ -293,7 +293,7 @@
                                         <div class="col-11">
                                             <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); padding: 30px; text-align: center; animation: fadeInUp 0.8s ease-in-out;">
                                                 <h4 style="color: black; font-size: 24px; margin-bottom: 20px;">LOGBOOK MAHASISWA</h4>
-                                                <a href="/logbook/{{ $user->id }}?id_pengajuan={{ $p->id }}" style="display: inline-block; padding: 15px 30px; font-size: 18px; text-decoration: none; color: #ffffff; background-color: #DC143C; border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#DC143C'" onmouseout="this.style.backgroundColor='#DC143C'">Isi Logbook</a>
+                                                <a href="/marimagang/logbook/{{ $user->id }}?id_pengajuan={{ $p->id }}" style="display: inline-block; padding: 15px 30px; font-size: 18px; text-decoration: none; color: #ffffff; background-color: #DC143C; border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#DC143C'" onmouseout="this.style.backgroundColor='#DC143C'">Isi Logbook</a>
                                             </div>
                                         </div>
                                     </div>
@@ -528,7 +528,7 @@
                                                             @endif
                                                             <li>
                                                                 <b>Data Anggota</b>
-                                                                <a href="/anggota/{{ $user->id }}?id_pengajuan={{ $p->id }}" class="text-danger">
+                                                                <a href="/marimagang/anggota/{{ $user->id }}?id_pengajuan={{ $p->id }}" class="text-danger">
                                                                     <span style="margin-right: 5px;">
                                                                         <i class="fas fa-users"></i>
                                                                     </span>
@@ -610,7 +610,7 @@
             $('#skill').empty();
             var databidang_id = $(this)
                 .val();
-            $.get("{{ url('pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
+            $.get("{{ url('marimagang/pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
 
                 $("#skill").select2({
                     data: data.results,

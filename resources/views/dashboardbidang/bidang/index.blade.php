@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Akun</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/marimagang/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -131,12 +131,12 @@
                                             <td>{{ $b->email }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="/bidangupdate/{{ $b->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $b->id }}">
+                                                    <a href="/marimagang/bidangupdate/{{ $b->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $b->id }}">
                                                         <button type="button" class="btn btn-icon btn-round btn-info">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="/bidangdelete/{{ $b->id }}" class="bidang" data-confirm-delete="true">
+                                                    <a href="/marimagang/bidangdelete/{{ $b->id }}" class="bidang" data-confirm-delete="true">
                                                         <button type="button" class="btn btn-icon btn-round btn-danger">
                                                             <i class="far fa-trash-alt"></i>
                                                         </button>
@@ -158,7 +158,7 @@
 
                                                         <div class="container-fluid">
 
-                                                            <form method="POST" action="/bidangupdate/{{ $b->id }}" enctype="multipart/form-data">
+                                                            <form method="POST" action="/marimagang/bidangupdate/{{ $b->id }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method("put")
                                                                 <div class="form-group row">

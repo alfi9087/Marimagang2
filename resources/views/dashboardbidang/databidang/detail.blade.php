@@ -9,7 +9,7 @@
                 <h4 class="page-title">Kelola Konten</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboard">
+                        <a href="/marimagang/dashboardbidang">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a href="/databidang/{{ $bidang->id }}" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
+                            <a href="/marimagang/databidang/{{ $bidang->id }}" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
                         </div>
                     </div>
                 </div>

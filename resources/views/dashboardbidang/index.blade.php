@@ -11,8 +11,8 @@
                         <h5 class="text-white op-7 mb-2">Mengelola Bidang dan Pengajuan Magang</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <a href="/databidang/{{ $bidang->id }}" class="btn btn-white btn-border btn-round mr-2">Kelola Bidang</a>
-                        <a href="/pengajuanbidang/{{ $bidang->id }}" class="btn btn-light btn-round">Kelola Permohonan</a>
+                        <a href="/marimagang/databidang/{{ $bidang->id }}" class="btn btn-white btn-border btn-round mr-2">Kelola Bidang</a>
+                        <a href="/marimagang/pengajuanbidang/{{ $bidang->id }}" class="btn btn-light btn-round">Kelola Permohonan</a>
                     </div>
                 </div>
             </div>

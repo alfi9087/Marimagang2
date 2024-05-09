@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class PengajuanController extends Controller
 {
@@ -567,6 +569,30 @@ class PengajuanController extends Controller
 
             Alert::success('Sukses', 'Logbook Berhasil Ditambahkan')->showConfirmButton();
 
+            return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
+        } catch (\Exception $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function email(Request $request)
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+            'pesan' => 'required|string',
+        ]);
+
+        $email = $data['email'];
+        $message = $data['pesan'];
+
+        try {
+            Mail::to($email)->send(new SendEmail($message));
+
+            Alert::success('Sukses', 'Email Berhasil Dikirim')->showConfirmButton();
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();

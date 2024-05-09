@@ -13,7 +13,7 @@
                         <h2>Selamat Datang di Mari Magang</h2>
                         <p>Tempat mahasiswa melakukan pendaftaran magang atau PKL di Dinas Komunikasi dan Informatika Kabupaten Malang</p>
                         <div class="main-button-red">
-                            <div class="scroll-to-section"><a href="/forms">Gabung Sekarang !</a></div>
+                            <div><a href="/marimagang/forms">Gabung Sekarang !</a></div>
                         </div>
                     </div>
                 </div>
@@ -98,10 +98,10 @@
             <div class="col-lg-4">
                 <div class="meeting-item">
                     <div class="thumb">
-                        <a href="/homedetail/{{ $d->id }}"><img src="{{ asset('storage/' . $d->thumbnail) }}" alt="New Lecturer Meeting" style="width: 100%; height: 250px;"></a>
+                        <a href="/marimagang/homedetail/{{ $d->id }}"><img src="{{ asset('storage/' . $d->thumbnail) }}" alt="New Lecturer Meeting" style="width: 100%; height: 250px;"></a>
                     </div>
                     <div class="down-content">
-                        <a href="/homedetail/{{ $d->id }}">
+                        <a href="/marimagang/homedetail/{{ $d->id }}">
                             <h4 style="margin: 0; padding: 0;">{{ $d->nama }}</h4>
                         </a>
                         <p style="margin: 0; padding: 0;">Bidang Kerja Untuk Mahasiswa Magang / PKL</p>
@@ -127,7 +127,7 @@
                             <h3>Tanya Jawab Seputar Magang</h3>
                             <p>Pertanyaan umum yang sering ditanyakan oleh para mahasiswa yang ingin mendaftar di Dinas Komunikasi dan Informatika Kabupaten Malang</p>
                             <div class="main-button-red">
-                                <div><a href="/forms">Gabung Sekarang!</a></div>
+                                <div><a href="/marimagang/forms">Gabung Sekarang!</a></div>
                             </div>
                         </div>
                     </div>
