@@ -46,34 +46,45 @@ class DataBidangController extends Controller
             Alert::success('Sukses', 'Data Bidang Berhasil Ditambahkan')->showConfirmButton();
 
             return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-            return redirect()->back();
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
         }
     }
 
     public function open(Request $request, $id)
     {
-        $databidang = DataBidang::find($id);
-        if ($databidang) {
-            $databidang->status = 'Buka';
-            $databidang->save();
-            toast('Bidang Berhasil Dibuka', 'success');
+        try {
+            $databidang = DataBidang::find($id);
+            if ($databidang) {
+                $databidang->status = 'Buka';
+                $databidang->save();
+                toast('Bidang Berhasil Dibuka', 'success');
+            }
+            return redirect()->back();
+        } catch (\Exception $e) {
+            toast('Terjadi kesalahan: ' . $e->getMessage(), 'error');
+            return redirect()->back();
         }
-
-        return redirect()->back();
     }
 
     public function close(Request $request, $id)
     {
-        $databidang = DataBidang::find($id);
-        if ($databidang) {
-            $databidang->status = 'Tutup';
-            $databidang->save();
-            toast('Bidang Berhasil Ditutup', 'error');
+        try {
+            $databidang = DataBidang::find($id);
+            if ($databidang) {
+                $databidang->status = 'Tutup';
+                $databidang->save();
+                toast('Bidang Berhasil Ditutup', 'success');
+            }
+            return redirect()->back();
+        } catch (\Exception $e) {
+            toast('Terjadi kesalahan: ' . $e->getMessage(), 'error');
+            return redirect()->back();
         }
-
-        return redirect()->back();
     }
 
     public function delete($id)
@@ -100,9 +111,12 @@ class DataBidangController extends Controller
             toast('Data Bidang Berhasil Dihapus', 'success');
 
             return redirect()->back();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withErrors($e->validator->errors())->withInput();
         } catch (\Exception $e) {
-            Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage())->showConfirmButton();
-            return redirect()->back();
+            Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();
+            return redirect()->back()->withInput();
         }
     }
 }

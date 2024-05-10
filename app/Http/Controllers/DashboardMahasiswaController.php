@@ -21,16 +21,32 @@ class DashboardMahasiswaController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $pengajuan = Pengajuan::where('user_id', $user->id)->get();
-        $pengajuanExists = !$pengajuan->isEmpty();
+        $login = $user->verify == 1;
+        $profil = !empty($user->nama) && !empty($user->kampus) && !empty($user->jurusan) && !empty($user->prodi) && !empty($user->nim) && !empty($user->telepon) && !empty($user->email) && !empty($user->foto);
+        $pengajuan = $user->pengajuan()->latest()->first();
+        $pengajuanDiproses = $pengajuan && $pengajuan->status == 'Diproses';
+        $pengajuanDiteruskan = $pengajuan && $pengajuan->status == 'Diteruskan';
+        $pengajuanDiterima = $pengajuan && $pengajuan->status == 'Diterima';
+        $magang = $pengajuan && $pengajuan->status == 'Magang' && $pengajuan->kesbangpol;
+        $magangSelesai = $pengajuan && $pengajuan->status == 'Selesai';
+        $resetPengajuan = $pengajuan && $pengajuan->status == 'Ditolak';
 
+        $pengajuan = Pengajuan::where('user_id', $user->id)->get();
 
         $riwayat = Riwayat::where('user_id', $id)->orderBy('created_at', 'desc')->get();
 
         return view('mahasiswa.index', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
-            'riwayat' => $riwayat
+            'riwayat' => $riwayat,
+            'login' => $login,
+            'profil' => $profil,
+            'pengajuanDiproses' => $pengajuanDiproses,
+            'pengajuanDiteruskan' => $pengajuanDiteruskan,
+            'pengajuanDiterima' => $pengajuanDiterima,
+            'magang' => $magang,
+            'magangSelesai' => $magangSelesai,
+            'resetPengajuan' => $resetPengajuan
         ]);
     }
 

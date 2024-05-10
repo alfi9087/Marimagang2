@@ -57,7 +57,7 @@
 
         .steps-wrapper {
             background-color: #ffffff;
-            padding: 20px;
+            padding: 20px 20px 0px 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -74,7 +74,7 @@
             padding: 20px;
             background-color: #ffffff;
             border: 5px solid #DC143C;
-            border-radius: 5px;
+            border-radius: 50% 0px 50% 10px;
         }
 
         .step-number {
