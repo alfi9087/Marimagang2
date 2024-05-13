@@ -14,6 +14,8 @@
     <!-- File Boostrap -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/landingpage/bootstrap/css/bootstrap.min.css') }}">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
     <!-- File CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/mahasiswa.css') }}">
@@ -60,6 +62,7 @@
             padding: 20px 20px 0px 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .step-box {
@@ -75,6 +78,7 @@
             background-color: #ffffff;
             border: 5px solid #DC143C;
             border-radius: 50% 0px 50% 10px;
+            position: relative;
         }
 
         .step-number {
@@ -94,6 +98,32 @@
         .step-content p {
             font-size: 14px;
             color: #DC143C;
+        }
+
+        .step-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .step-nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 40px;
+            color: #DC143C;
+        }
+
+        .step-nav button:hover {
+            color: #000;
+        }
+
+        .step-nav-right {
+            right: -50px;
+        }
+
+        .step-nav-left {
+            left: -50px;
         }
     </style>
 
@@ -203,6 +233,30 @@
         $('#foto').change(function() {
             previewFoto(this);
         });
+    </script>
+
+    <script>
+        function showNextSteps() {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'none';
+            document.getElementById('step4').style.display = 'none';
+            document.getElementById('step5').style.display = 'block';
+            document.getElementById('step6').style.display = 'block';
+            document.getElementById('step7').style.display = 'block';
+            document.getElementById('step8').style.display = 'block';
+        }
+
+        function showPreviousSteps() {
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('step3').style.display = 'block';
+            document.getElementById('step4').style.display = 'block';
+            document.getElementById('step5').style.display = 'none';
+            document.getElementById('step6').style.display = 'none';
+            document.getElementById('step7').style.display = 'none';
+            document.getElementById('step8').style.display = 'none';
+        }
     </script>
 
 </body>

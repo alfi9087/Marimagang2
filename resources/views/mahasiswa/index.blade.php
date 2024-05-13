@@ -19,61 +19,67 @@
                 <div class="steps-wrapper">
                     <h2>LANGKAH LANGKAH PENGAJUAN MAGANG</h2>
                     <div class="step-box">
-                        <div class="step" @if($login) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step1" @if($login) style="background-color: #DC143C;" @endif>
                             <div class="step-number" @if($login) style="color: white;" @endif>1</div>
                             <div class="step-content">
                                 <h3 @if($login) style="color: white;" @endif>REGISTRASI DAN LOGIN</h3>
-                                <p @if($login) style="color: white;" @endif>Melakukan Registrasi Akun dan Login Ketika Sudah di Acc Admin</p>
+                                <p @if($login) style="color: white;" @endif>Melakukan Registrasi Akun dan Login Ketika Status Akun Sudah Terverifikasi</p>
                             </div>
                         </div>
-                        <div class="step" @if($profil) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step2" @if($profil) style="background-color: #DC143C;" @endif>
                             <div class="step-number" @if($profil) style="color: white;" @endif>2</div>
                             <div class="step-content">
                                 <h3 @if($profil) style="color: white;" @endif>PROFIL MAHASISWA</h3>
                                 <p @if($profil) style="color: white;" @endif>Melengkapi Semua Data Profil Yang Dibutuhkan (Termasuk Foto Profil)</p>
                             </div>
                         </div>
-                        <div class="step" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                        <div class="step" id="step3" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
                             <div class="step-number" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>3</div>
                             <div class="step-content">
                                 <h3 @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>PENGAJUAN MAGANG</h3>
-                                <p @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>Mahasiswa Melakukan Pengajuan Magang Setelah Melengkapi Profil Mahasiswa</p>
+                                <p @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>Mahasiswa Melakukan Pengajuan Magang Pada Menu Pengajuan Magang Setelah Melengkapi Profil</p>
                             </div>
                         </div>
-                        <div class="step" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                        <div class="step" id="step4" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
                             <div class="step-number" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>4</div>
                             <div class="step-content">
                                 <h3 @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>ACC ADMIN 1</h3>
-                                <p @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>Pengajuan Akan Diverifikasi Admin dan Meneruskan Ke Bidang Yang Bersangkutan</p>
+                                <p @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>Pengajuan Akan Diverifikasi Admin dan Meneruskan Ke Bidang Yang Telah Dipilih Mahasiswa</p>
                             </div>
                         </div>
-                        <div class="step" @if($pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                        <div class="step" id="step5" @if($pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif style="display: none;">
                             <div class="step-number" @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>5</div>
                             <div class="step-content">
                                 <h3 @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>ACC BIDANG</h3>
                                 <p @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>Setiap Bidang Juga Akan Melakukan Verifikasi Pengajuan Mahasiswa</p>
                             </div>
                         </div>
-                        <div class="step" @if($magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                        <div class="step" id="step6" @if($magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif style="display: none;">
                             <div class="step-number" @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>6</div>
                             <div class="step-content">
                                 <h3 @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>ACC ADMIN 2</h3>
                                 <p @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>Upload Surat Kesbangpol dan Menunggu Verifikasi Surat Kesbangpol Oleh Admin</p>
                             </div>
                         </div>
-                        <div class="step" @if($magang || $magangSelesai) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step7" @if($magang || $magangSelesai) style="background-color: #DC143C;" @endif style="display: none;">
                             <div class="step-number" @if($magang || $magangSelesai) style="color: white;" @endif>7</div>
                             <div class="step-content">
                                 <h3 @if($magang || $magangSelesai) style="color: white;" @endif>KEGIATAN MAGANG</h3>
                                 <p @if($magang || $magangSelesai) style="color: white;" @endif>Anda Dinyatakan Magang dan Jangan Lupa Untuk Mengisi Logbook Serta Upload Berkas Akhir</p>
                             </div>
                         </div>
-                        <div class="step" @if($magangSelesai) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step8" @if($magangSelesai) style="background-color: #DC143C;" @endif style="display: none;">
                             <div class="step-number" @if($magangSelesai) style="color: white;" @endif>8</div>
                             <div class="step-content">
                                 <h3 @if($magangSelesai) style="color: white;" @endif>MAGANG SELESAI</h3>
                                 <p @if($magangSelesai) style="color: white;" @endif>Magang Dinyatakan Selesai Oleh Admin Setelah Semua Dokumen Akhir Lengkap</p>
                             </div>
+                        </div>
+                        <div class="step-nav step-nav-right">
+                            <button onclick="showNextSteps()"><i class="fa-regular fa-hand-point-right"></i></button>
+                        </div>
+                        <div class="step-nav step-nav-left">
+                            <button onclick="showPreviousSteps()"><i class="fa-regular fa-hand-point-left"></i></button>
                         </div>
                     </div>
                 </div>
