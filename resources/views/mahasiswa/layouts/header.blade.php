@@ -31,6 +31,9 @@
 
                     <ul class="nav">
                         <li><a href="/marimagang/mahasiswa/{{ $user->id }}">Beranda</a></li>
+                        <li>
+                            <a href="/marimagang/alurmagang/{{ $user->id }}">Alur Magang</a>
+                        </li>
                         @if(!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon)
                         @else
                         <li>
@@ -46,7 +49,7 @@
                     </a>
 
                 </nav>
-                
+
             </div>
         </div>
     </div>

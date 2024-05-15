@@ -21,111 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/mahasiswa.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
-
-    <style>
-        .card-title.text-center {
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .log-list {
-            list-style-type: none;
-            padding: 0;
-            overflow-y: auto;
-            max-height: 300px;
-        }
-
-        .log-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .log-item:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .steps-section {
-            padding: 50px 0;
-            background-color: #f9f9f9;
-            text-align: center;
-        }
-
-        .steps-wrapper {
-            background-color: #ffffff;
-            padding: 20px 20px 0px 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .step-box {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .step {
-            flex: 0 0 calc(25% - 40px);
-            margin: 20px;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 5px solid #DC143C;
-            border-radius: 50% 0px 50% 10px;
-            position: relative;
-        }
-
-        .step-number {
-            font-size: 30px;
-            font-weight: bold;
-            color: #DC143C;
-            margin-bottom: 10px;
-        }
-
-        .step-content h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #DC143C;
-            font-weight: bold;
-        }
-
-        .step-content p {
-            font-size: 14px;
-            color: #DC143C;
-        }
-
-        .step-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .step-nav button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 40px;
-            color: #DC143C;
-        }
-
-        .step-nav button:hover {
-            color: #000;
-        }
-
-        .step-nav-right {
-            right: -50px;
-        }
-
-        .step-nav-left {
-            left: -50px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/step.css') }}">
 
 </head>
 
@@ -233,30 +129,6 @@
         $('#foto').change(function() {
             previewFoto(this);
         });
-    </script>
-
-    <script>
-        function showNextSteps() {
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'none';
-            document.getElementById('step4').style.display = 'none';
-            document.getElementById('step5').style.display = 'block';
-            document.getElementById('step6').style.display = 'block';
-            document.getElementById('step7').style.display = 'block';
-            document.getElementById('step8').style.display = 'block';
-        }
-
-        function showPreviousSteps() {
-            document.getElementById('step1').style.display = 'block';
-            document.getElementById('step2').style.display = 'block';
-            document.getElementById('step3').style.display = 'block';
-            document.getElementById('step4').style.display = 'block';
-            document.getElementById('step5').style.display = 'none';
-            document.getElementById('step6').style.display = 'none';
-            document.getElementById('step7').style.display = 'none';
-            document.getElementById('step8').style.display = 'none';
-        }
     </script>
 
 </body>

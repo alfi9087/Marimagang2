@@ -53,6 +53,7 @@ Route::get('/marimagang/verification/{user}', [MahasiswaController::class, 'veri
 // Route Mahasiswa
 Route::middleware(['auth:web'])->group(function () {
     Route::get('/marimagang/pengajuan/{id}', [DashboardMahasiswaController::class, 'pengajuan']);
+    Route::get('/marimagang/alurmagang/{id}', [DashboardMahasiswaController::class, 'alurmagang']);
     Route::get('/marimagang/anggota/{id}', [DashboardMahasiswaController::class, 'anggota']);
     Route::get('/marimagang/logbook/{id}', [DashboardMahasiswaController::class, 'logbook']);
     Route::post('/marimagang/logbook/store/{id}', [PengajuanController::class, 'logbook'])->name('logbook.store');

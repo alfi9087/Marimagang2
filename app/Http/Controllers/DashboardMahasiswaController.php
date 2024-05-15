@@ -22,7 +22,7 @@ class DashboardMahasiswaController extends Controller
         $user = User::findOrFail($id);
 
         $login = $user->verify == 1;
-        $profil = !empty($user->nama) && !empty($user->kampus) && !empty($user->jurusan) && !empty($user->prodi) && !empty($user->nim) && !empty($user->telepon) && !empty($user->email) && !empty($user->foto);
+        $profil = !empty($user->nama) && !empty($user->kampus) && !empty($user->jurusan) && !empty($user->prodi) && !empty($user->nim) && !empty($user->telepon) && !empty($user->email);
         $pengajuan = $user->pengajuan()->latest()->first();
         $pengajuanDiproses = $pengajuan && $pengajuan->status == 'Diproses';
         $pengajuanDiteruskan = $pengajuan && $pengajuan->status == 'Diteruskan';
@@ -123,5 +123,15 @@ class DashboardMahasiswaController extends Controller
         $skill = DB::table('skill')->select('id', 'nama as text')->where('databidang_id', $databidang_id)->get();
         $data = ['results' => $skill];
         return $data;
+    }
+
+    public function alurmagang(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('mahasiswa.alurmagang', [
+            'title' => 'Dashboard Mahasiswa',
+            'user' => $user,
+        ]);
     }
 }

@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/upload.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/alur.css') }}">
 
 </head>
 
