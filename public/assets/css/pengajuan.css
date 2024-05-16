@@ -277,7 +277,7 @@ header
 
 .header-area {
     background-color: #DC143C;
-    position: relative;
+    position: fixed;
     top: 0px;
     left: 0;
     right: 0;
