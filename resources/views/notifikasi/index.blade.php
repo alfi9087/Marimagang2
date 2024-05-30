@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/marimagang/forms">
+                    <a href="/forms">
                         <i class="fa fa-user"></i>
                         Login / Register
                     </a>

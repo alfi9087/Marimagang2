@@ -11,8 +11,8 @@
                         <h5 class="text-white op-7 mb-2">Mengelola Mahasiswa dan Pengajuan Magang</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <a href="/marimagang/user" class="btn btn-white btn-border btn-round mr-2">Kelola Mahasiswa</a>
-                        <a href="/marimagang/pengajuanadmin" class="btn btn-light btn-round">Kelola Permohonan</a>
+                        <a href="/user" class="btn btn-white btn-border btn-round mr-2">Kelola Mahasiswa</a>
+                        <a href="/pengajuanadmin" class="btn btn-light btn-round">Kelola Permohonan</a>
                     </div>
                 </div>
             </div>

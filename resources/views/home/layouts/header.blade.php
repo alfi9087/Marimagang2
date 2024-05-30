@@ -30,7 +30,7 @@
                         <li class="scroll-to-section"><a href="#meetings">Bidang Kerja</a></li>
                         <li class="scroll-to-section"><a href="#apply">Tanya Jawab</a></li>
                         <li class="scroll-to-section"><a href="#data">Data Statistik</a></li>
-                        <li><a href="/marimagang/forms">Login / Register</a></li>
+                        <li><a href="/forms">Login / Register</a></li>
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>

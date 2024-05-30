@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Akun</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardadmin">
+                        <a href="/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -67,7 +67,7 @@
                                             <td>
 
                                                 @if( $u->verify == 0)
-                                                <a href="/marimagang/verify/{{ $u->id }}">
+                                                <a href="/verify/{{ $u->id }}">
                                                     <button type="button" class="btn btn-danger">
                                                         <i class="fas fa-user-slash"></i> Block
                                                     </button>
@@ -75,7 +75,7 @@
 
                                                 @else
 
-                                                <a href="/marimagang/block/{{ $u->id }}" class="block-button-mahasiswa">
+                                                <a href="/block/{{ $u->id }}" class="block-button-mahasiswa">
                                                     <button type="button" class="btn btn-success">
                                                         <i class="fas fa-user-check"></i> Terverifikasi
                                                     </button>

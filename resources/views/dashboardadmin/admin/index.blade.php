@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Akun</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardadmin">
+                        <a href="/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -131,12 +131,12 @@
                                             <td>{{ $a->email }}</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="/marimagang/adminupdate/{{ $a->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $a->id }}">
+                                                    <a href="/adminupdate/{{ $a->id }}" style="margin-right: 10px;" data-toggle="modal" data-target="#edit-{{ $a->id }}">
                                                         <button type="button" class="btn btn-icon btn-round btn-info">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="/marimagang/admindelete/{{ $a->id }}" class="delete-button-admin" data-confirm-delete="true">
+                                                    <a href="/admindelete/{{ $a->id }}" class="delete-button-admin" data-confirm-delete="true">
                                                         <button type="button" class="btn btn-icon btn-round btn-danger">
                                                             <i class="far fa-trash-alt"></i>
                                                         </button>
@@ -158,7 +158,7 @@
 
                                                         <div class="container-fluid">
 
-                                                            <form method="POST" action="/marimagang/adminupdate/{{ $a->id }}" enctype="multipart/form-data">
+                                                            <form method="POST" action="/adminupdate/{{ $a->id }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method("put")
                                                                 <div class="form-group row">

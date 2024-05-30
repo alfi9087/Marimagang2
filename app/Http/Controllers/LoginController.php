@@ -28,18 +28,18 @@ class LoginController extends Controller
                 $user = Auth::user();
 
                 if ($user->verify == 0) {
-                    return redirect('/marimagang/notif');
+                    return redirect('/notif');
                 }
 
                 $request->session()->regenerate();
                 $mahasiswaId = $user->id;
-                return redirect('/marimagang/mahasiswa/' . $mahasiswaId);
+                return redirect('/mahasiswa/' . $mahasiswaId);
             }
 
             if (Auth::guard('admin')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
                 $request->session()->regenerate();
                 Session::put('level', 'admin');
-                return redirect('/marimagang/dashboardadmin');
+                return redirect('/dashboardadmin');
             }
 
             if (Auth::guard('bidang')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
@@ -49,7 +49,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
                 Session::put('level', 'bidang');
                 $bidang = $bidang->id;
-                return redirect('marimagang/dashboardbidang/' . $bidang);
+                return redirect('/dashboardbidang/' . $bidang);
             }
         } catch (Exception $e) {
             Log::error('Exception during login:', ['message' => $e->getMessage()]);
@@ -70,6 +70,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerate();
-        return redirect('/marimagang/forms');
+        return redirect('/forms');
     }
 }

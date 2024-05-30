@@ -229,7 +229,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form method="POST" action="/marimagang/mahasiswaupdate/{{ $user->id }}" enctype="multipart/form-data">
+                                                    <form method="POST" action="/mahasiswaupdate/{{ $user->id }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('put')
 

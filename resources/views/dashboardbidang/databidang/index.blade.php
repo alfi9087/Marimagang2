@@ -9,7 +9,7 @@
                 <h4 class="page-title">Kelola Konten</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -163,7 +163,7 @@
                                     </a>
                                 </h3>
                                 <p class="card-text">Bidang Sekretariat Untuk Mahasiswa Magang / PKL</p>
-                                <a href="/marimagang/detail/{{ $d->id }}" class="btn btn-primary btn-rounded btn-sm" style="float: right;">Detail</a>
+                                <a href="/detail/{{ $d->id }}" class="btn btn-primary btn-rounded btn-sm" style="float: right;">Detail</a>
                                 <form action="{{ route('databidangdelete', ['id' => $d->id]) }}" method="POST" class="bidang-delete">
                                     @csrf
                                     @method('DELETE')
@@ -171,13 +171,13 @@
                                 </form>
 
                                 @if( $d->status == 'Buka')
-                                <a href="/marimagang/close/{{ $d->id }}" class="close-button-bidang">
+                                <a href="/close/{{ $d->id }}" class="close-button-bidang">
                                     <button type="button" class="btn btn-success btn-rounded btn-sm">
                                         Status : Buka
                                     </button>
                                 </a>
                                 @else
-                                <a href="/marimagang/open/{{ $d->id }}">
+                                <a href="/open/{{ $d->id }}">
                                     <button type="button" class="btn btn-danger btn-rounded btn-sm">
                                         Status : Tutup
                                     </button>

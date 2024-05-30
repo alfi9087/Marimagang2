@@ -8,7 +8,7 @@
                 <h4 class="page-title">Pengajuan Ke Bidang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardadmin">
+                        <a href="/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -70,7 +70,7 @@
                                             <td>{{ $p->databidang->nama }}</td>
                                             <td><span class="badge badge-warning">{{ $p->status }}</span></td>
                                             <td>
-                                                <a href="/marimagang/userdetailadmin/{{ $p->id }}">
+                                                <a href="/userdetailadmin/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>

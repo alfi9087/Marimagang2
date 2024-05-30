@@ -8,7 +8,7 @@
                 <h4 class="page-title">Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardadmin">
+                        <a href="/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -32,7 +32,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">Data Magang</h4>
-                                <a href="/marimagang/pdfadmin" class="btn btn-sm btn-danger" style="color: white; text-decoration: none;"><i class="fa fa-download"></i> Cetak ke PDF</a>
+                                <a href="/pdfadmin" class="btn btn-sm btn-danger" style="color: white; text-decoration: none;"><i class="fa fa-download"></i> Cetak ke PDF</a>
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="/marimagang/userdetailadmin/{{ $p->id }}">
+                                                <a href="/userdetailadmin/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>
@@ -135,7 +135,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="/marimagang/selesai" enctype="multipart/form-data">
+                                                    <form method="POST" action="/selesai" enctype="multipart/form-data">
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">

@@ -20,7 +20,7 @@
 
             <ul class="nav nav-primary">
                 <li class="nav-item">
-                    <a href="/marimagang/dashboardadmin">
+                    <a href="/dashboardadmin">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -40,12 +40,12 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/marimagang/admin">
+                                <a href="/admin">
                                     <span class="sub-item">Admin</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/marimagang/user">
+                                <a href="/user">
                                     <span class="sub-item">Mahasiswa</span>
                                 </a>
                             </li>
@@ -61,17 +61,17 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/marimagang/pengajuanadmin">
+                                <a href="/pengajuanadmin">
                                     <span class="sub-item">Pengajuan Magang</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/marimagang/pengajuanditeruskan">
+                                <a href="/pengajuanditeruskan">
                                     <span class="sub-item">Pengajuan Ke Bidang</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="/marimagang/pengajuanaccadmin">
+                                <a href="/pengajuanaccadmin">
                                     <span class="sub-item">Pengajuan Dikonfirmasi</span>
                                 </a>
                             </li>
@@ -87,7 +87,7 @@
                     <div class="collapse" id="charts">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="/marimagang/magang">
+                                <a href="/magang">
                                     <span class="sub-item">Data Magang</span>
                                 </a>
                             </li>
@@ -95,7 +95,7 @@
                     </div>
                 </li>
                 <li class="mx-4 mt-2">
-                    <a href="/marimagang/logout" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
+                    <a href="/logout" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fas fa-sign-out-alt"></i> </span>Logout</a>
                 </li>
             </ul>
         </div>

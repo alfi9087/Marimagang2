@@ -62,7 +62,7 @@
         </div>
         <div class="content">
             <p>Verifikasi Email Anda Dengan Klik Button Dibawah :</p>
-            <a href="{{ url('/marimagang/verification/' . $user->id) }}" class="button">Verifikasi Akun</a>
+            <a href="{{ url('/verification/' . $user->id) }}" class="button">Verifikasi Akun</a>
         </div>
         <div class="footer">
             <p>This is an automated email. Please do not reply to this email.</p>

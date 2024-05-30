@@ -8,7 +8,7 @@
                 <h4 class="page-title">Pengajuan Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardadmin">
+                        <a href="/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -77,7 +77,7 @@
                                             <td>Tidak Ada</td>
                                             @endif
                                             <td>
-                                                <a href="/marimagang/userdetailadmin/{{ $p->id }}">
+                                                <a href="/userdetailadmin/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>
@@ -116,7 +116,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="/marimagang/diteruskan/{{ $p->id }}" enctype="multipart/form-data">
+                                                    <form method="POST" action="/diteruskan/{{ $p->id }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">
@@ -158,7 +158,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="/marimagang/ditolakadmin/{{ $p->id }}" enctype="multipart/form-data">
+                                                    <form method="POST" action="/ditolakadmin/{{ $p->id }}" enctype="multipart/form-data">
                                                         @csrf
                                                         @method("put")
                                                         <div class="modal-body">

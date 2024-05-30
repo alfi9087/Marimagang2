@@ -8,7 +8,7 @@
                 <h4 class="page-title">Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -32,7 +32,7 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">Data Magang</h4>
-                                <a href="/marimagang/pdfbidang/{{ $bidang->id }}" class="btn btn-sm btn-danger" style="color: white; text-decoration: none;"><i class="fa fa-download"></i> Cetak ke PDF</a>
+                                <a href="/pdfbidang/{{ $bidang->id }}" class="btn btn-sm btn-danger" style="color: white; text-decoration: none;"><i class="fa fa-download"></i> Cetak ke PDF</a>
                             </div>
                         </div>
 
@@ -74,7 +74,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="/marimagang/userdetailbidang/{{ $p->id }}">
+                                                <a href="/userdetailbidang/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>

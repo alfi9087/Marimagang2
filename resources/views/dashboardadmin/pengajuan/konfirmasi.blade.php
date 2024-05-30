@@ -8,7 +8,7 @@
                 <h4 class="page-title">Pengajuan Dikonfirmasi</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardadmin">
+                        <a href="/dashboardadmin">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -88,7 +88,7 @@
                                                             Lihat Komentar
                                                         </button>
                                                         @else
-                                                        <a class="dropdown-item" href="/marimagang/userdetailadmin/{{ $p->id }}">
+                                                        <a class="dropdown-item" href="/userdetailadmin/{{ $p->id }}">
                                                             Lihat Detail User
                                                         </a>
 
@@ -111,7 +111,7 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form method="POST" action="/marimagang/diterimaadmin/{{ $p->id }}" enctype="multipart/form-data">
+                                                        <form method="POST" action="/diterimaadmin/{{ $p->id }}" enctype="multipart/form-data">
                                                             @csrf
                                                             @method("put")
                                                             <div class="modal-body">

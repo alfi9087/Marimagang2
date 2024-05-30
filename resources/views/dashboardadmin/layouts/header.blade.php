@@ -1,7 +1,7 @@
 <div class="main-header">
     <div class="logo-header" data-background-color="red">
 
-        <a href="/marimagang/dashboardadmin" class="logo" style="color: white;">
+        <a href="/dashboardadmin" class="logo" style="color: white;">
             Mari Magang
         </a>
 
@@ -59,9 +59,9 @@
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/marimagang/admin">Kelola Akun</a>
+                                <a class="dropdown-item" href="/admin">Kelola Akun</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/marimagang/logout">Logout</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
                             </li>
                         </div>
                     </ul>

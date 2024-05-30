@@ -9,7 +9,7 @@
                 <h4 class="page-title">Detail Mahasiswa</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/marimagang/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/dashboardbidang/{{ $bidang->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
