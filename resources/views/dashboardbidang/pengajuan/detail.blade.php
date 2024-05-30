@@ -373,8 +373,8 @@
                                                 </div>
                                                 <div class="col-sm-6 text-right">
                                                     @if ($pengajuan->nilai)
-                                                    <a href="{{ asset('storage/' . $pengajuan->nilai) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
-                                                        <i class="fa fa-eye"></i>
+                                                    <a href="{{ asset('storage/' . $pengajuan->nilai) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
                                                     </a>
                                                     @else
                                                     <p class="text-muted mb-0">File Belum Tersedia</p>

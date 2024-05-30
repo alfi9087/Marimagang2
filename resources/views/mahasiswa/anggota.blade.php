@@ -74,7 +74,7 @@
                                                                 <form method="POST" action="{{ route('tambah.anggota', ['id' => $user->id]) }}" enctype="multipart/form-data">
                                                                     @csrf
                                                                     <input type="hidden" name="id_pengajuan" value="{{ request()->query('id_pengajuan') }}">
-                                                                    <input type="hidden" name="user_id" value="{{ $p->user_id }}">
+                                                                    <input type="hidden" name="user_id" value="{{ $user->id ?? '' }}">
                                                                     <div class="modal-body">
                                                                         <div class="form-row">
                                                                             <div class="form-group">
@@ -133,7 +133,7 @@
                                                                             <form action="{{ route('edit.anggota', ['id' => $anggota->id]) }}" method="POST">
                                                                                 @csrf
                                                                                 @method('PUT')
-                                                                                <input type="hidden" name="user_id" value="{{ $p->user_id }}">
+                                                                                <input type="hidden" name="user_id" value="{{ $anggota->user_id }}">
                                                                                 <div class="form-row">
                                                                                     <div class="form-group">
                                                                                         <label for="nama">Nama:</label>
@@ -172,7 +172,7 @@
                                                                             <form action="{{ route('delete.anggota', ['id' => $anggota->id]) }}" method="POST">
                                                                                 @csrf
                                                                                 @method('DELETE')
-                                                                                <input type="hidden" name="user_id" value="{{ $p->user_id }}">
+                                                                                <input type="hidden" name="user_id" value="{{ $anggota->user_id }}">
                                                                                 <button type="submit" class="btn btn-danger">Hapus</button>
                                                                             </form>
                                                                         </div>

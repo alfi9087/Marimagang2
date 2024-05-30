@@ -610,7 +610,7 @@
             $('#skill').empty();
             var databidang_id = $(this)
                 .val();
-            $.get("{{ url('marimagang/pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
+            $.get("{{ url('/pengajuan/pilihan-skill') }}/" + databidang_id, function(data, status) {
 
                 $("#skill").select2({
                     data: data.results,

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h6>Detail</h6>
-                <h2>Bidang Sekretariat</h2>
+                <h2>Bidang Kerja Kominfo</h2>
             </div>
         </div>
     </div>
