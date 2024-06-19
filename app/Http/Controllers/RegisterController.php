@@ -13,13 +13,11 @@ class RegisterController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'nim' => 'required|numeric|digits:10|unique:users',
+                'nim' => 'required|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:8|max:50',
             ], [
                 'nim.required' => 'NIM field is required',
-                'nim.numeric' => 'NIM field must be numeric',
-                'nim.digits' => 'NIM field must be 10 digits',
                 'nim.unique' => 'NIM has already been taken',
                 'email.required' => 'Email field is required',
                 'email.email' => 'Please enter a valid email address',

@@ -15,6 +15,7 @@ class DataBidang extends Model
         'thumbnail',
         'photo',
         'deskripsi',
+        'kuota',
         'status'
     ];
 

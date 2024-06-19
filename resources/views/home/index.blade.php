@@ -105,6 +105,7 @@
                             <h4 style="margin: 0; padding: 0;">{{ $d->nama }}</h4>
                         </a>
                         <p style="margin: 0; padding: 0;">Bidang Kerja Untuk Mahasiswa Magang / PKL</p>
+                        <p style="margin: 0; padding: 0;">Kuota Peserta Magang : {{ $d->kuota }}</p>
                     </div>
                 </div>
             </div>

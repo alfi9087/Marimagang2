@@ -31,6 +31,7 @@ class DataBidangSeeder extends Seeder
                 'photo' => 'bidang/photos/struktur.jpg',
                 'deskripsi' => 'Deskripsi Databidang Sekretariat',
                 'status' => 'Buka',
+                'kuota' => 5,
             ],
             [
                 'bidang_id' => '2',
@@ -39,6 +40,7 @@ class DataBidangSeeder extends Seeder
                 'photo' => 'bidang/photos/struktur.jpg',
                 'deskripsi' => 'Deskripsi Databidang Aptika',
                 'status' => 'Buka',
+                'kuota' => 5,
             ],
             [
                 'bidang_id' => '3',
@@ -47,6 +49,7 @@ class DataBidangSeeder extends Seeder
                 'photo' => 'bidang/photos/struktur.jpg',
                 'deskripsi' => 'Deskripsi Databidang Infrastruktur',
                 'status' => 'Buka',
+                'kuota' => 5,
             ],
             [
                 'bidang_id' => '4',
@@ -55,6 +58,7 @@ class DataBidangSeeder extends Seeder
                 'photo' => 'bidang/photos/struktur.jpg',
                 'deskripsi' => 'Deskripsi Databidang Komunikasi',
                 'status' => 'Buka',
+                'kuota' => 5,
             ],
             [
                 'bidang_id' => '5',
@@ -63,6 +67,7 @@ class DataBidangSeeder extends Seeder
                 'photo' => 'bidang/photos/struktur.jpg',
                 'deskripsi' => 'Deskripsi Databidang Statistik',
                 'status' => 'Buka',
+                'kuota' => 5,
             ],
         ];
 

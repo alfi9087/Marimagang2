@@ -20,6 +20,7 @@ class DataBidangController extends Controller
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'deskripsi' => 'required',
+                'kuota' => 'required|integer|min:1', 
                 'skill.*' => 'required',
             ]);
 
@@ -33,6 +34,7 @@ class DataBidangController extends Controller
             $databidang->photo = $photoPath;
             $databidang->deskripsi = $validatedData['deskripsi'];
             $databidang->status = 'Buka';
+            $databidang->kuota = $validatedData['kuota']; 
 
             $databidang->save();
 

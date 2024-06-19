@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DataBidang;
 use App\Models\User;
+use App\Models\Pengajuan;
 
 class HomeController extends Controller
 {
@@ -30,12 +31,14 @@ class HomeController extends Controller
     public function detail($id)
     {
         $databidang = DataBidang::findOrFail($id);
-
         $skill = $databidang->skill;
+        $pengajuan = Pengajuan::where('databidang_id', $id)->where('status', 'Magang')->paginate(10); // Paginate with 10 records per page
+
         return view('home.detail', [
             'title' => 'Home',
             'databidang' => $databidang,
-            'skill' => $skill
+            'skill' => $skill,
+            'pengajuan' => $pengajuan
         ]);
     }
 }

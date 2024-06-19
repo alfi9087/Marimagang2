@@ -413,7 +413,7 @@ class PengajuanController extends Controller
         try {
             $validatedData = $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
-                'nim' => 'required|numeric|digits:10',
+                'nim' => 'required',
             ]);
 
             $user_id = auth()->user()->id;
@@ -449,7 +449,7 @@ class PengajuanController extends Controller
         try {
             $validatedData = $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
-                'nim' => 'required|numeric|regex:/^[0-9]{1,10}$/|unique:anggota,nim,' . $id,
+                'nim' => 'required|unique:anggota,nim,' . $id,
             ]);
 
             $anggota = Anggota::findOrFail($id);

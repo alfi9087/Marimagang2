@@ -137,6 +137,19 @@
                                 </div>
 
                                 <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kuota</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control @error('kuota') is-invalid @enderror" name="kuota" id="kuota" placeholder="Kuota" value="{{ old('kuota') }}" />
+
+                                        @error('kuota')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
                                     <div class="col-sm-9 offset-sm-3">
                                         <button type="submit" class="btn btn-primary float-right">Submit</button>
                                     </div>

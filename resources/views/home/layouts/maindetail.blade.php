@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 
+    <style>
+        .page-item.active .page-link {
+            background-color: #DC143C;
+            border-color: #DC143C;
+            color: #fff;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body>

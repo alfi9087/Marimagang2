@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('deskripsi')->nullable();
             $table->enum('status', ['Buka', 'Tutup']);
+            $table->unsignedInteger('kuota')->default(0);
             $table->timestamps();
 
             $table->foreign('bidang_id')->references('id')->on('bidangs')->onDelete('cascade');
