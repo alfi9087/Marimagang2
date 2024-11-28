@@ -25,7 +25,7 @@ class DataBidangSeeder extends Seeder
 
         $bidangData = [
             [
-                'bidang_id' => '1',
+                'admin_id' => '3',
                 'nama' => 'Sekretariat',
                 'thumbnail' => 'bidang/thumbnails/bidang-sekretariat.jpg',
                 'photo' => 'bidang/photos/struktur.jpg',
@@ -34,7 +34,7 @@ class DataBidangSeeder extends Seeder
                 'kuota' => 5,
             ],
             [
-                'bidang_id' => '2',
+                'admin_id' => '4',
                 'nama' => 'Bidang Aptika',
                 'thumbnail' => 'bidang/thumbnails/bidang-aptika.jpg',
                 'photo' => 'bidang/photos/struktur.jpg',
@@ -43,7 +43,7 @@ class DataBidangSeeder extends Seeder
                 'kuota' => 5,
             ],
             [
-                'bidang_id' => '3',
+                'admin_id' => '5',
                 'nama' => 'Bidang Infrastruktur',
                 'thumbnail' => 'bidang/thumbnails/bidang-infrastruktur.jpg',
                 'photo' => 'bidang/photos/struktur.jpg',
@@ -52,7 +52,7 @@ class DataBidangSeeder extends Seeder
                 'kuota' => 5,
             ],
             [
-                'bidang_id' => '4',
+                'admin_id' => '6',
                 'nama' => 'Bidang Komunikasi',
                 'thumbnail' => 'bidang/thumbnails/bidang-komunikasi.jpg',
                 'photo' => 'bidang/photos/struktur.jpg',
@@ -61,7 +61,7 @@ class DataBidangSeeder extends Seeder
                 'kuota' => 5,
             ],
             [
-                'bidang_id' => '5',
+                'admin_id' => '7',
                 'nama' => 'Bidang Statistik',
                 'thumbnail' => 'bidang/thumbnails/bidang-statistik.jpg',
                 'photo' => 'bidang/photos/struktur.jpg',
@@ -79,8 +79,8 @@ class DataBidangSeeder extends Seeder
             'Pengolahan Data',
         ];
 
-        foreach ($bidangData as $index => $bidang) {
-            $databidang = Databidang::create($bidang);
+        foreach ($bidangData as $index => $admin) {
+            $databidang = Databidang::create($admin);
 
             Skill::create([
                 'databidang_id' => $databidang->id,

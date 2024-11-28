@@ -8,8 +8,13 @@
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
+                            @role('superadmin')
                             Admin
-                            <span class="user-level">Mari Magang</span>
+                            @endrole
+                            @role('adminbidang')
+                            Bidang {{ auth()->user()->nama }}
+                            @endrole
+                            <span class="user-level">Persuma</span>
                         </span>
                     </a>
 
@@ -19,12 +24,14 @@
             </div>
 
             <ul class="nav nav-primary">
+                @hasanyrole('superadmin|adminbidang')
                 <li class="nav-item">
-                    <a href="/dashboardadmin">
+                    <a href="/dashboardadmin/ {{ auth()->user()->id }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
+                @endrole
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
@@ -49,9 +56,37 @@
                                     <span class="sub-item">Mahasiswa</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/jurusan">
+                                    <span class="sub-item">Jurusan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/prodi">
+                                    <span class="sub-item">Prodi</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
+                @role('adminbidang')
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#sidebarLayouts">
+                        <i class="fas fa-laptop"></i>
+                        <p>Data Bidang</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLayouts">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="/databidang/{{ auth()->user()->id }}">
+                                    <span class="sub-item">Kelola Bidang</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @endrole
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#forms">
                         <i class="fas fa-book"></i>
@@ -60,6 +95,7 @@
                     </a>
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
+                            @role('superadmin')
                             <li>
                                 <a href="/pengajuanadmin">
                                     <span class="sub-item">Pengajuan Magang</span>
@@ -75,6 +111,21 @@
                                     <span class="sub-item">Pengajuan Dikonfirmasi</span>
                                 </a>
                             </li>
+                            @endrole
+                            @role('adminbidang')
+                            <li>
+                                <a href="/pengajuanbidang/{{ auth()->user()->id }}">
+                                    <span class="sub-item">Pengajuan dari bidang</span>
+                                </a>
+                            </li>
+                            @endrole
+                            @role('superadmin')
+                            <li>
+                                <a href="/pengajuanbidangsuper">
+                                    <span class="sub-item">Pengajuan dari bidang</span>
+                                </a>
+                            </li>
+                            @endrole
                         </ul>
                     </div>
                 </li>
@@ -86,11 +137,20 @@
                     </a>
                     <div class="collapse" id="charts">
                         <ul class="nav nav-collapse">
+                            @role('superadmin')
                             <li>
                                 <a href="/magang">
                                     <span class="sub-item">Data Magang</span>
                                 </a>
                             </li>
+                            @endrole
+                            @role('adminbidang')
+                            <li>
+                                <a href="/magangbidang/{{ auth()->user()->id }}">
+                                    <span class="sub-item">Data Magang</span>
+                                </a>
+                            </li>
+                            @endrole
                         </ul>
                     </div>
                 </li>

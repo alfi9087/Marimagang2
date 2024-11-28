@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama')->nullable();
             $table->string('kampus')->nullable();
-            $table->string('jurusan')->nullable();
-            $table->string('prodi')->nullable();
+            $table->unsignedBigInteger('jurusan_id')->nullable();
+            $table->unsignedBigInteger('prodi_id')->nullable();
             $table->string('nim')->unique();
             $table->string('telepon')->unique()->nullable();
             $table->string('email')->unique();
@@ -28,6 +28,9 @@ return new class extends Migration
             $table->integer('verify')->default(0);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('jurusan_id')->references('id')->on('jurusan')->onDelete('set null');
+            $table->foreign('prodi_id')->references('id')->on('prodi')->onDelete('set null');
         });
     }
 

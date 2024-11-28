@@ -28,14 +28,10 @@ class PengajuanController extends Controller
                 'databidang_id' => 'required|exists:databidang,id',
                 'skill' => 'required|array',
                 'bukti' => 'required|mimes:pdf|max:2048',
-                'deskripsi' => ['required', function ($attribute, $value, $fail) {
-                    $wordCount = str_word_count($value);
-                    if ($wordCount < 20) {
-                        $fail('The ' . $attribute . ' must be at least 20 words.');
-                    }
-                }],
+                'deskripsi',
                 'pengantar' => 'required|mimes:pdf|max:2048',
                 'proposal' => 'required|mimes:pdf|max:2048',
+                'cv' => 'nullable|mimes:pdf|max:800',
             ], [
                 'start_date.required' => 'Tanggal Mulai is required',
                 'start_date.date' => 'Invalid Tanggal Mulai format',
@@ -50,13 +46,14 @@ class PengajuanController extends Controller
                 'bukti.required' => 'Bukti is required',
                 'bukti.mimes' => 'Bukti must be in PDF format',
                 'bukti.max' => 'Bukti may not be greater than 2 MB',
-                'deskripsi.required' => 'Deskripsi is required',
                 'pengantar.required' => 'Surat Pengantar is required',
                 'pengantar.mimes' => 'Surat Pengantar must be in PDF format',
                 'pengantar.max' => 'Surat Pengantar may not be greater than 2 MB',
                 'proposal.required' => 'Proposal is required',
                 'proposal.mimes' => 'Proposal must be in PDF format',
                 'proposal.max' => 'Proposal may not be greater than 2 MB',
+                'cv.mimes' => 'cv must be in PDF format',
+                'cv.max' => 'cv may not be greater than 800 KB',
             ]);
 
             $user_id = $request->input('user_id');
@@ -74,6 +71,7 @@ class PengajuanController extends Controller
                     'bukti' => $request->file('bukti')->store('bukti', 'public'),
                     'pengantar' => $request->file('pengantar')->store('pengantar', 'public'),
                     'proposal' => $request->file('proposal')->store('proposal', 'public'),
+                    'cv' => $request->file('cv')->store('cv', 'public'),
                 ]);
 
                 session(['pengajuan_id' => $pengajuan->id]);

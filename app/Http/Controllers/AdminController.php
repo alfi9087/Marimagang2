@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin;
+use App\Models\DataBidang;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        $databidang = DataBidang::all();
+
+        return view('dashboardadmin.admin.index', compact('databidang'));
+    }
     public function store(Request $request)
     {
         try {
@@ -20,7 +27,7 @@ class AdminController extends Controller
 
             $validatedData['password'] = bcrypt($validatedData['password']);
 
-            Admin::create($validatedData);
+            Admin::create($validatedData)->assignRole('adminbidang');
 
             Alert::success('Sukses', 'Data Admin Berhasil Ditambahkan')->showConfirmButton();
 

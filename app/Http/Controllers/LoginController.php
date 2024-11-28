@@ -37,19 +37,11 @@ class LoginController extends Controller
             }
 
             if (Auth::guard('admin')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
+                $bidang = Auth::guard('admin')->user();
                 $request->session()->regenerate();
                 Session::put('level', 'admin');
-                return redirect('/dashboardadmin');
-            }
-
-            if (Auth::guard('bidang')->attempt(['email' => $credentials['emaillogin'], 'password' => $credentials['passwordlogin']])) {
-
-                $bidang = Auth::guard('bidang')->user();
-
-                $request->session()->regenerate();
-                Session::put('level', 'bidang');
                 $bidang = $bidang->id;
-                return redirect('/dashboardbidang/' . $bidang);
+                return redirect('/dashboardadmin/' . $bidang);
             }
         } catch (Exception $e) {
             Log::error('Exception during login:', ['message' => $e->getMessage()]);
@@ -62,8 +54,6 @@ class LoginController extends Controller
     {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-        } elseif (Auth::guard('bidang')->check()) {
-            Auth::guard('bidang')->logout();
         } else {
             Auth::logout();
         }

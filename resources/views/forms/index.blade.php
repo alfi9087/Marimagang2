@@ -30,6 +30,7 @@
             @enderror
             <br>
             <button type="submit">Daftar</button>
+            <p id="back"><a href="/">Kembali ke halaman awal</a></p>
         </form>
 
     </div>
@@ -78,6 +79,7 @@
             @enderror
             <br>
             <button type="submit">Masuk</button>
+            <p id="back"><a href="/">Kembali ke halaman awal</a></p>
         </form>
     </div>
 

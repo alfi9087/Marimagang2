@@ -44,9 +44,11 @@
 
     <script>
         const leftBox = document.getElementById('left-box');
+        const centerBox = document.getElementById('center-box');
         const rightBox = document.getElementById('right-box');
         const proposalInfo = document.getElementById('proposal-info');
         const pengantarInfo = document.getElementById('pengantar-info');
+        const cvInfo = document.getElementById('cv-info');
 
         leftBox.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -64,6 +66,22 @@
             handleUploadedFile(file, proposalInfo, 'proposal');
         });
 
+        centerBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            centerBox.style.border = '2px dashed #007bff';
+        });
+
+        centerBox.addEventListener('dragleave', () => {
+            centerBox.style.border = '2px dashed #ccc';
+        });
+
+        centerBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            centerBox.style.border = '2px dashed #ccc';
+            const file = e.dataTransfer.files[0];
+            handleUploadedFile(file, pengantarInfo, 'pengantar');
+        });
+
         rightBox.addEventListener('dragover', (e) => {
             e.preventDefault();
             rightBox.style.border = '2px dashed #007bff';
@@ -77,15 +95,19 @@
             e.preventDefault();
             rightBox.style.border = '2px dashed #ccc';
             const file = e.dataTransfer.files[0];
-            handleUploadedFile(file, pengantarInfo, 'pengantar');
+            handleUploadedFile(file, cvInfo, 'cv');
         });
 
         leftBox.addEventListener('click', () => {
             document.getElementById('proposal').click();
         });
+        
+        centerBox.addEventListener('click', () => {
+            document.getElementById('pengantar').click();
+        });
 
         rightBox.addEventListener('click', () => {
-            document.getElementById('pengantar').click();
+            document.getElementById('cv').click();
         });
 
         function handleUploadedFile(file, infoContainer, type) {
@@ -111,6 +133,11 @@
         document.getElementById('pengantar').addEventListener('change', function(e) {
             const file = e.target.files[0];
             handleUploadedFile(file, pengantarInfo, 'pengantar');
+        });
+
+        document.getElementById('cv').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            handleUploadedFile(file, cvInfo, 'cv');
         });
     </script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

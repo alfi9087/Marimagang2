@@ -1,4 +1,4 @@
-@extends('dashboardbidang.layouts.main')
+@extends('dashboardadmin.layouts.main')
 
 @section('content')
 
@@ -9,7 +9,7 @@
                 <h4 class="page-title">Kelola Konten</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardbidang">
+                        <a href="/dashboardadmin/{{ auth()->user()->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a href="/databidang/{{ $bidang->id }}" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
+                            <a href="/databidang/{{ $databidang->admin_id }}" class="btn btn-round" style="color: black; background-color: white; border: 1px solid black;">Kembali</a>
                         </div>
                     </div>
                 </div>

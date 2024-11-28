@@ -32,6 +32,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'created_at'
     ];
 
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'prodi_id');
+    }
+
     public function anggota()
     {
         return $this->hasMany(Anggota::class, 'user_id');

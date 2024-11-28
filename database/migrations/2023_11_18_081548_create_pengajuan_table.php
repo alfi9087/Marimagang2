@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('bukti')->nullable();
             $table->string('pengantar')->nullable();
             $table->string('proposal')->nullable();
+            $table->string('cv')->nullable();
             $table->string('kesediaan')->nullable();
             $table->string('kesbangpol')->nullable();
             $table->string('laporan')->nullable();

@@ -9,7 +9,7 @@
                 <h4 class="page-title">Detail Mahasiswa</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardadmin">
+                        <a href="/dashboardadmin/{{ auth()->user()->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -201,7 +201,7 @@
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <p class="text-muted mb-0">
-                                                        {{ $pengajuan->user->jurusan }}
+                                                        {{ $pengajuan->user->jurusan->nama_jurusan }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -212,7 +212,7 @@
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <p class="text-muted mb-0">
-                                                        {{ $pengajuan->user->prodi }}
+                                                        {{ $pengajuan->user->prodi->nama_prodi }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -286,6 +286,24 @@
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a href="{{ asset('storage/' . $pengajuan->proposal) }}" download class="btn btn-sm btn-success rounded-circle">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    @else
+                                                    <p class="text-muted mb-0">File Belum Tersedia</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <p class="mb-0"><i class="fa fa-file-pdf-o"></i> CV</p>
+                                                </div>
+                                                <div class="col-sm-6 text-right">
+                                                    @if ($pengajuan->cv)
+                                                    <a href="{{ asset('storage/' . $pengajuan->cv) }}" target="_blank" class="btn btn-sm btn-primary rounded-circle">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{ asset('storage/' . $pengajuan->cv) }}" download class="btn btn-sm btn-success rounded-circle">
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     @else

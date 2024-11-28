@@ -119,6 +119,167 @@
 
     <script>
         $(document).ready(function() {
+            $('.bidang').click(function(e) {
+                e.preventDefault();
+                var deleteUrl = $(this).attr('href');
+                swal({
+                    title: 'Apakah Kamu Yakin?',
+                    text: "Data yang dihapus tidak dapat dikembalikan",
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: 'Tidak, Batalkan!',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: 'Ya, Hapus Data!',
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = deleteUrl;
+                    }
+                });
+            });
+
+            $('.close-button-bidang').click(function(e) {
+                e.preventDefault();
+                var blockUrl = $(this).attr('href');
+                swal({
+                    title: 'Apakah kamu yakin?',
+                    text: "Bidang Yang Ditutup Tidak Dapat Diambil Oleh Mahasiswa",
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: 'Tidak, Batalkan!',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: 'Ya, Tutup Bidang!',
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = blockUrl;
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <script>
+        function previewThumbnail() {
+            var thumbnailInput = document.getElementById('thumbnail');
+            var thumbnailPreview = document.getElementById('thumbnail-preview');
+
+            thumbnailInput.addEventListener('change', function() {
+                var file = thumbnailInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    thumbnailPreview.src = e.target.result;
+                    thumbnailPreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function previewPhoto() {
+            var photoInput = document.getElementById('photo');
+            var photoPreview = document.getElementById('photo-preview');
+
+            photoInput.addEventListener('change', function() {
+                var file = photoInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    photoPreview.src = e.target.result;
+                    photoPreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        window.addEventListener('load', function() {
+            previewThumbnail();
+            previewPhoto();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('.addmulti').on('click', function() {
+            addmulti();
+        });
+
+        function addmulti() {
+            var multi = '<div class="form-group row"><label class="col-sm-3 col-form-label">Skill</label><div class="col-sm-8"><input type="text" class="form-control @error('
+            skill ') is-invalid @enderror" name="skill[]" id="skill" placeholder="Skill Yang Dibutuhkan" value="{{ is_array(old('
+            skill ')) ? old('
+            skill ')[0] : old('
+            skill ') }}" />@error('
+            skill ')<div class="invalid-feedback">{{ $message }}</div>@enderror</div><div class="col-sm-1"><a href="#" class="remove btn btn-danger plus float-right">-</a></div></div>';
+            $('.multi').append(multi);
+        };
+
+        $(document).on('click', '.remove', function() {
+            $(this).parent().parent().remove();
+        });
+    </script>
+
+    <script>
+        var SweetAlert2Demo = function() {
+
+            var initDemos = function() {
+
+                $('.bidang-delete').submit(function(e) {
+                    e.preventDefault();
+
+                    var deleteUrl = $(this).attr('action');
+
+                    swal({
+                        title: 'Apakah Kamu Yakin?',
+                        text: "Data yang dihapus tidak dapat dikembalikan",
+                        type: 'warning',
+                        buttons: {
+                            cancel: {
+                                visible: true,
+                                text: 'Tidak, batalkan!',
+                                className: 'btn btn-danger'
+                            },
+                            confirm: {
+                                text: 'Ya, hapus data!',
+                                className: 'btn btn-success'
+                            }
+                        }
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            window.location.href = deleteUrl;
+                        }
+                    });
+                });
+            };
+
+            return {
+                init: function() {
+                    initDemos();
+                },
+            };
+        }();
+
+        jQuery(document).ready(function() {
+            SweetAlert2Demo.init();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
             $('.delete-button-admin').click(function(e) {
                 e.preventDefault();
                 var deleteUrl = $(this).attr('href');

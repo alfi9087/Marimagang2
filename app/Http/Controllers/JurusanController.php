@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Bidang;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class BidangController extends Controller
+class JurusanController extends Controller
 {
     public function store(Request $request)
     {
         try {
             $validatedData = $request->validate([
-                'nama' => 'required|max:70',
-                'email' => 'required|email|unique:admins',
-                'password' => 'required|min:8'
+                'nama_jurusan' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
             ]);
 
-            $validatedData['password'] = bcrypt($validatedData['password']);
+            Jurusan::create($validatedData);
 
-            Bidang::create($validatedData);
-
-            Alert::success('Sukses', 'Data Akun Bidang Berhasil Ditambahkan')->showConfirmButton();
+            Alert::success('Sukses', 'Data Jurusan Berhasil Ditambahkan')->showConfirmButton();
 
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -38,26 +34,23 @@ class BidangController extends Controller
     {
         try {
             $request->validate([
-                'nama' => 'required|max:70',
-                'email' => 'email:dns|unique:admins,email,' . $id,
+                'nama_jurusan' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
             ]);
 
-            $bidang = Bidang::find($id);
+            $jurusan = Jurusan::find($id);
 
-            if (!$bidang) {
-                Alert::error('Error', 'Admin tidak ditemukan')->showConfirmButton();
+            if (!$jurusan) {
+                Alert::error('Error', 'Jurusan tidak ditemukan')->showConfirmButton();
                 return redirect()->back();
             }
 
-            $oldNama = $bidang->nama;
-            $oldEmail = $bidang->email;
+            $oldNama = $jurusan->nama_jurusan;
 
-            $bidang->nama = $request->nama;
-            $bidang->email = $request->email;
-            $bidang->save();
+            $jurusan->nama_jurusan = $request->nama_jurusan;
+            $jurusan->save();
 
-            if ($bidang->nama !== $oldNama || $bidang->email !== $oldEmail) {
-                Alert::success('Sukses', 'Data Akun Bidang Berhasil Diperbarui')->showConfirmButton();
+            if ($jurusan->nama_jurusan !== $oldNama) {
+                Alert::success('Sukses', 'Data jurusan Berhasil Diperbarui')->showConfirmButton();
             }
 
             return redirect()->back();
@@ -73,8 +66,8 @@ class BidangController extends Controller
     public function delete(Request $request)
     {
         try {
-            Bidang::destroy($request->id);
-            Alert::success('Sukses', 'Data Bidang Berhasil Dihapus')->showConfirmButton();
+            Jurusan::destroy($request->id);
+            Alert::success('Sukses', 'Data Jurusan Berhasil Dihapus')->showConfirmButton();
             return redirect()->back();
         } catch (\Illuminate\Validation\ValidationException $e) {
             Alert::error('Error', 'An error occurred: ' . $e->getMessage())->showConfirmButton();

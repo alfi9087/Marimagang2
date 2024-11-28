@@ -15,7 +15,7 @@ class DataBidangController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'bidang_id' => 'required|exists:bidangs,id',
+                'admin_id' => 'required|exists:admins,id',
                 'nama' => 'required|string|max:255',
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -24,11 +24,11 @@ class DataBidangController extends Controller
                 'skill.*' => 'required',
             ]);
 
-            $thumbnailPath = $request->file('thumbnail')->store('bidang/thumbnails');
-            $photoPath = $request->file('photo')->store('bidang/photos');
+            $thumbnailPath = $request->file('thumbnail')->store('admin/thumbnails');
+            $photoPath = $request->file('photo')->store('admin/photos');
 
             $databidang = new DataBidang;
-            $databidang->bidang_id = $validatedData['bidang_id'];
+            $databidang->admin_id = $validatedData['admin_id'];
             $databidang->nama = $validatedData['nama'];
             $databidang->thumbnail = $thumbnailPath;
             $databidang->photo = $photoPath;

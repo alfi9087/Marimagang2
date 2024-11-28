@@ -8,7 +8,7 @@
                 <h4 class="page-title">Pengajuan Ke Bidang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardadmin">
+                        <a href="/dashboardadmin/{{ auth()->user()->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>

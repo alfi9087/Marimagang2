@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Anggota;
 use App\Models\Pengajuan;
 use App\Models\DataBidang;
+use App\Models\Jurusan;
+use App\Models\Prodi;
 use App\Models\Riwayat;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -20,6 +22,8 @@ class DashboardMahasiswaController extends Controller
     public function index($id)
     {
         $user = User::findOrFail($id);
+        $jurusan = Jurusan::all();
+        $prodi = Prodi::all();
 
         $login = $user->verify == 1;
         $profil = !empty($user->nama) && !empty($user->kampus) && !empty($user->jurusan) && !empty($user->prodi) && !empty($user->nim) && !empty($user->telepon) && !empty($user->email);
@@ -38,6 +42,8 @@ class DashboardMahasiswaController extends Controller
         return view('mahasiswa.index', [
             'title' => 'Dashboard Mahasiswa',
             'user' => $user,
+            'jurusan' => $jurusan,
+            'prodi' => $prodi,
             'riwayat' => $riwayat,
             'login' => $login,
             'profil' => $profil,

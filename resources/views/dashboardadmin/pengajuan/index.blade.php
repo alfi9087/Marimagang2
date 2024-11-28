@@ -8,7 +8,7 @@
                 <h4 class="page-title">Pengajuan Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardadmin">
+                        <a href="/dashboardadmin/{{ auth()->user()->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -103,8 +103,61 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#judulKegiatanModal{{ $p->id }}">PDF</button>
+                                                </div>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal Judul Kegiatan -->
+                                        <div class="modal fade" id="judulKegiatanModal{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="judulKegiatanModalLabel{{ $p->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="judulKegiatanModalLabel{{ $p->id }}">Surat Pengantar KESBANGPOL</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form method="POST" action="{{ route('pengajuan.pdf', ['id' => $p->id]) }}" class="needs-validation">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="form-group row">
+                                                                <div class="col">
+                                                                    <label for="nomor_surat" class="form-label">Nomor Surat</label>
+                                                                    <input type="text" class="form-control" id="nomor_surat" name="nomor_surat" required>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label for="nip">NIP</label>
+                                                                    <input type="number" class="form-control" id="nip" name="nip" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nama_petugas">Nama Petugas</label>
+                                                                <input type="text" class="form-control" id="nama_petugas" name="nama_petugas" required>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label for="jabatan">Jabatan</label>
+                                                                <input type="text" class="form-control" id="jabatan" name="jabatan" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="judul_kegiatan">Judul Kegiatan</label>
+                                                                <input type="text" class="form-control" id="judul_kegiatan" name="judul_kegiatan" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="tanggal">Tanggal</label>
+                                                                <input type="date" class="form-control" name="tanggal" id="tanggal">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary">Unduh PDF</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- Modal Diteruskan Ke Bidang -->
                                         <div class="modal fade" id="diteruskanModal{{ $p->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

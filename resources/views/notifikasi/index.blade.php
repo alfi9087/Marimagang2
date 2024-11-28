@@ -34,7 +34,7 @@
     </div>
 </nav>
 <!-- Content -->
-<div class="main" style="background-image: url('{{ asset('assets/images/bg-malang.jpg') }}')">
+<div class="main" style="background-image: url('{{ asset('assets/images/bg-malang.jpg') }}');">
     <div class="cover black" data-color="black"></div>
     <div class="container">
         <h1 class="logo">

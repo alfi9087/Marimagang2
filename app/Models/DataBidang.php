@@ -29,8 +29,8 @@ class DataBidang extends Model
         return $this->hasOne(Pengajuan::class, 'databidang_id');
     }
 
-    public function bidang()
+    public function admin()
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->belongsTo(Admin::class);
     }
 }

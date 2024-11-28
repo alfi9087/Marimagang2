@@ -23,8 +23,8 @@ class MahasiswaController extends Controller
             $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
                 'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
-                'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
-                'prodi' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
+                'jurusan_id' => 'required|exists:jurusan,id',
+                'prodi_id' => 'required|exists:prodi,id',
                 'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:13',
                 'foto' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
             ], [
@@ -34,12 +34,10 @@ class MahasiswaController extends Controller
                 'kampus.required' => 'Kampus field is required',
                 'kampus.regex' => 'Kampus field must contain only letters, numbers, spaces, hyphens, and underscores',
                 'kampus.max' => 'Kampus field may not be greater than 60 characters',
-                'jurusan.required' => 'Jurusan field is required',
-                'jurusan.regex' => 'Jurusan field must contain only letters, numbers, spaces, hyphens, and underscores',
-                'jurusan.max' => 'Jurusan field may not be greater than 60 characters',
-                'prodi.required' => 'Prodi field is required',
-                'prodi.regex' => 'Prodi field must contain only letters, numbers, and spaces',
-                'prodi.max' => 'Prodi field may not be greater than 60 characters',
+                'jurusan_id.required' => 'Field jurusan is required',
+                'jurusan_id.exists' => 'Selected jurusan is invalid',
+                'prodi_id.required' => 'Field prodi is required',
+                'prodi_id.exists' => 'Selected prodi is invalid',
                 'telepon.required' => 'Telepon field is required',
                 'telepon.regex' => 'Telepon field must contain only numbers, spaces, hyphens, and plus symbols',
                 'telepon.min' => 'Telepon field must be at least 10 characters',
@@ -57,8 +55,8 @@ class MahasiswaController extends Controller
 
             $user->nama = $request->input('nama');
             $user->kampus = $request->input('kampus');
-            $user->jurusan = $request->input('jurusan');
-            $user->prodi = $request->input('prodi');
+            $user->jurusan_id = $request->jurusan_id;
+            $user->prodi_id = $request->prodi_id;
             $user->telepon = $request->input('telepon');
             $user->foto = $photoPath;
             $user->save();
@@ -93,8 +91,8 @@ class MahasiswaController extends Controller
             $request->validate([
                 'nama' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
                 'kampus' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
-                'jurusan' => 'required|regex:/^[a-zA-Z0-9\s\-_]+$/|max:60',
-                'prodi' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:60',
+                'jurusan_id' => 'required|exists:jurusan,id',
+                'prodi_id' => 'required|exists:prodi,id',
                 'telepon' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:13',
                 'foto' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
             ], [
@@ -104,12 +102,10 @@ class MahasiswaController extends Controller
                 'kampus.required' => 'Kampus field is required',
                 'kampus.regex' => 'Kampus field must contain only letters, numbers, spaces, hyphens, and underscores',
                 'kampus.max' => 'Kampus field may not be greater than 60 characters',
-                'jurusan.required' => 'Jurusan field is required',
-                'jurusan.regex' => 'Jurusan field must contain only letters, numbers, spaces, hyphens, and underscores',
-                'jurusan.max' => 'Jurusan field may not be greater than 60 characters',
-                'prodi.required' => 'Prodi field is required',
-                'prodi.regex' => 'Prodi field must contain only letters, numbers, and spaces',
-                'prodi.max' => 'Prodi field may not be greater than 60 characters',
+                'jurusan_id.required' => 'Field jurusan is required',
+                'jurusan_id.exists' => 'Selected jurusan is invalid',
+                'prodi_id.required' => 'Field prodi is required',
+                'prodi_id.exists' => 'Selected prodi is invalid',
                 'telepon.required' => 'Telepon field is required',
                 'telepon.regex' => 'Telepon field must contain only numbers, spaces, hyphens, and plus symbols',
                 'telepon.min' => 'Telepon field must be at least 10 characters',
@@ -122,8 +118,8 @@ class MahasiswaController extends Controller
             if (
                 $user->nama == $request->input('nama') &&
                 $user->kampus == $request->input('kampus') &&
-                $user->jurusan == $request->input('jurusan') &&
-                $user->prodi == $request->input('prodi') &&
+                $user->jurusan_id == $request->jurusan_id &&
+                $user->prodi_id == $request->prodi_id &&
                 $user->telepon == $request->input('telepon') &&
                 !$request->hasFile('foto')
             ) {
@@ -133,8 +129,8 @@ class MahasiswaController extends Controller
 
             $user->nama = $request->input('nama');
             $user->kampus = $request->input('kampus');
-            $user->jurusan = $request->input('jurusan');
-            $user->prodi = $request->input('prodi');
+            $user->jurusan_id = $request->jurusan_id;
+            $user->prodi_id = $request->prodi_id;
             $user->telepon = $request->input('telepon');
 
             if ($request->hasFile('foto')) {

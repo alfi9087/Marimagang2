@@ -46,8 +46,8 @@ a {
 button {
     border-radius: 20px;
     border: 1px solid #FFFF;
-    background-color: #DC143C;
-    color: #FFFFFF;
+    background-color: #03346E;
+    color: #E2E2B6;
     font-size: 12px;
     font-weight: bold;
     padding: 12px 45px;
@@ -66,11 +66,11 @@ button:focus {
 
 button.ghost {
     background-color: transparent;
-    border-color: #FFFFFF;
+    border-color: #E2E2B6;
 }
 
 form {
-    background-color: #FFFFFF;
+    background-color: #E2E2B6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,10 +82,15 @@ form {
 
 input {
     background-color: #eee;
+    border-radius: 20px;
     border: none;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
+}
+.back{
+    color: #03346E;
+    font-size: 10px;
 }
 
 .container {
@@ -162,9 +167,9 @@ input {
 }
 
 .overlay {
-    background: #DC143C;
-    background: -webkit-linear-gradient(to right, #DC143C, #FFFF);
-    background: linear-gradient(to right, #DC143C, #DC143C);
+    background: #021526;
+    background: -webkit-linear-gradient(to right, #021526, #FFFF);
+    background: linear-gradient(to right, #021526, #021526);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

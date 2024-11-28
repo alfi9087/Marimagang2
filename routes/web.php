@@ -6,6 +6,8 @@ use App\Http\Controllers\FormsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardBidangController;
@@ -27,7 +29,7 @@ use App\Http\Controllers\PengajuanController;
 */
 
 // Route Landing Page
-Route::get('/marimagang', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 // Route Forms (Login Register)
 Route::get('/forms', [FormsController::class, 'form'])->name('forms');
@@ -74,12 +76,22 @@ Route::middleware(['auth:web'])->group(function () {
 
 // Route Admin
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/dashboardadmin', [DashboardAdminController::class, 'index']);
+    Route::get('/dashboardadmin/{id}', [DashboardAdminController::class, 'index']);
 
     Route::get('/admin', [DashboardAdminController::class, 'admin']);
     Route::post('/adminpost', [AdminController::class, 'store'])->name('adminpost');
     Route::put('/adminupdate/{id}', [AdminController::class, 'update']);
     Route::get('/admindelete/{id}', [AdminController::class, 'delete']);
+
+    Route::get('/jurusan', [DashboardAdminController::class, 'jurusan']);
+    Route::post('/jurusanpost', [JurusanController::class, 'store'])->name('jurusanpost');
+    Route::put('/jurusanupdate/{id}', [JurusanController::class, 'update']);
+    Route::get('/jurusandelete/{id}', [JurusanController::class, 'delete']);
+
+    Route::get('/prodi', [DashboardAdminController::class, 'prodi']);
+    Route::post('/prodipost', [ProdiController::class, 'store'])->name('prodipost');
+    Route::put('/prodiupdate/{id}', [ProdiController::class, 'update']);
+    Route::get('/prodidelete/{id}', [ProdiController::class, 'delete']);
 
     Route::get('/block/{id}', [MahasiswaController::class, 'block'])->name('mahasiswa.block');
     Route::get('/verify/{id}', [MahasiswaController::class, 'verifyAdmin'])->name('mahasiswa.verify');
@@ -89,6 +101,8 @@ Route::middleware(['auth:admin'])->group(function () {
 
     // Route Pengajuan
     Route::get('/pengajuan/update-skill/{databidang_id}', [DashboardAdminController::class, 'select_skill']);
+
+    Route::post('/pengajuan/pdf/{id}', [DashboardAdminController::class, 'pengajuanPdf'])->name('pengajuan.pdf');
 
     // Route Dashboard Admin
     Route::get('/pengajuanadmin', [DashboardAdminController::class, 'pengajuan']);
@@ -105,32 +119,23 @@ Route::middleware(['auth:admin'])->group(function () {
 
     // Route Kirim Email 
     Route::post('/kirim-email', [PengajuanController::class, 'email']);
-});
 
-
-// Route Bidang
-Route::middleware(['auth:bidang'])->group(function () {
-    Route::get('/pengajuanbidang/{id}', [DashboardBidangController::class, 'pengajuan']);
-    Route::get('/userdetailbidang/{id}', [DashboardBidangController::class, 'userdetail']);
+    Route::get('/pengajuanbidangsuper', [DashboardAdminController::class, 'pengajuansuperbidang']);
+    Route::get('/pengajuanbidang/{id}', [DashboardAdminController::class, 'pengajuanbidang']);
+    Route::get('/userdetailbidang/{id}', [DashboardAdminController::class, 'userdetail']);
     Route::put('/ditolakbidang/{id}', [PengajuanController::class, 'ditolakbidang']);
     Route::put('/diterimabidang/{id}', [PengajuanController::class, 'diterimabidang']);
 
-    Route::get('/pdfbidang/{id}', [DashboardBidangController::class, 'pdfbidang'])->name('pdfbidang');
-    Route::get('/magangbidang/{id}', [DashboardBidangController::class, 'magangbidang']);
+    Route::get('/pdfbidang/{id}', [DashboardAdminController::class, 'pdfbidang'])->name('pdfbidang');
+    Route::get('/magangbidang/{id}', [DashboardAdminController::class, 'magangbidang']);
 
-    Route::get('/dashboardbidang/{id}', [DashboardBidangController::class, 'index'])->name('dashboard.bidang');
-
-    // Route Akun Bidang (CRUD Akun Bidang)
-    Route::get('/bidang/{id}', [DashboardBidangController::class, 'bidang']);
-    Route::post('/bidangpost', [BidangController::class, 'store'])->name('bidangpost');
-    Route::put('/bidangupdate/{id}', [BidangController::class, 'update']);
-    Route::get('/bidangdelete/{id}', [BidangController::class, 'delete']);
+    Route::get('/dashboardbidang/{id}', [DashboardAdminController::class, 'index'])->name('dashboard.bidang');
 
     // Route Data Bidang
-    Route::get('/databidang/{id}', [DashboardBidangController::class, 'databidang']);
+    Route::get('/databidang/{id}', [DashboardAdminController::class, 'databidang']);
     Route::post('/databidang/submit', [DataBidangController::class, 'store'])->name('databidang.submit');
     Route::get('/databidangdelete/{id}', [DataBidangController::class, 'delete'])->name('databidangdelete');
     Route::get('/open/{id}', [DataBidangController::class, 'open']);
     Route::get('/close/{id}', [DataBidangController::class, 'close'])->name('bidang.close');
-    Route::get('/detail/{id}', [DashboardBidangController::class, 'detail'])->name('dashboard.detail');
+    Route::get('/detail/{id}', [DashboardAdminController::class, 'detail'])->name('dashboard.detail');
 });

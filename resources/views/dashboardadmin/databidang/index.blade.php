@@ -1,4 +1,4 @@
-@extends('dashboardbidang.layouts.main')
+@extends('dashboardadmin.layouts.main')
 
 @section('content')
 
@@ -9,7 +9,7 @@
                 <h4 class="page-title">Kelola Konten</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/dashboardadmin/{{ auth()->user()->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -61,7 +61,7 @@
 
                             <form method="POST" action="{{ route('databidang.submit') }}" enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" name="bidang_id" value="{{ $bidang->id }}">
+                                <input type="hidden" name="admin_id" value="{{ $admin->id }}">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Nama Bidang</label>
                                     <div class="col-sm-9">

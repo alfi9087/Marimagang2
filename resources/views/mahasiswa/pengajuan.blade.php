@@ -33,7 +33,7 @@
                             @endif
 
                             @foreach ($pengajuan as $p)
-                            @if ($p->status == 'Diterima')
+                            @if ($p->status == 'Magang' && !$p->kesbangpol)
                             <a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item bg-light">
                                 <div class="list-div my-2">
                                     <div class="fa fa-upload"></div> &nbsp;&nbsp;&nbsp; Surat Kesbangpol
@@ -68,7 +68,7 @@
                     <div id="page-content-wrapper">
                         <div class="row pt-3" id="border-btm">
                             <div class="col-4">
-                                <button class="btn btn-danger mt-4 ml-3 mb-3" id="menu-toggle">
+                                <button class="btn btn-primary mt-4 ml-3 mb-3" id="menu-toggle">
                                     <div class="bar4"></div>
                                     <div class="bar4"></div>
                                     <div class="bar4"></div>
@@ -200,13 +200,13 @@
                                                         <fieldset>
                                                             <div class="container mt-5">
                                                                 <div class="row">
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-4">
                                                                         <label for="proposal">Proposal
                                                                             Magang:</label>
                                                                         <div class="upload-box" id="left-box">
                                                                             <p>Drag & Drop PDF</p>
                                                                             <br>
-                                                                            <button type="button" class="btn btn-danger">Pilih
+                                                                            <button type="button" class="btn btn-primary">Pilih
                                                                                 File</button>
                                                                             <input type="file" id="proposal" name="proposal" accept=".pdf" style="display: none;" class="form-control form-control-user @error('proposal') is-invalid @enderror">
                                                                             @error('proposal')
@@ -217,13 +217,12 @@
                                                                         </div>
                                                                         <div id="proposal-info"></div>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <label for="pengantar">Surat Pengantar
-                                                                            Pendidikan:</label>
-                                                                        <div class="upload-box" id="right-box">
+                                                                    <div class="col-md-4">
+                                                                        <label for="pengantar">Surat Pengantar:</label>
+                                                                        <div class="upload-box" id="center-box">
                                                                             <p>Drag & Drop PDF</p>
                                                                             <br>
-                                                                            <button type="button" class="btn btn-danger">Pilih
+                                                                            <button type="button" class="btn btn-primary">Pilih
                                                                                 File</button>
                                                                             <input type="file" id="pengantar" name="pengantar" accept=".pdf" style="display: none;" class="form-control form-control-user @error('pengantar') is-invalid @enderror">
                                                                             @error('pengantar')
@@ -233,6 +232,22 @@
                                                                             @enderror
                                                                         </div>
                                                                         <div id="pengantar-info"></div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label for="cv">Curicullum Vitae:</label>
+                                                                        <div class="upload-box" id="right-box">
+                                                                            <p>Drag & Drop PDF</p>
+                                                                            <br>
+                                                                            <button type="button" class="btn btn-primary">Pilih
+                                                                                File</button>
+                                                                            <input type="file" id="cv" name="cv" accept=".pdf" style="display: none;" class="form-control form-control-user @error('cv') is-invalid @enderror">
+                                                                            @error('cv')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                            @enderror
+                                                                        </div>
+                                                                        <div id="cv-info"></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -247,7 +262,7 @@
                             </div>
 
                             @foreach ($pengajuan as $p)
-                            @if ($p->status == 'Diterima')
+                            @if ($p->status == 'Magang' && !$p->kesbangpol)
 
                             <!-- Menu Upload Surat Kesbangpol -->
                             <div id="menu2" class="tab-pane">
@@ -422,27 +437,24 @@
                                                                     Download
                                                                 </a>
                                                             </li>
-                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
                                                             <li>
-                                                                <b>Kesbangpol</b>
-                                                                @if($p->kesbangpol)
-                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" target="_blank" class="text-danger">
+                                                                <b>Curriculum vitae</b>
+                                                                <a href="{{ asset('storage/'.$p->cv) }}" target="_blank" class="text-danger">
                                                                     <span style="margin-right: 5px;">
                                                                         <i class="fas fa-eye"></i>
                                                                     </span>
                                                                     Lihat
                                                                 </a>
                                                                 |
-                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" download class="text-danger">
+                                                                <a href="{{ asset('storage/'.$p->cv) }}" download class="text-danger">
                                                                     <span style="margin-left: 5px;">
                                                                         <i class="fas fa-download"></i>
                                                                     </span>
                                                                     Download
                                                                 </a>
-                                                                @else
-                                                                File Belum Diupload
-                                                                @endif
                                                             </li>
+                                                            @if (in_array($p->status, ['Diterima', 'Magang', 'Selesai']))
+                                                            
                                                             @if($p->kesediaan)
                                                             <li>
                                                                 <b>Surat Rekomendasi Magang</b>
@@ -513,6 +525,27 @@
                                                                 </a>
                                                             </li>
                                                             @endif
+
+                                                            <li>
+                                                                <b>Kesbangpol</b>
+                                                                @if($p->kesbangpol)
+                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" target="_blank" class="text-danger">
+                                                                    <span style="margin-right: 5px;">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </span>
+                                                                    Lihat
+                                                                </a>
+                                                                |
+                                                                <a href="{{ asset('storage/'.$p->kesbangpol) }}" download class="text-danger">
+                                                                    <span style="margin-left: 5px;">
+                                                                        <i class="fas fa-download"></i>
+                                                                    </span>
+                                                                    Download
+                                                                </a>
+                                                                @else
+                                                                File Belum Diupload
+                                                                @endif
+                                                            </li>
 
                                                             @endif
                                                             @if ($p->status == 'Magang' || $p->status == 'Ditolak')

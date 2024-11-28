@@ -18,6 +18,7 @@ class Pengajuan extends Model
         'bukti',
         'pengantar',
         'proposal',
+        'cv',
         'laporan',
         'suratmagang',
         'kesbangpol',

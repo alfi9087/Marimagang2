@@ -23,16 +23,16 @@ body {
 #test {
     margin-top: 0px;
     margin-bottom: 40px;
-    border: 1px solid #DC143C;
+    border: 1px solid #03346E;
     border-radius: 0.25rem;
     width: 60px;
     height: 30px;
-    background-color: #DC143C;
+    background-color: #03346E;
     color: white;
 }
 
 .active1 {
-    color: #DC143C !important;
+    color: #03346E !important;
     font-weight: bold;
 }
 
@@ -55,14 +55,14 @@ body {
     padding: 2px;
     font-size: 10px;
     font-weight: bold;
-    background-color: red;
+    background-color: blue;
     color: #ffffff;
     border-radius: 5px;
     margin-left: 5px;
 }
 
 #sidebar-wrapper {
-    min-height: 144vh;
+    /* min-height: 144vh; */
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
@@ -114,18 +114,18 @@ body {
 
 .card0 {
     height: 900px;
-    border: 3px solid #DC143C;
+    border: 3px solid #03346E;
     /* Ketebalan border 3px dan warna hitam (#000) */
     border-radius: 5px;
     /* Sudut yang lebih lembut */
-    box-shadow: 8px 8px 8px #DC143C;
+    box-shadow: 8px 8px 8px #03346E;
     /* Efek bayangan */
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .top-highlight {
-    color: #DC143C;
+    color: #03346E;
     font-weight: bold;
     font-size: 20px;
 }
@@ -234,7 +234,7 @@ header
 }
 
 .sub-header .right-icons ul li a {
-    color: #DC143C;
+    color: #03346E;
     font-size: 14px;
     transition: all .3s;
 }
@@ -249,7 +249,7 @@ header
 }
 
 .background-header {
-    background-color: #DC143C !important;
+    background-color: #03346E !important;
     height: 80px !important;
     position: fixed !important;
     top: 0 !important;
@@ -276,7 +276,7 @@ header
 }
 
 .header-area {
-    background-color: #DC143C;
+    background-color: #03346E;
     position: fixed;
     top: 0px;
     left: 0;

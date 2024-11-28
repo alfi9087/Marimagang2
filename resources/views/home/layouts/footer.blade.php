@@ -1,45 +1,7 @@
 <section class="contact-us" id="contact">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 align-self-center">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form id="contact" action="" method="post">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h2>Dapatkan Info Lebih Lanjut</h2>
-                                </div>
-                                <div class="col-lg-4">
-                                    <fieldset>
-                                        <input name="name" type="text" id="name" placeholder="Nama Mahasiswa" required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-4">
-                                    <fieldset>
-                                        <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="NIM" required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-4">
-                                    <fieldset>
-                                        <input name="subject" type="text" id="subject" placeholder="Subjek" required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <textarea name="message" type="text" class="form-control" id="message" placeholder="Pesan Mahasiswa" required=""></textarea>
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="button">Kirim Pesan</button>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
+            <div class="col-lg-12">
                 <div class="right-info">
                     <ul>
                         <li>
@@ -55,15 +17,33 @@
                             <span style="font-size: 13px;">Jl. K.H. Agus Salim No. 7 Malang 65119</span>
                         </li>
                         <li>
-                            <h6 style="font-weight:bold">Website URL</h6>
-                            <span style="font-size: 12px;">kominfo.malangkab.go.id</span>
+                            <h6 style="font-weight:bold">Instagram</h6>
+                            <span style="font-size: 13px;">kominfokabmlg</span>
                         </li>
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
+
     <div class="footer">
         <p>Copyright © 2023 <br> Dinas Komunikasi dan Informatika Kabupaten Malang</p>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="justify-content-end">
+                        <div class="right-icons">
+                            <ul>
+                                <li><a href="https://facebook.com/kominfokabmalang"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/kominfokabmlg"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.instagram.com/kominfokabmlg/"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="https://youtube.com/channel/UCPo6b6DOnJvve7ORpDUbkXA"><i class="fa fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-@extends('dashboardbidang.layouts.main')
+@extends('dashboardadmin.layouts.main')
 
 @section('content')
 <div class="main-panel">
@@ -8,7 +8,7 @@
                 <h4 class="page-title">Data Pengajuan Magang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
-                        <a href="/dashboardbidang/{{ $bidang->id }}">
+                        <a href="/dashboardadmin/{{ auth()->user()->id }}">
                             <i class="flaticon-home"></i>
                         </a>
                     </li>
@@ -72,7 +72,7 @@
                                             <td class="col-1">{{ $p->databidang->nama }}</td>
                                             <td class="col-3"><span class="badge badge-warning">{{ $p->status }}</span></td>
                                             <td class="col-1">
-                                                <a href="/userdetailbidang/{{ $p->id }}">
+                                                <a href="/userdetailadmin/{{ $p->id }}">
                                                     <button type="button" class="btn btn-xs btn-info">
                                                         Profil
                                                     </button>

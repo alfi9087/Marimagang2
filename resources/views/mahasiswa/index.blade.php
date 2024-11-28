@@ -17,51 +17,51 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="steps-wrapper">
-                    <h2>LANGKAH LANGKAH PENGAJUAN MAGANG</h2>
+                    <h2>STATUS PENGAJUAN MAGANG</h2>
                     <div class="step-box">
-                        <div class="step" id="step1" @if($login) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step1" @if($login) style="background-color: #03346E;" @endif>
                             <div class="step-number" @if($login) style="color: white;" @endif>1</div>
                             <div class="step-content">
                                 <h3 @if($login) style="color: white;" @endif>REGISTRASI DAN LOGIN</h3>
                             </div>
                         </div>
-                        <div class="step" id="step2" @if($profil) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step2" @if($profil) style="background-color: #03346E;" @endif>
                             <div class="step-number" @if($profil) style="color: white;" @endif>2</div>
                             <div class="step-content">
                                 <h3 @if($profil) style="color: white;" @endif>PROFIL MAHASISWA</h3>
                             </div>
                         </div>
-                        <div class="step" id="step3" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
-                            <div class="step-number" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>3</div>
+                        <div class="step" id="step3" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #03346E;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                            <div class="step-number" @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @endif>3</div>
                             <div class="step-content">
-                                <h3 @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>PENGAJUAN MAGANG</h3>
+                                <h3 @if($pengajuanDiproses || $pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @endif>PENGAJUAN MAGANG</h3>
                             </div>
                         </div>
-                        <div class="step" id="step4" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
-                            <div class="step-number" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>4</div>
+                        <div class="step" id="step4" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="background-color: #03346E;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                            <div class="step-number" @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @endif>4</div>
                             <div class="step-content">
-                                <h3 @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>ACC ADMIN 1</h3>
+                                <h3 @if($pengajuanDiteruskan || $pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @elseif($resetPengajuan) style="color: #03346E;" @endif>ACC ADMIN 1</h3>
                             </div>
                         </div>
-                        <div class="step" id="step5" @if($pengajuanDiterima || $magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
-                            <div class="step-number" @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>5</div>
+                        <div class="step" id="step5" @if($pengajuanDiterima || $magang || $magangSelesai) style="background-color: #03346E;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                            <div class="step-number" @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @endif>5</div>
                             <div class="step-content">
-                                <h3 @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>ACC BIDANG</h3>
+                                <h3 @if($pengajuanDiterima || $magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @elseif($resetPengajuan) style="color: #03346E;" @endif>ACC BIDANG</h3>
                             </div>
                         </div>
-                        <div class="step" id="step6" @if($magang || $magangSelesai) style="background-color: #DC143C;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
-                            <div class="step-number" @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>6</div>
+                        <div class="step" id="step6" @if($magang || $magangSelesai) style="background-color: #03346E;" @elseif($resetPengajuan) style="background-color: #ffffff;" @endif>
+                            <div class="step-number" @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @endif>6</div>
                             <div class="step-content">
-                                <h3 @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #DC143C;" @endif>ACC ADMIN 2</h3>
+                                <h3 @if($magang || $magangSelesai) style="color: white;" @elseif($resetPengajuan) style="color: #03346E;" @endif>ACC ADMIN 2</h3>
                             </div>
                         </div>
-                        <div class="step" id="step7" @if($magang || $magangSelesai) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step7" @if($magang || $magangSelesai) style="background-color: #03346E;" @endif>
                             <div class="step-number" @if($magang || $magangSelesai) style="color: white;" @endif>7</div>
                             <div class="step-content">
                                 <h3 @if($magang || $magangSelesai) style="color: white;" @endif>KEGIATAN MAGANG</h3>
                             </div>
                         </div>
-                        <div class="step" id="step8" @if($magangSelesai) style="background-color: #DC143C;" @endif>
+                        <div class="step" id="step8" @if($magangSelesai) style="background-color: #03346E;" @endif>
                             <div class="step-number" @if($magangSelesai) style="color: white;" @endif>8</div>
                             <div class="step-content">
                                 <h3 @if($magangSelesai) style="color: white;" @endif>MAGANG SELESAI</h3>
@@ -116,9 +116,9 @@
                                     <div class="card mb-6">
 
                                         @if(!$user->nama || !$user->kampus || !$user->jurusan || !$user->prodi || !$user->telepon)
-                                        <button class="btn" style="width: 100%; background-color: #DC143C; color: white;" data-bs-toggle="modal" data-bs-target="#modalform">Lengkapi Profil</button>
+                                        <button class="btn" style="width: 100%; background-color: #03346E; color: white;" data-bs-toggle="modal" data-bs-target="#modalform">Lengkapi Profil</button>
                                         @else
-                                        <button class="btn" style="width: 100%; background-color: #DC143C; color: white;" data-bs-toggle="modal" data-bs-target="#modalformedit">Edit Profil</button>
+                                        <button class="btn" style="width: 100%; background-color: #03346E; color: white;" data-bs-toggle="modal" data-bs-target="#modalformedit">Edit Profil</button>
                                         @endif
                                     </div>
 
@@ -139,7 +139,7 @@
                                                                 <img src="https://i.pinimg.com/236x/83/52/64/835264761a076845234005154f1bacd8.jpg" class="rounded-circle" alt="example placeholder" style="width: 200px;" id="add" />
                                                             </div>
                                                             <div class="d-flex justify-content-center">
-                                                                <div class="btn btn-rounded" style="background-color: #DC143C; color: white;">
+                                                                <div class="btn btn-rounded" style="background-color: #03346E; color: white;">
                                                                     <label class="form-label text-white m-1" for="customFile2">Pilih Foto Profil</label>
 
                                                                     <input type="file" class="form-control d-none form-control-user @error('foto') is-invalid @enderror" id="customFile2" name="foto" value="{{ old('foto') }}" onchange="preview(event)">
@@ -177,24 +177,40 @@
 
                                                         <div class="mb-3">
                                                             <label for="jurusan" class="col-form-label">Jurusan:</label>
-                                                            <input type="text" class="form-control form-control-user @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan" value="{{ old('jurusan') }}">
-
-                                                            @error('jurusan')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
+                                                            <div class="select-group">
+                                                                <select name="jurusan_id" id="jurusan_id" class="form-control form-control-user @error('jurusan_id') is-invalid @enderror">
+                                                                    <option value="" disabled selected hidden></option>
+                                                                    @foreach ($jurusan as $item)
+                                                                    <option value="{{ $item->id }}">
+                                                                        {{ $item->nama_jurusan }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('jurusan_id')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
                                                             </div>
-                                                            @enderror
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="prodi" class="col-form-label">Prodi:</label>
-                                                            <input type="text" class="form-control form-control-user @error('prodi') is-invalid @enderror" id="prodi" name="prodi" value="{{ old('prodi') }}">
-
-                                                            @error('prodi')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
+                                                            <div class="select-group">
+                                                                <select name="prodi_id" id="prodi_id" class="form-control form-control-user @error('prodi_id') is-invalid @enderror">
+                                                                    <option value="" disabled selected hidden></option>
+                                                                    @foreach ($prodi as $item)
+                                                                    <option value="{{ $item->id }}">
+                                                                        {{ $item->nama_prodi }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('prodi')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
                                                             </div>
-                                                            @enderror
                                                         </div>
 
                                                         <div class="mb-3">
@@ -210,7 +226,7 @@
 
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn" style="background-color: #DC143C; color: white;">Kirim Data</button>
+                                                            <button type="submit" class="btn" style="background-color: #03346E; color: white;">Kirim Data</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -246,7 +262,7 @@
                                                                 </div>
                                                                 @enderror
 
-                                                                <label class="form-label text-white m-1" for="foto" style="background-color: #DC143C; color: white; padding: 6px 12px; cursor: pointer; border: none;">
+                                                                <label class="form-label text-white m-1" for="foto" style="background-color: #03346E; color: white; padding: 6px 12px; cursor: pointer; border: none;">
                                                                     Ubah Foto Profil
                                                                 </label>
                                                             </div>
@@ -287,24 +303,40 @@
 
                                                         <div class="mb-3">
                                                             <label for="jurusan" class="col-form-label">Jurusan:</label>
-                                                            <input type="text" class="form-control form-control-user @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan" value="{{ old('jurusan', $user->jurusan) }}">
-
-                                                            @error('jurusan')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
+                                                            <div class="select-group">
+                                                                <select name="jurusan_id" id="jurusan_id" class="form-control form-control-user @error('jurusan_id') is-invalid @enderror">
+                                                                    <option value="" disabled selected hidden></option>
+                                                                    @foreach ($jurusan as $item)
+                                                                    <option value="{{ $item->id }}" {{ (old('jurusan_id') ?? $user->jurusan_id) == $item->id ? 'selected' : '' }}>
+                                                                        {{ $item->nama_jurusan }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('jurusan_id')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
                                                             </div>
-                                                            @enderror
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="prodi" class="col-form-label">Prodi:</label>
-                                                            <input type="text" class="form-control form-control-user @error('prodi') is-invalid @enderror" id="prodi" name="prodi" value="{{ old('prodi', $user->prodi) }}">
-
-                                                            @error('prodi')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
+                                                            <div class="select-group">
+                                                                <select name="prodi_id" id="prodi_id" class="form-control form-control-user @error('prodi_id') is-invalid @enderror">
+                                                                    <option value="" disabled selected hidden></option>
+                                                                    @foreach ($prodi as $item)
+                                                                    <option value="{{ $item->id }}" {{ (old('prodi_id') ?? $user->prodi_id) == $item->id ? 'selected' : '' }}>
+                                                                        {{ $item->nama_prodi }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                @error('prodi')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                                @enderror
                                                             </div>
-                                                            @enderror
                                                         </div>
 
                                                         <div class="mb-3">
@@ -320,7 +352,7 @@
 
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn" style="background-color: #DC143C; color: white;">Kirim Data</button>
+                                                            <button type="submit" class="btn" style="background-color: #03346E; color: white;">Kirim Data</button>
                                                         </div>
                                                     </form>
 
@@ -388,10 +420,10 @@
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <p class="text-muted mb-0">
-                                                        @if(!$user->jurusan)
+                                                        @if(!$user->jurusan_id)
                                                         Data belum ditambahkan
                                                         @else
-                                                        {{ $user->jurusan }}
+                                                        {{ $user->jurusan->nama_jurusan }}
                                                         @endif
                                                     </p>
                                                 </div>
@@ -403,10 +435,10 @@
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <p class="text-muted mb-0">
-                                                        @if(!$user->prodi)
+                                                        @if(!$user->prodi_id)
                                                         Data belum ditambahkan
                                                         @else
-                                                        {{ $user->prodi }}
+                                                        {{ $user->prodi->nama_prodi}}
                                                         @endif
                                                     </p>
                                                 </div>

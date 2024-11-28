@@ -1,8 +1,8 @@
 <div class="main-header">
     <div class="logo-header" data-background-color="red">
 
-        <a href="/dashboardadmin" class="logo" style="color: white;">
-            Mari Magang
+        <a href="/dashboardadmin/" class="logo" style="color: white;">
+            Persuma
         </a>
 
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
